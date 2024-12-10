@@ -1,0 +1,97 @@
+body {
+    margin: 0; /* Remove default margin */
+    overflow: hidden; /* Prevents scrolling */
+    font-family: Arial, sans-serif; /* Set font */
+    animation: gradient 15s ease infinite; /* Animated gradient background */
+    background: linear-gradient(270deg, #1a1a1a, #4e4e4e, #1a1a1a); /* Gradient colors */
+    background-size: 400% 400%; /* Scales the gradient for animation */
+}
+
+h1 { /* Adjust for your header element */
+    font-size: 48px; /* Adjust size of the header */
+    color: #00FFFF; /* Neon cyan text color */
+    text-shadow: 
+        0 0 10px #00FFFF,  /* Slight glow */
+        0 0 20px #00FFFF;  /* Medium glow */
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; } /* Start position of gradient */
+    50% { background-position: 100% 50%; } /* Midway point */
+    100% { background-position: 0% 50%; } /* End position */
+}
+
+#menu {
+    position: absolute; /* Absolute positioning */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact center */
+    text-align: center; /* Center text */
+}
+
+#menu button {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    border: none; /* Remove border */
+    color: #fff; /* White text */
+    padding: 15px 30px; /* Padding for button */
+    margin: 10px; /* Space between buttons */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth hover effect */
+}
+
+#menu button:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Brighter background on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.emoji {
+    position: absolute; /* Absolute positioning */
+    opacity: 0.025; /* Initial opacity */
+    font-size: 40px; /* Font size of emojis */
+    pointer-events: auto; /* Allow interaction */
+    transition: opacity 0.3s; /* Smooth transition */
+}
+
+.emoji:hover {
+    opacity: 1; /* Fully visible on hover */
+}
+
+#score, #highscore, #timer {
+    position: absolute; /* Absolute positioning */
+    top: 10px; /* Position from top */
+    font-size: 24px; /* Font size */
+    z-index: 10; /* Ensure on top */
+}
+
+#score {
+    left: 10px; /* Position score on the left */
+}
+
+#highscore {
+    left: 150px; /* Space for high score */
+}    
+
+#timer {
+    right: 10px; /* Position timer on the right */
+}
+
+/* Toast notification styling */
+.toast {
+    position: fixed; /* Fixed position on screen */
+    bottom: 20px; /* Space from bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact center */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+    color: white; /* White text */
+    padding: 15px 30px; /* Padding inside the toast */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Font size */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease, bottom 0.5s ease; /* Smooth fade-in effect */
+    z-index: 100; /* On top of other elements */
+}
+
+.toast.show {
+    opacity: 1; /* Visible when class 'show' is added */
+    bottom: 40px; /* Move toast up when visible */
+}

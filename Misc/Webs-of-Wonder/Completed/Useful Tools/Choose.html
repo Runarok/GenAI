@@ -1,0 +1,231 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision Maker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #1a1a1a, #4d4d4d, #808080, #333333);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center vertically */
+            height: 100vh;
+        }
+        #menu {
+            background-color: rgba(68, 68, 68, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            width: 350px; /* Slightly wider */
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+            text-shadow: 1.25px 1.25px 2px rgba(0, 0, 0, 0.5);
+        }
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #0f0; /* Green border on focus */
+            outline: none;
+        }
+        button {
+            padding: 12px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+            background-color: #555;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background-color: #666;
+            transform: translateY(-2px);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .remove-button {
+            width: 30px;
+            height: 30px;
+            background: #888;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the "X" */
+        }
+        .remove-button:hover {
+            background: #666;
+        }
+        .highlight {
+            border: 2px solid #0f0;
+            background-color: rgba(0, 255, 0, 0.2);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+       .result {
+    margin-top: 20px;
+    font-size: 24px;
+    text-align: center; /* Center-align the text */
+    display: none;
+    color: #0f0; /* Green color for the result */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 255, 0, 0.1); /* Light green background */
+    border: 2px solid #0f0; /* Green border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px; /* Padding for spacing */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: transform 0.3s, opacity 0.3s; /* Animation effects */
+}
+
+/* Add a class for showing the result with animation */
+.result.show {
+    display: block; /* Ensure it's displayed */
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Start position for animation */
+}
+
+/* Class to animate on show */
+.result.hidden {
+    opacity: 0; /* Start hidden */
+    transform: translateY(-20px); /* Slide in effect */
+}
+
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #444;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            transition: opacity 0.5s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="menu">
+        <h1>Decision Maker</h1>
+        <input type="text" id="choice-input" placeholder="Enter choices, separated by commas">
+        <button id="add-choice">Add Choices</button>
+        <ul id="choice-list"></ul>
+        <button id="make-decision">Make a Decision</button>
+        <div class="result" id="decision-result"></div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const choiceInput = document.getElementById('choice-input');
+        const addChoiceButton = document.getElementById('add-choice');
+        const choiceList = document.getElementById('choice-list');
+        const makeDecisionButton = document.getElementById('make-decision');
+        const decisionResult = document.getElementById('decision-result');
+        const toast = document.getElementById('toast');
+
+        const choicesSet = new Set();
+
+        // Pre-fill initial choices
+        const initialChoices = ["Yes", "No", "Maybe", "Maybe Not", "Definitely"];
+        initialChoices.forEach(choice => addChoice(choice));
+
+        function addChoice(choice) {
+            const lowerCaseChoice = choice.toLowerCase();
+            if (!choicesSet.has(lowerCaseChoice)) {
+                choicesSet.add(lowerCaseChoice);
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="checkbox" class="choice" value="${lowerCaseChoice}" checked> ${choice} <button class="remove-button">X</button>`;
+                choiceList.appendChild(li);
+
+                const removeButton = li.querySelector('.remove-button');
+                removeButton.addEventListener('click', () => {
+                    choicesSet.delete(lowerCaseChoice);
+                    choiceList.removeChild(li);
+                    showToast(`${choice} removed`);
+                });
+            } else {
+                showToast(`${choice} is a duplicate!`);
+            }
+        }
+
+        addChoiceButton.addEventListener('click', () => {
+            const input = choiceInput.value.split(',').map(choice => choice.trim()).filter(choice => choice);
+            input.forEach(choice => addChoice(choice));
+            choiceInput.value = ''; // Clear the input
+        });
+
+        makeDecisionButton.addEventListener('click', () => {
+    const checkedChoices = Array.from(choiceList.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(input => input.value);
+    if (checkedChoices.length > 0) {
+        const randomChoice = checkedChoices[Math.floor(Math.random() * checkedChoices.length)];
+        decisionResult.textContent = `Decision: ${randomChoice.charAt(0).toUpperCase() + randomChoice.slice(1)}`; // Capitalize the first letter
+        decisionResult.classList.add('highlight', 'show');
+        decisionResult.classList.remove('hidden');
+    } else {
+        showToast('No choices selected!');
+        decisionResult.classList.remove('show');
+        decisionResult.classList.add('hidden');
+    }
+});
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.opacity = 0;
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                    toast.style.opacity = 1;
+                }, 500);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

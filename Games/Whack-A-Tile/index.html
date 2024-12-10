@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Set character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design for mobile -->
+    <title>Whack-a-Tile Game</title> <!-- Title of the web page -->
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <h1>Whack-a-Tile!</h1> <!-- Game title -->
+    <div class="menu active" id="menu"> <!-- Menu container -->
+        <div class="controls"> <!-- Controls for starting the game -->
+            <select id="grid-size"> <!-- Dropdown for grid size selection -->
+                <option value="4">4x4</option> <!-- Option for 4x4 grid -->
+                <option value="5">5x5</option> <!-- Option for 5x5 grid -->
+                <option value="6">6x6</option> <!-- Option for 6x6 grid -->
+            </select>
+            <select id="tile-count"> <!-- Dropdown for tile count selection -->
+                <option value="1">1 Tile</option> <!-- Option for 1 tile -->
+                <option value="2">2 Tiles</option> <!-- Option for 2 tiles -->
+                <option value="3">3 Tiles</option> <!-- Option for 3 tiles -->
+                <option value="4">4 Tiles</option> <!-- Option for 4 tiles -->
+                <option value="5">5 Tiles</option> <!-- Option for 5 tiles -->
+            </select>
+            <button id="play-button">Play</button> <!-- Button to start the game -->
+            <button id="info-button">Info</button> <!-- Button to show instructions -->
+        </div>
+    </div>
+    <div class="game" id="game"> <!-- Game container -->
+        <div class="score">Score: <span id="score">0</span></div> <!-- Display for current score -->
+        <div id="timer">Time: <span id="time">30</span> seconds</div> <!-- Display for timer -->
+        <div class="board" id="board"></div> <!-- Container for game tiles -->
+        <div class="high-score">Highest Score: <span id="highest-score">0</span> (Mode: <span id="highest-mode">N/A</span>)</div> <!-- Display for highest score -->
+        <div class="reset-container" style="display: flex; justify-content: center;"> <!-- Flex container for reset button -->
+            <button id="reset-button">Reset Game</button> <!-- Button to reset the game -->
+        </div>
+    </div>
+    <div class="toast" id="toast"></div> <!-- Toast notification for messages -->
+    <div class="modal" id="info-modal"> <!-- Modal for game instructions -->
+        <h2>Game Instructions</h2> <!-- Modal title -->
+        <p>Score points by clicking on the active tiles.</p> <!-- Instructions -->
+        <p>Each correct click increases your score by Number of tiles.</p> <!-- More instructions -->
+        <p>Each wrong click decreases your score by 1.</p> <!-- More instructions -->
+        <p>You have 30 seconds to score as many points as possible!</p> <!-- Time limit -->
+        <p>Select the grid size and number of tiles before starting.</p> <!-- Setup instructions -->
+        <button id="close-modal">Close</button> <!-- Button to close the modal -->
+    </div>
+    <script src="script.js"></script> <!-- Link to external JavaScript -->
+</body>
+</html>

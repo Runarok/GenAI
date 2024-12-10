@@ -1,0 +1,180 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Golden-Depths.png" type="image/png">
+    <title>Golden Depths: Game Instructions</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #1f1f1f;
+            padding: 40px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        /* Flexbox for title and image */
+        .header {
+            display: flex;
+            align-items: center; /* Vertically center the image and text */
+            justify-content: center; /* Center the content horizontally */
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 50px; /* Adjust size of the logo */
+            height: auto;
+            margin-right: 20px; /* Space between image and text */
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #ffd700;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #ff9800;
+            margin-top: 30px;
+        }
+
+        p, ul {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: disc inside;
+            margin-left: 20px;
+        }
+
+        .important {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            padding: 15px 30px;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 40px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .scrollable {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .scrollable::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollable::-webkit-scrollbar-thumb {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+
+        .scrollable::-webkit-scrollbar-track {
+            background: #333;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header section with image and title -->
+        <div class="header">
+            <img src="Golden-Depths.png" alt="Golden Depths Logo">
+            <h1>Golden Depths: Wumpus World</h1>
+        </div>
+
+        <div class="scrollable">
+            <p><strong>Welcome to Golden Depths: Wumpus World!</strong> In this thrilling game, you find yourself trapped in a dark maze, filled with dangerous creatures and hidden treasures. Can you navigate your way to victory, or will the Wumpus catch you first? Read the instructions below to get started!</p>
+
+            <h3>Objective:</h3>
+            <p>Your goal is simple but dangerous:</p>
+            <ul>
+                <li><span class="important">Find the gold</span> hidden somewhere in the maze.</li>
+                <li><span class="important">Avoid the Wumpus</span>, a terrifying creature that can eat you if you enter the room it's in.</li>
+                <li><span class="important">Watch out for pits</span>, which can cause you to fall to your doom.</li>
+            </ul>
+
+            <h3>How to Play:</h3>
+            <p>You control your character using either the following keys or the on-screen buttons:</p>
+
+            <h4>Keyboard Controls:</h4>
+            <ul>
+                <li><strong>Movement:</strong> Use the <span class="important">W</span> key to move up, <span class="important">S</span> key to move down, <span class="important">A</span> key to move left, and <span class="important">D</span> key to move right.</li>
+                <li><strong>Shooting:</strong> Press the <span class="important">E</span> key to shoot an arrow in the direction you're facing. You have 3 arrows to use, so make them count!</li>
+                <li><strong>Reset Game:</strong> Press the <span class="important">Q</span> key to reset the game and start a new adventure.</li>
+            </ul>
+
+            <h4>On-Screen Controls:</h4>
+            <p>If you prefer to use on-screen buttons, you can also control your character with the buttons located at the bottom of the screen:</p>
+            <ul>
+                <li><strong>Movement:</strong> Use the "Up", "Down", "Left", and "Right" buttons to move between rooms in the maze.</li>
+                <li><strong>Shooting:</strong> Press the "Shoot Arrow" button to shoot an arrow in the direction you're facing.</li>
+                <li><strong>Reset Game:</strong> If you want to restart, use the "Reset Game" button to restart the adventure and try again!</li>
+            </ul>
+
+            <h3>Sensory Clues:</h3>
+            <p>As you explore, you'll receive sensory clues that help you navigate the maze:</p>
+            <ul>
+                <li><strong>Stench</strong> (S): Indicates that the Wumpus is in an adjacent room. Stay away!</li>
+                <li><strong>Breeze</strong> (B): Indicates that there’s a pit nearby. Be cautious!</li>
+                <li><strong>Glitter</strong> (G): Indicates that the gold is in an adjacent room. Follow the glitter!</li>
+            </ul>
+
+            <h3>Game Rules:</h3>
+            <ul>
+                <li><strong>The Wumpus:</strong> If you enter the room with the Wumpus, it will eat you, and you lose the game.</li>
+                <li><strong>The Pits:</strong> Stepping into a room with a pit means you fall to your death and lose the game.</li>
+                <li><strong>The Gold:</strong> If you find the gold, you win the game and escape the maze!</li>
+                <li><strong>Arrows:</strong> You have 3 arrows to use. If you run out of arrows, you're out of luck!</li>
+            </ul>
+
+            <p>Good luck, adventurer. The maze is dark and treacherous, but with careful planning and a little bit of luck, you may just make it out alive!</p>
+        </div>
+
+        <button class="button" onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        // Placeholder for starting the game
+        function startGame() {
+            // Normally, you'd initiate your game here
+            window.location.href = 'index.html'; // Redirect to the game page (same as your initial page)
+        }
+    </script>
+</body>
+</html>

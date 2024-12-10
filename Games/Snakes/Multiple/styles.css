@@ -1,0 +1,108 @@
+  body {
+            display: flex; /* Arrange items in a column */
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center elements horizontally */
+            font-family: 'Arial', sans-serif; /* Set the font */
+            background: linear-gradient(to bottom right, #1b1b1b, #3a3a3a); /* Gradient background */
+            color: #ffffff; /* White text color */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Padding around the body */
+        }
+
+        h1 {
+            font-size: 3em; /* Size of the main heading */
+            margin-bottom: 10px; /* Space below the heading */
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); /* Depth effect */
+            letter-spacing: 2px; /* Space between letters */
+        }
+
+        #controls {
+            margin: 20px; /* Space around controls */
+            display: flex; /* Layout for control elements */
+            flex-direction: column; /* Stack controls vertically */
+            background: rgba(42, 42, 42, 0.9); /* Semi-transparent background */
+            padding: 20px; /* Padding inside the controls box */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); /* Shadow for depth */
+            transition: background 0.3s, transform 0.2s; /* Smooth hover effect */
+        }
+
+        #controls:hover {
+            background: rgba(42, 42, 42, 1); /* Darker on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        label {
+            margin: 10px 0 5px; /* Spacing for labels */
+            font-weight: bold; /* Bold text */
+            font-size: 1.1em; /* Slightly larger font size */
+        }
+
+        input {
+            padding: 12px; /* Padding inside input fields */
+            border: 2px solid #4CAF50; /* Green border */
+            border-radius: 5px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below inputs */
+            background-color: #2a2a2a; /* Dark background */
+            color: #ffffff; /* White text color */
+            transition: border-color 0.3s, background 0.3s; /* Smooth focus effects */
+        }
+
+        input:focus {
+            border-color: #76c7c0; /* Light border on focus */
+            background-color: #3c3c3c; /* Slightly lighter background */
+            outline: none; /* Remove default outline */
+        }
+
+        button {
+            padding: 12px; /* Padding inside buttons */
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+            font-size: 1em; /* Standard font size */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: scale(1.05); /* Slightly grow on hover */
+        }
+
+        canvas {
+            border: 2px solid #ffffff; /* White border for canvas */
+            display: none; /* Hide canvas by default */
+            margin-top: 20px; /* Space above canvas */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Light shadow */
+        }
+
+        #score {
+            font-size: 28px; /* Score display font size */
+            margin-top: 10px; /* Space above score */
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8); /* Depth effect */
+        }
+
+        #game-info {
+            display: none; /* Hide game info by default */
+            background: rgba(42, 42, 42, 0.9); /* Semi-transparent background */
+            padding: 20px; /* Padding inside game info */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); /* Shadow for depth */
+        }
+
+        #game-info h2 {
+            margin: 0 0 10px; /* Space below heading */
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6); /* Light shadow */
+        }
+
+        #closeInfo {
+            background-color: #f44336; /* Red background for close button */
+            transition: background-color 0.3s; /* Smooth hover effect */
+        }
+
+        #closeInfo:hover {
+            background-color: #d32f2f; /* Darker red on hover */
+        }

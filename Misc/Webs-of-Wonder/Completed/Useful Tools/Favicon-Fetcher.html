@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Fetcher</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input {
+            background-color: #333;
+            color: #e0e0e0;
+            border: 2px solid #444;
+            padding: 10px;
+            font-size: 16px;
+            width: 70%;
+            max-width: 400px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .favicon-container {
+            margin-top: 20px;
+        }
+        .favicon {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            background-color: #444;
+            margin-top: 20px;
+        }
+        #error {
+            color: #ff0000;
+            margin-top: 20px;
+        }
+        .download-btn {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .download-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Favicon Fetcher</h1>
+    <input type="text" id="urlInput" placeholder="Enter a valid URL">
+    <button onclick="fetchFavicon()">Get Favicon</button>
+
+    <div class="favicon-container">
+        <img id="faviconImage" class="favicon" style="display:none;">
+        <p id="error" style="display:none;"></p>
+        <button id="downloadBtn" class="download-btn" style="display:none;" onclick="downloadFavicon()">Download Favicon</button>
+    </div>
+
+    <script>
+        function fetchFavicon() {
+            // Clear previous error or favicon
+            document.getElementById('faviconImage').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
+            
+            const url = document.getElementById('urlInput').value.trim();
+
+            if (url) {
+                const faviconUrl = getFaviconUrl(url);
+                fetch(faviconUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            document.getElementById('faviconImage').src = faviconUrl;
+                            document.getElementById('faviconImage').style.display = 'block';
+                            document.getElementById('downloadBtn').style.display = 'inline-block';
+                        } else {
+                            showError('Favicon not found for the provided URL.');
+                        }
+                    })
+                    .catch(error => {
+                        showError('Error fetching favicon: ' + error.message);
+                    });
+            } else {
+                showError('Please enter a valid URL.');
+            }
+        }
+
+        function getFaviconUrl(url) {
+            // Attempt to build the favicon URL
+            const urlObject = new URL(url);
+            return `${urlObject.origin}/favicon.ico`; // Default location for favicon.ico
+        }
+
+        function showError(message) {
+            document.getElementById('error').innerText = message;
+            document.getElementById('error').style.display = 'block';
+        }
+
+        function downloadFavicon() {
+            const faviconImage = document.getElementById('faviconImage');
+            const imageUrl = faviconImage.src;
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = 'favicon.ico'; // Default filename for favicon
+            a.click();
+        }
+    </script>
+
+</body>
+</html>

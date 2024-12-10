@@ -1,0 +1,134 @@
+body {
+    display: flex; /* Flexbox layout for vertical centering */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(-45deg, #004040, #008080, #800080, #228B22); /* Gradient background */
+    background-size: 400% 400%; /* Size for the gradient animation */
+    animation: gradient 15s ease infinite; /* Gradient animation */
+    color: white; /* Text color */
+    font-family: 'Arial', sans-serif; /* Default font */
+    
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 {
+    margin-bottom: 20px; /* Space below the header */
+    font-size: 48px; /* Header font size */
+    color: white; /* Text color */
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8); /* Shadow for depth */
+    font-family: 'Impact', sans-serif; /* Bold font for emphasis */
+    padding: 10px; /* Inner padding */
+    border-radius: 10px; /* Rounded corners for the header */
+    margin: 20px 0;
+    color: #00bcd4; /* Cyan color */
+    text-shadow: 0 0 10px #00bcd4;
+}
+
+.board {
+    display: grid;
+    grid-gap: 10px;
+    margin-bottom: 20px;
+    border: 5px solid cyan; /* Cyan border for the board */
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.5); /* Shadow for the board */
+    padding: 10px;
+    border-radius: 15px; /* Rounded corners */
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    background-color: rgba(85, 85, 85, 0.9); /* Slight transparency */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Shadow for tiles */
+}
+
+.tile:hover {
+    transform: scale(1.05); /* Slightly enlarge tile on hover */
+}
+
+.score, .high-score {
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.menu, .game {
+    display: none; /* Hide menu and game by default */
+}
+
+.menu.active, .game.active {
+    display: block; /* Show active menu or game */
+}
+
+#size-select {
+    margin-bottom: 20px; /* Space below the dropdown */
+    padding: 10px; /* Inner padding */
+    font-size: 16px; /* Font size for dropdown */
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid cyan; /* Cyan border for dropdown */
+    background-color: rgba(255, 255, 255, 0.5); /* Slightly transparent background */
+}
+
+#play-button {
+    padding: 10px 20px; /* Inner padding */
+    font-size: 16px; /* Font size for play button */
+    background-color: rgba(0, 204, 0, 0.9); /* Green background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition effects */
+}
+
+#play-button:hover {
+    background-color: rgba(0, 255, 0, 1); /* Lighter green on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.scores {
+    display: flex; /* Flexbox layout for scores */
+    flex-direction: column; /* Stack scores vertically */
+    align-items: center; /* Center align items */
+    margin-bottom: 20px; /* Space below scores */
+}
+
+.reset-container {
+    display: flex; /* Flexbox layout for reset button */
+    justify-content: center; /* Center align content */
+    margin-top: 10px; /* Space above reset container */
+}
+
+#reset-button {
+    padding: 10px 20px; /* Inner padding */
+    font-size: 16px; /* Font size for reset button */
+    background-color: rgba(255, 69, 0, 0.9); /* Red background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition effects */
+}
+
+#reset-button:hover {
+    background-color: rgba(255, 99, 71, 1); /* Lighter red on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}

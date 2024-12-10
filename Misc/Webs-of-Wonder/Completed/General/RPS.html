@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        h1 {
+            color: #ffffff;
+        }
+        .button {
+            margin: 10px;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .scoreboard {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .score {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rock, Paper, Scissors</h1>
+    <button class="button" onclick="play('rock')">Rock</button>
+    <button class="button" onclick="play('paper')">Paper</button>
+    <button class="button" onclick="play('scissors')">Scissors</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="scoreboard" id="scoreboard">
+        <div class="score">Wins: <span id="wins">0</span></div>
+        <div class="score">Losses: <span id="losses">0</span></div>
+        <div class="score">Draws: <span id="draws">0</span></div>
+    </div>
+
+    <script>
+        let wins = 0;
+        let losses = 0;
+        let draws = 0;
+
+        function play(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result;
+
+            if (playerChoice === computerChoice) {
+                result = "It's a tie! Both chose " + playerChoice;
+                draws++;
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = "You win! " + playerChoice + " beats " + computerChoice;
+                wins++;
+            } else {
+                result = "You lose! " + computerChoice + " beats " + playerChoice;
+                losses++;
+            }
+
+            document.getElementById('result').innerText = result;
+            document.getElementById('wins').innerText = wins;
+            document.getElementById('losses').innerText = losses;
+            document.getElementById('draws').innerText = draws;
+        }
+    </script>
+
+</body>
+</html>

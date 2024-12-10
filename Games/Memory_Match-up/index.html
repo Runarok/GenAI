@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Match-Up</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <h1>Memory Match-Up</h1>
+    <div class="container">
+        <div>
+            <input type="number" id="cardCount" min="2" max="100" value="10" placeholder="No. of pairs">
+            <button id="startButton">Start Game</button>
+        </div>
+        <div class="timer" id="timerDisplay">Time: 0s</div>
+        <div class="game-board" id="gameBoard"></div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script> <!-- Link to external JavaScript -->
+</body>
+</html>

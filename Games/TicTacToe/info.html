@@ -1,0 +1,163 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Game Features</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #000000, #434343);
+            color: white;
+            overflow: auto; /* Allow scrolling */
+            padding: 20px;
+            margin: 0; /* Remove default margin */
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            width: 100%; /* Make sections responsive */
+            max-width: 600px; /* Limit max width for larger screens */
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #e74c3c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: border-color 0.2s;
+        }
+
+        select:focus {
+            border-color: #333;
+            outline: none;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+<button class="back-button" onclick="window.location.href='index.html'">←</button>
+
+<h1>Tic-Tac-Toe Game Features</h1>
+<div class="controls">
+    <button onclick="showSection('overview')">Overview</button>
+    <button onclick="showSection('key-features')">Key Features</button>
+    <button onclick="showSection('conclusion')">Conclusion</button>
+</div>
+
+<div id="overview" class="section">
+    <h2>Overview</h2>
+    <p>This is a simple web-based Tic-Tac-Toe game that allows players to compete against each other or against AI opponents. The game features a visually appealing design and includes various game modes.</p>
+</div>
+
+<div id="key-features" class="section">
+    <h2>Key Features</h2>
+    <h3>1. User Interface</h3>
+    <ul>
+        <li><strong>Responsive Design:</strong> Centered on screen with a gradient background.</li>
+        <li><strong>Game Board:</strong> A 3x3 grid with interactive cells.</li>
+        <li><strong>Status Display:</strong> Shows current player's turn, winner, or draw.</li>
+        <li><strong>Win Counter:</strong> Tracks wins for both players and draws.</li>
+    </ul>
+    <h3>2. Game Modes</h3>
+    <ul>
+        <li><strong>2 Player Mode:</strong> Players take turns against each other.</li>
+        <li><strong>Kid Mode:</strong> More forgiving for younger players.</li>
+        <li><strong>Human Mode:</strong> Competes against a simpler AI.</li>
+        <li><strong>Unbeatable Mode:</strong> Smart AI using a minimax algorithm.</li>
+    </ul>
+    <h3>3. AI Opponents</h3>
+    <ul>
+        <li><strong>Random Move AI:</strong> Makes random moves.</li>
+        <li><strong>Easy AI:</strong> Blocks winning moves or makes random moves.</li>
+        <li><strong>Smart AI:</strong> Uses minimax algorithm for optimal moves.</li>
+    </ul>
+    <h3>4. Interactive Elements</h3>
+    <ul>
+        <li><strong>Cell Interaction:</strong> Players click on cells to place their marks.</li>
+        <li><strong>Reset Button:</strong> Resets the game board.</li>
+        <li><strong>Mode Selection Dropdown:</strong> Choose the game mode before starting.</li>
+    </ul>
+    <h3>5. Animations and Visuals</h3>
+    <ul>
+        <li><strong>Background Animation:</strong> Animated 'X' and 'O' characters.</li>
+        <li><strong>Hover Effects:</strong> Cells grow and cast shadows when hovered over.</li>
+    </ul>
+    <h3>6. Game Logic</h3>
+    <ul>
+        <li><strong>Winning Conditions:</strong> Checks for winning combinations.</li>
+        <li><strong>Draw Condition:</strong> Detects if all cells are filled without a winner.</li>
+        <li><strong>Automatic Reset:</strong> Resets after a win or draw.</li>
+    </ul>
+    <h3>7. Accessibility</h3>
+    <ul>
+        <li><strong>Keyboard Focus:</strong> Dropdown menus are focusable.</li>
+    </ul>
+    <h3>8. Custom Styles</h3>
+    <p>Uses CSS styles for visual appeal, including fonts and transitions.</p>
+</div>
+
+<div id="conclusion" class="section">
+    <h2>Conclusion</h2>
+    <p>This Tic-Tac-Toe game provides a robust and engaging experience for players of all ages, catering to both casual players and those looking for a challenge.</p>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+    }
+    
+    // Show overview by default
+    showSection('overview');
+</script>
+
+</body>
+</html>

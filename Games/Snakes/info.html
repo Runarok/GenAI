@@ -1,0 +1,218 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game Features</title>
+    <link href="https://example.com/noricon-font.css" rel="stylesheet"> <!-- Ensure this link points to the correct font source -->
+    <style>
+        /* Body styles for overall layout and aesthetic */
+        body {
+            font-family: 'Noricon', sans-serif;
+            background-color: #0e1c24; /* Darker background for immersion */
+            color: #ffffff; /* White text for contrast */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding around the content */
+            text-align: center; /* Center align text */
+            overflow-y: auto; /* Allow vertical scrolling for content overflow */
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* Main heading style */
+        h1 {
+            font-size: 3em; /* Large font size for the title */
+            color: #00bcd4; /* Teal color for the main heading */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        /* Subheading style */
+        h2 {
+            font-size: 2em; /* Font size for subheadings */
+            color: #00bcd4; /* Consistent teal color */
+            margin-top: 40px; /* Space above the subheading */
+            margin-bottom: 10px; /* Space below the subheading */
+        }
+
+        /* Style for content sections */
+        .section {
+            border: 2px solid #00bcd4; /* Teal border for sections */
+            border-radius: 12px; /* Rounded corners for sections */
+            padding: 20px; /* Padding within sections */
+            margin: 20px auto; /* Centered margin with spacing */
+            max-width: 800px; /* Limit width for better readability */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background for sections */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+            transition: transform 0.3s, background-color 0.3s; /* Smooth transitions for hover effects */
+            position: relative; /* Position for potential future enhancements */
+        }
+
+        /* Hover effect for sections */
+        .section:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
+            transform: scale(1.05); /* Slight scaling effect on hover */
+        }
+
+        /* Link styles */
+        a {
+            display: inline-block; /* Display links as blocks */
+            text-decoration: none; /* Remove underline from links */
+            color: #00bcd4; /* Teal color for links */
+            font-size: 1.5em; /* Adjusted font size for links */
+            margin: 15px 0; /* Vertical margin for spacing */
+            padding: 10px 20px; /* Padding for link buttons */
+            border-radius: 8px; /* Rounded corners for links */
+            background-color: rgba(255, 255, 255, 0.1); /* Light background for links */
+            transition: color 0.3s, background-color 0.3s; /* Smooth transitions on hover */
+        }
+
+        /* Hover effect for links */
+        a:hover {
+            color: #ffffff; /* Change link color on hover */
+            background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: 40px; /* Space above the footer */
+            font-size: 0.9em; /* Slightly smaller font for footer */
+            color: #ccc; /* Light gray color for footer text */
+        }
+    </style>
+</head>
+<body>
+    <!-- Main title of the page -->
+    <h1>🎮 Overview</h1>
+    
+    <!-- Section introducing the Snake Game project -->
+    <div class="section">
+        <p>Welcome to the <strong>Snake Game</strong> project! In this repository, you'll find the HTML document <code>index.html</code>, which serves as a dynamic game selection interface. Players can dive straight into action by choosing between a single-player experience or an engaging multiplayer mode.</p>
+        <a href="https://tempestaethel.github.io/Snakes/">👉 Play Here</a> <!-- Link to play the game -->
+    </div>
+
+    <!-- Subheading for Snake Game Overview -->
+    <h2>🐍 Snake Game Overview</h2>
+    
+    <!-- Section providing an introduction to the Snake Game -->
+    <div class="section">
+        <h3>🌟 Introduction</h3>
+        <p>This document presents a simple yet captivating <strong>Snake Game</strong> crafted with HTML, CSS, and JavaScript. The game allows players to customize their experience with features like a flexible playing field, adjustable snake speeds, and exciting gameplay elements such as apples and power-ups.</p>
+    </div>
+
+    <!-- Section detailing the game features -->
+    <div class="section">
+        <h3>🚀 Features</h3>
+        <ul>
+            <li><strong>Customizable Board Size</strong>: Choose a board size ranging from 10 to 50 squares for endless gameplay variety.</li>
+            <li><strong>Adjustable Snake Speed</strong>: Set the snake’s speed between 1 and 10, allowing for varying difficulty levels.</li>
+            <li><strong>Multiple Apples</strong>: The option to enable multiple apples adds an extra layer of challenge and scoring potential.</li>
+            <li><strong>Power-ups</strong>: Collect power-ups that provide benefits or introduce challenges during gameplay.</li>
+            <li><strong>Responsive Design</strong>: The game interface is designed to be visually appealing and modern, ensuring a smooth user experience.</li>
+        </ul>
+    </div>
+
+    <!-- Section describing the game layout -->
+    <div class="section">
+        <h3>📐 Game Layout</h3>
+        <p>The game starts with a user-friendly menu where players can set their game parameters:</p>
+        <ul>
+            <li>Board Size (input)</li>
+            <li>Snake Speed (input)</li>
+            <li>Options to enable multiple apples and power-ups</li>
+            <li>A <strong>Start Game</strong> button to jump into action.</li>
+            <li>An <strong>Info</strong> button for clear game instructions.</li>
+        </ul>
+        <p>Keep track of your score in real-time as you play on an HTML <code>&lt;canvas&gt;</code> element, where the snake, apples, and power-ups are beautifully rendered.</p>
+    </div>
+
+    <!-- Section outlining gameplay mechanics -->
+    <div class="section">
+        <h3>🎮 Gameplay Mechanics</h3>
+        <ul>
+            <li><strong>Snake Movement</strong>: Control your snake using the arrow keys or WASD keys—choose your preferred method.</li>
+            <li><strong>Eating Apples</strong>: When the snake eats an apple, it grows longer, and you rack up points.</li>
+            <li><strong>Power-ups</strong>: Collecting power-ups can speed up or slow down your snake, or even grant bonus points.</li>
+            <li><strong>Game Over</strong>: The game concludes if the snake collides with itself, displaying the final score for bragging rights.</li>
+        </ul>
+    </div>
+
+    <!-- Section listing key JavaScript functions -->
+    <div class="section">
+        <h3>🔑 Key JavaScript Functions</h3>
+        <ul>
+            <li><strong>startGame()</strong>: Initializes the game settings and starts the game loop.</li>
+            <li><strong>spawnApple()</strong>: Randomly generates apples on the board while ensuring they don't overlap with the snake.</li>
+            <li><strong>spawnPower()</strong>: Creates power-ups in random locations to keep gameplay dynamic.</li>
+            <li><strong>loop()</strong>: The main loop updates the game state, checks for collisions, and redraws the canvas.</li>
+            <li><strong>applyPower()</strong>: Adjusts the snake's speed or score based on the power-ups collected.</li>
+        </ul>
+    </div>
+
+    <!-- Section summarizing the conclusion -->
+    <div class="section">
+        <h3>🎉 Conclusion</h3>
+        <p>This Snake Game combines classic gameplay with modern features to deliver an engaging experience. The flexibility in settings allows for tailored gameplay, while the visual design enhances user interaction.</p>
+    </div>
+
+    <!-- Subheading for Multiplayer Snake Game Overview -->
+    <h2>🕹️ Multiplayer Snake Game Overview</h2>
+    
+    <!-- Section introducing the multiplayer version of the game -->
+    <div class="section">
+        <p>This project is a complete implementation of a <strong>Multiplayer Snake Game</strong> using HTML, CSS, and JavaScript. Below is a glimpse into its key components.</p>
+    </div>
+
+    <!-- Section detailing the HTML structure of the multiplayer game -->
+    <div class="section">
+        <h3>📄 HTML Structure</h3>
+        <ul>
+            <li><strong>Header</strong>: Displays the game title prominently.</li>
+            <li><strong>Control Panel</strong>: 
+                <ul>
+                    <li>Input fields for game settings (board size, snake speed, number of apples, and power-up frequency).</li>
+                    <li>Buttons to start the game and access game information.</li>
+                </ul>
+            </li>
+            <li><strong>Canvas Element</strong>: Where all the game action unfolds.</li>
+            <li><strong>Score Display</strong>: Keeps players updated on their score during gameplay.</li>
+            <li><strong>Game Rules Section</strong>: Initially hidden, this section displays the rules and controls when accessed.</li>
+        </ul>
+    </div>
+
+    <!-- Section discussing CSS styling -->
+    <div class="section">
+        <h3>🎨 CSS Styling</h3>
+        <ul>
+            <li><strong>Theme</strong>: A dark, immersive aesthetic with gradients and shadows enhances the gaming experience.</li>
+            <li><strong>Layout</strong>: Centered elements with a modern design provide an enjoyable user interface.</li>
+            <li><strong>Hover Effects</strong>: Buttons and input fields feature smooth transitions, contributing to overall responsiveness.</li>
+        </ul>
+    </div>
+
+    <!-- Section outlining JavaScript functionality -->
+    <div class="section">
+        <h3>🔍 JavaScript Functionality</h3>
+        <ul>
+            <li><strong>Game Initialization</strong>: Reads settings from input fields and stores them in <code>localStorage</code> for a seamless experience.</li>
+            <li><strong>Game Loop</strong>: Regularly updates the game state (moving snakes, checking collisions, redrawing).</li>
+            <li><strong>Snake Movement</strong>: Direction control for Player 1 (WASD) and Player 2 (Arrow keys).</li>
+            <li><strong>Apple and Power-Up Management</strong>: Generates apples and power-ups, tracking consumption and updating scores.</li>
+            <li><strong>Collision Detection</strong>: Checks for self-collisions, apple collisions, power-up pickups, and snake collisions.</li>
+            <li><strong>Game Over Logic</strong>: Determines when the game ends and announces the winner.</li>
+        </ul>
+    </div>
+
+    <!-- Section describing user interaction -->
+    <div class="section">
+        <h3>👾 User Interaction</h3>
+        <ul>
+            <li>Players can adjust game settings before launching into action.</li>
+            <li>Control your snakes during gameplay for that competitive edge.</li>
+            <li>Access game rules easily through a popup for quick reference.</li>
+        </ul>
+    </div>
+
+    <!-- Footer summarizing the project -->
+    <footer>
+        <p>Overall, this code creates a functional and engaging multiplayer snake game experience that can be enjoyed directly in your web browser. Jump in and have fun!</p>
+    </footer>
+</body>
+</html>

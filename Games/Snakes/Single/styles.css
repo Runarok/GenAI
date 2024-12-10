@@ -1,0 +1,115 @@
+/* Set up the full height and center content with a dark gradient background */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Canvas styling for the game area */
+    canvas {
+      border: 2px solid #fff; /* White border around the canvas */
+      background-color: #4d4d4d; /* Dark background for the game area */
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Light glow effect */
+      display: none; /* Hide initially, shown when the game starts */
+    }
+
+    /* Menu styling for game settings */
+    #menu {
+      position: absolute; /* Positioned absolutely for flexibility */
+      display: flex; /* Flexbox layout for menu items */
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center align items */
+      background-color: rgba(0, 0, 0, 0.85); /* Semi-transparent black background */
+      padding: 30px; /* Padding inside the menu */
+      border: 2px solid #fff; /* White border around the menu */
+      border-radius: 10px; /* Rounded corners */
+      color: #fff; /* White text color */
+      z-index: 1; /* Ensure menu appears above other elements */
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    }
+
+    /* Title styling for the menu */
+    #menu h2 {
+      margin: 0; /* Remove default margin */
+      font-size: 24px; /* Title font size */
+      color: #0ff; /* Teal color for title */
+    }
+
+    /* Label styling for inputs */
+    #menu label {
+      margin-top: 15px; /* Space above labels */
+      font-size: 16px; /* Label font size */
+    }
+
+    /* Input styling for number inputs */
+    #menu input[type="number"] {
+      margin-left: 10px; /* Space between label and input */
+      padding: 5px; /* Padding inside input fields */
+      width: 60px; /* Fixed width for inputs */
+      border: 1px solid #fff; /* White border */
+      border-radius: 5px; /* Rounded corners */
+      background-color: #333; /* Dark background for inputs */
+      color: #fff; /* White text */
+    }
+
+    /* Button styling for actions */
+    button {
+      margin-top: 20px; /* Space above buttons */
+      padding: 10px 20px; /* Padding inside buttons */
+      background-color: #0ff; /* Teal background for buttons */
+      color: black; /* Black text color */
+      cursor: pointer; /* Pointer cursor on hover */
+      border: none; /* Remove default border */
+      border-radius: 5px; /* Rounded corners */
+      font-size: 16px; /* Button font size */
+      transition: background-color 0.3s; /* Smooth background color change */
+    }
+
+    /* Hover effect for buttons */
+    button:hover {
+      background-color: #0cc; /* Darker teal on hover */
+    }
+
+    /* Score display styling */
+    #score {
+      position: absolute; /* Positioned absolutely for flexibility */
+      top: 20px; /* Position from the top */
+      right: 20px; /* Position from the right */
+      font-size: 24px; /* Font size for score */
+      color: #fff; /* White text */
+      display: none; /* Hide initially, shown during gameplay */
+    }
+
+    /* Final score styling */
+    #finalScore {
+      margin-top: 20px; /* Space above final score */
+      font-size: 18px; /* Font size for final score */
+      color: #ff0; /* Yellow color for emphasis */
+    }
+
+    /* Info section styling */
+    #info {
+      display: none; /* Hidden by default, shown when needed */
+      background-color: rgba(0, 0, 0, 0.85); /* Semi-transparent background */
+      padding: 20px; /* Padding inside info section */
+      border-radius: 10px; /* Rounded corners */
+      margin-top: 15px; /* Space above info section */
+      color: #fff; /* White text */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    }
+
+    /* Title styling for the info section */
+    #info h3 {
+      margin: 0; /* Remove default margin */
+      font-size: 20px; /* Font size for info title */
+      color: #0ff; /* Teal color for title */
+    }
+
+    /* Padding for lists in the info section */
+    #info ul {
+      padding-left: 20px; /* Indent list items */
+    }

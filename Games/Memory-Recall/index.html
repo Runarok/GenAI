@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Recall Game</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Memory Recall Game</h1>
+
+    <div id="menu">
+        <!-- Input for number of items -->
+        <label for="num-items">Number of items (10 to 100):</label>
+        <input type="number" id="num-items" min="10" max="100" value="10">
+
+        <!-- Checkbox for limiting wrong guesses -->
+        <label for="limit-guesses">Limit wrong guesses to 20% of items:</label>
+        <input type="checkbox" id="limit-guesses">
+
+        <!-- Button to start the game -->
+        <button id="start-btn">Start Game</button>
+    </div>
+
+    <div id="game-area">
+        <!-- Input for user guesses -->
+        <input type="text" id="guess-input" placeholder="Enter your guesses" autocomplete="off">
+        <!-- Button to reset the game -->
+        <button id="reset-btn">Reset Game</button>
+
+        <!-- Container for displaying correct guesses -->
+        <div class="correct-items" id="correct-items"></div>
+    </div>
+
+    <!-- Modal for displaying items to memorize -->
+    <div id="items-modal">
+        <div id="items-modal-content">
+            <span id="close-modal">Close</span>
+            <h2>Memorize these items:</h2>
+            <ul id="items-list"></ul>
+        </div>
+    </div>
+
+    <!-- Toast notification element -->
+    <div id="toast"></div>
+
+     <script src="script.js"></script>
+</body>
+</html>

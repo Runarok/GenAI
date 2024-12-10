@@ -1,0 +1,421 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        /* Body styling with background */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2c2c2c;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 10px;
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            background-color: white;
+            cursor: pointer;
+            border: 2px solid #333;
+            color: black;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .status {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        /* Dropdown styling */
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        /* Counters */
+        #win-counter {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Animated Background */
+        .background-xo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .background-xo span {
+            position: absolute;
+            font-size: 40px;
+            font-weight: bold;
+            color: cyan;
+            opacity: 0.1;
+            animation: move 15s linear infinite;
+        }
+
+        /* Teal color for the "O"s */
+         .background-xo .o {
+            color: teal;
+        }
+
+        /* Animations for background */
+        @keyframes move {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background for X and O -->
+    <div class="background-xo" id="background-xo"></div>
+
+    <div class="controls">
+        <!-- Mode selection dropdown -->
+        <select id="mode-selection">
+            <option value="0">2 Player Mode</option>
+            <option value="1">Kid Mode</option>
+            <option value="3">Human Mode</option>
+            <option value="2">Unbeatable Mode</option>
+        </select>
+        <button id="reset-button">Reset Game</button>
+    </div>
+
+    <div>
+        <div class="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+        <div class="status">
+            <p id="game-status">Player X's turn</p>
+        </div>
+    </div>
+
+    <!-- Win Counter -->
+    <div id="win-counter">
+        <p>Wins for X: <span id="x-wins">0</span></p>
+        <p>Wins for O: <span id="o-wins">0</span></p>
+        <p>Draws: <span id="draws">0</span></p> <!-- Draw counter -->
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll('.cell');
+        const statusText = document.getElementById('game-status');
+        const modeSelection = document.getElementById('mode-selection');
+        const resetButton = document.getElementById('reset-button');
+
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let gameMode = 0; // 0 = 2 Player, 1 = Random AI, 2 = Smart AI (Minimax), 3 = Easy AI
+        let firstTurnTaken = false;
+        let xWins = 0;
+        let oWins = 0;
+        let draws = 0; // Draw counter
+
+        const winningConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        function generateBackgroundXO() {
+        const container = document.getElementById('background-xo');
+        for (let i = 0; i < 50; i++) {
+        const span = document.createElement('span');
+        span.textContent = Math.random() > 0.5 ? 'X' : 'O';
+
+        // Randomize the color between teal and cyan
+        const randomColor = Math.random() > 0.5 ? 'teal' : 'cyan';
+        span.style.color = randomColor;
+
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.animationDuration = Math.random() * 5 + 10 + 's';
+        span.style.opacity = Math.random() * 0.3 + 0.1;
+        container.appendChild(span);
+    }
+}
+
+        generateBackgroundXO();
+
+        function checkForWinner() {
+            let roundWon = false;
+            for (let i = 0; i < winningConditions.length; i++) {
+                const winCondition = winningConditions[i];
+                let a = board[winCondition[0]];
+                let b = board[winCondition[1]];
+                let c = board[winCondition[2]];
+                if (a === '' || b === '' || c === '') {
+                    continue;
+                }
+                if (a === b && b === c) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                statusText.innerHTML = `Player ${currentPlayer} wins!`;
+                gameActive = false;
+
+                if (currentPlayer === 'X') {
+                    xWins++;
+                    document.getElementById('x-wins').innerText = xWins;
+                } else {
+                    oWins++;
+                    document.getElementById('o-wins').innerText = oWins;
+                }
+                setTimeout(resetBoard, 1500); // Automatically reset after win
+                return true;
+            }
+
+            if (!board.includes('')) {
+                statusText.innerHTML = "It's a draw!";
+                gameActive = false;
+                draws++;  // Increment draw counter
+                document.getElementById('draws').innerText = draws;
+                setTimeout(resetBoard, 1500); // Automatically reset after draw
+                return true;
+            }
+
+            return false;
+        }
+
+        function cellClick(event) {
+            const clickedCell = event.target;
+            const clickedCellIndex = clickedCell.getAttribute('data-index');
+
+            if (board[clickedCellIndex] !== '' || !gameActive || (gameMode > 0 && currentPlayer === 'O')) {
+                return;
+            }
+
+            // Disable mode dropdown after first move
+            if (!firstTurnTaken) {
+                modeSelection.disabled = true;
+                firstTurnTaken = true;
+            }
+
+            board[clickedCellIndex] = currentPlayer;
+            clickedCell.innerHTML = currentPlayer;
+
+            if (!checkForWinner()) {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusText.innerHTML = `Player ${currentPlayer}'s turn`;
+
+                if (gameMode > 0 && currentPlayer === 'O') {
+                    setTimeout(() => {
+                        if (gameMode === 1) {
+                            playRandomMove();
+                        } else if (gameMode === 2) {
+                            playSmartMove();
+                        } else if (gameMode === 3) {
+                            playEasyMove();
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        function playRandomMove() {
+            let availableCells = board.map((cell, index) => cell === '' ? index : null).filter(index => index !== null);
+            if (availableCells.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableCells.length);
+                const cellIndex = availableCells[randomIndex];
+
+                board[cellIndex] = 'O';
+                cells[cellIndex].innerHTML = 'O';
+
+                if (!checkForWinner()) {
+                    currentPlayer = 'X';
+                    statusText.innerHTML = `Player X's turn`;
+                }
+            }
+        }
+
+        function playEasyMove() {
+            let availableCells = board.map((cell, index) => cell === '' ? index : null).filter(index => index !== null);
+
+            // Check if O can win
+            let move = findWinningMove('O');
+
+            // If O can't win, check if X is about to win and block it
+            if (move === null) {
+                move = findBlockingMove('X');
+            }
+
+            // If no block or win is needed, make a random move
+            if (move === null) {
+                const randomIndex = Math.floor(Math.random() * availableCells.length);
+                move = availableCells[randomIndex];
+            }
+
+            board[move] = 'O';
+            cells[move].innerHTML = 'O';
+
+            if (!checkForWinner()) {
+                currentPlayer = 'X';
+                statusText.innerHTML = `Player X's turn`;
+            }
+        }
+
+        function findWinningMove(player) {
+            for (let i = 0; i < winningConditions.length; i++) {
+                const [a, b, c] = winningConditions[i];
+                if (board[a] === player && board[b] === player && board[c] === '') {
+                    return c;
+                } else if (board[a] === player && board[c] === player && board[b] === '') {
+                    return b;
+                } else if (board[b] === player && board[c] === player && board[a] === '') {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+        function findBlockingMove(player) {
+            return findWinningMove(player); // This works the same way for blocking
+        }
+
+        function playSmartMove() {
+            let bestMove = getBestMove(board);
+            board[bestMove.index] = 'O';
+            cells[bestMove.index].innerHTML = 'O';
+
+            if (!checkForWinner()) {
+                currentPlayer = 'X';
+                statusText.innerHTML = `Player X's turn`;
+            }
+        }
+
+        function getBestMove(board) {
+            let bestScore = -Infinity;
+            let move;
+            for (let i = 0; i < board.length; i++) {
+                if (board[i] === '') {
+                    board[i] = 'O';
+                    let score = minimax(board, 0, false);
+                    board[i] = '';
+                    if (score > bestScore) {
+                        bestScore = score;
+                        move = { index: i };
+                    }
+                }
+            }
+            return move;
+        }
+
+        function minimax(newBoard, depth, isMaximizing) {
+            const result = evaluateBoard(newBoard);
+            if (result !== null) {
+                return result;
+            }
+
+            if (isMaximizing) {
+                let bestScore = -Infinity;
+                for (let i = 0; i < newBoard.length; i++) {
+                    if (newBoard[i] === '') {
+                        newBoard[i] = 'O';
+                        let score = minimax(newBoard, depth + 1, false);
+                        newBoard[i] = '';
+                        bestScore = Math.max(score, bestScore);
+                    }
+                }
+                return bestScore;
+            } else {
+                let bestScore = Infinity;
+                for (let i = 0; i < newBoard.length; i++) {
+                    if (newBoard[i] === '') {
+                        newBoard[i] = 'X';
+                        let score = minimax(newBoard, depth + 1, true);
+                        newBoard[i] = '';
+                        bestScore = Math.min(score, bestScore);
+                    }
+                }
+                return bestScore;
+            }
+        }
+
+        function evaluateBoard(board) {
+            for (let condition of winningConditions) {
+                const [a, b, c] = condition;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return board[a] === 'O' ? 10 : -10;
+                }
+            }
+
+            if (!board.includes('')) {
+                return 0;
+            }
+            return null;
+        }
+
+        function resetBoard() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            cells.forEach(cell => (cell.innerHTML = ''));
+            currentPlayer = 'X';
+            gameActive = true;
+            firstTurnTaken = false;
+            statusText.innerHTML = `Player X's turn`;
+            modeSelection.disabled = false;
+        }
+
+        function handleModeChange() {
+            gameMode = parseInt(modeSelection.value);
+            resetBoard();
+        }
+
+        cells.forEach(cell => cell.addEventListener('click', cellClick));
+        resetButton.addEventListener('click', resetBoard);
+        modeSelection.addEventListener('change', handleModeChange);
+    </script>
+</body>
+</html>

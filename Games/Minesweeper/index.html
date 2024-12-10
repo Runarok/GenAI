@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0d1b2a, #1b2631);
+            background-size: 400% 400%;
+            animation: gradientFlow 10s ease infinite;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #00bcd4;
+            text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4, 0 0 30px rgba(0, 188, 212, 0.7);
+            font-size: 48px;
+            text-align: center;
+        }
+        .dropdown {
+            position: relative;
+            margin: 20px 0;
+            width: 300px;
+        }
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e2e2e;
+            color: #f0f0f0;
+            border: 1px solid #00bcd4;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .dropdown select:hover {
+            background-color: #3e3e3e;
+        }
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 188, 212, 0.9);
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 5px;
+            opacity: 0;
+            transition: opacity 0.5s linear;
+        }
+        .dropdown:hover .tooltip {
+            opacity: 1;
+        }
+        .start-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #00bcd4;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            margin-top: 20px;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .start-button:hover {
+            background-color: #0097a7;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+    <div class="dropdown">
+        <select id="modeSelect">
+            <option value="">Select Mode</option>
+            <option value="Modes/Mode1.html" title="Size: 8x8 | Mines: 10 | Mine Percentage: 15.625%">Beginner's Bliss</option>
+            <option value="Modes/Mode2.html" title="Size: 10x10 | Mines: 15 | Mine Percentage: 15%">Novice's Nest</option>
+            <option value="Modes/Mode3.html" title="Size: 12x12 | Mines: 20 | Mine Percentage: 13.89%">Intermediate Challenge</option>
+            <option value="Modes/Mode4.html" title="Size: 16x16 | Mines: 40 | Mine Percentage: 15.625%">Strategist's Playground</option>
+            <option value="Modes/Mode5.html" title="Size: 20x20 | Mines: 60 | Mine Percentage: 15%">Rookie's Realm</option>
+            <option value="Modes/Mode6.html" title="Size: 24x24 | Mines: 100 | Mine Percentage: 17.36%">Expert Expedition</option>
+            <option value="Modes/Mode7.html" title="Size: 30x30 | Mines: 150 | Mine Percentage: 16.67%">Mastermind's Maze</option>
+            <option value="Modes/Mode8.html" title="Size: 36x36 | Mines: 250 | Mine Percentage: 19.44%">Challenger's Crucible</option>
+            <option value="Modes/Mode9.html" title="Size: 40x40 | Mines: 300 | Mine Percentage: 18.75%">Ultimate Battleground</option>
+            <option value="Modes/Mode10.html" title="Size: 50x50 | Mines: 400 | Mine Percentage: 16%">Titan's Trial</option>
+        </select>
+        <div class="tooltip">Hover over the options for details</div>
+    </div>
+    <button class="start-button" onclick="startGame()">Start Game</button>
+
+    <script>
+        function startGame() {
+            const select = document.getElementById('modeSelect');
+            const selectedValue = select.value;
+            if (selectedValue) {
+                window.location.href = selectedValue;
+            } else {
+                window.location.href = 'Details/Default.html'; // Redirect to Default.html if no mode selected
+            }
+        }
+    </script>
+</body>
+</html>

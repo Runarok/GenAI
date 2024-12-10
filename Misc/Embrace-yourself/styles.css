@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #555555); /* Dark to gray gradient */
+    background-size: 400% 400%; /* Size for the gradient animation */
+    animation: gradient 18s ease infinite; /* Gradient animation */
+    color: #ffffff; /* White text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.book {
+    width: 90vw; /* Responsive width */
+    max-width: 420px; /* Max width */
+    height: 90vh; /* Responsive height */
+    max-height: 600px; /* Max height */
+    border: 1px solid #073642; /* Teal */
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(315deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.5)); /* Gradient at opposite angle */
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #222222; /* Darker background for pages */
+    position: absolute;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.page.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+}
+
+h1 {
+    margin: 10px 0; /* Adjusted margin */
+    color: #ffffff; /* White text */
+}
+
+p {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1.25px 0; /* Reduced margin to 5px */
+    color: #ffffff; /* White text */
+}
+
+.navigation {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px; /* Increased padding */
+    box-sizing: border-box; /* Ensures padding is included in width calculation */
+}
+
+.arrow-button {
+    background-color: #444444; /* Dark gray */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background-color 0.3s;
+    width: 50px; /* Fixed width */
+    margin: 0; /* Reset margins */
+}
+
+.arrow-button:hover {
+    background-color: #555555; /* Lighter gray on hover */
+}
+
+.page-selector {
+    background-color: #444444; /* Dark gray */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.font-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #444444; /* Dark gray */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.font-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    background-color: #222222; /* Darker background for dropdown */
+    border: 1px solid #444444; /* Dark gray border */
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.font-dropdown select {
+    background-color: #222222; /* Darker background */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page-dropdown {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #222222; /* Darker background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+}
+
+#page1 {
+    background-color: rgba(255, 255, 255, 0.1); /* Light background for contrast */
+    border: 2px solid #268bd2; /* Border to highlight the page */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding for spacing */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+#page1 p {
+    font-size: 3em; /* Larger font size for paragraphs */
+    color: #ffffff; /* White color for the paragraph text */
+    text-align: center; /* Center-align text */
+    margin: 10px 0; /* Space between paragraphs */
+    line-height: 1.2; /* Line height for readability */
+}

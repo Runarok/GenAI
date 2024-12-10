@@ -1,0 +1,435 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategist's Playground</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0d1b2a, #1b2631);
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #00bcd4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .board-container {
+            border: 3px solid #00bcd4;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(16, 40px);
+            grid-template-rows: repeat(16, 40px);
+            gap: 2px;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            background-color: #2e2e2e;
+            border: 1px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .cell:hover {
+            background-color: #3e3e3e;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .cell.revealed {
+            background-color: #4e4e4e;
+            cursor: default;
+        }
+        .cell.mine {
+            background-color: #ff4c4c;
+        }
+        .cell.marked {
+            background-color: #00796b;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #minesLeft {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #00bcd4;
+        }
+        #gameInfo {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #00bcd4;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #00bcd4;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0097a7;
+            transform: scale(1.05);
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #00bcd4;
+            font-size: 24px;
+            transition: color 0.2s;
+        }
+        .back-button:hover {
+            background-color: #00bcd4;
+            color: #0097a7;
+        }
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(0, 188, 212, 0.8);
+            color: #ffffff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            transition: visibility 0s, opacity 0.5s linear;
+            opacity: 0;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<button class="back-button" onclick="window.history.back()">←</button>
+
+    <h1>Strategist's Playground</h1>
+    <div id="gameInfo">Size: 16x16 | Mines: 40 | Mine Percentage: 15.625%</div>
+    <div id="minesLeft">Mines Left: <span id="minesCount">40</span></div>
+    <div class="board-container">
+        <div class="board" id="board"></div>
+    </div>
+    <button id="resetBtn">Reset Game</button>
+    <div id="toast" class="toast">Congratulations! You win!</div>
+
+    <script>
+        const boardSize = 16; // Updated board size to 16
+        const numberOfMines = 40; // Total number of mines
+        let board = [];
+        let revealedCount = 0;
+        let minesLeft = numberOfMines;
+        let firstClick = true;
+
+        function createBoard() {
+            // Initializes the board with cells
+            board = Array.from({ length: boardSize }, () => 
+                Array.from({ length: boardSize }, () => ({ 
+                    state: false, revealed: false, mine: false, marked: false, value: 0 
+                }))
+            );
+            renderBoard(); // Render the board after creation
+        }
+
+        function placeMines(excludeX, excludeY) {
+            // Places mines on the board, avoiding the first click position
+            let minesPlaced = 0;
+            while (minesPlaced < numberOfMines) {
+                const x = Math.floor(Math.random() * boardSize);
+                const y = Math.floor(Math.random() * boardSize);
+                // Ensure no mines are placed in the surrounding cells of the first click
+                if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && 
+                    !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
+                    board[x][y].mine = true; // Place a mine
+                    minesPlaced++; // Increment mines placed
+                }
+            }
+        }
+
+        function areAdjacentCellsMined(x, y, excludeX, excludeY) {
+            // Checks if adjacent cells have mines
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the current cell
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds and has a mine
+                    if (newX === excludeX && newY === excludeY) continue; // Skip the first click position
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].mine) {
+                        return true; // Found an adjacent mine
+                    }
+                }
+            }
+            return false; // No adjacent mines found
+        }
+
+        function calculateValues() {
+            // Calculates the number of adjacent mines for each cell
+            for (let x = 0; x < boardSize; x++) {
+                for (let y = 0; y < boardSize; y++) {
+                    if (board[x][y].mine) {
+                        board[x][y].value = -1; // Indicate a mine
+                        continue; // Skip further calculations for mines
+                    }
+                    board[x][y].value = countAdjacentMines(x, y); // Count adjacent mines
+                }
+            }
+        }
+
+        function countAdjacentMines(x, y) {
+            // Counts the number of mines adjacent to a given cell
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the current cell
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds and has a mine
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].mine) {
+                        count++; // Increment mine count
+                    }
+                }
+            }
+            return count; // Return the count of adjacent mines
+        }
+
+        function renderBoard() {
+            // Renders the board to the DOM
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = ''; // Clear the board
+            board.forEach((row, x) => {
+                row.forEach((cell, y) => {
+                    const cellElement = document.createElement('div');
+                    cellElement.className = 'cell'; // Add cell class
+                    cellElement.dataset.x = x; // Set x coordinate
+                    cellElement.dataset.y = y; // Set y coordinate
+
+                    // Add click event listener to each cell
+                    cellElement.addEventListener('click', () => handleCellClick(x, y));
+
+                    // Update cell display based on its state
+                    if (cell.revealed) {
+                        cellElement.classList.add('revealed');
+                        if (cell.mine) {
+                            cellElement.classList.add('mine');
+                            cellElement.innerText = '💣'; // Mine icon
+                        } else {
+                            cellElement.innerText = cell.value > 0 ? cell.value : ''; // Show value or empty
+                        }
+                    }
+                    if (cell.marked) {
+                        cellElement.classList.add('marked');
+                        cellElement.innerText = '🚩'; // Flag icon
+                    }
+
+                    boardElement.appendChild(cellElement); // Append cell to the board
+                });
+            });
+        }
+
+        function handleCellClick(x, y) {
+            // Handles the click event on a cell
+            if (firstClick) {
+                placeMines(x, y); // Place mines on first click
+                calculateValues(); // Calculate values after mines are placed
+                firstClick = false; // Set first click flag to false
+            }
+
+            const cell = board[x][y];
+            if (cell.marked) {
+                // Unmark cell on left-click
+                cell.marked = false; // Toggle marked state
+                minesLeft++; // Increment mines left
+                document.getElementById('minesCount').innerText = minesLeft; // Update mines display
+                renderBoard(); // Re-render the board
+                return;
+            }
+
+            if (cell.revealed) {
+                // Check if the clicked cell is a number
+                if (cell.value > 0) {
+                    const markedCount = countMarkedNeighbors(x, y);
+                    if (markedCount === cell.value) {
+                        revealSurroundingCells(x, y); // Reveal surrounding cells if marked count matches value
+                    }
+                }
+                return;
+            }
+
+            cell.revealed = true; // Reveal the clicked cell
+            revealedCount++; // Increment revealed count
+
+            if (cell.mine) {
+                showToast('Game Over! You hit a mine!'); // Show toast on hitting a mine
+                revealAllMines(); // Reveal all mines
+                renderBoard(); // Re-render the board
+                setTimeout(() => {
+                    resetGame(); // Reset the game after a short delay
+                }, 500); // Delay in milliseconds (500 ms = 0.5 seconds)
+                return;
+            }
+
+            if (cell.value === 0) {
+                revealAdjacentCells(x, y); // Reveal adjacent cells if value is zero
+            }
+
+            renderBoard(); // Re-render the board after clicking
+            checkWinCondition(); // Check if the player has won
+        }
+
+        function countMarkedNeighbors(x, y) {
+            // Counts the number of marked neighbors around a cell
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the current cell
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds and is marked
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].marked) {
+                        count++; // Increment marked count
+                    }
+                }
+            }
+            return count; // Return the count of marked neighbors
+        }
+
+        function revealSurroundingCells(x, y) {
+            // Reveals surrounding cells when a cell with a number is clicked
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
+                        const neighbor = board[newX][newY];
+                        if (!neighbor.revealed && !neighbor.marked) {
+                            neighbor.revealed = true; // Reveal neighbor
+                            revealedCount++; // Increment revealed count
+                            if (neighbor.value === 0) {
+                                revealAdjacentCells(newX, newY); // Recursively reveal if value is zero
+                            }
+                        }
+                    }
+                }
+            }
+            renderBoard(); // Re-render the board after revealing
+            checkWinCondition(); // Check if the player has won
+        }
+
+        function revealAdjacentCells(x, y) {
+            // Reveals adjacent cells if value is zero
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
+                        const neighbor = board[newX][newY];
+                        if (!neighbor.revealed) {
+                            neighbor.revealed = true; // Reveal neighbor
+                            revealedCount++; // Increment revealed count
+                            if (neighbor.value === 0) {
+                                revealAdjacentCells(newX, newY); // Recursively reveal if value is zero
+                            }
+                        }
+                    }
+                }
+            }
+            renderBoard(); // Re-render the board after revealing
+        }
+
+        function revealAllMines() {
+            // Reveals all mines on the board
+            board.forEach(row => {
+                row.forEach(cell => {
+                    if (cell.mine) {
+                        cell.revealed = true; // Reveal mine
+                    }
+                });
+            });
+            renderBoard(); // Re-render the board
+        }
+
+        function checkWinCondition() {
+            // Checks if the player has won
+            if (revealedCount === boardSize * boardSize - numberOfMines) {
+                showToast('Congratulations! You win!'); // Show win toast
+            }
+        }
+
+        function showToast(message) {
+            // Displays a toast message
+            const toast = document.getElementById('toast');
+            toast.innerText = message; // Set the message
+            toast.classList.add('show'); // Show the toast
+            setTimeout(() => {
+                toast.classList.remove('show'); // Hide the toast after 3 seconds
+            }, 3000);
+        }
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            // Reset game button handler
+            resetGame(); // Reset the game state
+        });
+
+        document.addEventListener('contextmenu', (e) => {
+            // Handles right-click for marking cells
+            e.preventDefault(); // Prevent default context menu
+            const x = e.target.dataset.x; // Get x coordinate
+            const y = e.target.dataset.y; // Get y coordinate
+            if (x !== undefined && y !== undefined) {
+                const cell = board[parseInt(x)][parseInt(y)]; // Get the cell
+                if (!cell.revealed) {
+                    cell.marked = !cell.marked; // Toggle marked state
+                    minesLeft += cell.marked ? -1 : 1; // Adjust mines left count
+                    document.getElementById('minesCount').innerText = minesLeft; // Update mines display
+                    renderBoard(); // Re-render the board
+                }
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            // Handles keydown events for resetting the game
+            if (e.key === 'r' || e.key === 'R') {
+                resetGame(); // Reset the game if 'R' or 'r' is pressed
+            }
+        });
+
+        function resetGame() {
+            // Resets the game state
+            minesLeft = numberOfMines; // Reset mines left
+            revealedCount = 0; // Reset revealed count
+            firstClick = true; // Reset the first click flag
+            createBoard(); // Create a new board
+            document.getElementById('minesCount').innerText = minesLeft; // Update mines display
+        }
+
+        createBoard(); // Initialize the board at the start
+    </script>
+</body>
+</html>

@@ -1,0 +1,1546 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: #ecf0f1;
+            line-height: 1.8;
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            color: #ecf0f1;
+            text-align: center;
+        }
+
+        /* Quote container styles */
+        .quote-container {
+            background: linear-gradient(to right, #1e2a38, #2c3e50);
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 700px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .quote {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .author {
+            text-align: right;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #bdc3c7;
+        }
+
+        /* Responsive design */
+        @media (min-width: 600px) {
+            .quote-container {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .quote-container {
+                width: 60%;
+            }
+        }
+
+        /* Button styles */
+        .random-btn {
+            padding: 12px 24px;
+            background: linear-gradient(to right, #00bcd4, #4caf50);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .random-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Highlighting effect */
+        .highlight {
+            box-shadow: 0 0 0 3px cyan; /* Using box-shadow instead of border */
+            animation: highlightEffect 1s ease-out forwards;
+        }
+
+        @keyframes highlightEffect {
+            0% {
+                box-shadow: 0 0 0 3px cyan;
+            }
+            100% {
+                box-shadow: 0 0 0 0 transparent;
+            }
+        }
+
+        /* Spacing and padding adjustments */
+        .quote-container p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Adjustments for mobile devices */
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .quote-container {
+                padding: 20px;
+            }
+
+            .random-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+
+        /* Fixed buttons styles */
+        .fixed-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Spacing between buttons */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Quotes</h1>
+
+    <div class="quote-container"> 
+        <p class="quote">"The only real mistake is the one from which we learn nothing."</p>
+        <p class="author">- Henry Ford</p>
+    </div>
+
+    <div class="quote-container"> 
+        <p class="quote">"The future belongs to those who believe in the beauty of their dreams."</p>
+        <p class="author">- Eleanor Roosevelt</p>
+    </div>
+
+    <div class="quote-container"> 
+        <p class="quote">"What we do today, right now, will have an accumulated effect on all our tomorrows."</p>
+        <p class="author">- Alexandra Stoddard</p>
+    </div>
+
+    <div class="quote-container"> 
+        <p class="quote">"A journey of a thousand miles begins with a single step."</p>
+        <p class="author">- Lao Tzu</p>
+    </div>
+
+    <div class="quote-container"> 
+        <p class="quote">"A journey of a thousand miles must begin with a single step."</p>
+        <p class="author">- Lao Tzu</p>
+    </div>
+
+        <div class="quote-container"> 
+    <p class="quote">"The future belongs to those who believe in the beauty of their dreams."</p>
+    <p class="author">- Eleanor Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"What we do today, right now, will have an accumulated effect on all our tomorrows."</p>
+    <p class="author">- Alexandra Stoddard</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"A journey of a thousand miles begins with a single step."</p>
+    <p class="author">- Lao Tzu</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"A journey of a thousand miles must begin with a single step."</p>
+    <p class="author">- Lao Tzu</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"A person who never made a mistake never tried anything new."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Act as if what you do makes a difference. It does."</p>
+    <p class="author">- William James</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"An unexamined life is not worth living."</p>
+    <p class="author">- Socrates</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Be yourself; everyone else is already taken."</p>
+    <p class="author">- Oscar Wilde</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle."</p>
+    <p class="author">- Christian D. Larson</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Believe you can and you're halfway there."</p>
+    <p class="author">- Theodore Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Believe you can and you’re halfway there."</p>
+    <p class="author">- Theodore Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Change your thoughts and you change your world."</p>
+    <p class="author">- Norman Vincent Peale</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Do not wait to strike till the iron is hot, but make it hot by striking."</p>
+    <p class="author">- William Butler Yeats</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Do not wait; the time will never be 'just right'. Start where you stand, and work with whatever tools you may have at your command."</p>
+    <p class="author">- Napoleon Hill</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Do something today that your future self will thank you for."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Do something today your future self will thank you for."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Do what you can, with what you have, where you are."</p>
+    <p class="author">- Theodore Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don't be pushed around by the fears in your mind. Be led by the dreams in your heart."</p>
+    <p class="author">- Roy T. Bennett</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don't count the days, make the days count."</p>
+    <p class="author">- Muhammad Ali</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don't count the days; make the days count."</p>
+    <p class="author">- Muhammad Ali</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart."</p>
+    <p class="author">- Roy T. Bennett</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t count the days, make the days count."</p>
+    <p class="author">- Muhammad Ali</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it."</p>
+    <p class="author">- Jordan Belfort</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only thing standing between you and your goal is the story you keep telling yourself as to why you can’t achieve it."</p>
+    <p class="author">- Jordan Belfort</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only thing we have to fear is fear itself."</p>
+    <p class="author">- Franklin D. Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only way to do great work is to love what you do."</p>
+    <p class="author">- Steve Jobs</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only way to have a friend is to be one."</p>
+    <p class="author">- Ralph Waldo Emerson</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The purpose of our lives is to be happy."</p>
+    <p class="author">- Dalai Lama</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The secret of getting ahead is getting started."</p>
+    <p class="author">- Mark Twain</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The way to get started is to quit talking and begin doing."</p>
+    <p class="author">- Walt Disney</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment."</p>
+    <p class="author">- Ralph Waldo Emerson</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"To live is the rarest thing in the world. Most people exist, that is all."</p>
+    <p class="author">- Oscar Wilde</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"To succeed in life, you need three things: a wishbone, a backbone, and a funny bone."</p>
+    <p class="author">- Reba McEntire</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"To succeed, your desire for success should be greater than your fear of failure."</p>
+    <p class="author">- Bill Cosby</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Turn your wounds into wisdom."</p>
+    <p class="author">- Oprah Winfrey</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Wake up with determination. Go to bed with satisfaction."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
+    <p class="author">- Aristotle</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We cannot solve our problems with the same thinking we used when we created them."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We cannot solve our problems with the same thinking we used when we created them."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We can’t help everyone, but everyone can help someone."</p>
+    <p class="author">- Ronald Reagan</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We may encounter many defeats but we must not be defeated."</p>
+    <p class="author">- Maya Angelou</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What lies behind us and what lies before us are tiny matters compared to what lies within us."</p>
+    <p class="author">- Ralph Waldo Emerson</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What we achieve inwardly will change outer reality."</p>
+    <p class="author">- Plutarch</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What we do in life echoes in eternity."</p>
+    <p class="author">- Maximus Decimus Meridius</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What we do today, right now, will have an accumulated effect on all our tomorrows."</p>
+    <p class="author">- Alexandra Stoddard</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What we fear doing most is usually what we most need to do."</p>
+    <p class="author">- Tim Ferriss</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What we think, we become."</p>
+    <p class="author">- Buddha</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What you do today can improve all your tomorrows."</p>
+    <p class="author">- Ralph Marston</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What you get by achieving your goals is not as important as what you become by achieving your goals."</p>
+    <p class="author">- Zig Ziglar</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You are braver than you believe, stronger than you seem, and smarter than you think."</p>
+    <p class="author">- A.A. Milne</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You are enough just as you are."</p>
+    <p class="author">- Bridget Jones</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You are never too old to set another goal or to dream a new dream."</p>
+    <p class="author">- C.S. Lewis</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You can never cross the ocean until you have the courage to lose sight of the shore."</p>
+    <p class="author">- Christopher Columbus</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You cannot find peace by avoiding life."</p>
+    <p class="author">- Virginia Woolf</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You cannot shake hands with a clenched fist."</p>
+    <p class="author">- Indira Gandhi</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You cannot start a new chapter of your life if you keep re-reading the last one."</p>
+    <p class="author">- Unknown</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You can’t cross the sea merely by standing and staring at the water."</p>
+    <p class="author">- Rabindranath Tagore</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You can’t fall if you don’t climb. But there’s no joy in living your whole life on the ground."</p>
+    <p class="author">- Unknown</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You can’t use up creativity. The more you use, the more you have."</p>
+    <p class="author">- Maya Angelou</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You can’t use up creativity. The more you use, the more you have."</p>
+    <p class="author">- Mia Angelou</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You don’t have to be great to start, but you have to start to be great."</p>
+    <p class="author">- Zig Ziglar</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You have as much laughter as you have faith."</p>
+    <p class="author">- Martin Luther</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You have within you right now, everything you need to deal with whatever the world can throw at you."</p>
+    <p class="author">- Brian Tracy</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You miss 100% of the shots you don’t take."</p>
+    <p class="author">- Wayne Gretzky</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You must be the change you wish to see in the world."</p>
+    <p class="author">- Mahatma Gandhi</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You must do the things you think you cannot do."</p>
+    <p class="author">- Eleanor Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You only live once, but if you do it right, once is enough."</p>
+    <p class="author">- Mae West</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Your life does not get better by chance, it gets better by change."</p>
+    <p class="author">- Jim Rohn</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Your limitation—it’s only your imagination."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Your time is limited, don’t waste it living someone else’s life."</p>
+    <p class="author">- Steve Jobs</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"A person who never made a mistake never tried anything new."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"A winner is a dreamer who never gives up."</p>
+    <p class="author">- Nelson Mandela</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Act as if what you do makes a difference. It does."</p>
+    <p class="author">- William James</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Believe in your dreams and they may come true; believe in yourself and they will come true."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Believe you can and you’re halfway there."</p>
+    <p class="author">- Theodore Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Change your thoughts and you change your world."</p>
+    <p class="author">- Norman Vincent Peale</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Do not wait to strike till the iron is hot, but make it hot by striking."</p>
+    <p class="author">- William Butler Yeats</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don't limit your challenges. Challenge your limits."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don't wait for the perfect moment. Take the moment and make it perfect."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don't watch the clock; do what it does. Keep going."</p>
+    <p class="author">- Sam Levenson</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don’t count the days, make the days count."</p>
+    <p class="author">- Muhammad Ali</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don’t stop when you’re tired. Stop when you’re done."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don’t wait for opportunity. Create it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Don’t wait for the perfect moment. Take the moment and make it perfect."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Dream big and dare to fail."</p>
+    <p class="author">- Norman Vaughan</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Dream bigger. Do bigger."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Dream it. Wish it. Do it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Every day may not be good, but there is something good in every day."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Everything you can imagine is real."</p>
+    <p class="author">- Pablo Picasso</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Everything you’ve ever wanted is on the other side of fear."</p>
+    <p class="author">- George Addair</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Great things never come from comfort zones."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you can believe it, the mind can achieve it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you can dream it, you can achieve it."</p>
+    <p class="author">- Zig Ziglar</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you can dream it, you can do it."</p>
+    <p class="author">- Walt Disney</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you want to achieve greatness stop asking for permission."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you want to fly, give up everything that weighs you down."</p>
+    <p class="author">- Buddha</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you want to lift yourself up, lift up someone else."</p>
+    <p class="author">- Booker T. Washington</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"If you want to live a happy life, tie it to a goal, not to people or things."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"In the end, we will remember not the words of our enemies, but the silence of our friends."</p>
+    <p class="author">- Martin Luther King Jr.</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"In the middle of every difficulty lies opportunity."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"It always seems impossible until it’s done."</p>
+    <p class="author">- Nelson Mandela</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"It does not matter how slowly you go as long as you do not stop."</p>
+    <p class="author">- Confucius</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"It’s going to be hard, but hard does not mean impossible."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"It’s not whether you get knocked down, it’s whether you get up."</p>
+    <p class="author">- Vince Lombardi</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Keep your eyes on the stars, and your feet on the ground."</p>
+    <p class="author">- Theodore Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Keep your face always toward the sunshine—and shadows will fall behind you."</p>
+    <p class="author">- Walt Whitman</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Life is 10% what happens to us and 90% how we react to it."</p>
+    <p class="author">- Charles R. Swindoll</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Life is either a daring adventure or nothing at all."</p>
+    <p class="author">- Helen Keller</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Life is not about waiting for the storm to pass, but about learning to dance in the rain."</p>
+    <p class="author">- Vivian Greene</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Life is really simple, but we insist on making it complicated."</p>
+    <p class="author">- Confucius</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Life is what happens when you’re busy making other plans."</p>
+    <p class="author">- John Lennon</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Life isn’t about finding yourself. Life is about creating yourself."</p>
+    <p class="author">- George Bernard Shaw</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Little things make big days."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Opportunities don't happen, you create them."</p>
+    <p class="author">- Chris Grosser</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Opportunities don’t happen, you create them."</p>
+    <p class="author">- Chris Grosser</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Push yourself, because no one else is going to do it for you."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Sometimes we’re tested not to show our weaknesses, but to discover our strengths."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Start where you are. Use what you have. Do what you can."</p>
+    <p class="author">- Arthur Ashe</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success doesn’t just find you. You have to go out and get it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is how high you bounce when you hit bottom."</p>
+    <p class="author">- George S. Patton</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is not about being the best. It’s about always getting better."</p>
+    <p class="author">- Behdad Sami</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is not final, failure is not fatal: It is the courage to continue that counts."</p>
+    <p class="author">- Winston Churchill</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is not final, failure is not fatal: It is the courage to continue that counts."</p>
+    <p class="author">- Winston S. Churchill</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is not how high you have climbed, but how you make a positive difference to the world."</p>
+    <p class="author">- Roy T. Bennett</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is not just about what you accomplish in your life, it's about what you inspire others to do."</p>
+    <p class="author">- Unknown</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is not the key to happiness. Happiness is the key to success."</p>
+    <p class="author">- Albert Schweitzer</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is often achieved by those who don’t know that failure is inevitable."</p>
+    <p class="author">- Coco Chanel</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is the ability to go from one failure to another with no loss of enthusiasm."</p>
+    <p class="author">- Winston S. Churchill</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success is the sum of small efforts, repeated day in and day out."</p>
+    <p class="author">- Robert Collier</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success isn’t just about what you accomplish in your life, it’s about what you inspire others to do."</p>
+    <p class="author">- Unknown</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success usually comes to those who are too busy to be looking for it."</p>
+    <p class="author">- Henry David Thau</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Success usually comes to those who are too busy to be looking for it."</p>
+    <p class="author">- Henry David Thoreau</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The best revenge is to be unlike him who performed the injury."</p>
+    <p class="author">- Marcus Aurelius</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The best way to find yourself is to lose yourself in the service of others."</p>
+    <p class="author">- Mahatma Gandhi</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The best way to predict the future is to create it."</p>
+    <p class="author">- Peter Drucker</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The future belongs to those who believe in the beauty of their dreams."</p>
+    <p class="author">- Eleanor Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The future belongs to those who prepare for it today."</p>
+    <p class="author">- Malcolm X</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The future depends on what you do today."</p>
+    <p class="author">- Mahatma Gandhi</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The greatest glory in living lies not in never falling, but in rising every time we fall."</p>
+    <p class="author">- Nelson Mandela</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The harder you work for something, the greater you’ll feel when you achieve it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The journey of a thousand miles begins with one step."</p>
+    <p class="author">- Lao Tzu</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The key to success is to focus on goals, not obstacles."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The mind is everything. What you think you become."</p>
+    <p class="author">- Buddha</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only impossible journey is the one you never begin."</p>
+    <p class="author">- Tony Robbins</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
+    <p class="author">- Franklin D. Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it."</p>
+    <p class="author">- Jordan Belfort</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only thing we have to fear is fear itself."</p>
+    <p class="author">- Franklin D. Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only way to achieve the impossible is to believe it is possible."</p>
+    <p class="author">- Charles Kingsleigh</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The only way to do great work is to love what you do."</p>
+    <p class="author">- Steve Jobs</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The secret of getting ahead is getting started."</p>
+    <p class="author">- Mark Twain</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The secret of success is to be ready when your opportunity comes."</p>
+    <p class="author">- Benjamin Disraeli</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"The way to get started is to quit talking and begin doing."</p>
+    <p class="author">- Walt Disney</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"To succeed in life, you need three things: a wishbone, a backbone, and a funny bone."</p>
+    <p class="author">- Reba McEntire</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We cannot solve our problems with the same thinking we used when we created them."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We may encounter many defeats but we must not be defeated."</p>
+    <p class="author">- Maya Angelou</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"We will either find a way, or make one."</p>
+    <p class="author">- Hannibal</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What lies behind us and what lies before us are tiny matters compared to what lies within us."</p>
+    <p class="author">- Ralph Waldo Emerson</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"What we think, we become."</p>
+    <p class="author">- Buddha</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Whatever you do, do it well."</p>
+    <p class="author">- Walt Disney</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When everything seems to be going against you, remember that the airplane takes off against the wind, not with it."</p>
+    <p class="author">- Henry Ford</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us."</p>
+    <p class="author">- Helen Keller</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When the going gets tough, the tough get going."</p>
+    <p class="author">- Joseph Kennedy</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When you cease to dream, you cease to live."</p>
+    <p class="author">- Malcolm Forbes</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When you have a dream, you've got to grab it and never let go."</p>
+    <p class="author">- Carol Burnett</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When you reach the end of your rope, tie a knot in it and hang on."</p>
+    <p class="author">- Franklin D. Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"When you stop chasing the wrong things, you give the right things a chance to catch you."</p>
+    <p class="author">- Lolly Daskal</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Whether you think you can or you think you can’t, you’re right."</p>
+    <p class="author">- Henry Ford</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Whoever is happy will make others happy too."</p>
+    <p class="author">- Anne Frank</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"With the new day comes new strength and new thoughts."</p>
+    <p class="author">- Eleanor Roosevelt</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Without the rain, there would be no rainbow."</p>
+    <p class="author">- Gilbert K. Chesterton</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You are never too old to set another goal or to dream a new dream."</p>
+    <p class="author">- C.S. Lewis</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You can’t go back and change the beginning, but you can start where you are and change the ending."</p>
+    <p class="author">- C.S. Lewis</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You cannot swim for new horizons until you have courage to lose sight of the shore."</p>
+    <p class="author">- William Faulkner</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You cannot swim for new horizons until you have courage to lose sight of the shore."</p>
+    <p class="author">- William Faulkner</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You miss 100% of the shots you don’t take."</p>
+    <p class="author">- Wayne Gretzky</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You must be the change you wish to see in the world."</p>
+    <p class="author">- Mahatma Gandhi</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You will never win if you never begin."</p>
+    <p class="author">- Helen Rowland</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"You’ve got to do your own growing, no matter how tall your grandfather was."</p>
+    <p class="author">- Abraham Lincoln</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Your best life will not be found in the past, but in the future. Start moving forward now."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container">
+    <p class="quote">"Your time is limited, don't waste it living someone else's life."</p>
+    <p class="author">- Steve Jobs</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t limit your challenges, challenge your limits."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t limit your challenges. Challenge your limits."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t stop when you’re tired. Stop when you’re done."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t wait for opportunity. Create it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Don’t watch the clock; do what it does. Keep going."</p>
+    <p class="author">- Sam Levenson</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Dream big and dare to fail."</p>
+    <p class="author">- Norman Vaughan</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Dream bigger. Do bigger."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Dream it. Believe it. Build it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Dream it. Believe it. Build it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Dream it. Wish it. Do it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Everything has beauty, but not everyone sees it."</p>
+    <p class="author">- Confucius</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Everything you can imagine is real."</p>
+    <p class="author">- Pablo Picasso</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Everything you’ve ever wanted is on the other side of fear."</p>
+    <p class="author">- George Addair</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Get busy living or get busy dying."</p>
+    <p class="author">- Stephen King</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Great things never come from comfort zones."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Happiness is not something ready-made. It comes from your own actions."</p>
+    <p class="author">- Dalai Lama</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Hardships often prepare ordinary people for an extraordinary destiny."</p>
+    <p class="author">- C.S. Lewis</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"I find that the harder I work, the more luck I seem to have."</p>
+    <p class="author">- Thomas Jefferson</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"If you can believe it, the mind can achieve it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"If you can dream it, you can achieve it."</p>
+    <p class="author">- Zig Ziglar</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"If you cannot do great things, do small things in a great way."</p>
+    <p class="author">- Napoleon Hill</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"If you want to achieve greatness stop asking for permission."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"If you want to lift yourself up, lift up someone else."</p>
+    <p class="author">- Booker T. Washington</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"If you want to live a happy life, tie it to a goal, not to people or things."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"In the end, we will remember not the words of our enemies, but the silence of our friends."</p>
+    <p class="author">- Martin Luther King Jr.</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"In the middle of every difficulty lies opportunity."</p>
+    <p class="author">- Albert Einstein</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"In three words I can sum up everything I've learned about life: it goes on."</p>
+    <p class="author">- Robert Frost</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"In three words I can sum up everything I’ve learned about life: it goes on."</p>
+    <p class="author">- Robert Frost</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"It always seems impossible until it’s done."</p>
+    <p class="author">- Nelson Mandela</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"It does not matter how slowly you go as long as you do not stop."</p>
+    <p class="author">- Confucius</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"It is during our darkest moments that we must focus to see the light."</p>
+    <p class="author">- Aristotle</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"It is never too late to be what you might have been."</p>
+    <p class="author">- George Eliot</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"It’s going to be hard, but hard does not mean impossible."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"It’s not whether you get knocked down, it’s whether you get up."</p>
+    <p class="author">- Vince Lombardi</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Keep your eyes on the stars, and your feet on the ground."</p>
+    <p class="author">- Theodore Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Keep your face always toward the sunshine—and shadows will fall behind you."</p>
+    <p class="author">- Walt Whitman</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is 10% what happens to us and 90% how we react to it."</p>
+    <p class="author">- Charles R. Swindoll</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is a journey, not a destination."</p>
+    <p class="author">- Ralph Waldo Emerson</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is either a daring adventure or nothing at all."</p>
+    <p class="author">- Helen Keller</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is not about finding yourself. Life is about creating yourself."</p>
+    <p class="author">- George Bernard Shaw</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is not about waiting for the storm to pass, but about learning to dance in the rain."</p>
+    <p class="author">- Vivian Greene</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is not measured by the number of breaths we take, but by the moments that take our breath away."</p>
+    <p class="author">- Maya Angelou</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is really simple, but we insist on making it complicated."</p>
+    <p class="author">- Confucius</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is short, and it is up to you to make it sweet."</p>
+    <p class="author">- Sarah Louise Delany</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is what happens when you're busy making other plans."</p>
+    <p class="author">- John Lennon</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is what happens when you’re busy making other plans."</p>
+    <p class="author">- John Lennon</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life is what we make it, always has been, always will be."</p>
+    <p class="author">- Grandma Moses</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Life isn’t about finding yourself. Life is about creating yourself."</p>
+    <p class="author">- George Bernard Shaw</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Little things make big days."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Opportunities don't happen, you create them."</p>
+    <p class="author">- Chris Grosser</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Push yourself, because no one else is going to do it for you."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Sometimes we’re tested not to show our weaknesses, but to discover our strengths."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success doesn’t just find you. You have to go out and get it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is how high you bounce when you hit bottom."</p>
+    <p class="author">- George S. Patton</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is not final, failure is not fatal: It is the courage to continue that counts."</p>
+    <p class="author">- Winston Churchill</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is not final, failure is not fatal: It is the courage to continue that counts."</p>
+    <p class="author">- Winston S. Churchill</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is not how high you have climbed, but how you make a positive difference to the world."</p>
+    <p class="author">- Roy T. Bennett</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is not just what you accomplish in your life, it’s about what you inspire others to do."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is not the key to happiness. Happiness is the key to success."</p>
+    <p class="author">- Albert Schweitzer</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is often achieved by those who don’t know that failure is inevitable."</p>
+    <p class="author">- Coco Chanel</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is the sum of small efforts, repeated day in and day out."</p>
+    <p class="author">- Robert Collier</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success is walking from failure to failure with no loss of enthusiasm."</p>
+    <p class="author">- Winston S. Churchill</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"Success usually comes to those who are too busy to be looking for it."</p>
+    <p class="author">- Henry David Thoreau</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best and most beautiful things in the world cannot be seen or even heard, but must be felt with the heart."</p>
+    <p class="author">- Helen Keller</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best preparation for tomorrow is doing your best today."</p>
+    <p class="author">- H. Jackson Brown Jr.</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best revenge is massive success."</p>
+    <p class="author">- Frank Sinatra</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best time to plant a tree was 20 years ago. The second best time is now."</p>
+    <p class="author">- Chinese Proverb</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best way to find yourself is to lose yourself in the service of others."</p>
+    <p class="author">- Mahatma Gandhi</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best way to predict the future is to create it."</p>
+    <p class="author">- Peter Drucker</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best way to predict the future is to invent it."</p>
+    <p class="author">- Alan Kay</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The best way to predict your future is to create it."</p>
+    <p class="author">- Peter Drucker</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The biggest adventure you can take is to live the life of your dreams."</p>
+    <p class="author">- Oprah Winfrey</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The future belongs to those who believe in the beauty of their dreams."</p>
+    <p class="author">- Eleanor Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The future depends on what you do today."</p>
+    <p class="author">- Mahatma Gandhi</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The greatest glory in living lies not in never falling, but in rising every time we fall."</p>
+    <p class="author">- Nelson Mandela</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The greatest glory in living lies not in never falling, but in rising every time we fall."</p>
+    <p class="author">- Nelson Mandela</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The harder you work for something, the greater you’ll feel when you achieve it."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The journey of a thousand miles begins with one step."</p>
+    <p class="author">- Lao Tzu</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The key to success is to focus on goals, not obstacles."</p>
+    <p class="author">- Anonymous</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The mind is everything. What you think you become."</p>
+    <p class="author">- Buddha</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The only impossible journey is the one you never begin."</p>
+    <p class="author">- Tony Robbins</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
+    <p class="author">- Franklin D. Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The only limit to our realization of tomorrow will be our doubts of today."</p>
+    <p class="author">- Franklin D. Roosevelt</p>
+</div>
+
+<div class="quote-container"> 
+    <p class="quote">"The only real mistake is the one from which we learn nothing."</p>
+    <p class="author">- Henry Ford</p>
+</div>
+
+    <!-- Fixed buttons container -->
+    <div class="fixed-buttons">
+        <button class="random-btn" onclick="RandomQuote()">Random Quote</button>
+        <button class="random-btn" onclick="shuffleQuotes()">Shuffle Quotes</button>
+    </div>
+
+    <script>
+        // Function to shuffle quote containers
+        function shuffleQuotes() {
+            const containers = document.querySelectorAll('.quote-container');
+            const parent = containers[0].parentNode;
+
+            // Convert NodeList to array
+            const containersArray = Array.from(containers);
+
+            // Shuffle the array of containers using Fisher-Yates algorithm
+            for (let i = containersArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [containersArray[i], containersArray[j]] = [containersArray[j], containersArray[i]];
+            }
+
+            // Append shuffled containers back to the parent
+            containersArray.forEach(container => {
+                parent.appendChild(container);
+            });
+        }
+
+        // Function to highlight a random quote container and scroll to it
+        function RandomQuote() {
+            const containers = document.querySelectorAll('.quote-container');
+            const randomIndex = Math.floor(Math.random() * containers.length);
+            const randomContainer = containers[randomIndex];
+
+            // Add highlight class
+            randomContainer.classList.add('highlight');
+
+            // Scroll to the highlighted quote
+            randomContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Remove highlight after 1 second
+            setTimeout(() => {
+                randomContainer.classList.remove('highlight');
+            }, 1000);
+        }
+
+        // Shuffle on page load
+        document.addEventListener('DOMContentLoaded', shuffleQuotes);
+    </script>
+</body>
+</html>

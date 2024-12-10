@@ -1,0 +1,448 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explosive Sentence Game</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            outline: none;
+        }
+        .container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .explosion {
+            display: none;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, yellow, transparent);
+            border-radius: 50%;
+            animation: explode 0.5s forwards;
+        }
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        .difficulty {
+            margin-bottom: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .power-up {
+            position: absolute;
+            color: cyan;
+            font-size: 36px; /* Increased size */
+            animation: fall 5s linear forwards;
+            z-index: -1; /* Ensure it's behind other elements */
+        }
+        @keyframes fall {
+            0% { top: -50px; }
+            100% { top: 100vh; }
+        }
+        .badge {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background: teal;
+            border-radius: 3px;
+            color: white;
+        }
+        #score {
+            margin: 20px;
+            font-size: 24px;
+        }
+        @media (max-width: 600px) {
+            input {
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="meaningful-sentence">The quick brown fox jumps over the lazy dog.</h1>
+    <div id="score">Score: <span id="score-value">0</span></div>
+    <div class="difficulty">
+        <label for="difficulty">Select Difficulty:</label>
+        <select id="difficulty">
+            <option value="10000">Very Easy (10s)</option>
+            <option value="7500">Easy (7.5s)</option>
+            <option value="5000" selected>Medium (5s)</option>
+            <option value="3000">Hard (3s)</option>
+            <option value="2000">Very Hard (2s)</option>
+            <option value="1000">Extreme (1s)</option>
+        </select>
+    </div>
+    <label>
+        <input type="checkbox" id="destroy-end" aria-label="Destroy only the last typed character"> Destroy only the last typed character
+    </label>
+    <div class="container">
+        <input type="text" id="user-input" aria-label="Input your sentence here">
+        <div id="explosion" class="explosion"></div>
+    </div>
+    <p id="timer">Time left: <span id="time-left">30</span> seconds</p>
+    <p id="result" class="hidden"></p>
+    <button id="download-button" class="hidden">Download Achievements</button>
+
+    <script>
+        const meaningfulSentences = [
+        "The sun sets behind the distant hills.",
+        "Hope is the light that guides us forward.",
+        "Life is a journey filled with surprises.",
+        "Every moment is a chance to start anew.",
+        "Kindness is a language everyone understands.",
+        "Dreams are the seeds of our future success.",
+        "The stars twinkle in the vast night sky.",
+        "Change is the only constant in life.",
+        "Courage is the power to face your fears.",
+        "Friendship is the heart's greatest treasure.",
+        "Love knows no boundaries or limitations.",
+        "Joy can be found in the simplest things.",
+        "Patience is a virtue we should cherish.",
+        "Wisdom comes from learning through life.",
+        "Laughter is the best medicine for the soul.",
+        "Adventure awaits those who seek it out.",
+        "Embrace the unknown with an open heart.",
+        "Life is a beautiful tapestry of moments.",
+        "Gratitude turns what we have into enough.",
+        "Every day is a new opportunity to grow.",
+        "The journey is as important as the goal.",
+        "Live in the moment, cherish every breath.",
+        "Emotions are the colors of our existence.",
+        "Nature heals the spirit and calms the mind.",
+        "Time flies, but memories last forever.",
+        "Success is a journey, not a destination.",
+        "Listen to your heart; it knows the way.",
+        "Every cloud has a silver lining somewhere.",
+        "Forgiveness is the key to inner peace.",
+        "Your smile can brighten someone’s day.",
+        "Hope is the anchor of the soul.",
+        "Creativity knows no boundaries or limits.",
+        "Happiness is a choice we make daily.",
+        "The past is a lesson, not a life sentence.",
+        "Every sunrise brings a new beginning.",
+        "We are stronger together than apart.",
+        "Dream big, work hard, stay humble.",
+        "The world is full of endless possibilities.",
+        "Kindness creates a ripple effect of joy.",
+        "Believe in yourself and all that you are.",
+        "Challenges are opportunities in disguise.",
+        "Love is the foundation of all great things.",
+        "Knowledge is the path to personal growth.",
+        "Celebrate every small victory along the way.",
+        "Your thoughts shape your reality each day.",
+        "Life is too short for regrets and worries.",
+        "Find beauty in the ordinary moments.",
+        "Gratitude transforms how we see the world.",
+        "The power of words can change lives.",
+        "Act with intention and purpose every day.",
+        "Every heartbeat is a reminder of life.",
+        "The journey of a thousand miles begins here.",
+        "Life is an adventure waiting to unfold.",
+        "Time spent with loved ones is priceless.",
+        "Your attitude determines your direction.",
+        "The future belongs to those who believe.",
+        "Let go of what you can't control.",
+        "Wisdom is knowing the right path to take.",
+        "Hope is the flame that never goes out.",
+        "Life's challenges make us who we are.",
+        "Simplicity brings clarity to our lives.",
+        "Your dreams are worth chasing every day.",
+        "Courage is grace under pressure.",
+        "A positive mindset leads to positive outcomes.",
+        "Every ending is a new beginning.",
+        "The heart has its reasons that reason knows not.",
+        "In the end, we only regret the chances we didn’t take.",
+        "Success is built on perseverance and passion.",
+        "Find joy in the journey, not just the destination.",
+        "Life is a dance, and we must learn the steps.",
+        "Let your heart be your compass in life.",
+        "The journey of life is best traveled with friends.",
+        "You are capable of more than you realize.",
+        "Your life is your story; write it well.",
+        "Every person has a story worth telling.",
+        "Adventure is out there; go find it!",
+        "Believe in the magic of new beginnings.",
+        "Your unique perspective is your strength.",
+        "True happiness comes from within.",
+        "Every day is a chance to make a difference.",
+        "Seek out the beauty in every situation.",
+        "Your potential is limitless; explore it.",
+        "Kind words can change someone's day.",
+        "In every challenge lies an opportunity.",
+        "The power of dreams can change the world.",
+        "Embrace your individuality; it's your superpower.",
+        "A grateful heart is a magnet for miracles.",
+        "The mind is a powerful tool for creation.",
+        "Live with purpose, passion, and joy.",
+        "Every storm eventually passes; keep going.",
+        "Your journey is uniquely yours; embrace it.",
+        "Let your dreams guide you towards greatness.",
+        "The simplest things bring the most joy.",
+        "Life is a canvas; paint it your way.",
+        "Every moment holds the power to inspire.",
+        "Cherish the little things that bring happiness.",
+        "You are the author of your own destiny.",
+        "Every smile is a reflection of the heart."
+    ];
+        const userInput = document.getElementById("user-input");
+        const explosionDiv = document.getElementById("explosion");
+        const timerDisplay = document.getElementById("time-left");
+        const scoreDisplay = document.getElementById("score-value");
+        const resultDisplay = document.getElementById("result");
+        const downloadButton = document.getElementById("download-button");
+        let timer;
+        let timeLeft = 30;
+        let score = 0;
+        let powerUpActive = false;
+        let powerUpType = "";
+        let timerStarted = false; // Flag to track if the timer has started
+        let scoreReductionCooldown = false; // Flag for score reduction cooldown
+
+        // Achievements
+        const achievements = JSON.parse(localStorage.getItem('achievements')) || {
+            firstWin: false,
+            type100Chars: false,
+            play1Hour: false,
+        };
+
+        // Save achievements to localStorage
+        function saveAchievements() {
+            localStorage.setItem('achievements', JSON.stringify(achievements));
+        }
+
+        function startTimer() {
+            if (!timerStarted) {
+                timerStarted = true; // Set the flag to true when the timer starts
+                timer = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.innerText = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        resultDisplay.innerText = "You lost! Time's up.";
+                        resultDisplay.classList.remove("hidden");
+                    }
+                }, 1000);
+            }
+        }
+
+        function randomExplosion() {
+            const destroyEndOnly = document.getElementById("destroy-end").checked;
+
+            if (destroyEndOnly) {
+                if (userInput.value.length > 0) {
+                    if (!scoreReductionCooldown) {
+                        scoreReductionCooldown = true; // Activate cooldown
+                        score -= 10; // Lose points for destruction
+                        updateScore();
+                        setTimeout(() => {
+                            scoreReductionCooldown = false; // Reset cooldown after 1 second
+                        }, 1000);
+                    }
+                    userInput.value = userInput.value.slice(0, -1);
+                    triggerExplosion(userInput.value.length);
+                }
+            } else {
+                const validInputs = userInput.value.split('').filter(c => /[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]/.test(c));
+                if (validInputs.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * validInputs.length);
+                    if (!scoreReductionCooldown) {
+                        scoreReductionCooldown = true; // Activate cooldown
+                        score -= 10; // Lose points for destruction
+                        updateScore();
+                        setTimeout(() => {
+                            scoreReductionCooldown = false; // Reset cooldown after 1 second
+                        }, 1000);
+                    }
+                    userInput.value = userInput.value.slice(0, randomIndex) + userInput.value.slice(randomIndex + 1);
+                    triggerExplosion(randomIndex);
+                }
+            }
+            spawnPowerUp();
+        }
+
+        function triggerExplosion(index) {
+            explosionDiv.style.left = `${userInput.getBoundingClientRect().left + (index * 10)}px`;
+            explosionDiv.style.top = `${userInput.getBoundingClientRect().top + 10}px`;
+            explosionDiv.style.display = 'block';
+            setTimeout(() => {
+                explosionDiv.style.display = 'none';
+            }, 500);
+        }
+
+        function spawnPowerUp() {
+            const powerUp = document.createElement("div");
+            powerUp.classList.add("power-up");
+            powerUp.innerText = "$";
+            powerUp.style.left = `${Math.random() * 100}%`;
+            document.body.appendChild(powerUp);
+
+            setTimeout(() => {
+                powerUp.remove();
+            }, 5000);
+
+            powerUp.addEventListener("animationend", () => {
+                powerUp.remove();
+            });
+
+            powerUp.onclick = function() {
+                collectPowerUp();
+                powerUp.remove();
+            };
+        }
+
+        function collectPowerUp() {
+            if (powerUpActive) return; // If a power-up is active, do nothing
+            const powerUpTypes = ["shield", "slow", "double"];
+            powerUpType = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)];
+            powerUpActive = true;
+
+            if (powerUpType === "shield") {
+                setTimeout(() => {
+                    powerUpActive = false;
+                }, 10000);
+            } else if (powerUpType === "slow") {
+                clearInterval(timer);
+                setTimeout(() => {
+                    timeLeft += 5; // Give extra time
+                    startTimer();
+                }, 5000);
+            } else if (powerUpType === "double") {
+                const originalScore = score;
+                setTimeout(() => {
+                    powerUpActive = false;
+                    score = originalScore; // Reset score to original after time
+                }, 10000);
+            }
+        }
+
+        function updateScore() {
+            score = Math.max(0, score); // Ensure score does not go below zero
+            scoreDisplay.innerText = score;
+            checkAchievements();
+        }
+
+        function checkAchievements() {
+            if (score >= 100 && !achievements.type100Chars) {
+                achievements.type100Chars = true;
+                saveAchievements();
+            }
+        }
+
+        function checkInput() {
+            if (userInput.value === document.getElementById("meaningful-sentence").innerText) {
+                clearInterval(timer);
+                score += 100; // Bonus points for winning
+                updateScore();
+                resultDisplay.innerText = "You win! Great job!";
+                resultDisplay.classList.remove("hidden");
+                downloadButton.classList.remove("hidden");
+                if (!achievements.firstWin) {
+                    achievements.firstWin = true;
+                    saveAchievements();
+                }
+            }
+        }
+
+        userInput.addEventListener('input', (e) => {
+            const regex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]*$/;
+            if (!regex.test(e.target.value)) {
+                e.target.value = e.target.value.slice(0, -1);
+            } else {
+                score += 2; // Increase points for correct input
+                updateScore();
+                startTimer(); // Start the timer on the first valid input
+            }
+            checkInput();
+        });
+
+        document.getElementById("difficulty").addEventListener('change', (e) => {
+            clearInterval(timer);
+            timeLeft = 30;
+            timerDisplay.innerText = timeLeft;
+            const interval = parseInt(e.target.value);
+            setInterval(randomExplosion, interval);
+            startTimer();
+        });
+
+        function randomSentence() {
+            const randomIndex = Math.floor(Math.random() * meaningfulSentences.length);
+            document.getElementById("meaningful-sentence").innerText = meaningfulSentences[randomIndex];
+        }
+
+        // Initialize game
+        randomSentence();
+        startTimer();
+        setInterval(randomExplosion, 1500); // Default interval for the first run
+
+        // Download achievements as an image
+        downloadButton.onclick = function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 300;
+            canvas.height = 200;
+            ctx.fillStyle = '#121212';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#E0E0E0';
+            ctx.font = '16px Arial';
+
+            // Draw a decorative border to mimic noricon style
+            ctx.strokeStyle = 'gold';
+            ctx.lineWidth = 5;
+            ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - 10);
+
+            // Center the title
+            ctx.textAlign = 'center';
+            ctx.fillText('Achievements:', canvas.width / 2, 20);
+
+            let y = 40;
+            for (const [key, value] of Object.entries(achievements)) {
+                ctx.fillText(`${key}: ${value ? 'Unlocked' : 'Locked'}`, canvas.width / 2, y);
+                y += 20;
+            }
+
+            const link = document.createElement('a');
+            link.download = 'achievements.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        };
+
+    </script>
+
+</body>
+</html>

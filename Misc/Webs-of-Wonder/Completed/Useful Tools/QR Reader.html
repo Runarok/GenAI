@@ -1,0 +1,200 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner / Reader</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            box-sizing: border-box;
+            text-align: center;
+            background: rgb(30, 30, 30);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 5px;
+        }
+
+        .container h1 {
+            color: #ffffff;
+        }
+
+        .section {
+            background-color: #2c2c2c;
+            padding: 50px 30px;
+            border: 1.5px solid #444;
+            border-radius: 0.25em;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        #my-qr-reader {
+            padding: 20px !important;
+            border: 1.5px solid #444 !important;
+            border-radius: 8px;
+            background-color: #1f1f1f;
+        }
+
+        #my-qr-reader img[alt="Info icon"] {
+            display: none;
+        }
+
+        #my-qr-reader img[alt="Camera based scan"] {
+            width: 100px !important;
+            height: 100px !important;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: 1px solid #444;
+            outline: none;
+            border-radius: 0.25em;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            transition: 0.3s background-color;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        video {
+            width: 100% !important;
+            border: 1px solid #444 !important;
+            border-radius: 0.25em;
+        }
+
+        .result {
+            margin-top: 20px;
+            color: #ffffff;
+        }
+
+        .drag-drop-area {
+            margin-top: 20px;
+            padding: 30px;
+            border: 2px dashed #555;
+            border-radius: 0.25em;
+            color: white;
+            background-color: #444;
+        }
+
+        .drag-drop-area.dragover {
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Scan QR Codes</h1>
+        <div class="section">
+            <div id="my-qr-reader"></div>
+
+            <!-- Drag and drop area -->
+            <div id="drag-drop-area" class="drag-drop-area">
+                Drag and drop an image here, or click to select a file
+                <input type="file" id="qr-file-input" style="display: none;">
+            </div>
+
+            <div class="result" id="result"></div>
+            <button id="copy-button" style="display: none;">Copy URL</button>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script>
+        function domReady(fn) {
+            if (document.readyState === "complete" || document.readyState === "interactive") {
+                setTimeout(fn, 1000);
+            } else {
+                document.addEventListener("DOMContentLoaded", fn);
+            }
+        }
+
+        domReady(function () {
+            // QR code scan success callback
+            function onScanSuccess(decodeText) {
+                // Display the decoded URL
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `<a href="${decodeText}" target="_blank" style="color: #1d9bf0;">Decoded URL: ${decodeText}</a>`;
+
+                // Show the copy button
+                const copyButton = document.getElementById('copy-button');
+                copyButton.style.display = 'inline-block';
+
+                // Copy to clipboard functionality
+                copyButton.onclick = function () {
+                    navigator.clipboard.writeText(decodeText).then(() => {
+                        alert("URL copied to clipboard!");
+                    }, (err) => {
+                        alert("Failed to copy: " + err);
+                    });
+                };
+            }
+
+            // Initialize the camera scanner
+            let htmlscanner = new Html5QrcodeScanner(
+                "my-qr-reader", 
+                { fps: 10, qrbox: 250 }
+            );
+            htmlscanner.render(onScanSuccess);
+
+            // Handle file input for QR code scanning
+            const fileInput = document.getElementById('qr-file-input');
+            fileInput.addEventListener('change', function () {
+                const file = fileInput.files[0];
+                if (file) {
+                    scanFile(file);
+                }
+            });
+
+            // Drag and drop functionality
+            const dragDropArea = document.getElementById('drag-drop-area');
+            dragDropArea.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                dragDropArea.classList.add('dragover');
+            });
+
+            dragDropArea.addEventListener('dragleave', function () {
+                dragDropArea.classList.remove('dragover');
+            });
+
+            dragDropArea.addEventListener('drop', function (e) {
+                e.preventDefault();
+                dragDropArea.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file) {
+                    scanFile(file);
+                }
+            });
+
+            dragDropArea.addEventListener('click', function () {
+                fileInput.click();
+            });
+
+            // Function to scan file using Html5Qrcode
+            function scanFile(file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageData = e.target.result;
+
+                    // Scan the selected file
+                    Html5Qrcode.scanFile(imageData, true)
+                        .then(onScanSuccess)
+                        .catch(err => alert(`Failed to scan file: ${err}`));
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

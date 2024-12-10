@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding for proper text rendering -->
+    <meta charset="UTF-8">
+    <!-- Viewport meta tag for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title displayed on the browser tab -->
+    <title>Shadow Maze</title>
+    <!-- Linking the external CSS file for styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header section with game title and instructions -->
+    <div class="header">
+        <h1>Shadow Maze</h1>
+        <p class="instructions">Use arrow keys or WASD to navigate the maze</p>
+        <!-- Timer display -->
+        <p id="timer" style="font-size: 18px;">Time: 00:00</p>
+    </div>
+
+    <!-- Canvas where the maze will be rendered -->
+    <canvas id="mazeCanvas" width="500" height="500"></canvas>
+
+    <!-- Toast notification area (hidden by default) -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Linking the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

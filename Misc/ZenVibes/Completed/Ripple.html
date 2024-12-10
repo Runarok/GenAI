@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Ripple Effect</title>
+    <style>
+        /* Apply full-screen layout and remove margins */
+        body {
+            margin: 0;
+            height: 100vh; /* Full height of the viewport */
+            color: white; /* Set text color to white */
+            overflow: hidden; /* Prevent scrolling */
+            position: relative; /* Position relative for ripple effect */
+            font-family: 'Arial', sans-serif; /* Set font */
+            transition: background-color 0.3s ease; /* Smooth transition for background change */
+        }
+
+        /* Default gray gradient background */
+        .normal {
+            background: linear-gradient(to bottom, #7f8c8d, #95a5a6); /* Gray gradient from dark to light gray */
+        }
+
+        /* Colorful cyan and teal gradient background */
+        .colorful {
+            background: linear-gradient(to bottom, #00bcd4, #009688); /* Cyan to teal gradient */
+        }
+
+        /* Ripple effect style */
+        .ripple {
+            position: absolute; /* Position the ripple absolutely */
+            border-radius: 50%; /* Make the ripple circular */
+            background: rgba(255, 255, 255, 0.3); /* Default white ripple */
+            animation: rippleAnim 2s infinite; /* Apply the ripple animation */
+            transition: all 0.3s ease; /* Smooth transition for the ripple */
+        }
+
+        /* Ripple animation definition */
+        @keyframes rippleAnim {
+            0% {
+                transform: scale(0); /* Start with the ripple at scale 0 */
+                opacity: 1; /* Start with full opacity */
+            }
+            100% {
+                transform: scale(3); /* Grow the ripple to scale 3 */
+                opacity: 0; /* Fade out the ripple */
+            }
+        }
+
+        /* Button styling */
+        .toggle-btn {
+            position: absolute; /* Position the button absolutely */
+            top: 20px; /* Set button position from the top */
+            right: 20px; /* Set button position from the right */
+            padding: 12px 24px; /* Add padding inside the button */
+            background: #1abc9c; /* Set the button color to teal */
+            color: white; /* Set button text to white */
+            border: none; /* Remove the default button border */
+            border-radius: 30px; /* Create rounded corners */
+            cursor: pointer; /* Change cursor to pointer when hovering */
+            font-size: 16px; /* Set the font size */
+            font-weight: bold; /* Set bold font for the button */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+            transition: background 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        /* Button hover effect */
+        .toggle-btn:hover {
+            background: #16a085; /* Darker teal when hovered */
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+        }
+
+        /* Ripple in colorful mode */
+        .colorful .ripple {
+            background: rgba(255, 255, 255, 0.3); /* Applies a white, semi-transparent background to the ripple */
+            animation: colorfulRippleAnim 2s infinite; /* Apply the colorful ripple animation */
+        }
+
+        /* Keyframes for the colorful ripple animation */
+        @keyframes colorfulRippleAnim {
+            0% {
+                transform: scale(0); /* Start with scale 0 */
+                opacity: 1; /* Start with full opacity */
+            }
+            50% {
+                transform: scale(1.5); /* Grow the ripple to scale 1.5 at the midpoint */
+                opacity: 0.7; /* Slightly decrease opacity at the midpoint */
+            }
+            100% {
+                transform: scale(3); /* Grow the ripple to scale 3 */
+                opacity: 0; /* Fade out the ripple */
+            }
+        }
+
+    </style>
+</head>
+<body class="normal"> <!-- Initial class set to 'normal' -->
+    <button class="toggle-btn" id="toggleButton">Toggle Colorful</button>
+
+    <script>
+        const body = document.body; /* Select the body element */
+        const button = document.getElementById('toggleButton'); /* Select the toggle button */
+
+        let isColorful = false; /* Track whether the page is in colorful mode */
+
+        button.addEventListener('click', () => {
+            isColorful = !isColorful; /* Toggle the mode */
+            if (isColorful) {
+                body.classList.add('colorful'); /* Add colorful class */
+                body.classList.remove('normal'); /* Remove normal class */
+            } else {
+                body.classList.add('normal'); /* Add normal class */
+                body.classList.remove('colorful'); /* Remove colorful class */
+            }
+        });
+
+        document.body.addEventListener('click', function(event) {
+            const ripple = document.createElement('div'); /* Create a new div for the ripple */
+            ripple.classList.add('ripple'); /* Add the ripple class to the new div */
+            document.body.appendChild(ripple); /* Append the ripple to the body */
+
+            const size = Math.random() * 100 + 50; /* Randomly generate a size for the ripple */
+            ripple.style.width = ripple.style.height = `${size}px`; /* Set the width and height of the ripple */
+            ripple.style.top = `${event.clientY - size / 2}px`; /* Set the top position based on the mouse click */
+            ripple.style.left = `${event.clientX - size / 2}px`; /* Set the left position based on the mouse click */
+
+            setTimeout(() => {
+                ripple.remove(); /* Remove the ripple after 2 seconds */
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character set for proper text encoding -->
+  <meta charset="UTF-8">
+  <!-- Responsive design settings -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the webpage -->
+  <title>Simon Says Game</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+
+  <header>
+    <h1>Simon Says Game</h1>
+  </header>
+
+  <!-- Achievements Button (top-left) -->
+  <button id="achievements">🏆</button>
+
+  <div id="control-panel">
+    <!-- Dropdown for selecting number of tiles -->
+    <select id="numTiles">
+      <option value="2">2 Tiles</option>
+      <option value="3">3 Tiles</option>
+      <option value="4" selected>4 Tiles</option>
+      <option value="5">5 Tiles</option>
+      <option value="6">6 Tiles</option>
+      <option value="7">7 Tiles</option>
+      <option value="8">8 Tiles</option>
+      <option value="9">9 Tiles</option>
+      <option value="10">10 Tiles</option>
+    </select>
+    <button id="startButton">Start Game</button>
+  </div>
+
+  <main class="game-area">
+    <section class="button-box" id="buttonBox"></section>
+    <p id="status">0</p>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast"></div>
+
+  <!-- Achievements Modal -->
+  <div id="achievements-modal">
+    <h2>Achievements</h2>
+    <p id="achievements-list"></p>
+    <button id="close-modal">Close</button>
+  </div>
+
+  <script src="script.js"></script> <!-- Link to external JavaScript -->
+</body>
+</html>

@@ -1,0 +1,191 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twiddle Factor Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2f2f2f;
+      color: #ddd;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 120px;
+      padding: 10px;
+      margin-left: 10px;
+      font-size: 16px;
+      border: 1px solid #555;
+      border-radius: 4px;
+      background-color: #444;
+      color: #ddd;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .twiddle-factor-list {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .column {
+      width: 48%;
+    }
+
+    .twiddle-factor {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #555;
+      font-size: 18px;
+    }
+
+    .twiddle-factor span {
+      font-family: monospace;
+    }
+
+    .twiddle-factor .real {
+      color: #66ff66;
+    }
+
+    .twiddle-factor .imaginary {
+      color: #ff6600;
+    }
+
+    .twiddle-factor .exponent {
+      font-weight: bold;
+      color: #bbb;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .twiddle-factor-list {
+        flex-direction: column;
+      }
+
+      .column {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Twiddle Factor Calculator</h1>
+    <div class="input-group">
+      <label for="N" style="color: #fff;">Enter FFT Size (N):</label>
+      <input type="number" id="N" value="8" min="2" />
+      <button onclick="calculateTwiddleFactors()">Generate Twiddle Factors</button>
+    </div>
+
+    <!-- Checkbox to switch between i and j -->
+    <div style="color: #ddd; text-align: center; margin-bottom: 20px;">
+      <label for="useI" style="font-size: 16px;">Use <strong>i</strong> instead of <strong>j</strong> for the imaginary unit</label>
+      <input type="checkbox" id="useI" />
+    </div>
+
+    <div class="twiddle-factor-list" id="twiddle-factors">
+      <div class="column" id="positives"></div>
+      <div class="column" id="negatives"></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateTwiddleFactors() {
+      // Get the value of N and whether to use 'i' instead of 'j'
+      const N = parseInt(document.getElementById('N').value);
+      const useI = document.getElementById('useI').checked; // Check the checkbox
+
+      if (N < 2) {
+        alert("Please enter an FFT size greater than 1.");
+        return;
+      }
+
+      const positivesContainer = document.getElementById('positives');
+      const negativesContainer = document.getElementById('negatives');
+
+      positivesContainer.innerHTML = "";  // Clear previous results
+      negativesContainer.innerHTML = "";  // Clear previous results
+
+      for (let k = 0; k < N; k++) {
+        // Calculate positive twiddle factor (W_N^k)
+        const posReal = Math.cos(2 * Math.PI * k / N);
+        const posImag = Math.sin(2 * Math.PI * k / N);
+        const positive = formatTwiddleFactor(posReal, posImag, k, useI);
+
+        // Display positive twiddle factor in the first column
+        positivesContainer.innerHTML += `
+          <div class="twiddle-factor">
+            <span class="exponent">W<sub>${N}</sub><sup>${k}</sup>:</span>
+            <span class="real">${positive.real}</span>
+            <span class="imaginary">${positive.imaginary}</span>
+          </div>
+        `;
+
+        // Calculate negative twiddle factor (W_N^-k)
+        const negReal = Math.cos(2 * Math.PI * k / N);
+        const negImag = -Math.sin(2 * Math.PI * k / N);
+        const negative = formatTwiddleFactor(negReal, negImag, -k, useI);
+
+        // Display negative twiddle factor in the second column
+        negativesContainer.innerHTML += `
+          <div class="twiddle-factor">
+            <span class="exponent">W<sub>${N}</sub><sup>-${k}</sup>:</span>
+            <span class="real">${negative.real}</span>
+            <span class="imaginary">${negative.imaginary}</span>
+          </div>
+        `;
+      }
+    }
+
+    function formatTwiddleFactor(real, imaginary, k, useI) {
+      // Format the real and imaginary parts
+      const realPart = real.toFixed(3);
+      const imagPart = imaginary.toFixed(3);
+      const imagUnit = useI ? "i" : "j";  // Use 'i' or 'j' based on the checkbox
+
+      return { 
+        real: realPart, 
+        imaginary: `${imagPart}${imagUnit}` 
+      };
+    }
+  </script>
+</body>
+</html>
