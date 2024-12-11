@@ -31,6 +31,7 @@
             background-color: #333333;
         }
         #file-content {
+            display: none;  /* Hide by default */
             margin-top: 20px;
             padding: 15px;
             width: 80%;
@@ -43,9 +44,14 @@
             white-space: pre-wrap;
             font-family: "Courier New", Courier, monospace;
             font-size: 1rem;
+            max-height: 400px; /* Limit the height of the box */
+            overflow-y: auto;  /* Add scroll for large content */
+            position: relative; /* For button positioning */
         }
         #copy-btn {
-            margin-top: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             padding: 10px 20px;
             font-size: 1rem;
             background-color: #4caf50;
@@ -71,11 +77,11 @@
         <p>Drag and drop a text file (.txt, .md, etc.) here to view its content</p>
     </div>
 
-    <div id="file-content"></div>
+    <!-- File content will appear only after a file is dropped -->
+    <div id="file-content">
+        <button id="copy-btn" onclick="copyToClipboard()" disabled>Copy to Clipboard</button>
+    </div>
     
-    <!-- Copy Button -->
-    <button id="copy-btn" onclick="copyToClipboard()" disabled>Copy to Clipboard</button>
-
     <script>
         const dropArea = document.getElementById('drop-area');
         const fileContent = document.getElementById('file-content');
@@ -110,6 +116,7 @@
             reader.onload = function(e) {
                 currentFileContent = e.target.result;
                 fileContent.textContent = currentFileContent;
+                fileContent.style.display = 'block';  // Show the content area after a file is loaded
                 copyBtn.disabled = false;  // Enable the copy button after file content is loaded
             };
 
