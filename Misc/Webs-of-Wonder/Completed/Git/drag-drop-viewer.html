@@ -28,6 +28,7 @@
             color: #cccccc;
             transition: background-color 0.3s ease;
             margin-bottom: 20px; /* Space between drop area and file content */
+            cursor: pointer;
         }
         #drop-area.hover {
             background-color: #333333;
@@ -69,13 +70,19 @@
             background-color: #888;
             cursor: not-allowed;
         }
+        /* Hidden file input */
+        #file-input {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
     <h1>Drag and Drop File Viewer</h1>
     <div id="drop-area">
-        <p>Drag and drop a text file (.txt, .md, etc.) here to view its content</p>
+        <p>Drag and drop a text file (.txt, .md, etc.) here or click to select a file</p>
+        <!-- Hidden file input element -->
+        <input type="file" id="file-input" accept=".txt,.md" />
     </div>
 
     <!-- File content will appear only after a file is dropped -->
@@ -90,6 +97,7 @@
         const dropArea = document.getElementById('drop-area');
         const fileContent = document.getElementById('file-content');
         const copyBtn = document.getElementById('copy-btn');
+        const fileInput = document.getElementById('file-input');
         let currentFileContent = '';
 
         // Prevent default behavior for drag and drop
@@ -109,6 +117,19 @@
             const files = e.dataTransfer.files;
             if (files.length > 0) {
                 const file = files[0];
+                readFile(file);
+            }
+        });
+
+        // Allow the user to select a file from their system by clicking
+        dropArea.addEventListener('click', () => {
+            fileInput.click(); // Trigger file input dialog
+        });
+
+        // When a file is selected via the file input
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
                 readFile(file);
             }
         });
