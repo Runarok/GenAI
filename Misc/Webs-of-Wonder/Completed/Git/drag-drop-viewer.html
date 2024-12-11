@@ -60,7 +60,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             width: 60%; /* Match the width of the content box */
-            display: block; /* Make the button a block element */
+            display: none; /* Initially hide the button */
             margin: 0 auto; /* Center the button below the content */
         }
         #copy-btn:hover {
@@ -142,6 +142,7 @@
                 currentFileContent = e.target.result;
                 fileContent.textContent = currentFileContent;
                 fileContent.style.display = 'block';  // Show the content area after a file is loaded
+                copyBtn.style.display = 'block';  // Show the copy button
                 copyBtn.disabled = false;  // Enable the copy button after file content is loaded
             };
 
