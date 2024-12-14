@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Toggle Style</title>
+  <style>
+    /* Default Dark Theme (Black background) */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Default Table Style in Dark Theme */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #333;
+    }
+
+    table th {
+      background-color: #333;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    table td {
+      background-color: #1d1d1d;
+      color: #e0e0e0;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #2c2c2c;
+    }
+
+    /* Links in Dark Theme */
+    a {
+      color: #76c7f3;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #4db8ff;
+    }
+
+    /* Light Theme Style */
+    .light-theme {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .light-theme table {
+      border-collapse: collapse;
+    }
+
+    .light-theme table th, .light-theme table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    .light-theme table th {
+      background-color: #f4f4f4;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .light-theme table td {
+      background-color: #fff;
+      color: #333;
+    }
+
+    .light-theme table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .light-theme a {
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .light-theme a:hover {
+      color: #0056b3;
+    }
+
+    .light-theme h3 {
+      color: #333;
+    }
+
+    /* Fixed Toggle Button Style */
+    #toggleButton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    #toggleButton:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+  <button id="toggleButton">Toggle Theme</button>
+  <div id="content" class="dark-theme">
+<h3 id="for-the-git">For the git</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Tools</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Design &amp; Development</strong></td>
+<td><a href="https://napkin.ai">Napkin.ai</a>, <a href="https://uiverse.io">Uiverse.io</a>, <a href="https://design.com">Design</a>, <a href="https://www.figma.com">Figma</a>, <a href="https://webflow.com">Webflow</a>, <a href="https://www.sketch.com">Sketch</a>, <a href="https://www.adobe.com/products/xd.html">Adobe XD</a>, <a href="https://marvelapp.com">Marvel</a>, <a href="https://www.framer.com">Framer</a>, <a href="https://www.invisionapp.com">InVision</a>, <a href="https://zeplin.io">Zeplin</a>, <a href="https://balsamiq.com">Balsamiq</a>, <a href="https://affinity.serif.com/en-us/designer/">Affinity Designer</a>, <a href="https://getgrav.org">Grav</a>, <a href="https://getbootstrap.com">Bootstrap</a>, <a href="https://tailwindcss.com">Tailwind CSS</a>, <a href="https://www.silex.me">Silex</a>, <a href="https://codesandbox.io">CodeSandbox</a></td>
+</tr>
+<tr>
+<td><strong>Content Creation</strong></td>
+<td><a href="https://invideo.io">Invideo.io</a>, <a href="https://getmunch.com">Getmunch</a>, <a href="https://youlearn.ai">Youlearn.ai</a>, <a href="https://www.lumen5.com">Lumen5</a>, <a href="https://www.copy.ai">Copy.ai</a>, <a href="https://www.jasper.ai">Jasper</a>, <a href="https://writesonic.com">Writesonic</a>, <a href="https://www.frase.io">Frase</a>, <a href="https://copysmith.ai">CopySmith</a>, <a href="https://rytr.me">Rytr</a>, <a href="https://www.contentbot.ai">ContentBot</a>, <a href="https://www.scalenut.com">Scalenut</a>, <a href="https://ai-writer.com">AI Writer</a>, <a href="https://www.articleforge.com">Article Forge</a>, <a href="https://quillbot.com">Quillbot</a>, <a href="https://www.marketmuse.com">MarketMuse</a>, <a href="https://www.sudowrite.com">Sudowrite</a>, <a href="https://www.tome.app">Tome</a>, <a href="https://piktochart.com">Piktochart</a>, <a href="https://www.visme.co">Visme</a>, <a href="https://animoto.com">Animoto</a></td>
+</tr>
+<tr>
+<td><strong>Image &amp; Visual Tools</strong></td>
+<td><a href="https://tinywow.com">Tinywow</a>, <a href="https://pfpmaker.com">Pfp maker</a>, <a href="https://www.canva.com">Canva</a>, <a href="https://www.remove.bg">Remove.bg</a>, <a href="https://openai.com/dall-e">DALL·E</a>, <a href="https://deepai.org/machine-learning-model/text2img">DeepAI</a>, <a href="https://www.pexels.com">Pexels</a>, <a href="https://unsplash.com">Unsplash</a>, <a href="https://pixabay.com">Pixabay</a>, <a href="https://www.artbreeder.com">Artbreeder</a>, <a href="https://crello.com">Crello</a>, <a href="https://placeit.net">Placeit</a>, <a href="https://snappa.com">Snappa</a>, <a href="https://www.photopea.com">Photopea</a>, <a href="https://vectr.com">Vectr</a>, <a href="https://www.vecteezy.com">Vecteezy</a>, <a href="https://www.lumen5.com">Lumen5</a>, <a href="https://www.lalal.ai">Lalal.ai</a>, <a href="https://supermachine.art">Supermachine</a></td>
+</tr>
+<tr>
+<td><strong>Code &amp; Development</strong></td>
+<td><a href="https://yarn.co">Yarn.co</a>, <a href="https://carbon.sh">Carbon.sh</a>, <a href="https://github.com">GitHub</a>, <a href="https://replit.com">Replit</a>, <a href="https://stackblitz.com">StackBlitz</a>, <a href="https://codepen.io">CodePen</a>, <a href="https://glitch.com">Glitch</a>, <a href="https://vercel.com">Vercel</a>, <a href="https://www.netlify.com">Netlify</a>, <a href="https://gitlab.com">GitLab</a>, <a href="https://bitbucket.org">Bitbucket</a>, <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://gohugo.io">Hugo</a>, <a href="https://nextjs.org">Next.js</a>, <a href="https://www.gatsbyjs.com">Gatsby</a>, <a href="https://code.visualstudio.com">Visual Studio Code</a>, <a href="https://www.sublimetext.com">Sublime Text</a>, <a href="https://atom.io">Atom</a>, <a href="https://www.postman.com">Postman</a>, <a href="https://www.docker.com">Docker</a>, <a href="https://kubernetes.io">Kubernetes</a>, <a href="https://www.heroku.com">Heroku</a>, <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a>, <a href="https://firebase.google.com">Firebase</a>, <a href="https://www.mongodb.com/products/compass">MongoDB Compass</a>, <a href="https://swagger.io">Swagger</a></td>
+</tr>
+<tr>
+<td><strong>AI Tools</strong></td>
+<td><a href="https://platform.openai.com">GPT-3 Playground</a>, <a href="https://chat.openai.com">ChatGPT</a>, <a href="https://runwayml.com">Runway ML</a>, <a href="https://www.pinecone.io">Pinecone</a>, <a href="https://www.synthesia.io">Synthesia</a>, <a href="https://www.midjourney.com">MidJourney</a>, <a href="https://www.copy.ai">Copy.ai</a>, <a href="https://www.deepl.com">DeepL</a>, <a href="https://huggingface.co">Hugging Face</a>, <a href="https://deepmind.com">DeepMind</a>, <a href="https://replika.ai">Replika</a>, <a href="https://quillbot.com">Quillbot</a>, <a href="https://stablediffusionweb.com">Stable Diffusion</a>, <a href="https://www.cortexica.com">Cortexica</a>, <a href="https://www.aiva.ai">AIVA</a>, <a href="https://neural.love">Neural.love</a>, <a href="https://www.descript.com">Descript</a>, <a href="https://play.aidungeon.io">AI Dungeon</a>, <a href="https://www.lumen5.com">Lumen5</a>, <a href="https://copysmith.ai">CopySmith</a>, <a href="https://writer.com">Writer</a>, <a href="https://www.talkwalker.com">Talkwalker</a>, <a href="https://www.frase.io">Frase</a>, <a href="https://hootsuite.com">Hootsuite</a>, <a href="https://zapier.com">Zapier</a></td>
+</tr>
+</tbody></table>
+<h3 id="useful-links-index">Useful Links Index</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Links</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Apps</strong></td>
+<td><a href="https://music.youtube.com/">YouTube Music</a> , <a href="https://docs.google.com/document/u/0/">Google Docs</a> , <a href="https://calendar.google.com/calendar/u/0/r/tasks?pli=1">Google Tasks</a> , <a href="https://images.google.com/">Google Images</a> , <a href="https://drive.google.com/drive/u/0/my-drive">Google Drive</a> , <a href="https://mail.google.com/mail/u/0/#inbox">Gmail</a> , <a href="https://chromewebstore.google.com/">Chrome Web Store</a> , <a href="https://keep.google.com/u/0/#home">Google Keep</a> , <a href="https://www.instagram.com/">Instagram</a> , <a href="https://www.snapchat.com/?original_referrer=none">Snapchat</a> , <a href="https://www.reddit.com/">Reddit</a> , <a href="https://discord.com/channels/1063374192436850688/1068856450274840656">Discord</a> , <a href="https://in.pinterest.com/">Pinterest</a> , <a href="https://www.tunemymusic.com/">Tune Music</a> , <a href="https://open.spotify.com/">Spotify</a> , <a href="https://www.mycompiler.io/">myCompiler</a> , <a href="https://dontpad.com/">Dontpad</a> , <a href="https://www.airconsole.com/?spm=BlogArticle.InArticleHyperlinkWord&clickId=875399de95">Airconsole</a> , <a href="https://matlab.mathworks.com/">MATLAB Online</a> , <a href="https://store.epicgames.com/en-US/">Epic Games</a></td>
+</tr>
+<tr>
+<td><strong>Github</strong></td>
+<td><a href="https://github.com/TempestAethel/File-Reserve-Private/blob/main/Links.md">Links</a> , <a href="https://github.com/TempestAethel/TempestAethel">TA Menu</a> , <a href="https://github.com/TempestAethel/Courses-Internships">Courses</a> , <a href="https://github.com/TempestAethel/Academic">Academic</a> , <a href="https://github.com/TempestAethel/MyLocker">MyLocker</a> , <a href="https://github.com/TempestAethel/MySpace">MySpace</a> , <a href="https://github.com/TempestAethel/Design-and-implementation-of-Antenna">MiniProject</a></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/Runarok/Runarok">Runarok Menu</a> , <a href="https://github.com/Runarok/url-redir/blob/main/redirects.json">URL-redir</a> , <a href="https://github.com/Runarok/GenAI">GenAI</a> , <a href="https://github.com/Runarok/GenAI/tree/main/Misc/Webs-of-Wonder">MiscWeb</a></td>
+</tr>
+<tr>
+<td><strong>Git Use</strong></td>
+<td><a href="https://www.markdownguru.com/">Markdown</a></td>
+</tr>
+<tr>
+<td><strong>Words</strong></td>
+<td><a href="https://www.essaywritingsoft.com/essay-shuffler.html">Essay Shuffler</a> , <a href="https://quillbot.com/summarize">Text Summarizer</a> , <a href="https://anotepad.com/">Notepad</a> , <a href="https://ezcalc.me/word-sorter/">WordSorter</a> , <a href="https://www.madeintext.com/subscript-generator/">Subscript Generator</a> , <a href="https://www.i2symbol.com/symbols/superscript">Superscript Generator</a> , <a href="https://www.charactercountonline.com/">Character Count</a> , <a href="https://wordcounter.net/character-count">Word Counter</a></td>
+</tr>
+<tr>
+<td><strong>Conversions</strong></td>
+<td><a href="https://www.ilovepdf.com/">PDF Converter</a> , <a href="https://www.freeconvert.com/">File Converter</a> , <a href="https://products.fileformat.app/presentation/merger/ppt">Merge PPT</a> , <a href="https://pixlr.com/batch/">Batch Photo Edit</a></td>
+</tr>
+<tr>
+<td><strong>Anime &amp; Manga</strong></td>
+<td><a href="https://www.anime-planet.com/">Anime Planet</a> , <a href="https://w1.zoro.se/">Zoro</a> , <a href="https://www3.gogoanimes.fi/">Gogoanime</a> , <a href="https://www5.9anime.bid/9anime">9anime</a> , <a href="https://asuratoon.com/">Asura Scans</a> , <a href="https://asuratoon.com/manga/?status=&type=&order=latest">Asura Scans (Latest)</a> , <a href="https://mangadex.org/">MangaDex</a> , <a href="https://mangadex.org/titles/follows">MangaDex (Followed)</a> , <a href="https://mangadex.org/titles/feed">MangaDex (Feed)</a> , <a href="https://manga4life.com/">MangaLife</a> , <a href="https://manga4life.com/user/subscription.php">MangaLife (Subscription)</a> , <a href="https://manhuaus.com/manganato-5/">ManhuaUS</a></td>
+</tr>
+<tr>
+<td><strong>Others</strong></td>
+<td><a href="https://lightseeksdark.dropmark.com/">DROPMARK</a> , <a href="http://student.mybmtc.com:8280/pass/anonymous/studentapplication/result/BMTC-2023-24-155184-SEPO">BMTC Bus Pass</a></td>
+</tr>
+<tr>
+<td><strong>AI ART</strong></td>
+<td><a href="https://creator.nightcafe.studio/">NightCafe</a> , <a href="https://www.futurepedia.io/ai-tools/image-generators?sort=popular">Image Generators</a> , <a href="https://www.futurepedia.io/ai-tools/art-generators">AI Art Generators</a> , <a href="https://designer.microsoft.com/sticker-creator">Sticker Creator</a></td>
+</tr>
+<tr>
+<td><strong>Extensions</strong></td>
+<td><a href="https://chromewebstore.google.com/detail/aha-music-song-finder-for/dpacanjfikmhoddligfbehkpomnbgblf?pli=1">AHA Music</a> , <a href="https://chromewebstore.google.com/detail/save-page-we/dhhpefjklgkmgeafimnjhojgjamoafof">Save Page</a></td>
+</tr>
+<tr>
+<td><strong>YouTube</strong></td>
+<td><a href="https://www.youtube.com/results?search_query=manga">Manga</a> , <a href="https://www.youtube.com/results?search_query=horror+short+film">Horror Shorts</a> , <a href="https://www.youtube.com/results?search_query=jabardasth+latest+episode+">Jabardasth</a> , <a href="https://www.youtube.com/results?search_query=extra+jabardasth+latest+episode+">Extra Jabardasth</a> , <a href="https://www.youtube.com/playlist?list=PLwLSw1_eDZl0PC3GwSEfl_Oy2Obxw4H5e">Anime Playlist</a></td>
+</tr>
+<tr>
+<td><strong>AI</strong></td>
+<td><a href="https://theresanaiforthat.com/">There&#39;s an AI for that</a> , <a href="https://letsenhance.io/boost">Enhance</a> , <a href="https://www.upscale.media/upload">Enlarge</a> , <a href="https://pinetools.com/darken-image">Darken Image (PC)</a> , <a href="https://pixelied.com/features/photo-effects/darken-image">Darken Image (Phone)</a> , <a href="https://www.bing.com/saves?FORM=O2HV46">Collections</a> , <a href="https://www.bing.com/images/create?FORM=GENILP">Image Creator</a></td>
+</tr>
+<tr>
+<td><strong>Walls</strong></td>
+<td><a href="https://alphacoders.com/">Alpha Coders</a> , <a href="https://www.peakpx.com/">Peakpx</a> , <a href="https://www.wallpaperflare.com/">WallpaperFlare</a> , <a href="https://4kwallpapers.com/">4K Wallpapers</a> , <a href="https://www.pexels.com/">Pexels</a> , <a href="https://wallpapercave.com/">Wallpaper Cave</a> , <a href="https://wallhaven.cc/">Wallhaven</a> , <a href="https://pixabay.com/">Pixabay</a> , <a href="https://www.freepik.com/">Freepik</a> , <a href="https://www.zerochan.net/">Zerochan</a> , <a href="https://www.pixelstalk.net/">PixelsTalk</a> , <a href="https://simpledesktops.com/">Simple Desktops</a> , <a href="https://unsplash.com/">Unsplash</a></td>
+</tr>
+<tr>
+<td><strong>Minecraft</strong></td>
+<td><a href="https://oranj.io/blog/VoxelSphereGenerator">Voxel Shape</a> , <a href="https://www.plotz.co.uk/plotz-model.php?model=Sphere">Plotz Sphere</a> , <a href="https://donatstudios.com/PixelCircleGenerator">Pixel Circle/Oval</a> , <a href="https://www.chunkbase.com/">Chunk Base</a></td>
+</tr>
+<tr>
+<td><strong>TRASH</strong></td>
+<td><a href="https://www.stylishnameguru.com/">StyleName</a> , <a href="https://www.grammarcheck.net/editor/">Grammar Check</a> , <a href="https://www.urbandictionary.com/">Urban Dictionary</a> , <a href="https://getv.topsandtees.space/pMolEA8MEV">YT Download</a> , <a href="https://yarn.co/">Movie Finder</a> , <a href="https://www.geo-fs.com/">Aero Sim</a></td>
+</tr>
+<tr>
+<td><strong>DSDV</strong></td>
+<td><a href="https://www.boolean-algebra.com/">Boolean Equation Solver</a> , <a href="https://www.boolean-algebra.com/kmap/">K-map Solver</a> , <a href="http://www.quinemccluskey.com/">Table Solver</a></td>
+</tr>
+<tr>
+<td><strong>Books</strong></td>
+<td><a href="https://www.studocu.com/in/document/visvesvaraya-technological-university/communication-lab/becl404-manual-communication-laboratory/89139246">BECL404 Comm Lab</a> , <a href="https://powerunit-ju.com/wp-content/uploads/2021/04/Aurelien-Geron-Hands-On-Machine-Learning-with-Scikit-Learn-Keras-and-Tensorflow_-Concepts-Tools-and-Techniques-to-Build-Intelligent-Systems-OReilly-Media-2019.pdf">Hands-On Machine Learning</a> , <a href="https://libgen.li/">Library Genesis</a></td>
+</tr>
+<tr>
+<td><strong>Other Links</strong></td>
+<td><a href="https://www.timer-stopwatch.com/10-minute-timer/">10-Minute Timer</a> , <a href="https://live.skolar.in/student/classes">Skolar Student Classes</a> , <a href="https://obs.ibomma.games/telugu-movies/">Telugu Movies</a></td>
+</tr>
+</tbody></table>
+<h3 id="extensive-index">Extensive Index</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Links</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Image Tools</strong></td>
+<td><a href="https://tinywow.com/tools/resize-image">Image Resizer</a> , <a href="https://tinywow.com/tools/remove-image-background">Background Remover</a> , <a href="https://tinywow.com/tools/enhance-image">Image Enhancer</a> , <a href="https://tinywow.com/tools/image-converter">Image Converter</a> , <a href="https://tinywow.com/tools/compress-image">Image Compressor</a> , <a href="https://tinywow.com/tools/jpg-to-png">JPG to PNG</a> , <a href="https://tinywow.com/tools/jpg-to-pdf">JPG to PDF</a> , <a href="https://tinywow.com/tools/crop-image">Image Cropper</a> , <a href="https://tinywow.com/tools/resize-gif">GIF Resizer</a> , <a href="https://tinywow.com/tools/gif-to-video">GIF Converter</a> , <a href="https://tinywow.com/tools/gif-splitter">GIF Splitter</a> , <a href="https://tinywow.com/tools/split-image">Image Splitter</a> , <a href="https://tinywow.com/tools/png-to-jpg">PNG to JPG</a> , <a href="https://tinywow.com/tools/convert-image-to-text">Convert Image to Text</a> , <a href="https://tinywow.com/tools/change-image-background">Image Background Changer</a> , <a href="https://tinywow.com/tools/rotate-image">Rotate Image</a> , <a href="https://tinywow.com/tools/remove-image-watermark">Remove Image Watermark</a> , <a href="https://tinywow.com/tools/gif-to-png">Convert GIF to PNG</a> , <a href="https://tinywow.com/tools/jpg-to-png">Convert JPG to PNG</a> , <a href="https://tinywow.com/tools/pdf-to-image">Convert PDF to Image</a> , <a href="https://tinywow.com/tools/pdf-to-jpg">Convert PDF to JPG</a> , <a href="https://tinywow.com/tools/text-to-image">Create Image from Text</a> , <a href="https://tinywow.com/tools/image-to-word">Convert Image to Word</a> , <a href="https://tinywow.com/tools/image-to-word">Image to Word</a> , <a href="https://tinywow.com/tools/webp-to-jpg">Convert WebP to JPG</a> , <a href="https://tinywow.com/tools/webp-to-png">Convert WebP to PNG</a> , <a href="https://tinywow.com/tools/image-to-pdf">Convert Image to PDF</a> , <a href="https://tinywow.com/tools/image-optimizer">Image Optimizer</a> , <a href="https://tinywow.com/tools/crop-and-resize-image">Image Crop and Resize</a></td>
+</tr>
+<tr>
+<td><strong>Video Tools</strong></td>
+<td><a href="https://tinywow.com/tools/video-converter">Video Converter</a> , <a href="https://tinywow.com/tools/mp4-to-mp3">MP4 to MP3</a> , <a href="https://tinywow.com/tools/video-editor">Video Editor</a> , <a href="https://tinywow.com/tools/video-splitter">Video Splitter</a> , <a href="https://tinywow.com/tools/compress-video">Video Compressor</a> , <a href="https://tinywow.com/tools/mp4-to-avi">MP4 to AVI</a> , <a href="https://tinywow.com/tools/video-to-gif">Video to GIF</a> , <a href="https://tinywow.com/tools/gif-to-video">GIF to MP4</a> , <a href="https://tinywow.com/tools/mp4-to-mkv">MP4 to MKV</a> , <a href="https://tinywow.com/tools/avi-to-mp4">AVI to MP4</a> , <a href="https://tinywow.com/tools/video-to-audio">Convert Video to Audio</a> , <a href="https://tinywow.com/tools/rotate-video">Video Rotator</a> , <a href="https://tinywow.com/tools/video-to-text">Video to Text</a> , <a href="https://tinywow.com/tools/remove-video-background">Video Background Remover</a> , <a href="https://tinywow.com/tools/mp4-to-mov">MP4 to MOV</a> , <a href="https://tinywow.com/tools/mov-to-mp4">Convert MOV to MP4</a> , <a href="https://tinywow.com/tools/add-subtitles-to-video">Add Subtitles to Video</a> , <a href="https://tinywow.com/tools/video-to-mp3">Video to MP3</a> , <a href="https://tinywow.com/tools/youtube-downloader">YouTube Downloader</a> , <a href="https://tinywow.com/tools/mp4-to-flv">MP4 to FLV</a> , <a href="https://tinywow.com/tools/cut-video">Cut Video</a> , <a href="https://tinywow.com/tools/join-video">Join Videos</a> , <a href="https://tinywow.com/tools/video-joiner">Video Joiner</a> , <a href="https://tinywow.com/tools/flv-to-mp4">Convert FLV to MP4</a> , <a href="https://tinywow.com/tools/mp3-to-video">MP3 to Video</a> , <a href="https://tinywow.com/tools/video-to-mp4">Video to MP4</a> , <a href="https://tinywow.com/tools/remove-video-watermark">Video Watermark Remover</a> , <a href="https://tinywow.com/tools/video-collage-maker">Video Collage Maker</a> , <a href="https://tinywow.com/tools/video-to-slideshow">Create Slideshow from Video</a> , <a href="https://tinywow.com/tools/trim-video">Trim Video</a> , <a href="https://tinywow.com/tools/cut-mp4-video">Cut MP4 Video</a> , <a href="https://tinywow.com/tools/video-to-mp3">Convert Video to MP3</a></td>
+</tr>
+<tr>
+<td><strong>Audio Tools</strong></td>
+<td><a href="https://tinywow.com/tools/mp3-converter">MP3 Converter</a> , <a href="https://tinywow.com/tools/audio-cutter">Audio Cutter</a> , <a href="https://tinywow.com/tools/mp3-to-wav">MP3 to WAV</a> , <a href="https://tinywow.com/tools/audio-joiner">Audio Joiner</a> , <a href="https://tinywow.com/tools/wav-to-mp3">WAV to MP3</a> , <a href="https://tinywow.com/tools/compress-audio">Audio Compressor</a> , <a href="https://tinywow.com/tools/mp3-to-ogg">MP3 to OGG</a> , <a href="https://tinywow.com/tools/mp3-to-flac">MP3 to FLAC</a> , <a href="https://tinywow.com/tools/mp3-to-m4a">MP3 to M4A</a> , <a href="https://tinywow.com/tools/mp3-to-aac">MP3 to AAC</a> , <a href="https://tinywow.com/tools/mp3-to-wma">MP3 to WMA</a> , <a href="https://tinywow.com/tools/audio-to-text">Convert Audio to Text</a> , <a href="https://tinywow.com/tools/m4a-to-mp3">M4A to MP3</a> , <a href="https://tinywow.com/tools/audio-to-mp3">Audio to MP3</a> , <a href="https://tinywow.com/tools/ogg-to-mp3">OGG to MP3</a> , <a href="https://tinywow.com/tools/mp3-to-aiff">MP3 to AIFF</a> , <a href="https://tinywow.com/tools/mp3-to-amr">MP3 to AMR</a> , <a href="https://tinywow.com/tools/audio-to-wav">Audio to WAV</a> , <a href="https://tinywow.com/tools/audio-to-video">Convert Audio to MP4</a> , <a href="https://tinywow.com/tools/extract-audio-from-video">Extract Audio from Video</a> , <a href="https://tinywow.com/tools/audio-fade-in-fade-out">Audio Fade In/Fade Out</a> , <a href="https://tinywow.com/tools/cut-mp3">Cut MP3</a> , <a href="https://tinywow.com/tools/join-mp3">Join MP3</a> , <a href="https://tinywow.com/tools/audio-speed-changer">Audio Speed Changer</a> , <a href="https://tinywow.com/tools/mp3-to-text">MP3 to Text</a> , <a href="https://tinywow.com/tools/wav-to-mp3">Convert WAV to MP3</a> , <a href="https://tinywow.com/tools/m4a-to-wav">M4A to WAV</a> , <a href="https://tinywow.com/tools/audio-equalizer">Audio Equalizer</a> , <a href="https://tinywow.com/tools/mp3-to-aiff">MP3 to AIFF</a></td>
+</tr>
+<tr>
+<td><strong>Document Tools</strong></td>
+<td><a href="https://tinywow.com/tools/word-to-pdf">Word to PDF</a> , <a href="https://tinywow.com/tools/excel-to-pdf">Excel to PDF</a> , <a href="https://tinywow.com/tools/ppt-to-pdf">PowerPoint to PDF</a> , <a href="https://tinywow.com/tools/pdf-to-word">PDF to Word</a> , <a href="https://tinywow.com/tools/pdf-to-excel">PDF to Excel</a> , <a href="https://tinywow.com/tools/pdf-to-ppt">PDF to PowerPoint</a> , <a href="https://tinywow.com/tools/image-to-pdf">Image to PDF</a> , <a href="https://tinywow.com/tools/pdf-to-image">PDF to Image</a> , <a href="https://tinywow.com/tools/merge-pdf">PDF Merger</a> , <a href="https://tinywow.com/tools/split-pdf">PDF Splitter</a> , <a href="https://tinywow.com/tools/compress-pdf">PDF Compressor</a> , <a href="https://tinywow.com/tools/convert-document-to-pdf">Convert Document to PDF</a> , <a href="https://tinywow.com/tools/text-to-pdf">Text to PDF</a> , <a href="https://tinywow.com/tools/ppt-to-image">PowerPoint to Image</a> , <a href="https://tinywow.com/tools/excel-to-image">Excel to Image</a> , <a href="https://tinywow.com/tools/word-to-image">Word to Image</a> , <a href="https://tinywow.com/tools/online-ocr">Online OCR</a> , <a href="https://tinywow.com/tools/word-to-excel">Convert Word to Excel</a> , <a href="https://tinywow.com/tools/word-to-ppt">Convert Word to PowerPoint</a> , <a href="https://tinywow.com/tools/ppt-to-word">Convert PowerPoint to Word</a> , <a href="https://tinywow.com/tools/excel-to-word">Convert Excel to Word</a> , <a href="https://tinywow.com/tools/excel-to-ppt">Convert Excel to PowerPoint</a> , <a href="https://tinywow.com/tools/text-to-excel">Convert Text to Excel</a> , <a href="https://tinywow.com/tools/text-to-ppt">Convert Text to PowerPoint</a> , <a href="https://tinywow.com/tools/merge-ppt">Merge PowerPoint</a> , <a href="https://tinywow.com/tools/pdf-to-ppt">Convert PDF to PPT</a></td>
+</tr>
+<tr>
+<td><strong>TextFile Tools</strong></td>
+<td><a href="https://tinywow.com/tools/text-generator">Text Generator</a> , <a href="https://tinywow.com/tools/text-to-speech">Text to Speech</a> , <a href="https://tinywow.com/tools/text-formatter">Text Formatter</a> , <a href="https://tinywow.com/tools/text-cleaner">Text Cleaner</a> , <a href="https://tinywow.com/tools/text-converter">Text Converter</a> , <a href="https://tinywow.com/tools/text-case-converter">Text Case Converter</a> , <a href="https://tinywow.com/tools/character-counter">Character Counter</a> , <a href="https://tinywow.com/tools/word-counter">Word Counter</a> , <a href="https://tinywow.com/tools/text-summarizer">Text Summarizer</a> , <a href="https://tinywow.com/tools/remove-text-watermark">Remove Text Watermark</a> , <a href="https://tinywow.com/tools/text-to-image">Text to Image</a> , <a href="https://tinywow.com/tools/text-to-pdf">Text to PDF</a> , <a href="https://tinywow.com/tools/text-to-word">Text to Word</a> , <a href="https://tinywow.com/tools/text-to-ppt">Text to PowerPoint</a> , <a href="https://tinywow.com/tools/text-to-excel">Text to Excel</a> , <a href="https://tinywow.com/tools/text-to-markdown">Text to Markdown</a> , <a href="https://tinywow.com/tools/text-to-html">Text to HTML</a> , <a href="https://tinywow.com/tools/text-to-csv">Text to CSV</a> , <a href="https://tinywow.com/tools/text-to-json">Text to JSON</a> , <a href="https://tinywow.com/tools/text-to-xml">Text to XML</a> , <a href="https://tinywow.com/tools/text-to-yaml">Text to YAML</a> , <a href="https://tinywow.com/tools/remove-line-breaks">Remove Line Breaks</a> , <a href="https://tinywow.com/tools/text-to-csv-converter">Text to CSV Converter</a> , <a href="https://tinywow.com/tools/copy-text-to-clipboard">Copy Text to Clipboard</a></td>
+</tr>
+<tr>
+<td><strong>Compression &amp; Conversion Tools</strong></td>
+<td><a href="https://tinywow.com/tools/pdf-converter">PDF Converter</a> , <a href="https://tinywow.com/tools/zip-converter">ZIP Converter</a> , <a href="https://tinywow.com/tools/rar-to-zip">RAR to ZIP</a> , <a href="https://tinywow.com/tools/file-converter">File Converter</a> , <a href="https://tinywow.com/tools/image-to-pdf">Image to PDF</a> , <a href="https://tinywow.com/tools/pdf-to-image">PDF to Image</a> , <a href="https://tinywow.com/tools/compress-pdf">Compress PDF</a> , <a href="https://tinywow.com/tools/compress-audio">Compress Audio</a> , <a href="https://tinywow.com/tools/compress-video">Compress Video</a> , <a href="https://tinywow.com/tools/file-compressor">File Compressor</a> , <a href="https://tinywow.com/tools/split-pdf">PDF Splitter</a> , <a href="https://tinywow.com/tools/merge-pdf">PDF Merger</a> , <a href="https://tinywow.com/tools/convert-file">Convert File</a> , <a href="https://tinywow.com/tools/resize-image">Image Resizer</a> , <a href="https://tinywow.com/tools/audio-to-mp3">Audio to MP3</a> , <a href="https://tinywow.com/tools/mp3-to-wav">MP3 to WAV</a> , <a href="https://tinywow.com/tools/video-to-mp4">Video to MP4</a> , <a href="https://tinywow.com/tools/mp4-to-mp3">MP4 to MP3</a> , <a href="https://tinywow.com/tools/text-to-pdf">Text to PDF</a> , <a href="https://tinywow.com/tools/word-to-pdf">Word to PDF</a> , <a href="https://tinywow.com/tools/excel-to-pdf">Excel to PDF</a> , <a href="https://tinywow.com/tools/ppt-to-pdf">PowerPoint to PDF</a> , <a href="https://tinywow.com/tools/mp3-to-ogg">MP3 to OGG</a> , <a href="https://tinywow.com/tools/mp3-to-wma">MP3 to WMA</a> , <a href="https://tinywow.com/tools/file-to-zip">File to ZIP</a> , <a href="https://tinywow.com/tools/image-converter">Image Converter</a></td>
+</tr>
+<tr>
+<td><strong>Code Tools</strong></td>
+<td><a href="https://tinywow.com/tools/code-formatter">Code Formatter</a> , <a href="https://tinywow.com/tools/code-to-pdf">Code to PDF</a> , <a href="https://tinywow.com/tools/code-cleaner">Code Cleaner</a> , <a href="https://tinywow.com/tools/code-beautifier">Code Beautifier</a> , <a href="https://tinywow.com/tools/code-minifier">Code Minifier</a> , <a href="https://tinywow.com/tools/html-to-code">HTML to Code</a> , <a href="https://tinywow.com/tools/css-to-code">CSS to Code</a> , <a href="https://tinywow.com/tools/javascript-to-code">JavaScript to Code</a> , <a href="https://tinywow.com/tools/python-formatter">Python Formatter</a> , <a href="https://tinywow.com/tools/cpp-formatter">C++ Formatter</a> , <a href="https://tinywow.com/tools/json-formatter">JSON Formatter</a> , <a href="https://tinywow.com/tools/java-formatter">Java Formatter</a> , <a href="https://tinywow.com/tools/xml-formatter">XML Formatter</a> , <a href="https://tinywow.com/tools/sql-formatter">SQL Formatter</a> , <a href="https://tinywow.com/tools/css-minifier">CSS Minifier</a> , <a href="https://tinywow.com/tools/html-minifier">HTML Minifier</a> , <a href="https://tinywow.com/tools/json-minifier">JSON Minifier</a> , <a href="https://tinywow.com/tools/js-minifier">JavaScript Minifier</a> , <a href="https://tinywow.com/tools/yaml-formatter">YAML Formatter</a> , <a href="https://tinywow.com/tools/markdown-formatter">Markdown Formatter</a> , <a href="https://tinywow.com/tools/php-formatter">PHP Formatter</a> , <a href="https://tinywow.com/tools/go-formatter">Go Formatter</a> , <a href="https://tinywow.com/tools/sql-query-formatter">SQL Query Formatter</a></td>
+</tr>
+<tr>
+<td><strong>Website &amp; URL Tools</strong></td>
+<td><a href="https://tinywow.com/tools/url-shortener">URL Shortener</a> , <a href="https://tinywow.com/tools/link-checker">Link Checker</a> , <a href="https://tinywow.com/tools/website-downloader">Website Downloader</a> , <a href="https://tinywow.com/tools/website-screenshot">Website Screenshot</a> , <a href="https://tinywow.com/tools/qr-code-generator">Generate QR Code</a> , <a href="https://tinywow.com/tools/website-speed-test">Website Speed Test</a> , <a href="https://tinywow.com/tools/seo-analyzer">SEO Analyzer</a> , <a href="https://tinywow.com/tools/link-converter">Link Converter</a> , <a href="https://tinywow.com/tools/url-redirector">URL Redirector</a> , <a href="https://tinywow.com/tools/analytics-url-builder">Google Analytics URL Builder</a> , <a href="https://tinywow.com/tools/url-encoder">Online URL Encoder</a> , <a href="https://tinywow.com/tools/url-expander">URL Expander</a> , <a href="https://tinywow.com/tools/redirect-checker">Redirect Checker</a> , <a href="https://tinywow.com/tools/deep-link-generator">Deep Link Generator</a> , <a href="https://tinywow.com/tools/qr-code-reader">QR Code Reader</a> , <a href="https://tinywow.com/tools/website-analytics">Website Analytics</a> , <a href="https://tinywow.com/tools/domain-name-generator">Domain Name Generator</a> , <a href="https://tinywow.com/tools/url-parser">URL Parser</a> , <a href="https://tinywow.com/tools/website-security-checker">Website Security Checker</a> , <a href="https://tinywow.com/tools/url-decode">URL Decode</a> , <a href="https://tinywow.com/tools/markdown-to-html">Online Markdown Converter</a> , <a href="https://tinywow.com/tools/webp-to-jpg">WebP Converter</a></td>
+</tr>
+<tr>
+<td><strong>Social Media Tools</strong></td>
+<td><a href="https://tinywow.com/tools/instagram-downloader">Instagram Downloader</a> , <a href="https://tinywow.com/tools/youtube-downloader">YouTube Downloader</a> , <a href="https://tinywow.com/tools/facebook-video-downloader">Facebook Video Downloader</a> , <a href="https://tinywow.com/tools/twitter-video-downloader">Twitter Video Downloader</a> , <a href="https://tinywow.com/tools/tiktok-video-downloader">TikTok Video Downloader</a> , <a href="https://tinywow.com/tools/pinterest-downloader">Pinterest Downloader</a> , <a href="https://tinywow.com/tools/linkedin-video-downloader">LinkedIn Video Downloader</a> , <a href="https://tinywow.com/tools/reddit-video-downloader">Reddit Video Downloader</a> , <a href="https://tinywow.com/tools/vimeo-video-downloader">Vimeo Video Downloader</a> , <a href="https://tinywow.com/tools/snapchat-video-downloader">Snapchat Video Downloader</a> , <a href="https://tinywow.com/tools/youtube-to-mp3">YouTube to MP3</a> , <a href="https://tinywow.com/tools/instagram-story-downloader">Instagram Story Downloader</a> , <a href="https://tinywow.com/tools/facebook-to-mp3">Facebook to MP3</a> , <a href="https://tinywow.com/tools/tiktok-to-mp3">TikTok to MP3</a> , <a href="https://tinywow.com/tools/twitter-video-to-mp3">Twitter Video to MP3</a> , <a href="https://tinywow.com/tools/download-twitter-gif">Download Twitter GIF</a> , <a href="https://tinywow.com/tools/youtube-playlist-downloader">YouTube Playlist Downloader</a> , <a href="https://tinywow.com/tools/instagram-video-downloader">Instagram Video Downloader</a> , <a href="https://tinywow.com/tools/facebook-to-mp4">Facebook to MP4</a> , <a href="https://tinywow.com/tools/tiktok-video-converter">TikTok Video Converter</a> , <a href="https://tinywow.com/tools/save-instagram-photos">Save Instagram Photos</a> , <a href="https://tinywow.com/tools/pinterest-image-downloader">Pinterest Image Downloader</a> , <a href="https://tinywow.com/tools/reddit-image-downloader">Reddit Image Downloader</a> , <a href="https://tinywow.com/tools/vimeo-video-converter">Vimeo Video Converter</a> , <a href="https://tinywow.com/tools/youtube-subtitle-downloader">YouTube Subtitle Downloader</a></td>
+</tr>
+<tr>
+<td><strong>AI &amp; Misc Tools</strong></td>
+<td><a href="https://tinywow.com/tools/ai-image-generator">AI Image Generator</a> , <a href="https://tinywow.com/tools/ai-text-generator">AI Text Generator</a> , <a href="https://tinywow.com/tools/ai-audio-generator">AI Audio Generator</a> , <a href="https://tinywow.com/tools/ai-speech-generator">AI Speech Generator</a> , <a href="https://tinywow.com/tools/ai-video-generator">AI Video Generator</a> , <a href="https://tinywow.com/tools/ai-writing-assistant">AI Writing Assistant</a> , <a href="https://tinywow.com/tools/ai-chatbot">AI Chatbot</a> , <a href="https://tinywow.com/tools/ai-resume-generator">AI Resume Generator</a> , <a href="https://tinywow.com/tools/ai-art-generator">AI Art Generator</a> , <a href="https://tinywow.com/tools/ai-voiceover-generator">AI Voiceover Generator</a> , <a href="https://tinywow.com/tools/ai-text-to-image">AI Text to Image</a> , <a href="https://tinywow.com/tools/ai-story-generator">AI Story Generator</a> , <a href="https://tinywow.com/tools/ai-content-creation">AI Content Creation</a> , <a href="https://tinywow.com/tools/ai-marketing-tools">AI Marketing Tools</a> , <a href="https://tinywow.com/tools/ai-copywriting">AI Copywriting</a> , <a href="https://tinywow.com/tools/ai-graphic-design">AI Graphic Design</a> , <a href="https://tinywow.com/tools/ai-music-generator">AI Music Generator</a> , <a href="https://tinywow.com/tools/ai-language-translator">AI Language Translator</a> , <a href="https://tinywow.com/tools/ai-text-summarizer">AI Text Summarizer</a> , <a href="https://tinywow.com/tools/ai-text-rewriter">AI Text Rewriter</a> , <a href="https://tinywow.com/tools/ai-speech-to-text">AI Speech to Text</a> , <a href="https://tinywow.com/tools/ai-text-to-speech">AI Text to Speech</a> , <a href="https://tinywow.com/tools/ai-deep-learning">AI Deep Learning</a> , <a href="https://tinywow.com/tools/ai-chat-generator">AI Chat Generator</a> , <a href="https://tinywow.com/tools/ai-news-generator">AI News Generator</a> , <a href="https://tinywow.com/tools/miscellaneous-tools">Miscellaneous Tools</a> , <a href="https://tinywow.com/tools/random-joke-generator">Random Joke Generator</a> , <a href="https://tinywow.com/tools/math-solver">Math Solver</a> , <a href="https://tinywow.com/tools/random-password-generator">Random Password Generator</a> , <a href="https://tinywow.com/tools/random-name-generator">Random Name Generator</a> , <a href="https://tinywow.com/tools/virtual-assistant">Virtual Assistant</a> , <a href="https://tinywow.com/tools/ai-content-analyzer">AI Content Analyzer</a> , <a href="https://tinywow.com/tools/ai-text-recognition">AI Text Recognition</a> , <a href="https://tinywow.com/tools/ai-video-transcriber">AI Video Transcriber</a> , <a href="https://tinywow.com/tools/ai-image-recognition">AI Image Recognition</a></td>
+</tr>
+<tr>
+<td><strong>Image Editing &amp; GIF Tools</strong></td>
+<td><a href="https://tinywow.com/tools/resize-image">Image Resizer</a> , <a href="https://tinywow.com/tools/gif-maker">GIF Maker</a> , <a href="https://tinywow.com/tools/gif-resizer">GIF Resizer</a> , <a href="https://tinywow.com/tools/remove-image-background">Background Remover</a> , <a href="https://tinywow.com/tools/enhance-image">Image Enhancer</a> , <a href="https://tinywow.com/tools/gif-optimizer">GIF Optimizer</a> , <a href="https://tinywow.com/tools/crop-image">Image Cropping Tool</a> , <a href="https://tinywow.com/tools/image-filter">Image Filter</a> , <a href="https://tinywow.com/tools/image-to-png">Image to PNG</a> , <a href="https://tinywow.com/tools/gif-to-png">GIF to PNG</a> , <a href="https://tinywow.com/tools/gif-to-mp4">GIF to MP4</a> , <a href="https://tinywow.com/tools/gif-to-webp">GIF to WebP</a> , <a href="https://tinywow.com/tools/image-to-jpg">Image to JPG</a> , <a href="https://tinywow.com/tools/image-to-ico">Image to ICO</a> , <a href="https://tinywow.com/tools/gif-to-jpg">GIF to JPG</a> , <a href="https://tinywow.com/tools/image-compression">Image Compression</a> , <a href="https://tinywow.com/tools/gif-to-mp3">GIF to MP3</a> , <a href="https://tinywow.com/tools/image-to-pdf">Image to PDF</a> , <a href="https://tinywow.com/tools/gif-to-webm">GIF to WebM</a> , <a href="https://tinywow.com/tools/rotate-image">Rotate Image</a> , <a href="https://tinywow.com/tools/flip-image">Flip Image</a> , <a href="https://tinywow.com/tools/image-converter">Image Converter</a> , <a href="https://tinywow.com/tools/gif-to-avi">GIF to AVI</a> , <a href="https://tinywow.com/tools/add-text-to-image">Add Text to Image</a> , <a href="https://tinywow.com/tools/gif-loop-tool">GIF Loop Tool</a> , <a href="https://tinywow.com/tools/meme-generator">Meme Generator</a> , <a href="https://tinywow.com/tools/blur-image">Image Blur Tool</a> , <a href="https://tinywow.com/tools/image-background-editor">Image Background Editor</a> , <a href="https://tinywow.com/tools/gif-splitter">GIF Splitter</a> , <a href="https://tinywow.com/tools/gif-to-avi">GIF to AVI Converter</a></td>
+</tr>
+<tr>
+<td><strong>Text Analysis &amp; Utilities</strong></td>
+<td><a href="https://tinywow.com/tools/word-counter">Word Counter</a> , <a href="https://tinywow.com/tools/character-counter">Character Counter</a> , <a href="https://tinywow.com/tools/text-summarizer">Text Summarizer</a> , <a href="https://tinywow.com/tools/readability-checker">Readability Checker</a> , <a href="https://tinywow.com/tools/text-cleaner">Text Cleaner</a> , <a href="https://tinywow.com/tools/word-cloud-generator">Word Cloud Generator</a> , <a href="https://tinywow.com/tools/text-formatter">Text Formatter</a> , <a href="https://tinywow.com/tools/keyword-density-checker">Keyword Density Checker</a> , <a href="https://tinywow.com/tools/plagiarism-checker">Plagiarism Checker</a> , <a href="https://tinywow.com/tools/text-to-speech">Text to Speech</a> , <a href="https://tinywow.com/tools/text-to-pdf">Text to PDF</a> , <a href="https://tinywow.com/tools/grammar-check">Grammar Check</a> , <a href="https://tinywow.com/tools/sentence-case-converter">Sentence Case Converter</a> , <a href="https://tinywow.com/tools/sentence-splitter">Sentence Splitter</a> , <a href="https://tinywow.com/tools/text-analysis">Text Analysis</a> , <a href="https://tinywow.com/tools/proofreading-tool">Proofreading Tool</a> , <a href="https://tinywow.com/tools/text-extractor">Text Extractor</a> , <a href="https://tinywow.com/tools/readable-text-checker">Readable Text Checker</a> , <a href="https://tinywow.com/tools/spell-checker">Spell Checker</a> , <a href="https://tinywow.com/tools/stop-words-remover">Stop Words Remover</a> , <a href="https://tinywow.com/tools/text-merge">Text Merge</a> , <a href="https://tinywow.com/tools/duplicate-text-finder">Duplicate Text Finder</a> , <a href="https://tinywow.com/tools/text-rewriter">Text Rewriter</a> , <a href="https://tinywow.com/tools/paraphrasing-tool">Paraphrasing Tool</a> , <a href="https://tinywow.com/tools/ai-content-analyzer">AI Content Analyzer</a> , <a href="https://tinywow.com/tools/character-converter">Character Converter</a> , <a href="https://tinywow.com/tools/text-concatenator">Text Concatenator</a> , <a href="https://tinywow.com/tools/word-formatter">Word Formatter</a> , <a href="https://tinywow.com/tools/letter-case-converter">Letter Case Converter</a></td>
+</tr>
+<tr>
+<td><strong>Document Management</strong></td>
+<td><a href="https://tinywow.com/tools/pdf-converter">PDF Converter</a> , <a href="https://tinywow.com/tools/merge-pdf">Merge PDF</a> , <a href="https://tinywow.com/tools/split-pdf">Split PDF</a> , <a href="https://tinywow.com/tools/compress-pdf">PDF Compressor</a> , <a href="https://tinywow.com/tools/word-to-pdf">Word to PDF</a> , <a href="https://tinywow.com/tools/excel-to-pdf">Excel to PDF</a> , <a href="https://tinywow.com/tools/ppt-to-pdf">PPT to PDF</a> , <a href="https://tinywow.com/tools/image-to-pdf">Image to PDF</a> , <a href="https://tinywow.com/tools/pdf-to-word">PDF to Word</a> , <a href="https://tinywow.com/tools/pdf-to-excel">PDF to Excel</a> , <a href="https://tinywow.com/tools/pdf-to-ppt">PDF to PowerPoint</a> , <a href="https://tinywow.com/tools/pdf-to-jpg">PDF to JPG</a> , <a href="https://tinywow.com/tools/merge-word-docs">Merge Word Docs</a> , <a href="https://tinywow.com/tools/merge-excel-files">Merge Excel Files</a> , <a href="https://tinywow.com/tools/pdf-to-png">PDF to PNG</a> , <a href="https://tinywow.com/tools/word-to-jpg">Word to JPG</a> , <a href="https://tinywow.com/tools/jpg-to-pdf">JPG to PDF</a> , <a href="https://tinywow.com/tools/ppt-to-jpg">PowerPoint to JPG</a> , <a href="https://tinywow.com/tools/excel-to-jpg">Excel to JPG</a> , <a href="https://tinywow.com/tools/txt-to-pdf">Convert TXT to PDF</a> , <a href="https://tinywow.com/tools/document-scanner">Document Scanner</a> , <a href="https://tinywow.com/tools/document-formatter">Document Formatter</a> , <a href="https://tinywow.com/tools/document-merger">Document Merger</a> , <a href="https://tinywow.com/tools/document-to-word">Document to Word</a> , <a href="https://tinywow.com/tools/word-to-png">Word to PNG</a> , <a href="https://tinywow.com/tools/text-to-pdf">Text to PDF</a> , <a href="https://tinywow.com/tools/pdf-to-image">PDF to Image</a></td>
+</tr>
+<tr>
+<td><strong>Image to Text &amp; OCR</strong></td>
+<td><a href="https://tinywow.com/tools/ocr-scanner">OCR Scanner</a> , <a href="https://tinywow.com/tools/image-to-text">Image to Text</a> , <a href="https://tinywow.com/tools/ocr-converter">OCR Converter</a> , <a href="https://tinywow.com/tools/pdf-to-text">PDF to Text</a> , <a href="https://tinywow.com/tools/jpg-to-text">JPG to Text</a> , <a href="https://tinywow.com/tools/text-recognition">Text Recognition</a> , <a href="https://tinywow.com/tools/ocr-tool">OCR Tool</a> , <a href="https://tinywow.com/tools/scan-to-text">Scan to Text</a> , <a href="https://tinywow.com/tools/image-to-word">Image to Word</a> , <a href="https://tinywow.com/tools/convert-image-to-text">Convert Image to Text</a> , <a href="https://tinywow.com/tools/scan-text-to-pdf">Scan Text to PDF</a> , <a href="https://tinywow.com/tools/ocr-text-extractor">OCR Text Extractor</a> , <a href="https://tinywow.com/tools/png-to-text">PNG to Text</a> , <a href="https://tinywow.com/tools/image-to-excel">Image to Excel</a> , <a href="https://tinywow.com/tools/ocr-pdf">OCR PDF</a> , <a href="https://tinywow.com/tools/image-to-csv">Image to CSV</a> , <a href="https://tinywow.com/tools/text-scanner">Text Scanner</a> , <a href="https://tinywow.com/tools/ocr-file-converter">OCR File Converter</a> , <a href="https://tinywow.com/tools/convert-image-to-word">Convert Image to Word</a> , <a href="https://tinywow.com/tools/handwriting-to-text">Handwriting to Text</a> , <a href="https://tinywow.com/tools/convert-scanned-image">Convert Scanned Image</a> , <a href="https://tinywow.com/tools/ocr-jpeg-to-text">OCR JPEG to Text</a></td>
+</tr>
+<tr>
+<td><strong>Web Design Tools</strong></td>
+<td><a href="https://tinywow.com/tools/website-downloader">Website Downloader</a> , <a href="https://tinywow.com/tools/html-formatter">HTML Formatter</a> , <a href="https://tinywow.com/tools/css-minifier">CSS Minifier</a> , <a href="https://tinywow.com/tools/html-to-pdf">HTML to PDF</a> , <a href="https://tinywow.com/tools/html-to-jpg">HTML to JPG</a> , <a href="https://tinywow.com/tools/css-to-inline">CSS to Inline</a> , <a href="https://tinywow.com/tools/image-to-base64">Image to Base64</a> , <a href="https://tinywow.com/tools/css-to-scss">CSS to SCSS</a> , <a href="https://tinywow.com/tools/html-to-image">HTML to Image</a> , <a href="https://tinywow.com/tools/json-formatter">JSON Formatter</a> , <a href="https://tinywow.com/tools/javascript-minifier">JavaScript Minifier</a> , <a href="https://tinywow.com/tools/html-to-markdown">HTML to Markdown</a> , <a href="https://tinywow.com/tools/javascript-beautifier">JavaScript Beautifier</a> , <a href="https://tinywow.com/tools/css-formatter">CSS Formatter</a> , <a href="https://tinywow.com/tools/website-screenshot">Website Screenshot</a> , <a href="https://tinywow.com/tools/css-validator">CSS Validator</a> , <a href="https://tinywow.com/tools/webp-to-png">Webp to PNG</a> , <a href="https://tinywow.com/tools/html-validator">HTML Validator</a> , <a href="https://tinywow.com/tools/svg-to-png">SVG to PNG</a> , <a href="https://tinywow.com/tools/convert-html-to-word">Convert HTML to Word</a> , <a href="https://tinywow.com/tools/markdown-to-html">Markdown to HTML</a> , <a href="https://tinywow.com/tools/css-to-less">CSS to Less</a> , <a href="https://tinywow.com/tools/html-to-svg">HTML to SVG</a> , <a href="https://tinywow.com/tools/url-encoder">URL Encoder</a> , <a href="https://tinywow.com/tools/url-decoder">URL Decoder</a></td>
+</tr>
+<tr>
+<td><strong>Miscellaneous Tools</strong></td>
+<td><a href="https://tinywow.com/tools/barcode-generator">Barcode Generator</a> , <a href="https://tinywow.com/tools/qr-code-generator">QR Code Generator</a> , <a href="https://tinywow.com/tools/random-password-generator">Random Password Generator</a> , <a href="https://tinywow.com/tools/unit-converter">Unit Converter</a> , <a href="https://tinywow.com/tools/time-zone-converter">Time Zone Converter</a> , <a href="https://tinywow.com/tools/random-name-generator">Random Name Generator</a> , <a href="https://tinywow.com/tools/color-picker">Color Picker</a> , <a href="https://tinywow.com/tools/random-joke-generator">Random Joke Generator</a> , <a href="https://tinywow.com/tools/hex-to-rgb">Hex to RGB</a> , <a href="https://tinywow.com/tools/world-clock">World Clock</a> , <a href="https://tinywow.com/tools/base64-encoder">Base64 Encoder</a> , <a href="https://tinywow.com/tools/base64-decoder">Base64 Decoder</a> , <a href="https://tinywow.com/tools/random-number-generator">Random Number Generator</a> , <a href="https://tinywow.com/tools/morse-code-converter">Morse Code Converter</a> , <a href="https://tinywow.com/tools/random-text-generator">Random Text Generator</a> , <a href="https://tinywow.com/tools/countdown-timer">Countdown Timer</a> , <a href="https://tinywow.com/tools/text-to-emoji-converter">Text to Emoji Converter</a> , <a href="https://tinywow.com/tools/random-word-generator">Random Word Generator</a> , <a href="https://tinywow.com/tools/currency-converter">Currency Converter</a> , <a href="https://tinywow.com/tools/shipping-rate-calculator">Shipping Rate Calculator</a> , <a href="https://tinywow.com/tools/t-shirt-design-maker">T-Shirt Design Maker</a> , <a href="https://tinywow.com/tools/file-renamer">File Renamer</a> , <a href="https://tinywow.com/tools/image-watermark">Image Watermark</a> , <a href="https://tinywow.com/tools/text-to-qr-code">Text to QR Code</a> , <a href="https://tinywow.com/tools/song-lyrics-generator">Song Lyrics Generator</a> , <a href="https://tinywow.com/tools/ringtone-maker">Ringtone Maker</a></td>
+</tr>
+</tbody></table>
+
+ </div>
+
+  <script>
+    // Toggle button functionality
+    document.getElementById('toggleButton').addEventListener('click', function () {
+      const content = document.getElementById('content');
+      content.classList.toggle('light-theme'); // Toggle between dark and light theme
+    });
+  </script>
+
+</body>
+</html>
