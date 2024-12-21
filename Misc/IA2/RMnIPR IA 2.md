@@ -338,7 +338,7 @@ Copyright protects original works across diverse fields like literature, drama, 
 
 </details>
 
-
+---
 
 ## **Part 3: Trademark**
 
@@ -459,7 +459,7 @@ The **Coca-Cola vs. Bisleri case** is a landmark decision in trademark law, show
 
 </details>
 
-
+---
 
 ## **Part 4: Industrial Design Rights**
 
@@ -617,7 +617,8 @@ Industrial designs bridge creativity and commerce, ensuring that aesthetic innov
 
 </details>
 
-
+---
+ 
 ## **Part 5: Geographical Indications (GI)**
 
 <details>
