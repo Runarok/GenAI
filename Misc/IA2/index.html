@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
-    <title>Long Story Viewer</title>
+    <title>Long Paper Viewer</title>
     <style>
         /* Default styles for dark mode */
         body {
@@ -197,8 +196,8 @@
         }
 
         // Function to fetch the content of a specific markdown file from raw GitHub URL
-        function loadStoryContent(storyName) {
-            const fileUrl = `https://raw.githubusercontent.com/Runarok/GenAI/main/Misc/IA2/${storyName}.md`; // Construct the raw URL
+        function loadPaperContent(PaperName) {
+            const fileUrl = `https://raw.githubusercontent.com/Runarok/GenAI/main/Misc/IA2/${PaperName}.md`; // Construct the raw URL
 
             // Fetch the raw content of the selected markdown file
             fetch(fileUrl)
@@ -212,11 +211,11 @@
                     document.getElementById('markdown-content').innerHTML = htmlContent;
 
                     // Dynamically update the browser title
-                    document.title = `${storyName} - GenAI Chronicles`;
+                    document.title = `${PaperName} - GenAI Chronicles`;
                 })
                 .catch(error => {
-                    document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
-                    console.error('Error loading story content:', error);
+                    document.getElementById('markdown-content').innerHTML = `<p>Error loading the Paper content. Please try again later.</p>`;
+                    console.error('Error loading Paper content:', error);
                 });
         }
 
@@ -254,7 +253,7 @@
                     const button = document.createElement('button');
                     button.textContent = file;
                     button.onclick = () => {
-                        loadStoryContent(file); // Load content when clicked
+                        loadPaperContent(file); // Load content when clicked
                         setActiveButton(button); // Set the active class to the selected button
                     };
                     buttonsContainer.appendChild(button);
