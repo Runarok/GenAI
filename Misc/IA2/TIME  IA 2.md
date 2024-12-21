@@ -1144,13 +1144,39 @@ In a construction project, CPM can be used to determine the critical path by ide
 
 **Differences Between PERT and CPM**
 
-| **Aspect**                  | **PERT**                                            | **CPM**                                            |
-|-----------------------------|-----------------------------------------------------|----------------------------------------------------|
-| **Focus**                    | Time and task dependencies, especially in uncertain projects. | Task duration and resource allocation in predictable projects. |
-| **Time Estimates**           | Uses three time estimates (optimistic, pessimistic, most likely). | Uses a single time estimate for each task.        |
-| **Applicability**            | Best for research and development or projects with uncertain timelines. | Best for construction, manufacturing, or projects with predictable timelines. |
-| **Nature of Activities**     | Emphasizes uncertain activities and variability.    | Emphasizes deterministic and well-defined activities. |
-| **Output**                   | Estimates the expected project duration using probabilities. | Identifies the critical path and determines the project’s minimum duration. |
+<table>
+    <tr>
+        <th>Aspect</th>
+        <th>PERT</th>
+        <th>CPM</th>
+    </tr>
+    <tr>
+        <td>Focus</td>
+        <td>Time and task dependencies, especially in uncertain projects.</td>
+        <td>Task duration and resource allocation in predictable projects.</td>
+    </tr>
+    <tr>
+        <td>Time Estimates</td>
+        <td>Uses three time estimates (optimistic, pessimistic, most likely).</td>
+        <td>Uses a single time estimate for each task.</td>
+    </tr>
+    <tr>
+        <td>Applicability</td>
+        <td>Best for research and development or projects with uncertain timelines.</td>
+        <td>Best for construction, manufacturing, or projects with predictable timelines.</td>
+    </tr>
+    <tr>
+        <td>Nature of Activities</td>
+        <td>Emphasizes uncertain activities and variability.</td>
+        <td>Emphasizes deterministic and well-defined activities.</td>
+    </tr>
+    <tr>
+        <td>Output</td>
+        <td>Estimates the expected project duration using probabilities.</td>
+        <td>Identifies the critical path and determines the project’s minimum duration.</td>
+    </tr>
+</table>
+
 
 ---
 
