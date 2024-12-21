@@ -676,20 +676,74 @@ Geographical Indications (GI) are defined under the **Geographical Indications o
 
 **Examples of Articles Registered as GI in India**
 
-| **Article**               | **Type**      | **Place of Origin**          |
-|---------------------------|---------------|------------------------------|
-| **Darjeeling Tea**         | Agricultural  | West Bengal                  |
-| **Mysore Silk**            | Handicraft    | Karnataka                    |
-| **Kashmir Pashmina**       | Handicraft    | Jammu & Kashmir              |
-| **Banarasi Brocade Sarees**| Handicraft    | Uttar Pradesh                |
-| **Tirupathi Laddu**        | Foodstuff     | Andhra Pradesh               |
-| **Naga Mircha (Chili)**    | Agricultural  | Nagaland                     |
-| **Basmati Rice**           | Agricultural  | Multiple States in North India|
-| **Channapatna Toys**       | Handicraft    | Karnataka                    |
-| **Kangra Tea**             | Agricultural  | Himachal Pradesh             |
-| **Kullu Shawls**           | Handicraft    | Himachal Pradesh             |
-| **Aranmula Kannadi**       | Handicraft    | Kerala                       |
-| **Mahabalipuram Stone Sculpture** | Handicraft | Tamil Nadu                 |
+<table>
+    <tr>
+        <th>Article</th>
+        <th>Type</th>
+        <th>Place of Origin</th>
+    </tr>
+    <tr>
+        <td>Darjeeling Tea</td>
+        <td>Agricultural</td>
+        <td>West Bengal</td>
+    </tr>
+    <tr>
+        <td>Mysore Silk</td>
+        <td>Handicraft</td>
+        <td>Karnataka</td>
+    </tr>
+    <tr>
+        <td>Kashmir Pashmina</td>
+        <td>Handicraft</td>
+        <td>Jammu & Kashmir</td>
+    </tr>
+    <tr>
+        <td>Banarasi Brocade Sarees</td>
+        <td>Handicraft</td>
+        <td>Uttar Pradesh</td>
+    </tr>
+    <tr>
+        <td>Tirupathi Laddu</td>
+        <td>Foodstuff</td>
+        <td>Andhra Pradesh</td>
+    </tr>
+    <tr>
+        <td>Naga Mircha (Chili)</td>
+        <td>Agricultural</td>
+        <td>Nagaland</td>
+    </tr>
+    <tr>
+        <td>Basmati Rice</td>
+        <td>Agricultural</td>
+        <td>Multiple States in North India</td>
+    </tr>
+    <tr>
+        <td>Channapatna Toys</td>
+        <td>Handicraft</td>
+        <td>Karnataka</td>
+    </tr>
+    <tr>
+        <td>Kangra Tea</td>
+        <td>Agricultural</td>
+        <td>Himachal Pradesh</td>
+    </tr>
+    <tr>
+        <td>Kullu Shawls</td>
+        <td>Handicraft</td>
+        <td>Himachal Pradesh</td>
+    </tr>
+    <tr>
+        <td>Aranmula Kannadi</td>
+        <td>Handicraft</td>
+        <td>Kerala</td>
+    </tr>
+    <tr>
+        <td>Mahabalipuram Stone Sculpture</td>
+        <td>Handicraft</td>
+        <td>Tamil Nadu</td>
+    </tr>
+</table>
+
 
 **Significance of GI Registration:**
 - Protects traditional industries and supports rural artisans and farmers.
@@ -743,18 +797,75 @@ The case also reinforced the role of Geographical Indications in preserving the 
 <details>
   <summary>Differentiate between traditional knowledge, GI Products, and trademarks</summary>
 
-| **Aspect**            | **Traditional Knowledge (TK)**                              | **Geographical Indications (GI)**                        | **Trademarks**                                        |
-|-----------------------|-------------------------------------------------------------|---------------------------------------------------------|------------------------------------------------------|
-| **Definition**         | Traditional Knowledge refers to knowledge, practices, and skills passed down through generations within a community. | Geographical Indications are signs or symbols used to identify products originating from a specific geographical location, with unique qualities or reputation linked to that area. | Trademarks are unique symbols, logos, words, or phrases that distinguish goods or services of one entity from another. |
-| **Scope**              | Includes cultural practices, medicinal remedies, agricultural methods, and folklore. | Includes products like foodstuffs, handicrafts, and agricultural goods linked to a specific region. | Includes brand names, logos, slogans, and distinctive marks used for branding and marketing. |
-| **Legal Protection**   | Protected against misuse under intellectual property laws like the **Traditional Knowledge Digital Library (TKDL)**. | Protected under the **Geographical Indications of Goods (Registration and Protection) Act, 1999** in India. | Protected under the **Trademarks Act, 1999** in India. |
-| **Purpose**            | To preserve cultural heritage and prevent biopiracy.       | To promote and protect products associated with a specific region's reputation and quality. | To protect a brand's identity and ensure its exclusive use in the market. |
-| **Ownership**          | Belongs to the community or group maintaining the knowledge. | Ownership is collective, often by a group of producers, associations, or cooperatives in a region. | Ownership is individual, by a company, organization, or individual proprietor. |
-| **Examples**           | Ayurvedic practices, use of turmeric for healing, and neem for pest control. | Darjeeling Tea (West Bengal), Mysore Silk (Karnataka), Banarasi Sarees (Uttar Pradesh). | Nike logo, Coca-Cola symbol, McDonald’s golden arches. |
-| **Duration of Protection** | Perpetual, as long as the knowledge is preserved by the community. | Valid for **10 years**, renewable indefinitely.         | Valid for **10 years**, renewable indefinitely.      |
-| **Global Recognition** | Often lacks specific international protection; recognized through efforts like the **Convention on Biological Diversity (CBD)**. | Protected under international agreements like the **TRIPS Agreement**. | Recognized internationally under the **Madrid Protocol** for trademarks. |
-| **Economic Implication**| Primarily preserves cultural heritage; limited direct financial benefits. | Helps producers earn premium prices and boosts regional economies. | Directly linked to commercial branding and business revenue generation. |
-| **Key Objective**      | Safeguard indigenous practices from exploitation.           | Protect the authenticity and reputation of regional products. | Ensure brand recognition and prevent duplication.    |
+<table>
+    <tr>
+        <th>Aspect</th>
+        <th>Traditional Knowledge (TK)</th>
+        <th>Geographical Indications (GI)</th>
+        <th>Trademarks</th>
+    </tr>
+    <tr>
+        <td>Definition</td>
+        <td>Traditional Knowledge refers to knowledge, practices, and skills passed down through generations within a community.</td>
+        <td>Geographical Indications are signs or symbols used to identify products originating from a specific geographical location, with unique qualities or reputation linked to that area.</td>
+        <td>Trademarks are unique symbols, logos, words, or phrases that distinguish goods or services of one entity from another.</td>
+    </tr>
+    <tr>
+        <td>Scope</td>
+        <td>Includes cultural practices, medicinal remedies, agricultural methods, and folklore.</td>
+        <td>Includes products like foodstuffs, handicrafts, and agricultural goods linked to a specific region.</td>
+        <td>Includes brand names, logos, slogans, and distinctive marks used for branding and marketing.</td>
+    </tr>
+    <tr>
+        <td>Legal Protection</td>
+        <td>Protected against misuse under intellectual property laws like the <strong>Traditional Knowledge Digital Library (TKDL)</strong>.</td>
+        <td>Protected under the <strong>Geographical Indications of Goods (Registration and Protection) Act, 1999</strong> in India.</td>
+        <td>Protected under the <strong>Trademarks Act, 1999</strong> in India.</td>
+    </tr>
+    <tr>
+        <td>Purpose</td>
+        <td>To preserve cultural heritage and prevent biopiracy.</td>
+        <td>To promote and protect products associated with a specific region's reputation and quality.</td>
+        <td>To protect a brand's identity and ensure its exclusive use in the market.</td>
+    </tr>
+    <tr>
+        <td>Ownership</td>
+        <td>Belongs to the community or group maintaining the knowledge.</td>
+        <td>Ownership is collective, often by a group of producers, associations, or cooperatives in a region.</td>
+        <td>Ownership is individual, by a company, organization, or individual proprietor.</td>
+    </tr>
+    <tr>
+        <td>Examples</td>
+        <td>Ayurvedic practices, use of turmeric for healing, and neem for pest control.</td>
+        <td>Darjeeling Tea (West Bengal), Mysore Silk (Karnataka), Banarasi Sarees (Uttar Pradesh).</td>
+        <td>Nike logo, Coca-Cola symbol, McDonald’s golden arches.</td>
+    </tr>
+    <tr>
+        <td>Duration of Protection</td>
+        <td>Perpetual, as long as the knowledge is preserved by the community.</td>
+        <td>Valid for <strong>10 years</strong>, renewable indefinitely.</td>
+        <td>Valid for <strong>10 years</strong>, renewable indefinitely.</td>
+    </tr>
+    <tr>
+        <td>Global Recognition</td>
+        <td>Often lacks specific international protection; recognized through efforts like the <strong>Convention on Biological Diversity (CBD)</strong>.</td>
+        <td>Protected under international agreements like the <strong>TRIPS Agreement</strong>.</td>
+        <td>Recognized internationally under the <strong>Madrid Protocol</strong> for trademarks.</td>
+    </tr>
+    <tr>
+        <td>Economic Implication</td>
+        <td>Primarily preserves cultural heritage; limited direct financial benefits.</td>
+        <td>Helps producers earn premium prices and boosts regional economies.</td>
+        <td>Directly linked to commercial branding and business revenue generation.</td>
+    </tr>
+    <tr>
+        <td>Key Objective</td>
+        <td>Safeguard indigenous practices from exploitation.</td>
+        <td>Protect the authenticity and reputation of regional products.</td>
+        <td>Ensure brand recognition and prevent duplication.</td>
+    </tr>
+</table>
+
 
 **Summary**: Traditional Knowledge focuses on preserving intangible heritage, Geographical Indications highlight regional product uniqueness, and Trademarks are tools for distinguishing brands in commerce.
 
