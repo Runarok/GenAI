@@ -1,4 +1,7 @@
-# Intelligent Systems and Machine Learning Algorithms (Module 5) - Question Bank  
+
+# Intelligent Systems and Machine Learning Algorithms  
+**Module 5 - Question Bank**  
+
 
 ## Table of Contents  
 
