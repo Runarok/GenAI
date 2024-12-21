@@ -43,12 +43,34 @@ Uninformed (or blind) search strategies do not use additional problem-specific i
 
 ### Differences Between Informed and Uninformed Search
 
-| **Aspect**                 | **Informed Search**                           | **Uninformed Search**                      |
-|                           -|                                             --|                                          --|
-| **Use of Heuristics**      | Yes, uses domain-specific heuristics.         | No, does not use heuristics.               |
-| **Efficiency**             | More efficient due to guided exploration.     | Less efficient, may explore unnecessary nodes. |
-| **Examples**               | Greedy Best-First Search, A* Search           | BFS, DFS                                   |
-| **Knowledge Required**     | Requires additional problem-specific knowledge.| No additional knowledge required.          |
+<table>
+    <tr>
+        <th>Aspect</th>
+        <th>Informed Search</th>
+        <th>Uninformed Search</th>
+    </tr>
+    <tr>
+        <td>Use of Heuristics</td>
+        <td>Yes, uses domain-specific heuristics.</td>
+        <td>No, does not use heuristics.</td>
+    </tr>
+    <tr>
+        <td>Efficiency</td>
+        <td>More efficient due to guided exploration.</td>
+        <td>Less efficient, may explore unnecessary nodes.</td>
+    </tr>
+    <tr>
+        <td>Examples</td>
+        <td>Greedy Best-First Search, A* Search</td>
+        <td>BFS, DFS</td>
+    </tr>
+    <tr>
+        <td>Knowledge Required</td>
+        <td>Requires additional problem-specific knowledge.</td>
+        <td>No additional knowledge required.</td>
+    </tr>
+</table>
+
 
     
 </details>  
@@ -58,13 +80,39 @@ Uninformed (or blind) search strategies do not use additional problem-specific i
 
 **Comparison of Informed and Uninformed Search**
 
-| **Aspect**                 | **Informed Search**                                         | **Uninformed Search**                                   |
-|                           -|                                                         --|                                                      --|
-| **Definition**             | Uses heuristics or domain knowledge to guide the search.   | Explores the search space systematically without heuristics. |
-| **Heuristic Function**     | Utilizes a heuristic to estimate the cost to the goal.     | No heuristic is used; purely systematic exploration.   |
-| **Efficiency**             | More efficient; explores fewer nodes.                     | Less efficient; often explores many unnecessary nodes. |
-| **Solution Optimality**    | Can guarantee optimal solutions with proper heuristics (e.g., A* search). | Guarantees optimal solutions in some cases (e.g., BFS). |
-| **Complexity**             | Depends on the quality of the heuristic.                  | May have higher time and space complexity.            |
+<table>
+    <tr>
+        <th>Aspect</th>
+        <th>Informed Search</th>
+        <th>Uninformed Search</th>
+    </tr>
+    <tr>
+        <td>Definition</td>
+        <td>Uses heuristics or domain knowledge to guide the search.</td>
+        <td>Explores the search space systematically without heuristics.</td>
+    </tr>
+    <tr>
+        <td>Heuristic Function</td>
+        <td>Utilizes a heuristic to estimate the cost to the goal.</td>
+        <td>No heuristic is used; purely systematic exploration.</td>
+    </tr>
+    <tr>
+        <td>Efficiency</td>
+        <td>More efficient; explores fewer nodes.</td>
+        <td>Less efficient; often explores many unnecessary nodes.</td>
+    </tr>
+    <tr>
+        <td>Solution Optimality</td>
+        <td>Can guarantee optimal solutions with proper heuristics (e.g., A* search).</td>
+        <td>Guarantees optimal solutions in some cases (e.g., BFS).</td>
+    </tr>
+    <tr>
+        <td>Complexity</td>
+        <td>Depends on the quality of the heuristic.</td>
+        <td>May have higher time and space complexity.</td>
+    </tr>
+</table>
+
 
 **Scenarios Where Informed Search is Suitable**  
 1. **Pathfinding in Maps**: A* search, which uses heuristics like straight-line distance, is highly effective for finding the shortest path between two locations.  
