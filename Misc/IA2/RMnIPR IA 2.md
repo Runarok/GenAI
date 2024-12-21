@@ -736,7 +736,7 @@ The case also reinforced the role of Geographical Indications in preserving the 
 
 </details>
 
-
+---
 
 ## **Part 6: Traditional Knowledge & Intellectual Property**
 
