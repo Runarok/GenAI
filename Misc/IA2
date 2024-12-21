@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Markdown Files Viewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .file-item {
+            background-color: #1c1c1c;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-item:hover {
+            background-color: #3a3a3a;
+        }
+
+        .md-content-container {
+            background-color: #1e1e1e;
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            display: none;
+            white-space: pre-wrap;
+        }
+
+        .md-content-container h2 {
+            font-size: 24px;
+            color: #ffa500;
+        }
+
+        .md-content-container .content {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: #dcdcdc;
+        }
+
+        .md-content-container .content a {
+            color: #ffa500;
+            text-decoration: none;
+        }
+
+        .md-content-container .content a:hover {
+            text-decoration: underline;
+        }
+
+        .button {
+            background-color: #ffa500;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #ff8c00;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Offline Markdown Files Viewer</h1>
+
+    <ul class="file-list" id="fileList">
+        <!-- Markdown files will be listed here dynamically -->
+    </ul>
+
+    <div class="md-content-container" id="mdContent">
+        <button class="button" id="closeBtn">Close</button>
+        <h2 id="mdTitle"></h2>
+        <div id="mdContentText" class="content"></div>
+    </div>
+
+    <script>
+        // List of markdown file names (These should be in the same folder as the HTML file)
+        const mdFiles = [
+            "TIME IA 2.md",
+            "IMLA Mod 3 IA 2.md",
+            "IMLA Mod 4 IA 2.md",
+            "IMLA Mod 5 IA 2.md",
+            "RMnIPR IA 2.md"
+        ];
+
+        const fileListElement = document.getElementById('fileList');
+
+        // Dynamically create file items for each markdown file
+        mdFiles.forEach(file => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('file-item');
+            listItem.textContent = file;
+            listItem.addEventListener('click', () => loadFileContent(file));
+            fileListElement.appendChild(listItem);
+        });
+
+        // Function to load content of the selected file
+        function loadFileContent(file) {
+            const title = document.getElementById('mdTitle');
+            const contentContainer = document.getElementById('mdContentText');
+
+            // Using relative path to fetch the markdown file
+            fetch(file)  // Fetch the markdown file from the same folder
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch file");
+                    }
+                    return response.text();
+                })
+                .then(content => {
+                    title.textContent = file;
+                    contentContainer.innerHTML = marked(content); // Convert markdown to HTML using marked.js
+
+                    // Show the content container
+                    document.getElementById('mdContent').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error(error);
+                    contentContainer.innerHTML = "<p>Error loading file. Please try again.</p>";
+                    document.getElementById('mdContent').style.display = 'block';
+                });
+        }
+
+        // Close the content container
+        document.getElementById('closeBtn').addEventListener('click', () => {
+            document.getElementById('mdContent').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
