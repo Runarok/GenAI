@@ -56,8 +56,6 @@
 
 </details>
 
----
-
 <details>
   <summary>List and explain the different types of Patent applications</summary>
 
@@ -211,7 +209,6 @@ The Copyright Act, 1957 provides a robust framework for the protection of variou
 
 </details>
 
----
 
 <details>
   <summary>Explain the process of copyright registration with a neat flowchart</summary>
@@ -280,7 +277,7 @@ The Copyright Act, 1957 provides a robust framework for the protection of variou
 
 </details>
 
----
+
 
 <details>
   <summary>Briefly discuss the exclusive economic and moral rights that are granted to the copyright owners</summary>
@@ -306,7 +303,6 @@ These rights ensure both economic benefits and protection of the author’s pers
 
 </details>
 
----
 
 <details>
   <summary>What are the types of literary, dramatic, and artistic works that can be protected under copyright law?</summary>
@@ -342,7 +338,7 @@ Copyright protects original works across diverse fields like literature, drama, 
 
 </details>
 
----
+
 
 ## **Part 3: Trademark**
 
@@ -413,11 +409,9 @@ The court held that Bisleri had transferred the exclusive rights of the trademar
 **Conclusion**  
 The **Coca-Cola vs. Bisleri case** is a landmark decision in trademark law, showcasing the importance of protecting intellectual property and ensuring that agreements over trademark ownership are strictly adhered to. It underscores the territorial nature of trademarks and the rights of owners to prevent unauthorized use or exploitation of their trademarks, even in international markets.
 
----
 
 </details>
 
----
 
 <details>
   <summary>Explain the process of trademark registration in India with a neat flowchart</summary>
@@ -465,7 +459,7 @@ The **Coca-Cola vs. Bisleri case** is a landmark decision in trademark law, show
 
 </details>
 
----
+
 
 ## **Part 4: Industrial Design Rights**
 
@@ -541,7 +535,7 @@ Industrial designs bridge creativity and commerce, ensuring that aesthetic innov
 
 </details>
 
----
+
 
 <details>
   <summary>Explain the famous case law between Apple.Inc vs Samsung Electronics Co. related to Industrial design rights</summary>
@@ -587,7 +581,6 @@ Industrial designs bridge creativity and commerce, ensuring that aesthetic innov
 </details>
 
 
----
 
 <details>
   <summary>Outline the step-by-step procedure for registering an Industrial Design</summary>
@@ -624,7 +617,6 @@ Industrial designs bridge creativity and commerce, ensuring that aesthetic innov
 
 </details>
 
----
 
 ## **Part 5: Geographical Indications (GI)**
 
@@ -666,7 +658,7 @@ The turmeric case set a global precedent for addressing biopiracy and highlighte
 
 </details>
 
----
+
 
 <details>
   <summary>What are Geographical Indications (GI)? Mention some of the articles registered as GI in India with their type and place of Origin</summary>
@@ -707,7 +699,6 @@ Geographical Indications (GI) are defined under the **Geographical Indications o
 
 </details>
 
----
 
 <details>
   <summary>Discuss the case study of Neem plant Patent and its opposition claims in the context of the Geographical Indications</summary>
@@ -744,7 +735,7 @@ The case also reinforced the role of Geographical Indications in preserving the 
 
 </details>
 
----
+
 
 ## **Part 6: Traditional Knowledge & Intellectual Property**
 
