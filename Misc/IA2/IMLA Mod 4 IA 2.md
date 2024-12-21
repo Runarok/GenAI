@@ -1,6 +1,8 @@
-# Intelligent Systems and Machine Learning Algorithms (Module 4) - Question Bank  
 
-## Table of Contents  
+# Intelligent Systems and Machine Learning Algorithms  
+**Module 4 - Question Bank**  
+
+## Table of Contents 
 
 <details>  
   <summary>Define Machine Learning. Explain with examples why machine learning is important.</summary>  
@@ -566,12 +568,59 @@ The General-to-Specific Ordering of Hypotheses is crucial for efficiently learni
 
 Write FIND-S algorithm and explain with example.  
 
-| Instance | Sky   | AirTemp | Humidity | Wind   | Water | Forecast | EnjoySport |
-|----------|-------|---------|----------|--------|-------|----------|------------|
-| 1        | Sunny | Warm    | Normal   | Strong | Warm  | Same     | Yes        |
-| 2        | Sunny | Warm    | High     | Strong | Warm  | Same     | Yes        |
-| 3        | Rainy | Cold    | High     | Strong | Warm  | Change   | No         |
-| 4        | Sunny | Warm    | High     | Strong | Cool  | Change   | Yes        |
+<table>
+    <tr>
+        <th>Instance</th>
+        <th>Sky</th>
+        <th>AirTemp</th>
+        <th>Humidity</th>
+        <th>Wind</th>
+        <th>Water</th>
+        <th>Forecast</th>
+        <th>EnjoySport</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>Normal</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Rainy</td>
+        <td>Cold</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Change</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Cool</td>
+        <td>Change</td>
+        <td>Yes</td>
+    </tr>
+</table>
+
 
 
 **Answer:**
@@ -593,12 +642,59 @@ The **FIND-S algorithm** is a simple, specific-to-general learning algorithm use
 
 Let’s use the following dataset to demonstrate the **FIND-S algorithm**:
 
-| Instance | Sky   | AirTemp | Humidity | Wind   | Water | Forecast | EnjoySport |
-|----------|-------|---------|----------|--------|-------|----------|------------|
-| 1        | Sunny | Warm    | Normal   | Strong | Warm  | Same     | Yes        |
-| 2        | Sunny | Warm    | High     | Strong | Warm  | Same     | Yes        |
-| 3        | Rainy | Cold    | High     | Strong | Warm  | Change   | No         |
-| 4        | Sunny | Warm    | High     | Strong | Cool  | Change   | Yes        |
+<table>
+    <tr>
+        <th>Instance</th>
+        <th>Sky</th>
+        <th>AirTemp</th>
+        <th>Humidity</th>
+        <th>Wind</th>
+        <th>Water</th>
+        <th>Forecast</th>
+        <th>EnjoySport</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>Normal</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Rainy</td>
+        <td>Cold</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Change</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Cool</td>
+        <td>Change</td>
+        <td>Yes</td>
+    </tr>
+</table>
+
 
 #### **Step-by-Step Process:**
 
@@ -775,12 +871,59 @@ The **LIST-THEN-ELIMINATE** algorithm is a concept-learning method used to ident
 
 Consider a dataset with the following attributes: **Sky, AirTemp, Humidity, Wind, Water, Forecast, EnjoySport**.
 
-| Instance | Sky   | AirTemp | Humidity | Wind   | Water | Forecast | EnjoySport |
-|----------|-------|---------|----------|--------|-------|----------|------------|
-| 1        | Sunny | Warm    | Normal   | Strong | Warm  | Same     | Yes        |
-| 2        | Sunny | Warm    | High     | Strong | Warm  | Same     | Yes        |
-| 3        | Rainy | Cold    | High     | Strong | Warm  | Change   | No         |
-| 4        | Sunny | Warm    | High     | Strong | Cool  | Change   | Yes        |
+<table>
+    <tr>
+        <th>Instance</th>
+        <th>Sky</th>
+        <th>AirTemp</th>
+        <th>Humidity</th>
+        <th>Wind</th>
+        <th>Water</th>
+        <th>Forecast</th>
+        <th>EnjoySport</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>Normal</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Rainy</td>
+        <td>Cold</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Change</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Cool</td>
+        <td>Change</td>
+        <td>Yes</td>
+    </tr>
+</table>
+
 
 ---
 
@@ -849,12 +992,59 @@ The **Candidate Elimination Algorithm** is a concept-learning algorithm that mai
 
 Consider a dataset with the following attributes: **Sky, AirTemp, Humidity, Wind, Water, Forecast, EnjoySport**.
 
-| Instance | Sky   | AirTemp | Humidity | Wind   | Water | Forecast | EnjoySport |
-|----------|-------|---------|----------|--------|-------|----------|------------|
-| 1        | Sunny | Warm    | Normal   | Strong | Warm  | Same     | Yes        |
-| 2        | Sunny | Warm    | High     | Strong | Warm  | Same     | Yes        |
-| 3        | Rainy | Cold    | High     | Strong | Warm  | Change   | No         |
-| 4        | Sunny | Warm    | High     | Strong | Cool  | Change   | Yes        |
+<table>
+    <tr>
+        <th>Instance</th>
+        <th>Sky</th>
+        <th>AirTemp</th>
+        <th>Humidity</th>
+        <th>Wind</th>
+        <th>Water</th>
+        <th>Forecast</th>
+        <th>EnjoySport</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>Normal</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Same</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Rainy</td>
+        <td>Cold</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Warm</td>
+        <td>Change</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Sunny</td>
+        <td>Warm</td>
+        <td>High</td>
+        <td>Strong</td>
+        <td>Cool</td>
+        <td>Change</td>
+        <td>Yes</td>
+    </tr>
+</table>
+
 
 **Step-by-Step Execution:**
 
@@ -911,27 +1101,117 @@ The **Candidate Elimination Algorithm** is an effective method for learning a ta
 
 **Example—1:**
 
-| Origin  | Manufacturer | Color  | Decade | Type     | Example Type |
-|---------|--------------|--------|--------|----------|--------------|
-| Japan   | Honda        | Blue   | 1980   | Economy  | Positive     |
-| Japan   | Toyota       | Green  | 1970   | Sports   | Negative     |
-| Japan   | Toyota       | Blue   | 1990   | Economy  | Positive     |
-| USA     | Chrysler     | Red    | 1980   | Economy  | Negative     |
-| Japan   | Honda        | White  | 1980   | Economy  | Positive     |
-| Japan   | Toyota       | Green  | 1980   | Economy  | Positive     |
-| Japan   | Honda        | Red    | 1990   | Economy  | Negative     |
+<table>
+    <tr>
+        <th>Origin</th>
+        <th>Manufacturer</th>
+        <th>Color</th>
+        <th>Decade</th>
+        <th>Type</th>
+        <th>Example Type</th>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Honda</td>
+        <td>Blue</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Toyota</td>
+        <td>Green</td>
+        <td>1970</td>
+        <td>Sports</td>
+        <td>Negative</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Toyota</td>
+        <td>Blue</td>
+        <td>1990</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>USA</td>
+        <td>Chrysler</td>
+        <td>Red</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Negative</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Honda</td>
+        <td>White</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Toyota</td>
+        <td>Green</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Honda</td>
+        <td>Red</td>
+        <td>1990</td>
+        <td>Economy</td>
+        <td>Negative</td>
+    </tr>
+</table>
+
 
 ---
 
 **Example—2:**
 
-| Size  | Color  | Shape    | Class |
-|-------|--------|----------|-------|
-| Big   | Red    | Circle   | No    |
-| Small | Red    | Triangle | No    |
-| Small | Red    | Circle   | Yes   |
-| Big   | Blue   | Circle   | No    |
-| Small | Blue   | Circle   | Yes   |
+
+<table>
+    <tr>
+        <th>Size</th>
+        <th>Color</th>
+        <th>Shape</th>
+        <th>Class</th>
+    </tr>
+    <tr>
+        <td>Big</td>
+        <td>Red</td>
+        <td>Circle</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Small</td>
+        <td>Red</td>
+        <td>Triangle</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Small</td>
+        <td>Red</td>
+        <td>Circle</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Big</td>
+        <td>Blue</td>
+        <td>Circle</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Small</td>
+        <td>Blue</td>
+        <td>Circle</td>
+        <td>Yes</td>
+    </tr>
+</table>
 
 
 
@@ -945,15 +1225,73 @@ In the **Candidate Elimination Algorithm**, the version space is a set of hypoth
 
 **Example—1:**
 
-| Origin  | Manufacturer | Color  | Decade | Type     | Example Type |
-|---------|--------------|--------|--------|----------|--------------|
-| Japan   | Honda        | Blue   | 1980   | Economy  | Positive     |
-| Japan   | Toyota       | Green  | 1970   | Sports   | Negative     |
-| Japan   | Toyota       | Blue   | 1990   | Economy  | Positive     |
-| USA     | Chrysler     | Red    | 1980   | Economy  | Negative     |
-| Japan   | Honda        | White  | 1980   | Economy  | Positive     |
-| Japan   | Toyota       | Green  | 1980   | Economy  | Positive     |
-| Japan   | Honda        | Red    | 1990   | Economy  | Negative     |
+<table>
+    <tr>
+        <th>Origin</th>
+        <th>Manufacturer</th>
+        <th>Color</th>
+        <th>Decade</th>
+        <th>Type</th>
+        <th>Example Type</th>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Honda</td>
+        <td>Blue</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Toyota</td>
+        <td>Green</td>
+        <td>1970</td>
+        <td>Sports</td>
+        <td>Negative</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Toyota</td>
+        <td>Blue</td>
+        <td>1990</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>USA</td>
+        <td>Chrysler</td>
+        <td>Red</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Negative</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Honda</td>
+        <td>White</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Toyota</td>
+        <td>Green</td>
+        <td>1980</td>
+        <td>Economy</td>
+        <td>Positive</td>
+    </tr>
+    <tr>
+        <td>Japan</td>
+        <td>Honda</td>
+        <td>Red</td>
+        <td>1990</td>
+        <td>Economy</td>
+        <td>Negative</td>
+    </tr>
+</table>
+
 
 **Step-by-Step Process:**
 
@@ -989,13 +1327,45 @@ In the **Candidate Elimination Algorithm**, the version space is a set of hypoth
 
 **Example—2:**
 
-| Size  | Color  | Shape    | Class |
-|-------|--------|----------|-------|
-| Big   | Red    | Circle   | No    |
-| Small | Red    | Triangle | No    |
-| Small | Red    | Circle   | Yes   |
-| Big   | Blue   | Circle   | No    |
-| Small | Blue   | Circle   | Yes   |
+<table>
+    <tr>
+        <th>Size</th>
+        <th>Color</th>
+        <th>Shape</th>
+        <th>Class</th>
+    </tr>
+    <tr>
+        <td>Big</td>
+        <td>Red</td>
+        <td>Circle</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Small</td>
+        <td>Red</td>
+        <td>Triangle</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Small</td>
+        <td>Red</td>
+        <td>Circle</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Big</td>
+        <td>Blue</td>
+        <td>Circle</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Small</td>
+        <td>Blue</td>
+        <td>Circle</td>
+        <td>Yes</td>
+    </tr>
+</table>
+
 
 **Step-by-Step Process:**
 
