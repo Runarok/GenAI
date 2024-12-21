@@ -511,13 +511,56 @@ Greedy Best-First Search (GBFS) is one of several search algorithms that fall un
 
 **Key Differences Between GBFS and Other Search Strategies:**
 
-| **Property**               | **Greedy Best-First Search (GBFS)**               | **Breadth-First Search (BFS)**              | **Depth-First Search (DFS)**             | **A\* Search**                        | **Uniform Cost Search (UCS)**     |
-|                           -|                                                --|                                          -|                                       -|                                    --|                                 --|
-| **Heuristic Usage**         | Uses only heuristic function ( h(n) )           | Does not use any heuristic                | Does not use any heuristic             | Uses both ( g(n) ) and ( h(n) )  | Does not use any heuristic       |
-| **Optimality**              | Not guaranteed                                  | Guaranteed if all edge costs are equal    | Not guaranteed                         | Guaranteed with admissible heuristic | Guaranteed with non-negative costs|
-| **Completeness**            | Can fail if heuristic is misleading               | Always finds a solution if one exists     | Can fail in infinite spaces or cyclic graphs | Always finds a solution if one exists | Always finds a solution if one exists |
-| **Time Complexity**         | Can be fast, depends on heuristic                 | ( O(b^d) )                             | ( O(b^d) )                           | ( O(b^d) ), but more efficient with good heuristic | ( O(b^d) )                       |
-| **Memory Complexity**       | Low memory usage                                 | ( O(b^d) )                             | ( O(bd) )                            | ( O(b^d) ), higher than GBFS      | Higher than BFS, stores path costs|
+<table>
+    <tr>
+        <th>Property</th>
+        <th>Greedy Best-First Search (GBFS)</th>
+        <th>Breadth-First Search (BFS)</th>
+        <th>Depth-First Search (DFS)</th>
+        <th>A* Search</th>
+        <th>Uniform Cost Search (UCS)</th>
+    </tr>
+    <tr>
+        <td>Heuristic Usage</td>
+        <td>Uses only heuristic function (h(n))</td>
+        <td>Does not use any heuristic</td>
+        <td>Does not use any heuristic</td>
+        <td>Uses both (g(n) and h(n))</td>
+        <td>Does not use any heuristic</td>
+    </tr>
+    <tr>
+        <td>Optimality</td>
+        <td>Not guaranteed</td>
+        <td>Guaranteed if all edge costs are equal</td>
+        <td>Not guaranteed</td>
+        <td>Guaranteed with admissible heuristic</td>
+        <td>Guaranteed with non-negative costs</td>
+    </tr>
+    <tr>
+        <td>Completeness</td>
+        <td>Can fail if heuristic is misleading</td>
+        <td>Always finds a solution if one exists</td>
+        <td>Can fail in infinite spaces or cyclic graphs</td>
+        <td>Always finds a solution if one exists</td>
+        <td>Always finds a solution if one exists</td>
+    </tr>
+    <tr>
+        <td>Time Complexity</td>
+        <td>Can be fast, depends on heuristic</td>
+        <td>(O(b<sup>d</sup>))</td>
+        <td>(O(b<sup>d</sup>))</td>
+        <td>(O(b<sup>d</sup>), but more efficient with good heuristic)</td>
+        <td>(O(b<sup>d</sup>))</td>
+    </tr>
+    <tr>
+        <td>Memory Complexity</td>
+        <td>Low memory usage</td>
+        <td>(O(b<sup>d</sup>))</td>
+        <td>(O(b<sup>d</sup>))</td>
+        <td>(O(b<sup>d</sup>), higher than GBFS)</td>
+        <td>Higher than BFS, stores path costs</td>
+    </tr>
+</table>
 
    
 
@@ -1678,50 +1721,149 @@ A truth table lists all possible combinations of truth values for the components
 **Negation (`¬`)**  
 The negation of a proposition flips its truth value:
 
-| P   | ¬P  |
-|     |     |
-| T   | F   |
-| F   | T   |
+<table>
+    <tr>
+        <th>P</th>
+        <th>¬P</th>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+    </tr>
+</table>
+
 
 **Conjunction (`∧`)**  
 A conjunction is true only if both propositions are true:
 
-| P   | Q   | P ∧ Q |
-|     |     |    -- |
-| T   | T   | T     |
-| T   | F   | F     |
-| F   | T   | F     |
-| F   | F   | F     |
+<table>
+    <tr>
+        <th>P</th>
+        <th>Q</th>
+        <th>P ∧ Q</th>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+        <td>F</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>F</td>
+        <td>F</td>
+    </tr>
+</table>
+
 
 **Disjunction (`∨`)**  
 A disjunction is true if at least one of the propositions is true:
 
-| P   | Q   | P ∨ Q |
-|     |     |    -- |
-| T   | T   | T     |
-| T   | F   | T     |
-| F   | T   | T     |
-| F   | F   | F     |
+<table>
+    <tr>
+        <th>P</th>
+        <th>Q</th>
+        <th>P ∨ Q</th>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>F</td>
+        <td>F</td>
+    </tr>
+</table>
+
 
 **Implication (`→`)**  
 An implication is false only if the first proposition is true and the second is false:
 
-| P   | Q   | P → Q |
-|     |     |    -- |
-| T   | T   | T     |
-| T   | F   | F     |
-| F   | T   | T     |
-| F   | F   | T     | 
+<table>
+    <tr>
+        <th>P</th>
+        <th>Q</th>
+        <th>P → Q</th>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+    </tr>
+</table>
+
 
 **Biconditional (`↔`)**  
 A biconditional is true if both propositions have the same truth value:
 
-| P   | Q   | P ↔ Q |
-|     |     |    -- |
-| T   | T   | T     |
-| T   | F   | F     |
-| F   | T   | F     |
-| F   | F   | T     |
+<table>
+    <tr>
+        <th>P</th>
+        <th>Q</th>
+        <th>P ↔ Q</th>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+        <td>F</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+    </tr>
+</table>
+
 
 **4. Example of Determining the Truth Value of a Complex Proposition**
 
@@ -1736,16 +1878,99 @@ To determine its truth value, we follow these steps:
 
 **Truth Table for `(P ∧ Q) → (R ∨ ¬S)`**
 
-| P   | Q   | R   | S   | P ∧ Q | ¬S  | R ∨ ¬S | (P ∧ Q) → (R ∨ ¬S) |
-|     |     |     |     |    -- |     |        |                   - |
-| T   | T   | T   | T   | T     | F   | T      | T                   |
-| T   | T   | T   | F   | T     | T   | T      | T                   |
-| T   | F   | T   | T   | F     | F   | T      | T                   |
-| T   | F   | T   | F   | F     | T   | T      | T                   |
-| F   | T   | T   | T   | F     | F   | T      | T                   |
-| F   | T   | T   | F   | F     | T   | T      | T                   |
-| F   | F   | T   | T   | F     | F   | T      | T                   |
-| F   | F   | T   | F   | F     | T   | T      | T                   |
+<table>
+    <tr>
+        <th>P</th>
+        <th>Q</th>
+        <th>R</th>
+        <th>S</th>
+        <th>P ∧ Q</th>
+        <th>¬S</th>
+        <th>R ∨ ¬S</th>
+        <th>(P ∧ Q) → (R ∨ ¬S)</th>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>T</td>
+        <td>F</td>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>F</td>
+        <td>F</td>
+        <td>T</td>
+        <td>T</td>
+        <td>T</td>
+    </tr>
+</table>
+
 
 In this truth table, we determine the truth value of the complex proposition `(P ∧ Q) → (R ∨ ¬S)` based on the truth values of `P`, `Q`, `R`, and `S`.
 
