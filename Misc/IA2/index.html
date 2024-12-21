@@ -3,99 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Markdown Viewer</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/TempestAethel/AuroraChronicles/main/Favicon.png" type="image/png">
+    <title>Long Story Viewer</title>
     <style>
+        /* Default styles for dark mode */
         body {
+            font-family: 'Arial', sans-serif;
             background-color: #121212;
             color: #e0e0e0;
-            font-family: Arial, sans-serif;
             margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
             padding: 20px;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
         }
-        h1, h2 {
-            color: #fff;
-        }
-        button {
-            background-color: #333;
-            color: #fff;
-            border: 1px solid #444;
-            margin: 10px 0;
-            padding: 10px;
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #555;
+
+        .toggle-btn:hover {
+            background-color: #3700b3;
         }
-        .content {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: #1e1e1e;
-            overflow-y: auto;
+
+        /* Light mode styles */
+        .light-theme {
+            background-color: #ffffff;
+            color: #121212;
         }
-        pre {
-            color: #ccc;
-            background-color: #2c2c2c;
-            padding: 10px;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+
+        .light-theme .container {
+            background-color: #f0f0f0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4 {
+            color: #121212;
+        }
+
+        .light-theme .toggle-btn {
+            background-color: #03a9f4;
+        }
+
+        .light-theme .toggle-btn:hover {
+            background-color: #0288d1;
+        }
+
+        hr {
+            border: 1px solid #444;
+            margin: 20px 0;
+        }
+
+        .chapter {
+            margin-bottom: 50px;
+        }
+
+        /* Custom colors for headers (h1, h2, h3, h4) */
+        h1 {
+            color: #03a9f4; /* Cyan for h1 */
+        }
+
+        h2 {
+            color: #0288d1; /* Darker Cyan for h2 */
+        }
+
+        h3 {
+            color: #03a9f4; /* Lighter Cyan for h3 */
+        }
+
+        h4 {
+            color: #80deea; /* Very light Cyan for h4 */
+        }
+
+        .chapter-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            text-align: center; /* Centering chapter titles */
+        }
+
+        .chapter-content {
+            margin-top: 10px;
+            font-size: 1.1em;
+            text-align: justify; /* Keeping text left-aligned */
+        }
+
+        .chapter-content p {
+            margin-bottom: 20px;
+        }
+
+        /* Adjusting responsiveness for smaller screens */
+        @media screen and (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            .toggle-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Markdown Files from GitHub Repo</h1>
-    <div id="buttons-container"></div>
-    <div class="content" id="content-container"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <button class="toggle-btn" id="themeToggle">Switch to Light Theme</button>
+
+    <div class="container">
+        <div id="buttons-container">
+            <!-- Buttons for each markdown file will be dynamically inserted here -->
+        </div>
+        <div id="markdown-content">
+            <!-- The content of the selected markdown will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Include Showdown.js for Markdown rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
     <script>
-        const repoUrl = 'https://api.github.com/repos/Runarok/GenAI/contents/Misc/IA2';
-        const buttonsContainer = document.getElementById('buttons-container');
-        const contentContainer = document.getElementById('content-container');
+        // Function to fetch the list of markdown files in the directory
+        function fetchFileList() {
+            const apiUrl = 'https://api.github.com/repos/Runarok/GenAI/contents/Misc/IA2';
+            return fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    return data.filter(file => file.name.endsWith('.md')).map(file => file.name.replace('.md', ''));
+                })
+                .catch(error => {
+                    console.error('Error fetching file list:', error);
+                    return [];
+                });
+        }
 
-        // Fetch the list of files from the GitHub repository
-        async function fetchMarkdownFiles() {
-            try {
-                const response = await fetch(repoUrl);
-                const files = await response.json();
+        // Function to fetch the content of a specific markdown file from raw GitHub URL
+        function loadStoryContent(storyName) {
+            const fileUrl = `https://raw.githubusercontent.com/Runarok/GenAI/main/Misc/IA2/${storyName}.md`; // Construct the raw URL
 
-                // Filter out the markdown files
-                const mdFiles = files.filter(file => file.name.endsWith('.md'));
+            // Fetch the raw content of the selected markdown file
+            fetch(fileUrl)
+                .then(response => response.text()) // Get the raw markdown data as text
+                .then(markdown => {
+                    // Convert markdown to HTML
+                    const converter = new showdown.Converter();
+                    const htmlContent = converter.makeHtml(markdown);
+                    
+                    // Display the content in the #markdown-content container
+                    document.getElementById('markdown-content').innerHTML = htmlContent;
+
+                    // Dynamically update the browser title
+                    document.title = `${storyName} - GenAI Chronicles`;
+                })
+                .catch(error => {
+                    document.getElementById('markdown-content').innerHTML = `<p>Error loading the story content. Please try again later.</p>`;
+                    console.error('Error loading story content:', error);
+                });
+        }
+
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check if theme is saved in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+            themeToggleBtn.textContent = savedTheme === 'light-theme' ? 'Switch to Dark Theme' : 'Switch to Light Theme';
+        }
+
+        // Toggle theme when the button is clicked
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                localStorage.setItem('theme', 'dark-theme');
+                themeToggleBtn.textContent = 'Switch to Light Theme';
+            } else {
+                body.classList.add('light-theme');
+                localStorage.setItem('theme', 'light-theme');
+                themeToggleBtn.textContent = 'Switch to Dark Theme';
+            }
+        });
+
+        // Function to load the markdown file list and create buttons
+        function loadFileButtons() {
+            fetchFileList().then(fileList => {
+                const buttonsContainer = document.getElementById('buttons-container');
 
                 // Create a button for each markdown file
-                mdFiles.forEach(file => {
+                fileList.forEach(file => {
                     const button = document.createElement('button');
-                    button.innerText = file.name;
-                    button.onclick = () => loadMarkdown(file.download_url);
+                    button.textContent = file;
+                    button.onclick = () => loadStoryContent(file); // Load content when clicked
                     buttonsContainer.appendChild(button);
                 });
-            } catch (error) {
-                console.error('Error fetching files:', error);
-                buttonsContainer.innerHTML = '<p>Error fetching markdown files.</p>';
-            }
+            });
         }
 
-        // Load markdown content from the file's download URL
-        async function loadMarkdown(url) {
-            try {
-                const response = await fetch(url);
-                const text = await response.text();
-                displayMarkdown(text);
-            } catch (error) {
-                console.error('Error loading markdown content:', error);
-                contentContainer.innerHTML = '<p>Error loading content.</p>';
-            }
-        }
-
-        // Render the markdown to HTML using marked.js
-        function displayMarkdown(mdContent) {
-            contentContainer.innerHTML = marked(mdContent);
-        }
-
-        // Initialize the page
-        fetchMarkdownFiles();
+        // Initialize the page by loading the list of files and displaying the first file
+        window.onload = function() {
+            loadFileButtons(); // Load buttons for all files
+        };
     </script>
+
 </body>
 </html>
