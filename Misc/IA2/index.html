@@ -14,6 +14,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         h1, h2, h3, h4 {
@@ -32,39 +33,41 @@
         .container {
             max-width: 900px;
             margin: 40px auto;
-            padding: 20px;
+            padding: 30px;
             background-color: #1f1f1f;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease-in-out;
         }
 
         .toggle-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 12px 24px;
+            padding: 15px 25px;
             background-color: #6200ea;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .toggle-btn:hover {
             background-color: #3700b3;
+            transform: scale(1.05);
         }
 
-        /* Light mode styles */
+        /* Light theme styles */
         .light-theme {
             background-color: #ffffff;
             color: #121212;
         }
 
         .light-theme .container {
-            background-color: #f0f0f0;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f4f4f4;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
         }
 
         .light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4 {
@@ -88,49 +91,77 @@
             margin-bottom: 50px;
         }
 
-        /* Custom colors for headers (h1, h2, h3, h4) */
-        h1 {
-            color: #03a9f4; /* Cyan for h1 */
-        }
-
-        h2 {
-            color: #0288d1; /* Darker Cyan for h2 */
-        }
-
-        h3 {
-            color: #03a9f4; /* Lighter Cyan for h3 */
-        }
-
-        h4 {
-            color: #80deea; /* Very light Cyan for h4 */
-        }
-
         .chapter-title {
-            font-size: 1.6em;
+            font-size: 1.8em;
             font-weight: bold;
-            text-align: center; /* Centering chapter titles */
+            color: #03a9f4; 
+            text-align: center;
+            margin-bottom: 15px;
         }
 
         .chapter-content {
             margin-top: 10px;
             font-size: 1.1em;
-            text-align: justify; /* Keeping text left-aligned */
+            text-align: justify;
+            line-height: 1.8;
         }
 
         .chapter-content p {
             margin-bottom: 20px;
         }
 
+        /* Button Styling */
+        #buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        #buttons-container button {
+            padding: 12px 24px;
+            background-color: #03a9f4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #buttons-container button:hover {
+            background-color: #0288d1;
+            transform: scale(1.05);
+        }
+
+        #buttons-container button.active {
+            background-color: #0288d1;
+        }
+
         /* Adjusting responsiveness for smaller screens */
         @media screen and (max-width: 768px) {
             .container {
                 margin: 20px;
-                padding: 15px;
+                padding: 20px;
             }
 
             .toggle-btn {
-                padding: 10px 20px;
+                padding: 12px 18px;
                 font-size: 14px;
+            }
+
+            #buttons-container button {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .chapter-title {
+                font-size: 1.6em;
+            }
+
+            .chapter-content {
+                font-size: 1em;
             }
         }
     </style>
@@ -222,10 +253,20 @@
                 fileList.forEach(file => {
                     const button = document.createElement('button');
                     button.textContent = file;
-                    button.onclick = () => loadStoryContent(file); // Load content when clicked
+                    button.onclick = () => {
+                        loadStoryContent(file); // Load content when clicked
+                        setActiveButton(button); // Set the active class to the selected button
+                    };
                     buttonsContainer.appendChild(button);
                 });
             });
+        }
+
+        // Function to set the active button style
+        function setActiveButton(selectedButton) {
+            const buttons = document.querySelectorAll('#buttons-container button');
+            buttons.forEach(button => button.classList.remove('active')); // Remove active class from all buttons
+            selectedButton.classList.add('active'); // Add active class to the clicked button
         }
 
         // Initialize the page by loading the list of files and displaying the first file
