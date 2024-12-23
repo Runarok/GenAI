@@ -205,10 +205,10 @@
                 <p><strong>The Game of Nim</strong> is a classic mathematical strategy game, often used to teach concepts of combinatorial game theory. It involves two players, and the game typically proceeds as follows:</p>
                 
                 <h3>Setup:</h3>
-                <p>There are several piles (or stacks) of objects (like stones, matchsticks, or coins). The number of piles can vary, but each pile contains a positive number of objects.</p>
+                <p>There are several piles (or stacks) of objects (like stones, matchsticks, or coins). In this version of the game, the number of piles will be randomly chosen to be between 3 and 5 piles. Each pile will contain a random number of objects, ranging between 5 and 12 objects.</p>
                 
                 <h3>Gameplay:</h3>
-                <p>On each player's turn, they must choose one pile and remove any number of objects (at least one) from that pile. Players take turns until no objects are left in any pile.</p>
+                <p>On each player's turn, they must choose one pile and remove any number of objects (at least one) from that pile. The maximum number of objects a player can remove from a pile in one turn is 5. Players take turns until no objects are left in any pile.</p>
                 
                 <h3>Winning Condition:</h3>
                 <p>The player who removes the last object from the last pile wins the game.</p>
@@ -253,24 +253,22 @@
             <p>Click the button above to learn more about the rules and strategy behind the game.</p>
         </div>
 
-        <!-- Piles Display -->
-        <div id="piles" class="piles"></div>
+        <div class="piles" id="piles"></div>
 
-        <!-- Status Display -->
-        <div class="status" id="status"></div>
-
-        <!-- Input Modal -->
-        <div id="inputModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="closeInputModal">&times;</span>
-                <h2>Select number of objects to remove</h2>
-                <div id="inputAmountContainer"></div>
-            </div>
-        </div>
-
-        <!-- Toast Notification -->
-        <div id="toast" class="toast"></div>
+        <div id="status">Your turn! Click a pile to remove objects.</div>
     </div>
+
+    <!-- Input Modal -->
+    <div id="inputModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeInputModal">&times;</span>
+            <h2>Select number of objects to remove</h2>
+            <div id="inputAmountContainer"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
 
     <script>
         // Toast function
