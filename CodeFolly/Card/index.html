@@ -174,26 +174,31 @@
         let name = "s"; // Predefined name, change this if you need
 
         // Function to generate the link and display the birthday card
-        function generateLink() {
-            name = document.getElementById('nameInput').value.trim();
-            if (name) {
-                // Generate the link for the birthday card
-                const encodedName = encodeURIComponent(name); // Handle spaces as %20
-                const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodedName}`;
+function generateLink() {
+    name = document.getElementById('nameInput').value.trim();
+    if (name) {
+        // Generate the link for the birthday card
+        const encodedName = encodeURIComponent(name); // Handle spaces as %20
+        const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodedName}`;
 
-                // Copy the link to the clipboard
-                navigator.clipboard.writeText(url).then(() => {
-                    // Show the toast notification immediately
-                    showToast();
+        // Copy the link to the clipboard
+        navigator.clipboard.writeText(url).then(() => {
+            // Show the toast notification immediately
+            showToast();
 
-                    // Delay the hash check by 2000ms (after the toast disappears)
-                    setTimeout(() => {
-                        // Check the hash and display the birthday card
-                        displayCard(name); // Display the card after 2000ms
-                    }, 2000); // Delay for card appearance
-                });
-            }
-        }
+            // Delay the hash check by 2000ms (after the toast disappears)
+            setTimeout(() => {
+                // After the delay, check the hash and display the birthday card
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    // If hash exists, display the card for the name in the hash
+                    displayCard(decodeURIComponent(hash));
+                }
+            }, 2000); // Delay for card appearance
+        });
+    }
+}
+
 
         // Function to display the birthday card based on the name or hash
         function displayCard(name) {
