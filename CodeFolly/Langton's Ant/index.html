@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Langton's Ant - Dark Theme</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas {
+            background-color: #121212;
+            border: 2px solid #333;
+        }
+
+        h1 {
+            color: #f0f0f0;
+            margin-top: 20px;
+        }
+
+        #controls {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #444;
+            border: 1px solid #666;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Langton's Ant - Dark Theme</h1>
+    <canvas id="gridCanvas" width="600" height="600"></canvas>
+
+    <div id="controls">
+        <button onclick="startSimulation()">Start</button>
+        <button onclick="resetGrid()">Reset</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gridCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const gridSize = 101;  // Odd number for center alignment
+        const cellSize = 6;    // Size of each cell
+        const delay = 5;       // Milliseconds per step for the animation
+
+        let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));  // 0 for white, 1 for black
+        let ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }; // dir: 0=up, 1=right, 2=down, 3=left
+
+        function drawGrid() {
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    ctx.fillStyle = grid[y][x] === 0 ? '#fff' : '#444'; // White for 0, Dark for 1
+                    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+
+        function updateAnt() {
+            let currentCell = grid[ant.y][ant.x];
+            
+            if (currentCell === 0) {
+                ant.dir = (ant.dir + 1) % 4; // Turn right
+                grid[ant.y][ant.x] = 1;      // Change to black
+            } else {
+                ant.dir = (ant.dir + 3) % 4; // Turn left
+                grid[ant.y][ant.x] = 0;      // Change to white
+            }
+
+            // Move the ant
+            if (ant.dir === 0) ant.y--; // Up
+            else if (ant.dir === 1) ant.x++; // Right
+            else if (ant.dir === 2) ant.y++; // Down
+            else if (ant.dir === 3) ant.x--; // Left
+
+            // Keep the ant within the grid bounds
+            if (ant.x < 0) ant.x = gridSize - 1;
+            if (ant.x >= gridSize) ant.x = 0;
+            if (ant.y < 0) ant.y = gridSize - 1;
+            if (ant.y >= gridSize) ant.y = 0;
+        }
+
+        function startSimulation() {
+            const interval = setInterval(() => {
+                updateAnt();
+                drawGrid();
+            }, delay);
+
+            // Store the interval to stop it later if needed
+            window.simulationInterval = interval;
+        }
+
+        function resetGrid() {
+            grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
+            ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 };
+            clearInterval(window.simulationInterval);
+            drawGrid();
+        }
+
+        // Initial grid setup and draw
+        drawGrid();
+    </script>
+
+</body>
+</html>
