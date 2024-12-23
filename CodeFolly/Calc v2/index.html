@@ -164,46 +164,134 @@
         </table>
     </form>
 
-    <script>
-        function backspace() {
-            display.value = display.value.slice(0, -1);
+<script>
+    // Function to handle keyboard input
+    document.addEventListener('keydown', function(event) {
+        const key = event.key;
+
+        // Handling number keys (0-9)
+        if (key >= '0' && key <= '9') {
+            display.value += key;
         }
 
-        function calculate() {
-            try {
-                display.value = eval(display.value);
-            } catch (error) {
-                display.value = "Error";
-            }
+        // Handling operators
+        switch (key) {
+            case '+':
+                display.value += '+';
+                break;
+            case '-':
+                display.value += '-';
+                break;
+            case '*':
+                display.value += '*';
+                break;
+            case '/':
+                display.value += '/';
+                break;
+            case '.':
+                display.value += '.';
+                break;
+            case '%':
+                display.value += '%';
+                break;
+            case '^':
+                display.value += '**'; // Power operator
+                break;
+            case 'Enter':
+            case '=':
+                calculate();
+                break;
+            case 'Backspace':
+                backspace();
+                break;
+            case 'Escape':
+            case 'c':
+            case 'C':
+                display.value = '';
+                break;
+            case '(': // Parenthesis
+                display.value += '(';
+                break;
+            case ')':
+                display.value += ')';
+                break;
+            case 's':
+                if (event.shiftKey) {
+                    display.value += 'sin(';
+                }
+                break;
+            case 'c':
+                if (event.shiftKey) {
+                    display.value += 'cos(';
+                }
+                break;
+            case 't':
+                if (event.shiftKey) {
+                    display.value += 'tan(';
+                }
+                break;
+            case 'l':
+                if (event.altKey) {
+                    display.value += 'Math.LOG2E';
+                }
+                break;
+            case 'e':
+                if (event.altKey) {
+                    e();
+                }
+                break;
+            case 'p':
+                if (event.altKey) {
+                    pi();
+                }
+                break;
+            case 'l':
+                if (event.shiftKey && event.altKey) {
+                    base10Log();
+                }
+                break;
+            case 'x': // Multiplication
+                display.value += '*';
+                break;
+            default:
+                break;
         }
+    });
 
-        function e() {
-            display.value += Math.E;
+    // Function to calculate the expression
+    function calculate() {
+        try {
+            display.value = eval(display.value);
+        } catch (error) {
+            display.value = "Error";
         }
+    }
 
-        function pi() {
-            display.value += Math.PI;
-        }
+    // Function for backspace
+    function backspace() {
+        display.value = display.value.slice(0, -1);
+    }
 
-        function power() {
-            display.value += '**';
-        }
+    // Function to insert the value of 'e'
+    function e() {
+        display.value += Math.E;
+    }
 
-        function squareRoot() {
-            display.value += 'Math.sqrt(';
-        }
+    // Function to insert the value of 'pi'
+    function pi() {
+        display.value += Math.PI;
+    }
 
-        function ln2() {
-            display.value += Math.LN2;
-        }
+    // Function for square root
+    function squareRoot() {
+        display.value += 'Math.sqrt(';
+    }
 
-        function base10Log() {
-            display.value += 'Math.log10(';
-        }
+    // Function for logarithm base 10
+    function base10Log() {
+        display.value += 'Math.log10(';
+    }
+</script>
 
-        function exp() {
-            display.value += 'Math.exp(';
-        }
-    </script>
 </body>
 </html>
