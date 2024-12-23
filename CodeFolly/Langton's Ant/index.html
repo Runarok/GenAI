@@ -6,18 +6,17 @@
     <title>Langton's Ant - Dark Theme</title>
     <style>
         body {
-            background-color: #1e1e1e;
+            background-color: #121212;
             color: white;
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
-        }
-
-        canvas {
-            background-color: #121212;
-            border: 2px solid #333;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
         h1 {
@@ -25,8 +24,20 @@
             margin-top: 20px;
         }
 
+        #gridCanvas {
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            cursor: pointer;
+            display: block;
+            margin: 20px 0;
+        }
+
         #controls {
-            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 10px;
         }
 
         button {
@@ -37,6 +48,7 @@
             background-color: #444;
             border: 1px solid #666;
             color: white;
+            border-radius: 5px;
         }
 
         button:hover {
@@ -55,6 +67,7 @@
             color: white;
             padding: 5px;
             width: 60px;
+            border-radius: 5px;
         }
 
         #infoModal {
@@ -62,12 +75,13 @@
             top: 20px;
             right: 20px;
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            width: 250px;
+            width: 280px;
             color: white;
             font-size: 14px;
             display: none;
+            z-index: 1000;
         }
 
         #infoModal button {
@@ -77,10 +91,15 @@
             cursor: pointer;
             border: none;
             margin-top: 10px;
+            width: 100%;
         }
 
         #infoModal button:hover {
             background-color: #555;
+        }
+
+        #controls label {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -158,7 +177,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let y = 0; y < gridSize; y++) {
                 for (let x = 0; x < gridSize; x++) {
-                    ctx.fillStyle = grid[y][x] === 0 ? '#fff' : '#444';
+                    ctx.fillStyle = grid[y][x] === 0 ? '#3a3a3a' : '#212121'; // Darker grid colors
                     ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
                 }
             }
@@ -216,29 +235,30 @@
             grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
             ants = [{ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }];
             clearInterval(window.simulationInterval);
+            isSimulationRunning = false;
             drawGrid();
         }
 
         function changeSpeed() {
             delay = parseInt(document.getElementById('speed').value);
             if (isSimulationRunning) {
-                clearInterval(window.simulationInterval);
+                pauseSimulation();
                 startSimulation();
             }
         }
 
         function changeGridSize() {
             gridSize = parseInt(document.getElementById('gridSize').value);
-            cellSize = 600 / gridSize;
+            cellSize = canvas.width / gridSize;
             resetGrid();
         }
 
         function toggleInfo() {
             const infoModal = document.getElementById('infoModal');
-            if (infoModal.style.display === "block") {
-                infoModal.style.display = "none";
+            if (infoModal.style.display === 'block') {
+                infoModal.style.display = 'none';
             } else {
-                infoModal.style.display = "block";
+                infoModal.style.display = 'block';
             }
         }
 
