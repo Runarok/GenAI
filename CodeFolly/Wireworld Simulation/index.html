@@ -68,17 +68,40 @@
         button:active {
             background-color: #555;
         }
+
+        #info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ff9800;
+        }
+
     </style>
 </head>
 <body>
     <h1>Wireworld Simulation</h1>
     <div id="grid"></div>
-    <button onclick="startSimulation()">Start Simulation</button>
+    <button id="playPauseButton" onclick="togglePlayPause()">Play</button>
+    <button onclick="resetSimulation()">Reset</button>
+    <button onclick="showInfo()">Info</button>
+    
+    <div id="info" style="display: none;">
+        <p><strong>Wireworld Simulation</strong></p>
+        <p>This is a simple simulation of the Wireworld cellular automaton. The grid consists of cells that can be in one of the following states:</p>
+        <ul>
+            <li><strong>Empty</strong> - No signal.</li>
+            <li><strong>Wire</strong> - A wire that can conduct electrical signals.</li>
+            <li><strong>Head</strong> - Active signal in the wire.</li>
+            <li><strong>Tail</strong> - End of the signal, which will turn into a wire.</li>
+        </ul>
+        <p>Click on the cells to toggle between these states. Press <strong>Play</strong> to start the simulation and <strong>Pause</strong> to stop it.</p>
+        <button onclick="closeInfo()">Close Info</button>
+    </div>
 
     <script>
         const gridSize = 30;
         const grid = [];
         let interval;
+        let isPlaying = false;
 
         // Create the grid of cells
         function createGrid() {
@@ -130,12 +153,18 @@
             }
         }
 
-        // Start the simulation
-        function startSimulation() {
-            if (interval) clearInterval(interval);
-            interval = setInterval(() => {
-                runSimulationStep();
-            }, 500); // 500 ms delay for each step
+        // Start or pause the simulation
+        function togglePlayPause() {
+            if (isPlaying) {
+                clearInterval(interval);
+                document.getElementById("playPauseButton").textContent = "Play";
+            } else {
+                interval = setInterval(() => {
+                    runSimulationStep();
+                }, 500); // 500 ms delay for each step
+                document.getElementById("playPauseButton").textContent = "Pause";
+            }
+            isPlaying = !isPlaying;
         }
 
         // Run one step of the simulation
@@ -188,6 +217,29 @@
         function updateGridView() {
             for (let y = 0; y < gridSize; y++) {
                 for (let x = 0; x < gridSize; x++) {
+                    updateCell(x, y);
+                }
+            }
+        }
+
+        // Show the info section
+        function showInfo() {
+            document.getElementById("info").style.display = "block";
+        }
+
+        // Close the info section
+        function closeInfo() {
+            document.getElementById("info").style.display = "none";
+        }
+
+        // Reset the simulation grid
+        function resetSimulation() {
+            clearInterval(interval);
+            isPlaying = false;
+            document.getElementById("playPauseButton").textContent = "Play";
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    grid[y][x] = "empty";
                     updateCell(x, y);
                 }
             }
