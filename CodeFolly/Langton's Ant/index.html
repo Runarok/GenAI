@@ -17,6 +17,7 @@
         canvas {
             background-color: #121212;
             border: 2px solid #333;
+            cursor: pointer;
         }
 
         h1 {
@@ -89,9 +90,10 @@
     <canvas id="gridCanvas" width="600" height="600"></canvas>
 
     <div id="controls">
-        <button onclick="startSimulation()">Start</button>
+        <button onclick="toggleSimulation()">Start/Pause</button>
         <button onclick="resetGrid()">Reset</button>
         <button onclick="toggleInfo()">Info</button>
+        <button onclick="toggleInsertAnt()">Allow Inserts</button>
 
         <label for="speed">Speed (ms):</label>
         <input type="number" id="speed" value="5" min="1" max="100" onchange="changeSpeed()">
@@ -101,13 +103,38 @@
     </div>
 
     <div id="infoModal">
-        <h3>Langton's Ant</h3>
-        <p>This is a simulation of Langton's Ant. The ant moves based on simple rules:</p>
+        <h3>Rules of Langton's Ant</h3>
+        <p><strong>Initial Setup:</strong></p>
         <ul>
-            <li>Turns right on white cells.</li>
-            <li>Turns left on black cells.</li>
-            <li>Changes cell color after visiting.</li>
+            <li>The grid is a two-dimensional plane (usually considered infinite).</li>
+            <li>Each cell on the grid is initially either black (off) or white (on).</li>
+            <li>The ant starts at the center of the grid, facing a particular direction (typically up).</li>
         </ul>
+
+        <p><strong>Movement Rule:</strong></p>
+        <ul>
+            <li>If the ant is on a white cell, it turns 90° right (clockwise), changes the cell to black, and moves forward.</li>
+            <li>If the ant is on a black cell, it turns 90° left (counterclockwise), changes the cell to white, and moves forward.</li>
+        </ul>
+
+        <p><strong>Repeating the Process:</strong></p>
+        <ul>
+            <li>This process is repeated indefinitely. The ant's movement and the resulting pattern evolve according to these simple rules.</li>
+            <li>The pattern may seem chaotic initially but eventually forms a repeating structure (a "highway").</li>
+        </ul>
+
+        <p><strong>Interesting Behavior:</strong></p>
+        <ul>
+            <li><em>Initially chaotic:</em> The ant moves unpredictably, creating random-looking patterns.</li>
+            <li><em>Formation of a "highway":</em> Over time, the ant forms a repeating straight line (highway).</li>
+        </ul>
+
+        <p><strong>Key Characteristics:</strong></p>
+        <ul>
+            <li><em>Emergence of Order:</em> The system eventually stabilizes into a cyclic, predictable structure.</li>
+            <li><em>Non-periodic to Periodic:</em> The system starts disordered and transitions into a periodic "highway".</li>
+        </ul>
+
         <button onclick="toggleInfo()">Close</button>
     </div>
 
@@ -118,23 +145,33 @@
         let gridSize = 101;
         let cellSize = 6;
         let delay = 5;
+        let isSimulationRunning = false;
+        let isAllowInserts = false;
 
-        let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));  // 0 for white, 1 for black
-        let ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 };
+        let ants = [
+            { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 } // Main ant
+        ];
+
+        let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
 
         function drawGrid() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let y = 0; y < gridSize; y++) {
                 for (let x = 0; x < gridSize; x++) {
-                    ctx.fillStyle = grid[y][x] === 0 ? '#fff' : '#444'; // White for 0, Dark for 1
+                    ctx.fillStyle = grid[y][x] === 0 ? '#fff' : '#444';
                     ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
                 }
             }
+
+            ants.forEach((ant) => {
+                ctx.fillStyle = "#ff0000"; // Color of the ant
+                ctx.fillRect(ant.x * cellSize, ant.y * cellSize, cellSize, cellSize);
+            });
         }
 
-        function updateAnt() {
+        function updateAnt(ant) {
             let currentCell = grid[ant.y][ant.x];
-            
+
             if (currentCell === 0) {
                 ant.dir = (ant.dir + 1) % 4; // Turn right
                 grid[ant.y][ant.x] = 1;      // Change to black
@@ -143,13 +180,11 @@
                 grid[ant.y][ant.x] = 0;      // Change to white
             }
 
-            // Move the ant
             if (ant.dir === 0) ant.y--; // Up
             else if (ant.dir === 1) ant.x++; // Right
             else if (ant.dir === 2) ant.y++; // Down
             else if (ant.dir === 3) ant.x--; // Left
 
-            // Keep the ant within the grid bounds
             if (ant.x < 0) ant.x = gridSize - 1;
             if (ant.x >= gridSize) ant.x = 0;
             if (ant.y < 0) ant.y = gridSize - 1;
@@ -157,25 +192,36 @@
         }
 
         function startSimulation() {
-            const interval = setInterval(() => {
-                updateAnt();
+            isSimulationRunning = true;
+            window.simulationInterval = setInterval(() => {
+                ants.forEach(updateAnt);
                 drawGrid();
             }, delay);
+        }
 
-            // Store the interval to stop it later if needed
-            window.simulationInterval = interval;
+        function pauseSimulation() {
+            isSimulationRunning = false;
+            clearInterval(window.simulationInterval);
+        }
+
+        function toggleSimulation() {
+            if (isSimulationRunning) {
+                pauseSimulation();
+            } else {
+                startSimulation();
+            }
         }
 
         function resetGrid() {
             grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
-            ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 };
+            ants = [{ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }];
             clearInterval(window.simulationInterval);
             drawGrid();
         }
 
         function changeSpeed() {
             delay = parseInt(document.getElementById('speed').value);
-            if (window.simulationInterval) {
+            if (isSimulationRunning) {
                 clearInterval(window.simulationInterval);
                 startSimulation();
             }
@@ -196,7 +242,18 @@
             }
         }
 
-        // Initial grid setup and draw
+        function toggleInsertAnt() {
+            isAllowInserts = !isAllowInserts;
+        }
+
+        canvas.addEventListener('click', (e) => {
+            if (isAllowInserts) {
+                const x = Math.floor(e.offsetX / cellSize);
+                const y = Math.floor(e.offsetY / cellSize);
+                ants.push({ x, y, dir: 0 });
+            }
+        });
+
         drawGrid();
     </script>
 
