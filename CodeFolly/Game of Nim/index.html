@@ -35,6 +35,7 @@
             background-color: #45a049;
         }
 
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -73,6 +74,7 @@
             cursor: pointer;
         }
 
+        /* Game display */
         .game-container {
             margin-top: 100px;
             text-align: center;
@@ -86,15 +88,16 @@
             background-color: #444;
             padding: 20px;
             border-radius: 5px;
-            max-width: 600px;
+            max-width: 900px;
             margin: 20px auto;
-        }
-
-        .game-info p {
             font-size: 18px;
+            line-height: 1.6;
         }
 
-        /* Game display */
+        .game-info h2 {
+            color: #4CAF50;
+        }
+
         .piles {
             display: flex;
             justify-content: center;
@@ -126,11 +129,26 @@
             font-size: 20px;
         }
 
-        .status {
-            margin-top: 30px;
-            font-size: 20px;
-            color: #f44336;
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s linear;
         }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -140,13 +158,51 @@
         <button class="info-button" id="infoBtn">Game Info</button>
     </header>
 
-    <!-- Modal -->
+    <!-- Modal for Info -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
             <h2>Game of Nim - Info</h2>
-            <p>The Game of Nim is a mathematical game of strategy in which two players take turns removing objects from heaps or piles. Each player may remove any number of objects, but only from one pile per turn. The player who removes the last object wins the game.</p>
-            <p>The game's strategy revolves around binary numbers and the concept of Nim-sum (XOR). A player is in a losing position if the Nim-sum of the piles is 0 at the start of their turn. If the Nim-sum is non-zero, the player can force a win with optimal play.</p>
+            <div class="game-info">
+                <p><strong>The Game of Nim</strong> is a classic mathematical strategy game, often used to teach concepts of combinatorial game theory. It involves two players, and the game typically proceeds as follows:</p>
+                
+                <h3>Setup:</h3>
+                <p>There are several piles (or stacks) of objects (like stones, matchsticks, or coins). The number of piles can vary, but each pile contains a positive number of objects.</p>
+                
+                <h3>Gameplay:</h3>
+                <p>On each player's turn, they must choose one pile and remove any number of objects (at least one) from that pile. Players take turns until no objects are left in any pile.</p>
+                
+                <h3>Winning Condition:</h3>
+                <p>The player who removes the last object from the last pile wins the game.</p>
+                
+                <h3>Strategy:</h3>
+                <p>The Game of Nim is known for its mathematical strategy involving binary numbers (also known as the "Nim-sum"). To determine whether you are in a winning or losing position, you perform the following steps:</p>
+                
+                <ol>
+                    <li>Write the number of objects in each pile in binary form.</li>
+                    <li>Compute the Nim-sum, which is the result of taking the binary XOR (exclusive OR) of all the pile sizes.</li>
+                    <li>If the Nim-sum equals 0, the position is losing for the player about to move (assuming optimal play from the opponent).</li>
+                    <li>If the Nim-sum is non-zero, the position is winning for the player about to move.</li>
+                </ol>
+                
+                <h3>Example:</h3>
+                <p>Suppose there are 3 piles with the following number of objects:</p>
+                <ul>
+                    <li>Pile 1: 3 objects</li>
+                    <li>Pile 2: 4 objects</li>
+                    <li>Pile 3: 5 objects</li>
+                </ul>
+                <p>Convert the numbers to binary:</p>
+                <pre>3 (binary 0011)</pre>
+                <pre>4 (binary 0100)</pre>
+                <pre>5 (binary 0101)</pre>
+                <p>Now, XOR them:</p>
+                <pre>0011</pre>
+                <pre>0100</pre>
+                <pre>0101</pre>
+                <pre>0010 (which is 2 in decimal)</pre>
+                <p>Since the Nim-sum is non-zero (2), the position is winning for the current player.</p>
+            </div>
         </div>
     </div>
 
@@ -166,33 +222,33 @@
         <div class="status" id="status">Your turn! Click a pile to remove objects.</div>
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Modal for input (to enter the number of objects to remove) -->
+    <div id="inputModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeInputModal">&times;</span>
+            <h2>How many objects to remove?</h2>
+            <input type="number" id="inputAmount" min="1" style="width: 50px; padding: 10px; font-size: 16px;" />
+            <button id="submitAmount" class="info-button" style="margin-left: 10px;">Submit</button>
+        </div>
+    </div>
+
     <!-- JavaScript for Modal functionality and Game -->
     <script>
         // Get the modal and button elements
-        var modal = document.getElementById("infoModal");
+        var infoModal = document.getElementById("infoModal");
+        var inputModal = document.getElementById("inputModal");
         var btn = document.getElementById("infoBtn");
-        var span = document.getElementById("closeModal");
-
-        // Open the modal when the button is clicked
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // Close the modal when the close button is clicked
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Close the modal if the user clicks anywhere outside of it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+        var closeModal = document.getElementById("closeModal");
+        var closeInputModal = document.getElementById("closeInputModal");
+        var toast = document.getElementById("toast");
 
         // Game Variables
         let piles = [3, 5, 7]; // Starting configuration of the piles
         let currentPlayer = "Player 1"; // Player 1 starts
+        let currentPileIndex = -1;
 
         // Function to display piles
         function displayPiles() {
@@ -202,7 +258,7 @@
                 let pileDiv = document.createElement("div");
                 pileDiv.classList.add("pile");
                 pileDiv.innerHTML = `<span>${pile}</span><p>Pile ${index + 1}</p>`;
-                pileDiv.onclick = () => takeTurn(index);
+                pileDiv.onclick = () => selectPile(index);
                 pilesContainer.appendChild(pileDiv);
             });
         }
@@ -213,39 +269,91 @@
             statusDiv.textContent = message;
         }
 
+        // Function to show toast
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
         // Handle the player's turn
-        function takeTurn(pileIndex) {
+        function selectPile(pileIndex) {
             if (piles[pileIndex] === 0) return; // Can't take from an empty pile
+            currentPileIndex = pileIndex;
+            openInputModal();
+        }
 
-            // Ask the player how many objects to remove
-            let removeAmount = prompt(`How many objects would you like to remove from Pile ${pileIndex + 1}?`);
-            removeAmount = parseInt(removeAmount);
+        // Open the input modal to prompt the player
+        function openInputModal() {
+            inputModal.style.display = "block";
+        }
 
-            // Validate input
-            if (isNaN(removeAmount) || removeAmount <= 0 || removeAmount > piles[pileIndex]) {
+        // Close the input modal
+        closeInputModal.onclick = function() {
+            inputModal.style.display = "none";
+        }
+
+        // Handle the amount input when the player submits the number of objects
+        document.getElementById("submitAmount").onclick = function() {
+            let removeAmount = parseInt(document.getElementById("inputAmount").value);
+            if (isNaN(removeAmount) || removeAmount <= 0 || removeAmount > piles[currentPileIndex]) {
                 alert("Invalid move. Try again.");
                 return;
             }
 
             // Update the pile
-            piles[pileIndex] -= removeAmount;
+            piles[currentPileIndex] -= removeAmount;
             displayPiles();
 
             // Check if the game is over
             if (isGameOver()) {
                 updateStatus(`${currentPlayer} wins!`);
-                setTimeout(() => alert(`${currentPlayer} wins! Game Over!`), 10);
+                showToast(`${currentPlayer} wins!`);
+                setTimeout(() => {
+                    alert(`${currentPlayer} wins! Game Over!`);
+                    resetGame();
+                }, 10);
                 return;
             }
 
             // Switch player
             currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
             updateStatus(`${currentPlayer}'s turn!`);
+
+            inputModal.style.display = "none"; // Close the modal
         }
 
         // Check if the game is over
         function isGameOver() {
             return piles.every(pile => pile === 0);
+        }
+
+        // Reset game
+        function resetGame() {
+            piles = [3, 5, 7];
+            currentPlayer = "Player 1";
+            displayPiles();
+            updateStatus("Your turn! Click a pile to remove objects.");
+        }
+
+        // Open the modal when the button is clicked
+        btn.onclick = function() {
+            infoModal.style.display = "block";
+        }
+
+        // Close the modal when the close button is clicked
+        closeModal.onclick = function() {
+            infoModal.style.display = "none";
+        }
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            if (event.target == infoModal) {
+                infoModal.style.display = "none";
+            }
+            if (event.target == inputModal) {
+                inputModal.style.display = "none";
+            }
         }
 
         // Start the game
