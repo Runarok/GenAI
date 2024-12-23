@@ -38,10 +38,12 @@
             align-items: center;
             margin-top: 10px;
             padding: 10px;
+            width: 100%;
         }
 
         #buttonSection {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             margin-bottom: 15px;
@@ -56,6 +58,7 @@
             border: 1px solid #666;
             color: white;
             border-radius: 5px;
+            min-width: 100px;
         }
 
         button:hover {
@@ -78,9 +81,9 @@
         }
 
         #infoModal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 8px;
@@ -89,6 +92,8 @@
             font-size: 14px;
             display: none;
             z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         #infoModal button {
@@ -105,6 +110,40 @@
             background-color: #555;
         }
 
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #gridCanvas {
+                width: 100%;
+                height: 100%;
+                max-width: 500px;
+            }
+
+            #buttonSection {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            #controls {
+                width: 100%;
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+                max-width: 150px;
+            }
+
+            input {
+                width: 80px;
+            }
+
+            #infoModal {
+                width: 90%;
+                left: 5%;
+                right: 5%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -217,26 +256,30 @@
             if (ant.y >= gridSize) ant.y = 0;
         }
 
-        function startSimulation() {
-            isSimulationRunning = true;
-            window.simulationInterval = setInterval(() => {
-                ants.forEach(updateAnt);
-                drawGrid();
-            }, delay);
-            document.getElementById('playPauseButton').textContent = 'Pause';
-        }
-
-        function pauseSimulation() {
-            isSimulationRunning = false;
-            clearInterval(window.simulationInterval);
-            document.getElementById('playPauseButton').textContent = 'Play';
-        }
-
         function toggleSimulation() {
             if (isSimulationRunning) {
                 pauseSimulation();
             } else {
                 startSimulation();
+            }
+        }
+
+        function startSimulation() {
+            isSimulationRunning = true;
+            document.getElementById('playPauseButton').textContent = 'Pause';
+            simulationStep();
+        }
+
+        function pauseSimulation() {
+            isSimulationRunning = false;
+            document.getElementById('playPauseButton').textContent = 'Play';
+        }
+
+        function simulationStep() {
+            if (isSimulationRunning) {
+                ants.forEach(updateAnt);
+                drawGrid();
+                setTimeout(simulationStep, delay);
             }
         }
 
