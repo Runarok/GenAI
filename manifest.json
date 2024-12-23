@@ -1,7 +1,7 @@
 {
-  "name": "RoyalRealm",
-  "short_name": "RoyalRealm",
-  "description": "Main Menu for RoyalRealm",
+  "name": "Runarok",
+  "short_name": "Runarok",
+  "description": "Main Menu for Runarok",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#121212",
