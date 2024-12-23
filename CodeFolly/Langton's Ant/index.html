@@ -34,21 +34,17 @@
 
         #controls {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             margin-top: 10px;
             padding: 10px;
         }
 
-        #controls > div {
+        #buttonSection {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #controls > div:first-child {
-            flex-direction: row;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         button {
@@ -117,11 +113,12 @@
     <canvas id="gridCanvas" width="600" height="600"></canvas>
 
     <div id="controls">
-        <div>
+        <div id="buttonSection">
             <button id="playPauseButton" onclick="toggleSimulation()">Play</button>
             <button onclick="resetGrid()">Reset</button>
             <button onclick="toggleInfo()">Info</button>
             <button onclick="toggleInsertAnt()">Allow Inserts</button>
+            <button onclick="clearAnts()">Clear Ants</button> <!-- New button to clear ants -->
         </div>
         <div>
             <label for="speed">Speed (ms):</label>
@@ -265,15 +262,16 @@
 
         function toggleInfo() {
             const infoModal = document.getElementById('infoModal');
-            if (infoModal.style.display === 'block') {
-                infoModal.style.display = 'none';
-            } else {
-                infoModal.style.display = 'block';
-            }
+            infoModal.style.display = infoModal.style.display === 'block' ? 'none' : 'block';
         }
 
         function toggleInsertAnt() {
             isAllowInserts = !isAllowInserts;
+        }
+
+        function clearAnts() {
+            ants = [{ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }];
+            drawGrid();
         }
 
         canvas.addEventListener('click', (e) => {
@@ -286,6 +284,5 @@
 
         drawGrid();
     </script>
-
 </body>
 </html>
