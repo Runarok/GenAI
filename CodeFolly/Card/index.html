@@ -171,7 +171,7 @@
         ];
 
         // Initialize the name variable (defined or undefined)
-        let name = ""; // Predefined name, change this if you need
+        let name = "s"; // Predefined name, change this if you need
 
         // Function to generate the link and display the birthday card
         function generateLink() {
@@ -183,12 +183,12 @@
 
                 // Copy the link to the clipboard
                 navigator.clipboard.writeText(url).then(() => {
-                    // Show the toast notification for 500ms
+                    // Show the toast notification for 2000ms
                     showToast();
-                    // Check the hash after the link is copied
+                    // Delay the hash check by 2000ms (after the toast disappears)
                     setTimeout(() => {
                         window.location.href = url; // This reloads the page with the new hash
-                    }, 500); // Delay to show the toast for 500ms
+                    }, 2000); // Delay for hash check (matching the toast display duration)
                 });
             }
         }
@@ -220,7 +220,7 @@
             toast.className = 'toast show';
             setTimeout(function() {
                 toast.className = toast.className.replace('show', '');
-            }, 500); // Toast visibility duration of 500ms
+            }, 2000); // Toast visibility duration of 2000ms
         }
 
         // Check if `name` is defined, if not check for hash in the URL
