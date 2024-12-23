@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
             transition: background-color 0.5s;
         }
         .container {
@@ -43,44 +44,80 @@
         .input-section button:hover {
             background-color: #3700b3;
         }
-        .card {
-            background-color: #1e1e1e;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-            transition: all 0.3s ease;
+        /* Toast Notification Styles */
+        .toast {
+            visibility: hidden;
+            max-width: 50px;
+            height: 50px;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
             text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .card {
+            background-image: url('https://www.transparenttextures.com/patterns/60-degree-angles.png');
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+            animation: cardAnimation 1s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto;
         }
         .card h1 {
             font-size: 48px;
             margin-bottom: 20px;
             color: #ff4081;
-            animation: fadeIn 1s ease-in-out;
+            animation: fadeInTitle 1s ease-in-out;
         }
         .card p {
-            font-size: 24px;
-            margin-top: 0;
+            font-size: 28px;
+            margin-top: 10px;
             color: #b3b3b3;
-            animation: fadeIn 1.2s ease-in-out;
+            animation: fadeInText 1.5s ease-in-out;
         }
-        .loading {
-            font-size: 24px;
-            color: #ff4081;
-            display: none;
-        }
-        .input-section {
-            animation: fadeIn 1.5s ease-in-out;
+        .card img {
+            width: 100px;
+            margin-top: 20px;
+            animation: bounceIn 1s ease-in-out;
         }
 
-        /* Loading animation */
-        @keyframes loadingAnimation {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        /* Keyframe Animations */
+        @keyframes cardAnimation {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .loading span {
-            animation: loadingAnimation 1s infinite;
+        @keyframes fadeInTitle {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
         }
 
     </style>
@@ -101,25 +138,32 @@
             <div class="card" id="birthdayCard">
                 <h1 id="cardTitle">Happy Birthday!</h1>
                 <p id="cardMessage"></p>
+                <img src="https://www.example.com/happy-birthday-image.png" alt="Birthday Image">
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Link copied!</div>
 
     <script>
         // Function to generate the link and display the birthday card
         function generateLink() {
             const name = document.getElementById('nameInput').value.trim();
             if (name) {
-                // Display loading animation
+                // Show the loading animation
                 document.querySelector('.loading').style.display = 'block';
                 document.querySelector('.input-section button').disabled = true;
 
                 // Simulate the generation of a link (you can adjust the timeout as needed)
                 setTimeout(() => {
-                    const url = `https://runarok.github.io/GenAI/CodeFolly/Card/${encodeURIComponent(name)}`;
+                    // Generate the link with the hash
+                    const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodeURIComponent(name)}`;
                     navigator.clipboard.writeText(url).then(() => {
-                        alert('Link copied to clipboard!'); // Notify the user that the link was copied
-                        window.location.href = url; // Load the generated URL (this reloads the page with the hash)
+                        // Show the toast notification
+                        showToast();
+                        // Redirect to the new URL
+                        window.location.href = url; // This reloads the page with the new hash
                     });
                 }, 2000); // Simulating a delay of 2 seconds for the loading animation
             }
@@ -131,6 +175,15 @@
             document.querySelector('.card-section').style.display = 'block';
             document.getElementById('cardTitle').textContent = `Happy Birthday, ${name}!`;
             document.getElementById('cardMessage').textContent = `Wishing you a day filled with love, joy, and amazing memories. Enjoy every moment!`;
+        }
+
+        // Toast Notification Logic
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.className = 'toast show';
+            setTimeout(function() {
+                toast.className = toast.className.replace('show', '');
+            }, 3000); // Toast visibility duration
         }
 
         // Check if there's a hash in the URL (for displaying the birthday card)
