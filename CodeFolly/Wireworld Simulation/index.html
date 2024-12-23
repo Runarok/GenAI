@@ -56,7 +56,7 @@
             border: none;
             padding: 10px 20px;
             font-size: 16px;
-            margin-top: 20px;
+            margin-top: 10px;
             cursor: pointer;
             border-radius: 5px;
         }
@@ -96,21 +96,13 @@
             font-size: 14px;
             color: #ff9800;
         }
-
-        #controlPanel {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
     </style>
 </head>
 <body>
     <h1>Wireworld Simulation</h1>
     
-    <!-- Control Panel with Play/Pause and Reset Buttons -->
-    <div id="controlPanel">
+    <!-- Control Panel with Play/Pause, Reset, and Info Buttons -->
+    <div>
         <button id="playPauseButton" onclick="togglePlayPause()">Play</button>
         <button onclick="resetSimulation()">Reset</button>
         <button onclick="showInfo()">Info</button>
