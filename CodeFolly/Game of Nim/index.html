@@ -140,18 +140,28 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #333;
+            background-color: #FF5733;
             color: white;
-            padding: 12px 20px; /* Increased padding */
-            border-radius: 5px;
+            padding: 16px 30px; /* Increased padding */
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0s, opacity 0.5s linear;
+            transition: visibility 0s, opacity 0.5s ease-in-out;
+            z-index: 9999;
         }
 
         .toast.show {
             visibility: visible;
             opacity: 1;
+            animation: bounce 0.5s ease-out forwards;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
         }
 
         /* Adjust the modal input container */
@@ -247,35 +257,35 @@
         <div id="piles" class="piles"></div>
 
         <!-- Status Display -->
-        <div class="status" id="status">Your turn! Click a pile to remove objects.</div>
-    </div>
+        <div class="status" id="status"></div>
 
-    <!-- Toast Message -->
-    <div id="toast" class="toast">You win!</div>
-
-    <!-- Modal for Input Amount -->
-    <div id="inputModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeInputModal">&times;</span>
-            <h2>How many objects do you want to remove?</h2>
-            <div id="inputAmountContainer"></div>
+        <!-- Input Modal -->
+        <div id="inputModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeInputModal">&times;</span>
+                <h2>Select number of objects to remove</h2>
+                <div id="inputAmountContainer"></div>
+            </div>
         </div>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast"></div>
     </div>
 
     <script>
-        // Function to show the toast
+        // Toast function
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
             toast.classList.add('show');
             setTimeout(function () {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 4000); // Increased duration for toast visibility
         }
 
         // Game variables
-        let piles = [3, 4, 5]; // Starting piles
-        let currentPlayer = 1; // Player 1 starts
+        let piles = generateRandomPiles();
+        let currentPlayer = 1;
 
         // Get DOM elements
         const pilesContainer = document.getElementById('piles');
@@ -286,6 +296,16 @@
         const infoBtn = document.getElementById('infoBtn');
         const infoModal = document.getElementById('infoModal');
         const closeModal = document.getElementById('closeModal');
+
+        // Function to generate random piles
+        function generateRandomPiles() {
+            const numPiles = Math.floor(Math.random() * 3) + 3; // Generate 3 to 5 piles
+            let piles = [];
+            for (let i = 0; i < numPiles; i++) {
+                piles.push(Math.floor(Math.random() * 8) + 5); // Each pile has a random number between 5 and 12
+            }
+            return piles;
+        }
 
         // Function to update the display of piles
         function updatePiles() {
@@ -308,7 +328,8 @@
 
             // Show the modal to input how many objects to remove
             inputAmountContainer.innerHTML = '';
-            for (let i = 1; i <= piles[index]; i++) {
+            const maxRemove = Math.min(piles[index], 5); // Can remove at most 5 objects
+            for (let i = 1; i <= maxRemove; i++) {
                 const button = document.createElement('button');
                 button.textContent = i;
                 button.onclick = () => makeMove(index, i);
@@ -340,7 +361,7 @@
 
         // Reset the game to initial state
         function resetGame() {
-            piles = [3, 4, 5];
+            piles = generateRandomPiles();
             currentPlayer = 1;
             updatePiles();
             statusDiv.textContent = "Your turn! Click a pile to remove objects.";
@@ -363,6 +384,5 @@
         // Initialize the game
         updatePiles();
     </script>
-
 </body>
 </html>
