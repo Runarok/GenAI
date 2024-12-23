@@ -18,10 +18,8 @@
             background-color: #121212;
             border: 1px solid #444;
         }
-        .info-btn {
+        .info-btn, .clear-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
             background-color: #444;
             color: white;
             padding: 10px 15px;
@@ -29,8 +27,16 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .info-btn:hover {
+        .info-btn:hover, .clear-btn:hover {
             background-color: #666;
+        }
+        .info-btn {
+            top: 20px;
+            right: 20px;
+        }
+        .clear-btn {
+            top: 20px;
+            left: 20px;
         }
         .info-modal {
             position: absolute;
@@ -60,6 +66,7 @@
 <body>
     <canvas id="boidCanvas"></canvas>
     <button class="info-btn" id="infoBtn">Info</button>
+    <button class="clear-btn" id="clearBtn">Clear</button>
     <div class="info-modal" id="infoModal">
         <h2>Boids Simulation</h2>
         <p>This is a simulation of Boids, an algorithm that simulates the flocking behavior of birds.</p>
@@ -92,10 +99,16 @@
             this.size = 3;
         }
 
-        // Update boid position
+        // Update boid position with boundary checks (wrapping)
         Boid.prototype.update = function () {
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
+
+            // Boundary wrapping
+            if (this.position.x > canvas.width) this.position.x = 0;
+            if (this.position.x < 0) this.position.x = canvas.width;
+            if (this.position.y > canvas.height) this.position.y = 0;
+            if (this.position.y < 0) this.position.y = canvas.height;
 
             this.velocity.x += this.acceleration.x;
             this.velocity.y += this.acceleration.y;
@@ -278,7 +291,13 @@
             infoModal.style.display = "none";
         });
 
-        // Initialize the simulation
+        // Clear all Boids
+        const clearBtn = document.getElementById("clearBtn");
+        clearBtn.addEventListener("click", () => {
+            boids.length = 0;
+        });
+
+        // Start the simulation
         loop();
     </script>
 </body>
