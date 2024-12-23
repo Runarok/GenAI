@@ -8,7 +8,7 @@
         body {
             background-color: #121212;
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,6 +44,18 @@
         .input-section button:hover {
             background-color: #3700b3;
         }
+        /* Loading Circle Styles */
+        .loading-circle {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff4081;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
         /* Toast Notification Styles */
         .toast {
             visibility: hidden;
@@ -68,20 +80,20 @@
             visibility: visible;
             opacity: 1;
         }
+
+        /* Birthday Card Design */
         .card {
-            background-image: url('https://www.transparenttextures.com/patterns/60-degree-angles.png');
             background-color: #1e1e1e;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-            animation: cardAnimation 1s ease-in-out;
-            transition: all 0.3s ease-in-out;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
             text-align: center;
-            max-width: 80%;
+            animation: cardAnimation 1s ease-in-out;
+            max-width: 90%;
             margin: 0 auto;
         }
         .card h1 {
-            font-size: 48px;
+            font-size: 50px;
             margin-bottom: 20px;
             color: #ff4081;
             animation: fadeInTitle 1s ease-in-out;
@@ -93,8 +105,9 @@
             animation: fadeInText 1.5s ease-in-out;
         }
         .card img {
-            width: 100px;
+            width: 300px;
             margin-top: 20px;
+            border-radius: 10px;
             animation: bounceIn 1s ease-in-out;
         }
 
@@ -120,6 +133,11 @@
             100% { transform: scale(1); }
         }
 
+        /* Loading Circle Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -130,7 +148,7 @@
             <input type="text" id="nameInput" placeholder="Your Name">
             <br>
             <button onclick="generateLink()">Generate Birthday Card</button>
-            <p class="loading">Generating link... <span>.</span><span>.</span><span>.</span></p>
+            <div class="loading-circle" id="loadingCircle" style="display: none;"></div>
         </div>
 
         <!-- Birthday Card Section -->
@@ -138,7 +156,7 @@
             <div class="card" id="birthdayCard">
                 <h1 id="cardTitle">Happy Birthday!</h1>
                 <p id="cardMessage"></p>
-                <img src="https://www.example.com/happy-birthday-image.png" alt="Birthday Image">
+                <img id="birthdayImage" src="" alt="Birthday Image">
             </div>
         </div>
     </div>
@@ -151,30 +169,42 @@
         function generateLink() {
             const name = document.getElementById('nameInput').value.trim();
             if (name) {
-                // Show the loading animation
-                document.querySelector('.loading').style.display = 'block';
+                // Show the loading circle
+                document.getElementById('loadingCircle').style.display = 'inline-block';
                 document.querySelector('.input-section button').disabled = true;
 
-                // Simulate the generation of a link (you can adjust the timeout as needed)
+                // Simulate the generation of a link (just 500ms for loading)
                 setTimeout(() => {
-                    // Generate the link with the hash
-                    const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodeURIComponent(name)}`;
+                    const encodedName = encodeURIComponent(name); // Handle spaces as %20
+                    const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodedName}`;
                     navigator.clipboard.writeText(url).then(() => {
                         // Show the toast notification
                         showToast();
                         // Redirect to the new URL
                         window.location.href = url; // This reloads the page with the new hash
                     });
-                }, 2000); // Simulating a delay of 2 seconds for the loading animation
+                }, 500); // Simulating a delay of 500ms for the loading animation
             }
         }
 
         // Function to display the birthday card after the page loads with a hash
         function displayCard(name) {
+            // Display the birthday card and hide the input section
             document.querySelector('.input-section').style.display = 'none';
             document.querySelector('.card-section').style.display = 'block';
             document.getElementById('cardTitle').textContent = `Happy Birthday, ${name}!`;
             document.getElementById('cardMessage').textContent = `Wishing you a day filled with love, joy, and amazing memories. Enjoy every moment!`;
+
+            // Fetch a random birthday image from the Unsplash API
+            fetch('https://api.unsplash.com/photos/random?query=birthday&client_id=YOUR_ACCESS_KEY')
+                .then(response => response.json())
+                .then(data => {
+                    const imageUrl = data[0]?.urls?.regular;
+                    document.getElementById('birthdayImage').src = imageUrl || 'https://via.placeholder.com/300x200.png?text=Happy+Birthday';
+                })
+                .catch(() => {
+                    document.getElementById('birthdayImage').src = 'https://via.placeholder.com/300x200.png?text=Happy+Birthday';
+                });
         }
 
         // Toast Notification Logic
