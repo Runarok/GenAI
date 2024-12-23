@@ -208,8 +208,7 @@
             const images = [
                 'https://raw.githubusercontent.com/Runarok/GenAI/main/CodeFolly/Card/images/gift%20(1).jpeg',
                 'https://raw.githubusercontent.com/Runarok/GenAI/main/CodeFolly/Card/images/gift%20(2).jpeg',
-                'https://raw.githubusercontent.com/Runarok/GenAI/main/CodeFolly/Card/images/gift%20(3).jpeg',
-                'https://raw.githubusercontent.com/Runarok/GenAI/main/CodeFolly/Card/images/gift%20(4).jpeg'
+                'https://raw.githubusercontent.com/Runarok/GenAI/main/CodeFolly/Card/images/gift%20(3).jpeg'
             ];  // GitHub image URLs
             const randomImage = images[Math.floor(Math.random() * images.length)];
             document.getElementById('birthdayImage').src = randomImage;
@@ -224,12 +223,14 @@
             }, 500); // Toast visibility duration of 500ms
         }
 
-        // If the predefined name is set, display the card immediately
-        if (name) {
-            displayCard(name);
+        // Check for the hash in the URL
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            // If hash exists, display the card for the name in the hash
+            displayCard(decodeURIComponent(hash));
         } else {
-            // If no name is defined, show the input section
-            document.querySelector('.input-section').style.display = 'block';
+            // If no hash exists, display the card with the predefined name
+            displayCard(name);
         }
     </script>
 </body>
