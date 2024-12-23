@@ -34,10 +34,17 @@
 
         #controls {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
             margin-top: 10px;
-            gap: 10px;
+            padding: 10px;
+        }
+
+        #controls > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         button {
@@ -98,9 +105,6 @@
             background-color: #555;
         }
 
-        #controls label {
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -109,16 +113,20 @@
     <canvas id="gridCanvas" width="600" height="600"></canvas>
 
     <div id="controls">
-        <button onclick="toggleSimulation()">Start/Pause</button>
-        <button onclick="resetGrid()">Reset</button>
-        <button onclick="toggleInfo()">Info</button>
-        <button onclick="toggleInsertAnt()">Allow Inserts</button>
-
-        <label for="speed">Speed (ms):</label>
-        <input type="number" id="speed" value="5" min="1" max="100" onchange="changeSpeed()">
-        
-        <label for="gridSize">Grid Size:</label>
-        <input type="number" id="gridSize" value="101" min="5" max="301" step="2" onchange="changeGridSize()">
+        <div>
+            <button id="playPauseButton" onclick="toggleSimulation()">Play</button>
+            <button onclick="resetGrid()">Reset</button>
+            <button onclick="toggleInfo()">Info</button>
+            <button onclick="toggleInsertAnt()">Allow Inserts</button>
+        </div>
+        <div>
+            <label for="speed">Speed (ms):</label>
+            <input type="number" id="speed" value="5" min="1" max="100" onchange="changeSpeed()">
+        </div>
+        <div>
+            <label for="gridSize">Grid Size:</label>
+            <input type="number" id="gridSize" value="101" min="5" max="301" step="2" onchange="changeGridSize()">
+        </div>
     </div>
 
     <div id="infoModal">
@@ -216,11 +224,13 @@
                 ants.forEach(updateAnt);
                 drawGrid();
             }, delay);
+            document.getElementById('playPauseButton').textContent = 'Pause';
         }
 
         function pauseSimulation() {
             isSimulationRunning = false;
             clearInterval(window.simulationInterval);
+            document.getElementById('playPauseButton').textContent = 'Play';
         }
 
         function toggleSimulation() {
@@ -234,8 +244,6 @@
         function resetGrid() {
             grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
             ants = [{ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }];
-            clearInterval(window.simulationInterval);
-            isSimulationRunning = false;
             drawGrid();
         }
 
