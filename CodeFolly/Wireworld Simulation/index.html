@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireworld Simulation</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff9800;
+        }
+
+        #grid {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(30, 20px);
+            grid-template-rows: repeat(30, 20px);
+            gap: 1px;
+            justify-content: center;
+        }
+
+        .cell {
+            width: 20px;
+            height: 20px;
+            background-color: #121212;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .wire {
+            background-color: #FFD700; /* Yellow for wire */
+        }
+
+        .head {
+            background-color: #0000FF; /* Blue for head */
+        }
+
+        .tail {
+            background-color: #FF0000; /* Red for tail */
+        }
+
+        .empty {
+            background-color: #121212; /* Dark background for empty cells */
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        button:active {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wireworld Simulation</h1>
+    <div id="grid"></div>
+    <button onclick="startSimulation()">Start Simulation</button>
+
+    <script>
+        const gridSize = 30;
+        const grid = [];
+        let interval;
+
+        // Create the grid of cells
+        function createGrid() {
+            const gridElement = document.getElementById("grid");
+            gridElement.innerHTML = '';
+            for (let y = 0; y < gridSize; y++) {
+                const row = [];
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    cell.addEventListener("click", () => toggleCellState(x, y));
+                    gridElement.appendChild(cell);
+                    row.push("empty");
+                }
+                grid.push(row);
+            }
+        }
+
+        // Toggle cell state between empty, wire, head, and tail
+        function toggleCellState(x, y) {
+            const currentState = grid[y][x];
+            if (currentState === "empty") {
+                grid[y][x] = "wire";
+                updateCell(x, y);
+            } else if (currentState === "wire") {
+                grid[y][x] = "head";
+                updateCell(x, y);
+            } else if (currentState === "head") {
+                grid[y][x] = "tail";
+                updateCell(x, y);
+            } else {
+                grid[y][x] = "empty";
+                updateCell(x, y);
+            }
+        }
+
+        // Update the visual state of a cell
+        function updateCell(x, y) {
+            const cell = document.getElementById("grid").children[y * gridSize + x];
+            cell.classList.remove("wire", "head", "tail", "empty");
+            if (grid[y][x] === "wire") {
+                cell.classList.add("wire");
+            } else if (grid[y][x] === "head") {
+                cell.classList.add("head");
+            } else if (grid[y][x] === "tail") {
+                cell.classList.add("tail");
+            } else {
+                cell.classList.add("empty");
+            }
+        }
+
+        // Start the simulation
+        function startSimulation() {
+            if (interval) clearInterval(interval);
+            interval = setInterval(() => {
+                runSimulationStep();
+            }, 500); // 500 ms delay for each step
+        }
+
+        // Run one step of the simulation
+        function runSimulationStep() {
+            const newGrid = grid.map(row => row.slice()); // Create a copy of the grid
+
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    if (grid[y][x] === "head") {
+                        // Convert heads to tails
+                        newGrid[y][x] = "tail";
+                    } else if (grid[y][x] === "tail") {
+                        // Convert tails to wire
+                        newGrid[y][x] = "wire";
+                    } else if (grid[y][x] === "wire") {
+                        // Convert wire to head if it has 1 or 2 heads nearby
+                        const headCount = countHeadsAround(x, y);
+                        if (headCount === 1 || headCount === 2) {
+                            newGrid[y][x] = "head";
+                        }
+                    }
+                }
+            }
+
+            grid.length = 0; // Clear the grid
+            grid.push(...newGrid); // Update the grid with the new state
+            updateGridView(); // Update the visual grid
+        }
+
+        // Count the number of heads around a specific cell
+        function countHeadsAround(x, y) {
+            let count = 0;
+            const directions = [
+                [-1, 0], [1, 0], [0, -1], [0, 1], // 4 neighbors
+                [-1, -1], [1, 1], [-1, 1], [1, -1] // Diagonal neighbors
+            ];
+
+            for (const [dx, dy] of directions) {
+                const nx = x + dx;
+                const ny = y + dy;
+                if (nx >= 0 && ny >= 0 && nx < gridSize && ny < gridSize && grid[ny][nx] === "head") {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        // Update the visual grid after a simulation step
+        function updateGridView() {
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    updateCell(x, y);
+                }
+            }
+        }
+
+        // Initialize the grid
+        createGrid();
+    </script>
+</body>
+</html>
