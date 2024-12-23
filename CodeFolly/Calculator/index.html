@@ -5,92 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark Themed Calculator</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Arial', sans-serif;
             background-color: #121212;
-            color: white;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-        .calculator {
-            background-color: #1d1d1d;
+        table {
+            background-color: #1e1e1e;
+            border-radius: 15px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border-spacing: 10px;
         }
-        .display {
+        td {
+            padding: 10px;
+        }
+        input[type="text"] {
             background-color: #333;
             color: white;
-            font-size: 2em;
+            font-size: 2.5em;
             text-align: right;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        .button {
-            background-color: #444;
-            color: white;
-            font-size: 1.5em;
             border: none;
             padding: 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            border-radius: 10px;
+            width: 100%;
         }
-        .button:hover {
+        input[type="button"] {
+            background-color: #444;
+            color: white;
+            font-size: 1.8em;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+        input[type="button"]:hover {
             background-color: #555;
         }
-        .button:active {
+        input[type="button"]:active {
             background-color: #666;
         }
-        .button.operator {
+        input[type="button"].operator {
             background-color: #ff8c00;
         }
-        .button.operator:hover {
+        input[type="button"].operator:hover {
             background-color: #e07b00;
         }
-        .button.clear {
+        input[type="button"].clear {
             background-color: #d9534f;
         }
-        .button.clear:hover {
+        input[type="button"].clear:hover {
             background-color: #c9302c;
+        }
+        input[type="button"].equal {
+            background-color: #28a745;
+            grid-column: span 2;
+        }
+        input[type="button"].equal:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display" id="display">0</div>
-        <div class="buttons">
-            <button class="button clear" onclick="clearDisplay()">C</button>
-            <button class="button operator" onclick="appendToDisplay('/')">/</button>
-            <button class="button operator" onclick="appendToDisplay('*')">*</button>
-            <button class="button operator" onclick="appendToDisplay('-')">-</button>
-            <button class="button" onclick="appendToDisplay('7')">7</button>
-            <button class="button" onclick="appendToDisplay('8')">8</button>
-            <button class="button" onclick="appendToDisplay('9')">9</button>
-            <button class="button operator" onclick="appendToDisplay('+')">+</button>
-            <button class="button" onclick="appendToDisplay('4')">4</button>
-            <button class="button" onclick="appendToDisplay('5')">5</button>
-            <button class="button" onclick="appendToDisplay('6')">6</button>
-            <button class="button equal" onclick="calculateResult()">=</button>
-            <button class="button" onclick="appendToDisplay('1')">1</button>
-            <button class="button" onclick="appendToDisplay('2')">2</button>
-            <button class="button" onclick="appendToDisplay('3')">3</button>
-            <button class="button" onclick="appendToDisplay('0')">0</button>
-            <button class="button" onclick="appendToDisplay('.')">.</button>
-        </div>
-    </div>
+    <table id="calcu">
+        <tr>
+            <td colspan="3">
+                <input type="text" id="result" disabled>
+            </td>
+            <td><input type="button" class="clear" value="C" onclick="clearDisplay()"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="appendToDisplay('1')"></td>
+            <td><input type="button" value="2" onclick="appendToDisplay('2')"></td>
+            <td><input type="button" value="3" onclick="appendToDisplay('3')"></td>
+            <td><input type="button" class="operator" value="/" onclick="appendToDisplay('/')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="appendToDisplay('4')"></td>
+            <td><input type="button" value="5" onclick="appendToDisplay('5')"></td>
+            <td><input type="button" value="6" onclick="appendToDisplay('6')"></td>
+            <td><input type="button" class="operator" value="*" onclick="appendToDisplay('*')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="appendToDisplay('7')"></td>
+            <td><input type="button" value="8" onclick="appendToDisplay('8')"></td>
+            <td><input type="button" value="9" onclick="appendToDisplay('9')"></td>
+            <td><input type="button" class="operator" value="-" onclick="appendToDisplay('-')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" onclick="appendToDisplay('0')"></td>
+            <td><input type="button" value="." onclick="appendToDisplay('.')"></td>
+            <td><input type="button" class="equal" value="=" onclick="calculateResult()"></td>
+            <td><input type="button" class="operator" value="+" onclick="appendToDisplay('+')"></td>
+        </tr>
+    </table>
 
     <script>
-        let display = document.getElementById('display');
+        let display = document.getElementById('result');
         let currentInput = '';
 
         function appendToDisplay(value) {
@@ -99,20 +122,20 @@
             } else {
                 currentInput += value;
             }
-            display.innerText = currentInput;
+            display.value = currentInput;
         }
 
         function clearDisplay() {
             currentInput = '';
-            display.innerText = '0';
+            display.value = '0';
         }
 
         function calculateResult() {
             try {
                 currentInput = eval(currentInput).toString();
-                display.innerText = currentInput;
+                display.value = currentInput;
             } catch (e) {
-                display.innerText = 'Error';
+                display.value = 'Error';
                 currentInput = '';
             }
         }
