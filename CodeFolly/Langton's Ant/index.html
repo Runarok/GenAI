@@ -41,6 +41,46 @@
         button:hover {
             background-color: #555;
         }
+
+        label, input {
+            font-size: 16px;
+            color: white;
+            margin: 5px;
+        }
+
+        input {
+            background-color: #333;
+            border: 1px solid #666;
+            color: white;
+            padding: 5px;
+            width: 60px;
+        }
+
+        #infoModal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            width: 250px;
+            color: white;
+            font-size: 14px;
+            display: none;
+        }
+
+        #infoModal button {
+            background-color: #444;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+        }
+
+        #infoModal button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
@@ -51,20 +91,39 @@
     <div id="controls">
         <button onclick="startSimulation()">Start</button>
         <button onclick="resetGrid()">Reset</button>
+        <button onclick="toggleInfo()">Info</button>
+
+        <label for="speed">Speed (ms):</label>
+        <input type="number" id="speed" value="5" min="1" max="100" onchange="changeSpeed()">
+        
+        <label for="gridSize">Grid Size:</label>
+        <input type="number" id="gridSize" value="101" min="5" max="301" step="2" onchange="changeGridSize()">
+    </div>
+
+    <div id="infoModal">
+        <h3>Langton's Ant</h3>
+        <p>This is a simulation of Langton's Ant. The ant moves based on simple rules:</p>
+        <ul>
+            <li>Turns right on white cells.</li>
+            <li>Turns left on black cells.</li>
+            <li>Changes cell color after visiting.</li>
+        </ul>
+        <button onclick="toggleInfo()">Close</button>
     </div>
 
     <script>
-        const canvas = document.getElementById('gridCanvas');
-        const ctx = canvas.getContext('2d');
+        let canvas = document.getElementById('gridCanvas');
+        let ctx = canvas.getContext('2d');
 
-        const gridSize = 101;  // Odd number for center alignment
-        const cellSize = 6;    // Size of each cell
-        const delay = 5;       // Milliseconds per step for the animation
+        let gridSize = 101;
+        let cellSize = 6;
+        let delay = 5;
 
         let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));  // 0 for white, 1 for black
-        let ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }; // dir: 0=up, 1=right, 2=down, 3=left
+        let ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 };
 
         function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
             for (let y = 0; y < gridSize; y++) {
                 for (let x = 0; x < gridSize; x++) {
                     ctx.fillStyle = grid[y][x] === 0 ? '#fff' : '#444'; // White for 0, Dark for 1
@@ -112,6 +171,29 @@
             ant = { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 };
             clearInterval(window.simulationInterval);
             drawGrid();
+        }
+
+        function changeSpeed() {
+            delay = parseInt(document.getElementById('speed').value);
+            if (window.simulationInterval) {
+                clearInterval(window.simulationInterval);
+                startSimulation();
+            }
+        }
+
+        function changeGridSize() {
+            gridSize = parseInt(document.getElementById('gridSize').value);
+            cellSize = 600 / gridSize;
+            resetGrid();
+        }
+
+        function toggleInfo() {
+            const infoModal = document.getElementById('infoModal');
+            if (infoModal.style.display === "block") {
+                infoModal.style.display = "none";
+            } else {
+                infoModal.style.display = "block";
+            }
         }
 
         // Initial grid setup and draw
