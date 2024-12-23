@@ -7,292 +7,279 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        canvas {
-            display: block;
-            border: 1px solid #fff;
-        }
-
-        .controls {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 0;
+            background-color: #2e2e2e;
             color: white;
             font-family: Arial, sans-serif;
         }
-
-        .controls label {
+        canvas {
             display: block;
-            margin: 5px 0;
+            margin: 0 auto;
+            background-color: #121212;
+            border: 1px solid #444;
         }
-
-        .controls input[type="range"] {
-            width: 200px;
-        }
-
-        .controls button {
+        .info-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background-color: #444;
             color: white;
+            padding: 10px 15px;
             border: none;
-            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .info-btn:hover {
+            background-color: #666;
+        }
+        .info-modal {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+            display: none;
+        }
+        .info-modal h2 {
+            margin-top: 0;
+        }
+        .info-modal button {
+            background-color: #444;
+            color: white;
+            padding: 5px 10px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
         }
-
-        .controls button:hover {
-            background-color: #666;
-        }
     </style>
 </head>
 <body>
-    <div class="controls">
-        <label for="speed">Speed</label>
-        <input type="range" id="speed" min="1" max="10" value="5">
-        
-        <label for="alignment">Alignment</label>
-        <input type="range" id="alignment" min="0" max="1" step="0.01" value="0.5">
-
-        <label for="cohesion">Cohesion</label>
-        <input type="range" id="cohesion" min="0" max="1" step="0.01" value="0.5">
-
-        <label for="separation">Separation</label>
-        <input type="range" id="separation" min="0" max="1" step="0.01" value="0.5">
-        
-        <button id="startStopBtn">Start</button>
-        <button id="resetBtn">Reset</button>
+    <canvas id="boidCanvas"></canvas>
+    <button class="info-btn" id="infoBtn">Info</button>
+    <div class="info-modal" id="infoModal">
+        <h2>Boids Simulation</h2>
+        <p>This is a simulation of Boids, an algorithm that simulates the flocking behavior of birds.</p>
+        <p><strong>Controls:</strong></p>
+        <ul>
+            <li>Click anywhere on the canvas to spawn new Boids.</li>
+            <li>Watch them move, align, and avoid each other.</li>
+        </ul>
+        <button id="closeBtn">Close</button>
     </div>
-    
-    <canvas id="boidsCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('boidsCanvas');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById("boidCanvas");
+        const ctx = canvas.getContext("2d");
 
-        let boids = [];
-        let isRunning = false;
-        const numBoids = 100;
-        let speed = 5;
-        let alignment = 0.5;
-        let cohesion = 0.5;
-        let separation = 0.5;
-
+        // Set canvas size
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        class Boid {
-            constructor(x, y) {
-                this.position = { x: x, y: y };
-                this.velocity = { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1 };
-                this.acceleration = { x: 0, y: 0 };
-                this.size = 3;
-                this.color = getRandomColor();
-            }
+        const numBoids = 100;
+        const boids = [];
 
-            applyForce(force) {
-                this.acceleration.x += force.x;
-                this.acceleration.y += force.y;
-            }
+        // Boid constructor
+        function Boid(x, y) {
+            this.position = { x: x, y: y };
+            this.velocity = { x: Math.random() * 2 - 1, y: Math.random() * 2 - 1 };
+            this.acceleration = { x: 0, y: 0 };
+            this.maxSpeed = 4;
+            this.maxForce = 0.1;
+            this.size = 3;
+        }
 
-            update() {
-                this.velocity.x += this.acceleration.x;
-                this.velocity.y += this.acceleration.y;
+        // Update boid position
+        Boid.prototype.update = function () {
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
 
-                const speedLimit = 4;
-                const magnitude = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2);
-                if (magnitude > speedLimit) {
-                    this.velocity.x = (this.velocity.x / magnitude) * speedLimit;
-                    this.velocity.y = (this.velocity.y / magnitude) * speedLimit;
+            this.velocity.x += this.acceleration.x;
+            this.velocity.y += this.acceleration.y;
+            this.velocity.x = Math.min(Math.max(this.velocity.x, -this.maxSpeed), this.maxSpeed);
+            this.velocity.y = Math.min(Math.max(this.velocity.y, -this.maxSpeed), this.maxSpeed);
+
+            this.acceleration.x = 0;
+            this.acceleration.y = 0;
+        };
+
+        // Apply a force to a boid
+        Boid.prototype.applyForce = function (force) {
+            this.acceleration.x += force.x;
+            this.acceleration.y += force.y;
+        };
+
+        // Basic boid behavior (cohesion, alignment, separation)
+        Boid.prototype.flock = function (boids) {
+            let alignment = this.align(boids);
+            let cohesion = this.cohere(boids);
+            let separation = this.separate(boids);
+
+            this.applyForce(alignment);
+            this.applyForce(cohesion);
+            this.applyForce(separation);
+        };
+
+        // Align with the average heading of nearby boids
+        Boid.prototype.align = function (boids) {
+            let steering = { x: 0, y: 0 };
+            let total = 0;
+            for (let boid of boids) {
+                let distance = Math.hypot(this.position.x - boid.position.x, this.position.y - boid.position.y);
+                if (distance < 50) {
+                    steering.x += boid.velocity.x;
+                    steering.y += boid.velocity.y;
+                    total++;
                 }
-
-                this.position.x += this.velocity.x * speed;
-                this.position.y += this.velocity.y * speed;
-
-                // Wrap around edges
-                if (this.position.x > canvas.width) this.position.x = 0;
-                if (this.position.x < 0) this.position.x = canvas.width;
-                if (this.position.y > canvas.height) this.position.y = 0;
-                if (this.position.y < 0) this.position.y = canvas.height;
-
-                this.acceleration.x = 0;
-                this.acceleration.y = 0;
             }
 
-            flock(boids) {
-                const alignmentForce = this.align(boids);
-                const cohesionForce = this.cohere(boids);
-                const separationForce = this.separate(boids);
-
-                this.applyForce(alignmentForce);
-                this.applyForce(cohesionForce);
-                this.applyForce(separationForce);
-            }
-
-            align(boids) {
-                let steering = { x: 0, y: 0 };
-                let total = 0;
-                for (let other of boids) {
-                    const distance = Math.sqrt(
-                        (this.position.x - other.position.x) ** 2 +
-                        (this.position.y - other.position.y) ** 2
-                    );
-                    if (other !== this && distance < 50) {
-                        steering.x += other.velocity.x;
-                        steering.y += other.velocity.y;
-                        total++;
-                    }
-                }
-                if (total > 0) {
-                    steering.x /= total;
-                    steering.y /= total;
-                    const magnitude = Math.sqrt(steering.x ** 2 + steering.y ** 2);
-                    if (magnitude > 0) {
-                        steering.x = (steering.x / magnitude) * speed;
-                        steering.y = (steering.y / magnitude) * speed;
-                    }
+            if (total > 0) {
+                steering.x /= total;
+                steering.y /= total;
+                let magnitude = Math.hypot(steering.x, steering.y);
+                if (magnitude > 0) {
+                    steering.x /= magnitude;
+                    steering.y /= magnitude;
+                    steering.x *= this.maxSpeed;
+                    steering.y *= this.maxSpeed;
                     steering.x -= this.velocity.x;
                     steering.y -= this.velocity.y;
-                    steering.x *= alignment;
-                    steering.y *= alignment;
-                }
-                return steering;
-            }
-
-            cohere(boids) {
-                let steering = { x: 0, y: 0 };
-                let total = 0;
-                for (let other of boids) {
-                    const distance = Math.sqrt(
-                        (this.position.x - other.position.x) ** 2 +
-                        (this.position.y - other.position.y) ** 2
-                    );
-                    if (other !== this && distance < 100) {
-                        steering.x += other.position.x;
-                        steering.y += other.position.y;
-                        total++;
+                    let steeringMagnitude = Math.hypot(steering.x, steering.y);
+                    if (steeringMagnitude > this.maxForce) {
+                        steering.x = (steering.x / steeringMagnitude) * this.maxForce;
+                        steering.y = (steering.y / steeringMagnitude) * this.maxForce;
                     }
                 }
-                if (total > 0) {
-                    steering.x /= total;
-                    steering.y /= total;
-                    steering.x -= this.position.x;
-                    steering.y -= this.position.y;
-                    const magnitude = Math.sqrt(steering.x ** 2 + steering.y ** 2);
+            }
+            return steering;
+        };
+
+        // Move towards the average position of nearby boids
+        Boid.prototype.cohere = function (boids) {
+            let steering = { x: 0, y: 0 };
+            let total = 0;
+            for (let boid of boids) {
+                let distance = Math.hypot(this.position.x - boid.position.x, this.position.y - boid.position.y);
+                if (distance < 100) {
+                    steering.x += boid.position.x;
+                    steering.y += boid.position.y;
+                    total++;
+                }
+            }
+
+            if (total > 0) {
+                steering.x /= total;
+                steering.y /= total;
+                steering.x -= this.position.x;
+                steering.y -= this.position.y;
+                let magnitude = Math.hypot(steering.x, steering.y);
+                if (magnitude > 0) {
+                    steering.x /= magnitude;
+                    steering.y /= magnitude;
+                    steering.x *= this.maxSpeed;
+                    steering.y *= this.maxSpeed;
+                    steering.x -= this.velocity.x;
+                    steering.y -= this.velocity.y;
+                    let steeringMagnitude = Math.hypot(steering.x, steering.y);
+                    if (steeringMagnitude > this.maxForce) {
+                        steering.x = (steering.x / steeringMagnitude) * this.maxForce;
+                        steering.y = (steering.y / steeringMagnitude) * this.maxForce;
+                    }
+                }
+            }
+            return steering;
+        };
+
+        // Avoid collisions with nearby boids
+        Boid.prototype.separate = function (boids) {
+            let steering = { x: 0, y: 0 };
+            let total = 0;
+            for (let boid of boids) {
+                let distance = Math.hypot(this.position.x - boid.position.x, this.position.y - boid.position.y);
+                if (distance < 30) {
+                    let diff = { x: this.position.x - boid.position.x, y: this.position.y - boid.position.y };
+                    let magnitude = Math.hypot(diff.x, diff.y);
                     if (magnitude > 0) {
-                        steering.x = (steering.x / magnitude) * speed;
-                        steering.y = (steering.y / magnitude) * speed;
+                        diff.x /= magnitude;
+                        diff.y /= magnitude;
+                        diff.x *= 1 / distance;
+                        diff.y *= 1 / distance;
+                    }
+                    steering.x += diff.x;
+                    steering.y += diff.y;
+                    total++;
+                }
+            }
+
+            if (total > 0) {
+                steering.x /= total;
+                steering.y /= total;
+                let magnitude = Math.hypot(steering.x, steering.y);
+                if (magnitude > 0) {
+                    steering.x /= magnitude;
+                    steering.y /= magnitude;
+                    steering.x *= this.maxSpeed;
+                    steering.y *= this.maxSpeed;
+                    steering.x -= this.velocity.x;
+                    steering.y -= this.velocity.y;
+                    let steeringMagnitude = Math.hypot(steering.x, steering.y);
+                    if (steeringMagnitude > this.maxForce) {
+                        steering.x = (steering.x / steeringMagnitude) * this.maxForce;
+                        steering.y = (steering.y / steeringMagnitude) * this.maxForce;
                     }
                 }
-                steering.x *= cohesion;
-                steering.y *= cohesion;
-                return steering;
             }
+            return steering;
+        };
 
-            separate(boids) {
-                let steering = { x: 0, y: 0 };
-                let total = 0;
-                for (let other of boids) {
-                    const distance = Math.sqrt(
-                        (this.position.x - other.position.x) ** 2 +
-                        (this.position.y - other.position.y) ** 2
-                    );
-                    if (other !== this && distance < 25) {
-                        let diff = { x: this.position.x - other.position.x, y: this.position.y - other.position.y };
-                        const magnitude = Math.sqrt(diff.x ** 2 + diff.y ** 2);
-                        if (magnitude > 0) {
-                            diff.x /= magnitude;
-                            diff.y /= magnitude;
-                            diff.x *= (1 / distance);
-                            diff.y *= (1 / distance);
-                        }
-                        steering.x += diff.x;
-                        steering.y += diff.y;
-                        total++;
-                    }
-                }
-                if (total > 0) {
-                    steering.x /= total;
-                    steering.y /= total;
-                    const magnitude = Math.sqrt(steering.x ** 2 + steering.y ** 2);
-                    if (magnitude > 0) {
-                        steering.x = (steering.x / magnitude) * speed;
-                        steering.y = (steering.y / magnitude) * speed;
-                    }
-                }
-                steering.x *= separation;
-                steering.y *= separation;
-                return steering;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.position.x, this.position.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
+        // Create initial boids
+        function createBoids(x, y) {
+            boids.push(new Boid(x, y));
         }
 
-        function getRandomColor() {
-            const colors = ['#00FFCC', '#8A2BE2', '#00FF00']; // Neon colors
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        function startStopSimulation() {
-            isRunning = !isRunning;
-            const button = document.getElementById('startStopBtn');
-            button.textContent = isRunning ? 'Stop' : 'Start';
-            if (isRunning) {
-                animate();
-            }
-        }
-
-        function resetSimulation() {
-            boids = [];
-            for (let i = 0; i < numBoids; i++) {
-                boids.push(new Boid(Math.random() * canvas.width, Math.random() * canvas.height));
-            }
-        }
-
-        function updateParameters() {
-            speed = parseFloat(document.getElementById('speed').value);
-            alignment = parseFloat(document.getElementById('alignment').value);
-            cohesion = parseFloat(document.getElementById('cohesion').value);
-            separation = parseFloat(document.getElementById('separation').value);
-        }
-
-        function animate() {
-            if (!isRunning) return;
-
+        // Render boids
+        function render() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            updateParameters();
-
             for (let boid of boids) {
                 boid.flock(boids);
                 boid.update();
-                boid.draw();
+                ctx.beginPath();
+                ctx.arc(boid.position.x, boid.position.y, boid.size, 0, Math.PI * 2);
+                ctx.fillStyle = "#00ff00";
+                ctx.fill();
+                ctx.stroke();
             }
-
-            requestAnimationFrame(animate);
         }
 
-        document.getElementById('startStopBtn').addEventListener('click', startStopSimulation);
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            resetSimulation();
-            if (isRunning) animate();
+        // Game loop
+        function loop() {
+            render();
+            requestAnimationFrame(loop);
+        }
+
+        // Event listener for clicks to spawn new boids
+        canvas.addEventListener("click", (event) => {
+            createBoids(event.clientX, event.clientY);
         });
 
-        // Initial setup
-        resetSimulation();
+        // Info button toggle
+        const infoBtn = document.getElementById("infoBtn");
+        const infoModal = document.getElementById("infoModal");
+        const closeBtn = document.getElementById("closeBtn");
+
+        infoBtn.addEventListener("click", () => {
+            infoModal.style.display = infoModal.style.display === "block" ? "none" : "block";
+        });
+
+        closeBtn.addEventListener("click", () => {
+            infoModal.style.display = "none";
+        });
+
+        // Initialize the simulation
+        loop();
     </script>
 </body>
 </html>
