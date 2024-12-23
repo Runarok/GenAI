@@ -230,8 +230,7 @@
         <div class="modal-content">
             <span class="close" id="closeInputModal">&times;</span>
             <h2>How many objects to remove?</h2>
-            <input type="number" id="inputAmount" min="1" style="width: 50px; padding: 10px; font-size: 16px;" />
-            <button id="submitAmount" class="info-button" style="margin-left: 10px;">Submit</button>
+            <div id="inputAmountContainer"></div>
         </div>
     </div>
 
@@ -246,9 +245,20 @@
         var toast = document.getElementById("toast");
 
         // Game Variables
-        let piles = [3, 5, 7]; // Starting configuration of the piles
+        let piles = []; // Starting configuration of the piles
         let currentPlayer = "Player 1"; // Player 1 starts
         let currentPileIndex = -1;
+
+        // Function to generate random piles
+        function generateRandomPiles() {
+            let numberOfPiles = Math.floor(Math.random() * 3) + 3; // 3 to 5 piles
+            piles = [];
+
+            for (let i = 0; i < numberOfPiles; i++) {
+                let pileSize = Math.floor(Math.random() * 13) + 3; // Random number between 3 and 15
+                piles.push(pileSize);
+            }
+        }
 
         // Function to display piles
         function displayPiles() {
@@ -285,18 +295,26 @@
 
         // Open the input modal to prompt the player
         function openInputModal() {
+            const inputAmountContainer = document.getElementById("inputAmountContainer");
+            inputAmountContainer.innerHTML = ""; // Clear previous buttons
+
+            let pileSize = piles[currentPileIndex];
+            
+            for (let i = 1; i <= pileSize; i++) {
+                // Create buttons for each possible move (1 to the size of the selected pile)
+                let button = document.createElement("button");
+                button.textContent = `Remove ${i}`;
+                button.classList.add("info-button");
+                button.onclick = () => makeMove(i);
+                inputAmountContainer.appendChild(button);
+            }
+
             inputModal.style.display = "block";
         }
 
-        // Close the input modal
-        closeInputModal.onclick = function() {
-            inputModal.style.display = "none";
-        }
-
-        // Handle the amount input when the player submits the number of objects
-        document.getElementById("submitAmount").onclick = function() {
-            let removeAmount = parseInt(document.getElementById("inputAmount").value);
-            if (isNaN(removeAmount) || removeAmount <= 0 || removeAmount > piles[currentPileIndex]) {
+        // Make the move
+        function makeMove(removeAmount) {
+            if (removeAmount <= 0 || removeAmount > piles[currentPileIndex]) {
                 alert("Invalid move. Try again.");
                 return;
             }
@@ -320,7 +338,8 @@
             currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
             updateStatus(`${currentPlayer}'s turn!`);
 
-            inputModal.style.display = "none"; // Close the modal
+            // Close the modal
+            inputModal.style.display = "none";
         }
 
         // Check if the game is over
@@ -330,7 +349,7 @@
 
         // Reset game
         function resetGame() {
-            piles = [3, 5, 7];
+            generateRandomPiles();
             currentPlayer = "Player 1";
             displayPiles();
             updateStatus("Your turn! Click a pile to remove objects.");
@@ -357,6 +376,7 @@
         }
 
         // Start the game
+        generateRandomPiles();
         displayPiles();
         updateStatus("Your turn! Click a pile to remove objects.");
     </script>
