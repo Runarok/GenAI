@@ -35,7 +35,7 @@
         #controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
             margin-top: 10px;
             padding: 10px;
@@ -45,6 +45,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        #controls > div:first-child {
+            flex-direction: row;
         }
 
         button {
@@ -122,8 +126,6 @@
         <div>
             <label for="speed">Speed (ms):</label>
             <input type="number" id="speed" value="5" min="1" max="100" onchange="changeSpeed()">
-        </div>
-        <div>
             <label for="gridSize">Grid Size:</label>
             <input type="number" id="gridSize" value="101" min="5" max="301" step="2" onchange="changeGridSize()">
         </div>
