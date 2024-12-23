@@ -94,6 +94,43 @@
             font-size: 18px;
         }
 
+        /* Game display */
+        .piles {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .pile {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .pile:hover {
+            background-color: #4CAF50;
+        }
+
+        .pile span {
+            display: block;
+            font-size: 24px;
+        }
+
+        .pile p {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .status {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #f44336;
+        }
     </style>
 </head>
 <body>
@@ -116,13 +153,20 @@
     <!-- Game Content -->
     <div class="game-container">
         <h1>Welcome to the Game of Nim</h1>
+
         <div class="game-info">
             <p>In this game, two players will take turns removing objects from piles. The goal is to be the player who removes the last object!</p>
             <p>Click the button above to learn more about the rules and strategy behind the game.</p>
         </div>
+
+        <!-- Piles Display -->
+        <div id="piles" class="piles"></div>
+
+        <!-- Status Display -->
+        <div class="status" id="status">Your turn! Click a pile to remove objects.</div>
     </div>
 
-    <!-- JavaScript for Modal functionality -->
+    <!-- JavaScript for Modal functionality and Game -->
     <script>
         // Get the modal and button elements
         var modal = document.getElementById("infoModal");
@@ -145,7 +189,68 @@
                 modal.style.display = "none";
             }
         }
-    </script>
 
+        // Game Variables
+        let piles = [3, 5, 7]; // Starting configuration of the piles
+        let currentPlayer = "Player 1"; // Player 1 starts
+
+        // Function to display piles
+        function displayPiles() {
+            const pilesContainer = document.getElementById("piles");
+            pilesContainer.innerHTML = ""; // Clear previous display
+            piles.forEach((pile, index) => {
+                let pileDiv = document.createElement("div");
+                pileDiv.classList.add("pile");
+                pileDiv.innerHTML = `<span>${pile}</span><p>Pile ${index + 1}</p>`;
+                pileDiv.onclick = () => takeTurn(index);
+                pilesContainer.appendChild(pileDiv);
+            });
+        }
+
+        // Function to update the game status
+        function updateStatus(message) {
+            const statusDiv = document.getElementById("status");
+            statusDiv.textContent = message;
+        }
+
+        // Handle the player's turn
+        function takeTurn(pileIndex) {
+            if (piles[pileIndex] === 0) return; // Can't take from an empty pile
+
+            // Ask the player how many objects to remove
+            let removeAmount = prompt(`How many objects would you like to remove from Pile ${pileIndex + 1}?`);
+            removeAmount = parseInt(removeAmount);
+
+            // Validate input
+            if (isNaN(removeAmount) || removeAmount <= 0 || removeAmount > piles[pileIndex]) {
+                alert("Invalid move. Try again.");
+                return;
+            }
+
+            // Update the pile
+            piles[pileIndex] -= removeAmount;
+            displayPiles();
+
+            // Check if the game is over
+            if (isGameOver()) {
+                updateStatus(`${currentPlayer} wins!`);
+                setTimeout(() => alert(`${currentPlayer} wins! Game Over!`), 10);
+                return;
+            }
+
+            // Switch player
+            currentPlayer = currentPlayer === "Player 1" ? "Player 2" : "Player 1";
+            updateStatus(`${currentPlayer}'s turn!`);
+        }
+
+        // Check if the game is over
+        function isGameOver() {
+            return piles.every(pile => pile === 0);
+        }
+
+        // Start the game
+        displayPiles();
+        updateStatus("Your turn! Click a pile to remove objects.");
+    </script>
 </body>
 </html>
