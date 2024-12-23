@@ -18,7 +18,7 @@
             background-color: #121212;
             border: 1px solid #444;
         }
-        .info-btn, .clear-btn {
+        .info-btn, .clear-btn, .limit-input-btn {
             position: absolute;
             background-color: #444;
             color: white;
@@ -27,7 +27,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .info-btn:hover, .clear-btn:hover {
+        .info-btn:hover, .clear-btn:hover, .limit-input-btn:hover {
             background-color: #666;
         }
         .info-btn {
@@ -37,6 +37,22 @@
         .clear-btn {
             top: 20px;
             left: 20px;
+        }
+        .limit-input-container {
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .limit-input-container input {
+            background-color: #444;
+            color: white;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border: 1px solid #666;
+            border-radius: 5px;
         }
         .info-modal {
             position: absolute;
@@ -67,6 +83,10 @@
     <canvas id="boidCanvas"></canvas>
     <button class="info-btn" id="infoBtn">Info</button>
     <button class="clear-btn" id="clearBtn">Clear</button>
+    <div class="limit-input-container">
+        <label for="boidLimitInput">Boid Limit:</label>
+        <input type="number" id="boidLimitInput" value="200" min="10" max="500">
+    </div>
     <div class="info-modal" id="infoModal">
         <h2>Boids Simulation</h2>
         <p>This is a simulation of Boids, an algorithm that simulates the flocking behavior of birds.</p>
@@ -93,7 +113,7 @@
 
         const boids = [];
         let dangerZone = null;
-        const maxBoids = 200; // Limit number of boids to improve performance
+        let maxBoids = 200; // Default limit for boids
 
         // Helper function for creating random vectors
         function randomVector(scale) {
@@ -290,6 +310,12 @@
         clearBtn.addEventListener("click", () => {
             boids.length = 0;
             dangerZone = null;
+        });
+
+        // Boid limit input handler
+        const boidLimitInput = document.getElementById("boidLimitInput");
+        boidLimitInput.addEventListener("input", (event) => {
+            maxBoids = Math.max(10, Math.min(500, parseInt(event.target.value, 10)));
         });
 
         // Start the simulation
