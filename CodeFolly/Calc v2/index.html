@@ -4,60 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scientific Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            
-        }
-        table {
-            background-color: #1e1e1e;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-spacing: 10px;
-        }
-        td {
-            padding: 5px;
-        }
-        input[type="button"] {
-            background-color: #444;
-            color: white;
-            font-size: 1.5em;
-            border: none;
-            padding: 20px;
-            width: 100%;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s ease;
-        }
-        input[type="button"]:hover {
-            background-color: #555;
-            transform: scale(1.05);
-        }
-        input[type="button"]:active {
-            background-color: #666;
-            transform: scale(1);
-        }
-        #display {
-            background-color: #333;
-            color: white;
-            font-size: 2em;
-            width: 100%;
-            text-align: right;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: none;
-            box-sizing: border-box;
-        }
-    </style>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #121212;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    table {
+        background-color: #1e1e1e;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+        border-spacing: 15px;
+    }
+
+    td {
+        padding: 8px;
+    }
+
+    #display {
+        background-color: #333;
+        color: white;
+        font-size: 2.5em;
+        width: 100%;
+        text-align: right;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border: none;
+        box-sizing: border-box;
+    }
+
+    input[type="button"] {
+        background-color: #444;
+        color: white;
+        font-size: 1.6em;
+        border: none;
+        padding: 20px;
+        width: 100%;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s ease, box-shadow 0.3s;
+    }
+
+    input[type="button"]:hover {
+        background-color: #555;
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    input[type="button"]:active {
+        background-color: #666;
+        transform: scale(1);
+        box-shadow: none;
+    }
+
+    input[type="button"]:nth-child(odd) {
+        background-color: #555;
+    }
+
+    input[type="button"]:nth-child(odd):hover {
+        background-color: #666;
+    }
+
+    input[type="button"]:nth-child(even) {
+        background-color: #666;
+    }
+
+    input[type="button"]:nth-child(even):hover {
+        background-color: #777;
+    }
+
+    input[type="button"]:nth-child(5), 
+    input[type="button"]:nth-child(6),
+    input[type="button"]:nth-child(7), 
+    input[type="button"]:nth-child(8) {
+        background-color: #ff6f61;
+    }
+
+    input[type="button"]:nth-child(5):hover, 
+    input[type="button"]:nth-child(6):hover,
+    input[type="button"]:nth-child(7):hover,
+    input[type="button"]:nth-child(8):hover {
+        background-color: #ff3b2f;
+    }
+
+</style>
+
 </head>
 <body>
     <form>
