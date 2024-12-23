@@ -40,6 +40,7 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            transition: opacity 0.3s;
         }
         .input-section button:hover {
             background-color: #3700b3;
@@ -54,17 +55,20 @@
             animation: spin 1s linear infinite;
             display: inline-block;
             margin-top: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
         }
 
         /* Toast Notification Styles */
         .toast {
             visibility: hidden;
-            max-width: 50px;
-            height: 50px;
             position: fixed;
             z-index: 9999;
-            left: 50%;
             bottom: 30px;
+            left: 50%;
             transform: translateX(-50%);
             background-color: #333;
             color: #fff;
@@ -148,7 +152,7 @@
             <input type="text" id="nameInput" placeholder="Your Name">
             <br>
             <button onclick="generateLink()">Generate Birthday Card</button>
-            <div class="loading-circle" id="loadingCircle" style="display: none;"></div>
+            <div class="loading-circle" id="loadingCircle"></div>
         </div>
 
         <!-- Birthday Card Section -->
@@ -169,9 +173,9 @@
         function generateLink() {
             const name = document.getElementById('nameInput').value.trim();
             if (name) {
-                // Show the loading circle
-                document.getElementById('loadingCircle').style.display = 'inline-block';
-                document.querySelector('.input-section button').disabled = true;
+                // Hide the button and show the loading circle
+                document.querySelector('.input-section button').style.opacity = 0;
+                document.getElementById('loadingCircle').style.visibility = 'visible';
 
                 // Simulate the generation of a link (just 500ms for loading)
                 setTimeout(() => {
@@ -180,7 +184,7 @@
                     navigator.clipboard.writeText(url).then(() => {
                         // Show the toast notification
                         showToast();
-                        // Redirect to the new URL
+                        // Check the hash after copying the link
                         window.location.href = url; // This reloads the page with the new hash
                     });
                 }, 500); // Simulating a delay of 500ms for the loading animation
@@ -195,12 +199,10 @@
             document.getElementById('cardTitle').textContent = `Happy Birthday, ${name}!`;
             document.getElementById('cardMessage').textContent = `Wishing you a day filled with love, joy, and amazing memories. Enjoy every moment!`;
 
-            // Fetch a random birthday image from the Unsplash API
-            fetch('https://api.unsplash.com/photos/random?query=birthday&client_id=YOUR_ACCESS_KEY')
-                .then(response => response.json())
-                .then(data => {
-                    const imageUrl = data[0]?.urls?.regular;
-                    document.getElementById('birthdayImage').src = imageUrl || 'https://via.placeholder.com/300x200.png?text=Happy+Birthday';
+            // Fetch a random birthday image from the Lorem Picsum API (free API)
+            fetch('https://picsum.photos/300/200?random')
+                .then(response => {
+                    document.getElementById('birthdayImage').src = response.url;
                 })
                 .catch(() => {
                     document.getElementById('birthdayImage').src = 'https://via.placeholder.com/300x200.png?text=Happy+Birthday';
