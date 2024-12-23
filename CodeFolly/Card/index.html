@@ -169,6 +169,15 @@
     <div id="toast" class="toast">Link copied!</div>
 
     <script>
+        // Array of Random Happy Birthday Quotes
+        const birthdayQuotes = [
+            "Wishing you a day filled with happiness and a year filled with joy!",
+            "May your birthday be the start of a year filled with good luck, good health, and much happiness.",
+            "Happy Birthday! May your day be filled with love, laughter, and joy!",
+            "On your special day, may you be surrounded by love and happiness! Enjoy every moment!",
+            "Sending you smiles for every moment of your special day…Have a wonderful time and a very happy birthday!"
+        ];
+
         // Function to generate the link and display the birthday card
         function generateLink() {
             const name = document.getElementById('nameInput').value.trim();
@@ -197,16 +206,15 @@
             document.querySelector('.input-section').style.display = 'none';
             document.querySelector('.card-section').style.display = 'block';
             document.getElementById('cardTitle').textContent = `Happy Birthday, ${name}!`;
-            document.getElementById('cardMessage').textContent = `Wishing you a day filled with love, joy, and amazing memories. Enjoy every moment!`;
 
-            // Fetch a random birthday image from the Lorem Picsum API (free API)
-            fetch('https://picsum.photos/300/200?random')
-                .then(response => {
-                    document.getElementById('birthdayImage').src = response.url;
-                })
-                .catch(() => {
-                    document.getElementById('birthdayImage').src = 'https://via.placeholder.com/300x200.png?text=Happy+Birthday';
-                });
+            // Select a random happy birthday quote
+            const randomQuote = birthdayQuotes[Math.floor(Math.random() * birthdayQuotes.length)];
+            document.getElementById('cardMessage').textContent = randomQuote;
+
+            // Randomly select an image from the images folder (local PNGs)
+            const images = ['gift1.png', 'gift2.png', 'gift3.png'];  // Adjust with actual image filenames
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+            document.getElementById('birthdayImage').src = `images/${randomImage}`;
         }
 
         // Toast Notification Logic
