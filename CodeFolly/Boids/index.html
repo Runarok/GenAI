@@ -35,16 +35,17 @@
             right: 20px;
         }
         .clear-btn {
-            top: 20px;
+            top: 60px;
             left: 20px;
         }
         .limit-input-container {
             position: absolute;
-            top: 60px;
+            top: 20px;
             left: 20px;
             display: flex;
             align-items: center;
             color: white;
+            font-size: 16px;
         }
         .limit-input-container input {
             background-color: #444;
@@ -53,6 +54,7 @@
             margin-left: 10px;
             border: 1px solid #666;
             border-radius: 5px;
+            width: 60px;
         }
         .info-modal {
             position: absolute;
@@ -82,20 +84,29 @@
 <body>
     <canvas id="boidCanvas"></canvas>
     <button class="info-btn" id="infoBtn">Info</button>
-    <button class="clear-btn" id="clearBtn">Clear</button>
     <div class="limit-input-container">
         <label for="boidLimitInput">Boid Limit:</label>
-        <input type="number" id="boidLimitInput" value="200" min="10" max="500">
+        <input type="number" id="boidLimitInput" value="200" min="10" max="2000">
     </div>
+    <button class="clear-btn" id="clearBtn">Clear</button>
     <div class="info-modal" id="infoModal">
-        <h2>Boids Simulation</h2>
-        <p>This is a simulation of Boids, an algorithm that simulates the flocking behavior of birds.</p>
-        <p><strong>Controls:</strong></p>
-        <ul>
-            <li>Click anywhere on the canvas to spawn new Boids.</li>
-            <li>Boids will avoid the area you click (as a danger zone).</li>
-            <li>Watch them move, align, and avoid each other.</li>
-        </ul>
+    <h2>Boids Simulation</h2>
+    <p>This is a simulation of <strong>Boids</strong>, an algorithm that models the flocking behavior of birds and other animals that move in groups.</p>
+    <p><strong>How Boids Work:</strong></p>
+    <ul>
+        <li><strong>Separation:</strong> Boids avoid crowding together and colliding with each other.</li>
+        <li><strong>Alignment:</strong> Boids align their velocity with the average velocity of nearby boids.</li>
+        <li><strong>Cohesion:</strong> Boids steer towards the average position of nearby boids.</li>
+    </ul>
+    <p><strong>Controls:</strong></p>
+    <ul>
+        <li><strong>Left-click</strong> anywhere on the canvas to spawn new Boids and create a "danger zone" that they will avoid.</li>
+        <li>The <strong>danger zone</strong> is marked by where you clicked. Boids will steer away from this area to avoid collisions.</li>
+        <li>As Boids move, they follow the natural behaviors of <strong>separation</strong>, <strong>alignment</strong>, and <strong>cohesion</strong>, making them flock together while avoiding collisions.</li>
+        <li>You can adjust the <strong>Boid Limit</strong> at the top-left of the screen to control how many Boids can exist in the simulation at once.</li>
+        <li>Click the <strong>Clear</strong> button to remove all Boids and reset the canvas.</li>
+    </ul>
+    <p><strong>Enjoy the simulation!</strong></p>
         <button id="closeBtn">Close</button>
     </div>
 
