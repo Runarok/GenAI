@@ -2,6 +2,8 @@
 
 Welcome to the **GenAI** repository! This is a collection of games, projects, and experiments I generated using AI. While the core code was created with the help of AI, I dedicated considerable time to refine and modify it to ensure proper functionality. This project was born out of my curiosity to see how AI could assist in coding, and the results have been fascinating!
 
+This entire repository was made during my **freetime in the 5th semester** of university/college, where I had the chance to experiment with AI and see how it could enhance my coding projects in a fun and productive way.
+
 ## 🚀 Overview
 
 All projects in this repository are hosted on **GitHub Pages**. Feel free to explore and enjoy!
@@ -34,14 +36,11 @@ A maze adventure game set in a treasure-filled dungeon! I worked on refining the
 
 ## 🤝 How to Contribute
 
-I welcome contributions from anyone interested in improving the repository or suggesting new features. To contribute:
+I will no longer be actively updating this repository due to the following reason:
 
-1. **Fork** this repository.
-2. **Clone** your fork to your local machine.
-3. **Create a new branch** (`git checkout -b feature-branch`).
-4. **Make your changes** and commit them (`git commit -am 'Add new feature'`).
-5. **Push** to your forked repository (`git push origin feature-branch`).
-6. Open a **Pull Request** to merge your changes.
+- This entire repository was made during my **freetime in the 5th semester** of university/college, and I wanted to focus on experimenting and learning during that time.
+
+However, feel free to explore the code, make improvements, and create your own branches if you'd like to enhance or build upon any of the projects!
 
 ---
 
