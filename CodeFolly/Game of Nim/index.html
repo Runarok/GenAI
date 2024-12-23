@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Competitive Game of Nim</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .game-container {
+            text-align: center;
+            font-size: 1.5em;
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            width: 300px;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .heaps {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 20px;
+        }
+
+        .heap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .heap:active {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .object {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 5px;
+            background-color: neon;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .neon-blue { background-color: #00f; }
+        .neon-green { background-color: #0f0; }
+        .neon-purple { background-color: #f0f; }
+
+        @keyframes glow {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: lightgray;
+        }
+
+        .button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Competitive Game of Nim</h1>
+        <div class="heaps">
+            <div class="heap" data-heap="1">
+                <div class="object neon-blue"></div>
+                <div class="object neon-blue"></div>
+                <div class="object neon-blue"></div>
+            </div>
+            <div class="heap" data-heap="2">
+                <div class="object neon-green"></div>
+                <div class="object neon-green"></div>
+                <div class="object neon-green"></div>
+                <div class="object neon-green"></div>
+            </div>
+            <div class="heap" data-heap="3">
+                <div class="object neon-purple"></div>
+                <div class="object neon-purple"></div>
+            </div>
+        </div>
+        <div class="status">Player 1's turn</div>
+        <button class="button" id="restart-btn">Restart Game</button>
+    </div>
+
+    <script>
+        const heaps = document.querySelectorAll('.heap');
+        const statusDiv = document.querySelector('.status');
+        const restartBtn = document.getElementById('restart-btn');
+
+        let gameState = {
+            heap1: [1, 1, 1],
+            heap2: [1, 1, 1, 1],
+            heap3: [1, 1],
+            currentPlayer: 1, // 1 for Player 1, 2 for Player 2 or AI
+            isAI: true
+        };
+
+        let audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); // Sound for action
+
+        // Update the visual game state
+        function updateGameState() {
+            heaps.forEach((heap, index) => {
+                const heapNumber = index + 1;
+                const heapObjects = gameState[`heap${heapNumber}`];
+                heap.innerHTML = '';
+                heapObjects.forEach(() => {
+                    let obj = document.createElement('div');
+                    obj.classList.add('object');
+                    obj.classList.add(heapNumber === 1 ? 'neon-blue' : heapNumber === 2 ? 'neon-green' : 'neon-purple');
+                    heap.appendChild(obj);
+                });
+            });
+
+            statusDiv.textContent = gameState.currentPlayer === 1 ? "Player 1's turn" : (gameState.isAI ? "AI's turn" : "Player 2's turn");
+
+            if (gameOver()) {
+                statusDiv.textContent = gameState.currentPlayer === 1 ? "Player 1 wins!" : (gameState.isAI ? "AI wins!" : "Player 2 wins!");
+                heaps.forEach(heap => heap.style.pointerEvents = 'none');
+            }
+        }
+
+        // Check if the game is over
+        function gameOver() {
+            return [gameState.heap1, gameState.heap2, gameState.heap3].every(heap => heap.length === 0);
+        }
+
+        // Handle a player's click on a heap
+        function handleHeapClick(event) {
+            if (gameOver()) return;
+
+            const heapElement = event.target.closest('.heap');
+            const heapId = heapElement.getAttribute('data-heap');
+            const heap = gameState[`heap${heapId}`];
+
+            if (heap.length === 0) return;
+
+            const newHeap = heap.slice(0, heap.length - 1);
+            gameState[`heap${heapId}`] = newHeap;
+
+            audio.play();
+            gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
+            updateGameState();
+
+            if (gameState.currentPlayer === 2 && gameState.isAI) {
+                aiMove();
+            }
+        }
+
+        // Smart AI Move using Nim-Sum (XOR)
+        function aiMove() {
+            const heapsState = [gameState.heap1.length, gameState.heap2.length, gameState.heap3.length];
+            let nimSum = heapsState.reduce((acc, num) => acc ^ num, 0);
+            
+            if (nimSum === 0) {
+                // Random move if no winning move is found
+                const nonEmptyHeaps = [gameState.heap1, gameState.heap2, gameState.heap3].filter(heap => heap.length > 0);
+                const randomHeap = nonEmptyHeaps[Math.floor(Math.random() * nonEmptyHeaps.length)];
+                const heapId = [gameState.heap1, gameState.heap2, gameState.heap3].indexOf(randomHeap) + 1;
+
+                gameState[`heap${heapId}`].pop();
+            } else {
+                // Nim-Sum Strategy: Find a heap where the Nim-Sum is reduced to 0
+                for (let i = 0; i < 3; i++) {
+                    let heap = gameState[`heap${i+1}`];
+                    let newHeapLength = heap.length ^ nimSum;
+                    if (newHeapLength < heap.length) {
+                        gameState[`heap${i+1}`] = heap.slice(0, newHeapLength);
+                        break;
+                    }
+                }
+            }
+
+            audio.play();
+            gameState.currentPlayer = 1;
+            updateGameState();
+        }
+
+        function restartGame() {
+            gameState = {
+                heap1: [1, 1, 1],
+                heap2: [1, 1, 1, 1],
+                heap3: [1, 1],
+                currentPlayer: 1,
+                isAI: true
+            };
+            updateGameState();
+            heaps.forEach(heap => heap.style.pointerEvents = 'auto');
+        }
+
+        heaps.forEach(heap => heap.addEventListener('click', handleHeapClick));
+        restartBtn.addEventListener('click', restartGame);
+
+        updateGameState(); // Initial game state
+    </script>
+</body>
+</html>
