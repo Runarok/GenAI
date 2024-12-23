@@ -171,7 +171,7 @@
         ];
 
         // Initialize the name variable (defined or undefined)
-        let name = ""; // Predefined name, change this if you need
+        let name = "s"; // Predefined name, change this if you need
 
         // Function to generate the link and display the birthday card
         function generateLink() {
@@ -183,17 +183,19 @@
 
                 // Copy the link to the clipboard
                 navigator.clipboard.writeText(url).then(() => {
-                    // Show the toast notification for 2000ms
+                    // Show the toast notification immediately
                     showToast();
+
                     // Delay the hash check by 2000ms (after the toast disappears)
                     setTimeout(() => {
-                        window.location.href = url; // This reloads the page with the new hash
-                    }, 2000); // Delay for hash check (matching the toast display duration)
+                        // Check the hash and display the birthday card
+                        displayCard(name); // Display the card after 2000ms
+                    }, 2000); // Delay for card appearance
                 });
             }
         }
 
-        // Function to display the birthday card after the page loads with a hash or predefined name
+        // Function to display the birthday card based on the name or hash
         function displayCard(name) {
             // Display the birthday card and hide the input section
             document.querySelector('.input-section').style.display = 'none';
