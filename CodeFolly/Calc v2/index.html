@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        table {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border-spacing: 8px;
+        }
+        td {
+            padding: 10px;
+        }
+        input[type="text"] {
+            background-color: #333;
+            color: white;
+            font-size: 2.5em;
+            text-align: right;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+        }
+        input[type="button"] {
+            background-color: #444;
+            color: white;
+            font-size: 2em;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            height: 100%;
+        }
+        input[type="button"]:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+        input[type="button"]:active {
+            background-color: #666;
+            transform: scale(1);
+        }
+        input[type="button"].operator {
+            background-color: #ff8c00;
+        }
+        input[type="button"].operator:hover {
+            background-color: #e07b00;
+        }
+        input[type="button"].clear {
+            background-color: #d9534f;
+        }
+        input[type="button"].clear:hover {
+            background-color: #c9302c;
+        }
+        input[type="button"].equal {
+            background-color: #28a745;
+            grid-column: span 2;
+        }
+        input[type="button"].equal:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <table id="calcu">
+        <tr>
+            <td colspan="4">
+                <input type="text" id="result" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="button" class="clear" value="C" onclick="clearDisplay()"></td>
+            <td><input type="button" value="π" onclick="appendToDisplay('π')"></td>
+            <td><input type="button" value="(" onclick="appendToDisplay('(')"></td>
+            <td><input type="button" value=")" onclick="appendToDisplay(')')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="appendToDisplay('7')"></td>
+            <td><input type="button" value="8" onclick="appendToDisplay('8')"></td>
+            <td><input type="button" value="9" onclick="appendToDisplay('9')"></td>
+            <td><input type="button" class="operator" value="/" onclick="appendToDisplay('/')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="appendToDisplay('4')"></td>
+            <td><input type="button" value="5" onclick="appendToDisplay('5')"></td>
+            <td><input type="button" value="6" onclick="appendToDisplay('6')"></td>
+            <td><input type="button" class="operator" value="*" onclick="appendToDisplay('*')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="appendToDisplay('1')"></td>
+            <td><input type="button" value="2" onclick="appendToDisplay('2')"></td>
+            <td><input type="button" value="3" onclick="appendToDisplay('3')"></td>
+            <td><input type="button" class="operator" value="-" onclick="appendToDisplay('-')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" onclick="appendToDisplay('0')"></td>
+            <td><input type="button" value="." onclick="appendToDisplay('.')"></td>
+            <td><input type="button" class="equal" value="=" onclick="calculateResult()"></td>
+            <td><input type="button" class="operator" value="+" onclick="appendToDisplay('+')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="sin" onclick="appendToDisplay('sin(')"></td>
+            <td><input type="button" value="cos" onclick="appendToDisplay('cos(')"></td>
+            <td><input type="button" value="tan" onclick="appendToDisplay('tan(')"></td>
+            <td><input type="button" value="log" onclick="appendToDisplay('log(')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="sqrt" onclick="appendToDisplay('sqrt(')"></td>
+            <td><input type="button" value="x²" onclick="appendToDisplay('**2')"></td>
+            <td><input type="button" value="x³" onclick="appendToDisplay('**3')"></td>
+            <td><input type="button" value="e" onclick="appendToDisplay('e')"></td>
+        </tr>
+    </table>
+
+    <script>
+        let display = document.getElementById('result');
+        let currentInput = '';
+
+        function appendToDisplay(value) {
+            // Replace π and e with their numeric equivalents
+            if (value === 'π') value = Math.PI;
+            if (value === 'e') value = Math.E;
+
+            currentInput += value;
+            display.value = currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            display.value = '0';
+        }
+
+        function calculateResult() {
+            try {
+                // Use eval to calculate the expression
+                currentInput = eval(currentInput).toString();
+                display.value = currentInput;
+            } catch (e) {
+                display.value = 'Error';
+                currentInput = '';
+            }
+        }
+
+        // Event listener for keyboard support
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            if (key >= '0' && key <= '9') {
+                appendToDisplay(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/' || key === '.' || key === '(' || key === ')') {
+                appendToDisplay(key);
+            } else if (key === 'Enter') {
+                calculateResult();
+            } else if (key === 'Backspace') {
+                currentInput = currentInput.slice(0, -1);
+                display.value = currentInput || '0';
+            } else if (key === 'c' || key === 'C') {
+                clearDisplay();
+            }
+        });
+    </script>
+</body>
+</html>
