@@ -86,7 +86,7 @@
             <div class="card" id="birthdayCard">
                 <h1 id="cardTitle">Happy Birthday!</h1>
                 <p id="cardMessage"></p>
-                <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+                <button class="copy-btn" id="copyBtn" onclick="copyLink()">Copy Link</button>
             </div>
         </div>
     </div>
@@ -95,8 +95,9 @@
         function generateLink() {
             const name = document.getElementById('nameInput').value.trim();
             if (name) {
+                // Generate the link with the hash and reload the page
                 const url = window.location.href.split('#')[0] + '#' + encodeURIComponent(name);
-                window.location.href = url;
+                window.location.href = url; // This reloads the page with the new hash
             }
         }
 
@@ -108,8 +109,10 @@
         }
 
         function displayCard(name) {
+            // Hide the input section and show the card section
             document.querySelector('.input-section').style.display = 'none';
             document.querySelector('.card-section').style.display = 'block';
+            // Display the personalized birthday card
             document.getElementById('cardTitle').textContent = `Happy Birthday, ${name}!`;
             document.getElementById('cardMessage').textContent = `Wishing you a day filled with love, joy, and amazing memories. Enjoy every moment!`;
         }
@@ -118,6 +121,8 @@
         const hash = window.location.hash.substring(1);
         if (hash) {
             displayCard(decodeURIComponent(hash));
+            // Show the copy link button right away
+            document.getElementById('copyBtn').style.display = 'inline-block';
         } else {
             document.querySelector('.input-section').style.display = 'block';
         }
