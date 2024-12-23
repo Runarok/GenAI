@@ -45,23 +45,6 @@
         .input-section button:hover {
             background-color: #3700b3;
         }
-        /* Loading Circle Styles */
-        .loading-circle {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #ff4081;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-top: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            visibility: hidden;
-        }
-
         /* Toast Notification Styles */
         .toast {
             visibility: hidden;
@@ -136,12 +119,6 @@
             50% { transform: scale(1.1); opacity: 1; }
             100% { transform: scale(1); }
         }
-
-        /* Loading Circle Animation */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -152,7 +129,6 @@
             <input type="text" id="nameInput" placeholder="Your Name">
             <br>
             <button onclick="generateLink()">Generate Birthday Card</button>
-            <div class="loading-circle" id="loadingCircle"></div>
         </div>
 
         <!-- Birthday Card Section -->
@@ -182,21 +158,19 @@
         function generateLink() {
             const name = document.getElementById('nameInput').value.trim();
             if (name) {
-                // Hide the button and show the loading circle
-                document.querySelector('.input-section button').style.opacity = 0;
-                document.getElementById('loadingCircle').style.visibility = 'visible';
+                // Generate the link for the birthday card
+                const encodedName = encodeURIComponent(name); // Handle spaces as %20
+                const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodedName}`;
 
-                // Simulate the generation of a link (just 500ms for loading)
-                setTimeout(() => {
-                    const encodedName = encodeURIComponent(name); // Handle spaces as %20
-                    const url = `https://runarok.github.io/GenAI/CodeFolly/Card/#${encodedName}`;
-                    navigator.clipboard.writeText(url).then(() => {
-                        // Show the toast notification
-                        showToast();
-                        // Check the hash after copying the link
+                // Copy the link to the clipboard
+                navigator.clipboard.writeText(url).then(() => {
+                    // Show the toast notification for 500ms
+                    showToast();
+                    // Check the hash after the link is copied
+                    setTimeout(() => {
                         window.location.href = url; // This reloads the page with the new hash
-                    });
-                }, 500); // Simulating a delay of 500ms for the loading animation
+                    }, 500); // Delay to show the toast for 500ms
+                });
             }
         }
 
@@ -211,8 +185,8 @@
             const randomQuote = birthdayQuotes[Math.floor(Math.random() * birthdayQuotes.length)];
             document.getElementById('cardMessage').textContent = randomQuote;
 
-            // Randomly select an image from the images folder (local PNGs)
-            const images = ['gift1.png', 'gift2.png', 'gift3.png'];  // Adjust with actual image filenames
+            // Randomly select an image from the images folder (local JPEGs)
+            const images = ['gift (1).jpeg', 'gift (2).jpeg', 'gift (3).jpeg'];  // Adjust with actual image filenames
             const randomImage = images[Math.floor(Math.random() * images.length)];
             document.getElementById('birthdayImage').src = `images/${randomImage}`;
         }
@@ -223,7 +197,7 @@
             toast.className = 'toast show';
             setTimeout(function() {
                 toast.className = toast.className.replace('show', '');
-            }, 3000); // Toast visibility duration
+            }, 500); // Toast visibility duration of 500ms
         }
 
         // Check if there's a hash in the URL (for displaying the birthday card)
