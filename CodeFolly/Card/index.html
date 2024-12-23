@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Card</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.5s;
+        }
+        .container {
+            text-align: center;
+        }
+        .input-section, .card-section {
+            display: none;
+        }
+        .input-section input {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #fff;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .input-section button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #6200ea;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .input-section button:hover {
+            background-color: #3700b3;
+        }
+        .card {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+        .card h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ff4081;
+        }
+        .card p {
+            font-size: 24px;
+            margin-top: 0;
+            color: #b3b3b3;
+        }
+        .copy-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #03dac5;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #018786;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-section">
+            <h1>Enter Your Name</h1>
+            <input type="text" id="nameInput" placeholder="Your Name">
+            <br>
+            <button onclick="generateLink()">Generate Birthday Card</button>
+        </div>
+        <div class="card-section">
+            <div class="card" id="birthdayCard">
+                <h1 id="cardTitle">Happy Birthday!</h1>
+                <p id="cardMessage"></p>
+                <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateLink() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name) {
+                const url = window.location.href.split('#')[0] + '#' + encodeURIComponent(name);
+                window.location.href = url;
+            }
+        }
+
+        function copyLink() {
+            const link = window.location.href;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        function displayCard(name) {
+            document.querySelector('.input-section').style.display = 'none';
+            document.querySelector('.card-section').style.display = 'block';
+            document.getElementById('cardTitle').textContent = `Happy Birthday, ${name}!`;
+            document.getElementById('cardMessage').textContent = `Wishing you a day filled with love, joy, and amazing memories. Enjoy every moment!`;
+        }
+
+        // Check if there's a hash in the URL
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            displayCard(decodeURIComponent(hash));
+        } else {
+            document.querySelector('.input-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
