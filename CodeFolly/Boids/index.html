@@ -73,6 +73,7 @@
         <p><strong>Controls:</strong></p>
         <ul>
             <li>Click anywhere on the canvas to spawn new Boids.</li>
+            <li>Boids will avoid the area you click (as a danger zone).</li>
             <li>Watch them move, align, and avoid each other.</li>
         </ul>
         <button id="closeBtn">Close</button>
@@ -82,12 +83,17 @@
         const canvas = document.getElementById("boidCanvas");
         const ctx = canvas.getContext("2d");
 
-        // Set canvas size
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Set canvas size to fill entire window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas(); // Initial resize
 
         const numBoids = 100;
         const boids = [];
+        let dangerZone = null;
 
         // Boid constructor
         function Boid(x, y) {
@@ -130,10 +136,38 @@
             let alignment = this.align(boids);
             let cohesion = this.cohere(boids);
             let separation = this.separate(boids);
+            let avoidance = this.avoidDangerZone();
 
             this.applyForce(alignment);
             this.applyForce(cohesion);
             this.applyForce(separation);
+            this.applyForce(avoidance);
+        };
+
+        // Avoid danger zone (left-clicked area)
+        Boid.prototype.avoidDangerZone = function () {
+            if (!dangerZone) return { x: 0, y: 0 };
+
+            let dist = Math.hypot(this.position.x - dangerZone.x, this.position.y - dangerZone.y);
+            if (dist < 100) {
+                let force = { x: this.position.x - dangerZone.x, y: this.position.y - dangerZone.y };
+                let magnitude = Math.hypot(force.x, force.y);
+                if (magnitude > 0) {
+                    force.x /= magnitude;
+                    force.y /= magnitude;
+                    force.x *= this.maxSpeed;
+                    force.y *= this.maxSpeed;
+                    force.x -= this.velocity.x;
+                    force.y -= this.velocity.y;
+                    let forceMagnitude = Math.hypot(force.x, force.y);
+                    if (forceMagnitude > this.maxForce) {
+                        force.x = (force.x / forceMagnitude) * this.maxForce;
+                        force.y = (force.y / forceMagnitude) * this.maxForce;
+                    }
+                }
+                return force;
+            }
+            return { x: 0, y: 0 };
         };
 
         // Align with the average heading of nearby boids
@@ -273,8 +307,11 @@
             requestAnimationFrame(loop);
         }
 
-        // Event listener for clicks to spawn new boids
+        // Event listener for clicks to spawn new boids and create danger zone
         canvas.addEventListener("click", (event) => {
+            if (event.button === 0) {  // Left click
+                dangerZone = { x: event.clientX, y: event.clientY }; // Set the danger zone
+            }
             createBoids(event.clientX, event.clientY);
         });
 
@@ -295,6 +332,7 @@
         const clearBtn = document.getElementById("clearBtn");
         clearBtn.addEventListener("click", () => {
             boids.length = 0;
+            dangerZone = null;
         });
 
         // Start the simulation
