@@ -170,8 +170,8 @@
             "May your birthday be filled with all your favorite things and surrounded by the ones you love. Enjoy!"
         ];
 
-        // Define a predefined name variable
-        let name = ""; // Set the predefined name here
+        // Initialize the name variable (defined or undefined)
+        let name = ""; // Predefined name, change this if you need
 
         // Function to generate the link and display the birthday card
         function generateLink() {
@@ -223,14 +223,20 @@
             }, 500); // Toast visibility duration of 500ms
         }
 
-        // Check for the hash in the URL
-        const hash = window.location.hash.substring(1);
-        if (hash) {
-            // If hash exists, display the card for the name in the hash
-            displayCard(decodeURIComponent(hash));
-        } else {
-            // If no hash exists, display the card with the predefined name
+        // Check if `name` is defined, if not check for hash in the URL
+        if (name) {
+            // If name is predefined or set, display the card
             displayCard(name);
+        } else {
+            // If no name, check for a hash in the URL
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                // If hash exists, display the card for the name in the hash
+                displayCard(decodeURIComponent(hash));
+            } else {
+                // If no name or hash, show the input section
+                document.querySelector('.input-section').style.display = 'block';
+            }
         }
     </script>
 </body>
