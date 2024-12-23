@@ -3,286 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Langton's Ant - Dark Theme</title>
+    <title>Main Menu - RoyalRealm</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Noricon&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
+            color: #ffffff;
+            font-family: 'Noricon', sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        h1 {
-            color: #f0f0f0;
-            margin-top: 20px;
-        }
-
-        #gridCanvas {
-            background-color: #1e1e1e;
-            border: 2px solid #333;
-            cursor: pointer;
-            display: block;
-            margin: 20px 0;
-        }
-
-        #controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 10px;
-            padding: 10px;
-        }
-
-        #buttonSection {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #444;
-            border: 1px solid #666;
-            color: white;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #555;
-        }
-
-        label, input {
-            font-size: 16px;
-            color: white;
-            margin: 5px;
-        }
-
-        input {
-            background-color: #333;
-            border: 1px solid #666;
-            color: white;
-            padding: 5px;
-            width: 60px;
-            border-radius: 5px;
-        }
-
-        #infoModal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed to flex-start so content doesn't stretch vertically */
+            min-height: 100vh; /* Full viewport height */
+            text-align: center; /* Center text */
+            position: relative; /* For positioning the button */
+            overflow-y: auto; /* Enable scrolling only when necessary */
+            max-height: 100vh; /* Prevent the body from growing beyond the viewport */
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #00bcd4; /* Cyan color */
+            text-shadow: 0 0 10px #00bcd4;
+        }
+
+        .link-container {
+            background-color: #1e1e1e;
             border-radius: 8px;
-            width: 280px;
-            color: white;
-            font-size: 14px;
-            display: none;
-            z-index: 1000;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping of links */
+            gap: 10px;
+            justify-content: center; /* Center links horizontally */
         }
 
-        #infoModal button {
-            background-color: #444;
-            padding: 5px;
+        a {
+            color: #e0e0e0; /* Light gray for better contrast */
+            text-decoration: none;
+            padding: 10px;
+            border: 2px solid #00bcd4; /* Cyan border */
             border-radius: 5px;
-            cursor: pointer;
-            border: none;
-            margin-top: 10px;
-            width: 100%;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
-        #infoModal button:hover {
-            background-color: #555;
+        a:hover {
+            background-color: #00bcd4; /* Background on hover */
+            color: #121212; /* Dark text on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* New styles for section toggling */
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        .controls button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #00bcd4;
+            color: #121212;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 5px;
+        }
+
+        .controls button:hover {
+            background-color: #121212;
+            color: #00bcd4;
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            width: 100%; /* Make sections responsive */
+            max-width: 600px; /* Limit max width for larger screens */
+        }
+
+        @media (max-width: 600px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            a {
+                font-size: 0.9rem;
+            }
+
+            .controls button {
+                font-size: 0.9rem;
+            }
         }
 
     </style>
 </head>
 <body>
 
-    <h1>Langton's Ant - Dark Theme</h1>
-    <canvas id="gridCanvas" width="600" height="600"></canvas>
+<div class="controls">
+    <button onclick="showSection('Games')">Games</button>
+    <button onclick="showSection('CodeFolly')">CodeFolly</button>
+    <button onclick="showSection('miscellaneous')">Miscellaneous</button>
+</div>
 
-    <div id="controls">
-        <div id="buttonSection">
-            <button id="playPauseButton" onclick="toggleSimulation()">Play</button>
-            <button onclick="resetGrid()">Reset</button>
-            <button onclick="toggleInfo()">Info</button>
-            <button onclick="toggleInsertAnt()">Allow Inserts</button>
-            <button onclick="clearAnts()">Clear Ants</button> <!-- New button to clear ants -->
-        </div>
-        <div>
-            <label for="speed">Speed (ms):</label>
-            <input type="number" id="speed" value="5" min="1" max="100" onchange="changeSpeed()">
-            <label for="gridSize">Grid Size:</label>
-            <input type="number" id="gridSize" value="101" min="5" max="301" step="2" onchange="changeGridSize()">
-        </div>
+<!-- Section for Classic Games -->
+<div id="Games" class="section">
+    <div class="section-title">Classic Games</div>
+    <div class="link-container">
+        <a href="Games/TicTacToe/">Unbeatable Tic-Tac-Toe</a>
+        <a href="Games/Minesweeper/">Minesweeper</a>
+        <a href="Games/Snakes/">Snakes</a>
+        <a href="Games/Othello/">Othello</a>
+        <a href="Games/Clash-2024/">Clash 2024</a>
     </div>
 
-    <div id="infoModal">
-        <h3>Rules of Langton's Ant</h3>
-        <p><strong>Initial Setup:</strong></p>
-        <ul>
-            <li>The grid is a two-dimensional plane (usually considered infinite).</li>
-            <li>Each cell on the grid is initially either black (off) or white (on).</li>
-            <li>The ant starts at the center of the grid, facing a particular direction (typically up).</li>
-        </ul>
-
-        <p><strong>Movement Rule:</strong></p>
-        <ul>
-            <li>If the ant is on a white cell, it turns 90° right (clockwise), changes the cell to black, and moves forward.</li>
-            <li>If the ant is on a black cell, it turns 90° left (counterclockwise), changes the cell to white, and moves forward.</li>
-        </ul>
-
-        <p><strong>Repeating the Process:</strong></p>
-        <ul>
-            <li>This process is repeated indefinitely. The ant's movement and the resulting pattern evolve according to these simple rules.</li>
-            <li>The pattern may seem chaotic initially but eventually forms a repeating structure (a "highway").</li>
-        </ul>
-
-        <p><strong>Interesting Behavior:</strong></p>
-        <ul>
-            <li><em>Initially chaotic:</em> The ant moves unpredictably, creating random-looking patterns.</li>
-            <li><em>Formation of a "highway":</em> Over time, the ant forms a repeating straight line (highway).</li>
-        </ul>
-
-        <p><strong>Key Characteristics:</strong></p>
-        <ul>
-            <li><em>Emergence of Order:</em> The system eventually stabilizes into a cyclic, predictable structure.</li>
-            <li><em>Non-periodic to Periodic:</em> The system starts disordered and transitions into a periodic "highway".</li>
-        </ul>
-
-        <button onclick="toggleInfo()">Close</button>
+    <!-- Section for Memory/Puzzle Games -->
+    <div class="section-title">Memory/Puzzle Games</div>
+    <div class="link-container">
+        <a href="Games/Simon-says/">Simon says</a>
+        <a href="Games/Slice-n-Spin/">Slice-n-Spin</a>
+        <a href="Games/Memory_Match-up/">Flip & Find</a>
+        <a href="Games/Memory-Recall/">Memory Recall</a>
+        <a href="Games/Shadow-Maze/">Shadow Maze</a>
+        <a href="Games/Labyrinth-of-Shadows/">Labyrinth of Shadows</a>
     </div>
 
-    <script>
-        let canvas = document.getElementById('gridCanvas');
-        let ctx = canvas.getContext('2d');
+    <!-- Section for Reflex Games -->
+    <div class="section-title">Reflex Games</div>
+    <div class="link-container">
+        <a href="Games/Yoyo-Dash/">Yoyo Dash</a>
+        <a href="Games/Quick-Click/">Quick Click</a>
+        <a href="Games/Emoji-Hunt/">Emoji Hunt</a>
+        <a href="Games/Whack-A-Tile/">Whack A Tile</a>
+    </div>
 
-        let gridSize = 101;
-        let cellSize = 6;
-        let delay = 5;
-        let isSimulationRunning = false;
-        let isAllowInserts = false;
+    <!-- Section for Other types of Games -->
+    <div class="section-title">Other Games</div>
+    <div class="link-container">
+        <a href="Games/Progress-knight/">Progress Knight</a>
+        <a href="Games/Golden-Depths/">Golden Depths</a>
+        <a href="Games/Conways_GOL/">Conway's Game of Life</a>
+    </div>
+</div>
 
-        let ants = [
-            { x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 } // Main ant
-        ];
+<!-- Section for CodeFolly -->
+<div id="CodeFolly" class="section">
+    <div class="section-title">CodeFolly Projects</div>
+    <div class="link-container">
+        <a href="CodeFolly/Rubics/">Rubics</a>
+        <a href="CodeFolly/Boids/">Boids</a>
+        <a href="CodeFolly/Card/">B'day Card</a>
+        <a href="CodeFolly/Wireworld Simulation/">Wireworld Simulation</a>
+        <a href="CodeFolly/Game of Nim/">Game of Nim</a>
+        <a href="CodeFolly/Langton's Ant/">Langton's Ant</a>
+    </div>
+</div>
 
-        let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
+<!-- Section for Miscellaneous -->
+<div id="miscellaneous" class="section">
+    <div class="section-title">Academic</div>
+    <div class="link-container">
+        <a href="Misc/IA2/">IA 2</a>
+        <a href="Misc/Lab/">Lab</a>
+    </div>
 
-        function drawGrid() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let y = 0; y < gridSize; y++) {
-                for (let x = 0; x < gridSize; x++) {
-                    ctx.fillStyle = grid[y][x] === 0 ? '#3a3a3a' : '#212121'; // Darker grid colors
-                    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
-                }
-            }
+    <div class="section-title">Miscellaneous</div>
+    <div class="link-container">
+        <a href="Misc/Webs-of-Wonder/">Webs of Wonders</a>
+        <a href="Misc/ZenVibes/">ZenVibes</a>
+        <a href="Misc/Embrace-yourself/">Embrace yourself</a>
+    </div>
+</div>
 
-            ants.forEach((ant) => {
-                ctx.fillStyle = "#ff0000"; // Color of the ant
-                ctx.fillRect(ant.x * cellSize, ant.y * cellSize, cellSize, cellSize);
-            });
+
+<script>
+    // Function to show a specific section
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    // List of sections in order
+    const sectionIds = ['Games', 'CodeFolly' , 'miscellaneous'];
+
+    // Variable to track the current section
+    let currentSectionIndex = 0;
+
+    // Show the first section (Games) by default
+    showSection(sectionIds[currentSectionIndex]);
+
+    // Function to go to the next section
+    function goToNextSection() {
+        currentSectionIndex = (currentSectionIndex + 1) % sectionIds.length; // Loop to the first section after the last
+        showSection(sectionIds[currentSectionIndex]);
+    }
+
+    // Function to go to the previous section
+    function goToPreviousSection() {
+        currentSectionIndex = (currentSectionIndex - 1 + sectionIds.length) % sectionIds.length; // Loop to the last section before the first
+        showSection(sectionIds[currentSectionIndex]);
+    }
+
+    // Event listener for keydown events to listen for arrow keys and 'A/a', 'D/d'
+    document.addEventListener('keydown', function(event) {
+        // Right arrow key (→) or 'D'/'d' to go to next section
+        if (event.key === 'd' || event.key === 'D' || event.key === 'ArrowRight') {
+            goToNextSection();
+        } 
+        // Left arrow key (←) or 'A'/'a' to go to previous section
+        else if (event.key === 'a' || event.key === 'A' || event.key === 'ArrowLeft') {
+            goToPreviousSection();
+        }
+    });
+
+    // Variables to track touch starting points
+    let startX = 0;
+    let startY = 0;
+
+    // Start touch event
+    document.addEventListener('touchstart', function(event) {
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+    });
+
+    // End touch event
+    document.addEventListener('touchend', function(event) {
+        if (!startX || !startY) {
+            return;
         }
 
-        function updateAnt(ant) {
-            let currentCell = grid[ant.y][ant.x];
+        let endX = event.changedTouches[0].clientX;
+        let endY = event.changedTouches[0].clientY;
 
-            if (currentCell === 0) {
-                ant.dir = (ant.dir + 1) % 4; // Turn right
-                grid[ant.y][ant.x] = 1;      // Change to black
+        let diffX = endX - startX;
+        let diffY = endY - startY;
+
+        // Horizontal swipe detection
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) { // 50px threshold for swipe
+            if (diffX > 0) {
+                goToPreviousSection();
             } else {
-                ant.dir = (ant.dir + 3) % 4; // Turn left
-                grid[ant.y][ant.x] = 0;      // Change to white
-            }
-
-            if (ant.dir === 0) ant.y--; // Up
-            else if (ant.dir === 1) ant.x++; // Right
-            else if (ant.dir === 2) ant.y++; // Down
-            else if (ant.dir === 3) ant.x--; // Left
-
-            if (ant.x < 0) ant.x = gridSize - 1;
-            if (ant.x >= gridSize) ant.x = 0;
-            if (ant.y < 0) ant.y = gridSize - 1;
-            if (ant.y >= gridSize) ant.y = 0;
-        }
-
-        function startSimulation() {
-            isSimulationRunning = true;
-            window.simulationInterval = setInterval(() => {
-                ants.forEach(updateAnt);
-                drawGrid();
-            }, delay);
-            document.getElementById('playPauseButton').textContent = 'Pause';
-        }
-
-        function pauseSimulation() {
-            isSimulationRunning = false;
-            clearInterval(window.simulationInterval);
-            document.getElementById('playPauseButton').textContent = 'Play';
-        }
-
-        function toggleSimulation() {
-            if (isSimulationRunning) {
-                pauseSimulation();
-            } else {
-                startSimulation();
+                goToNextSection();
             }
         }
 
-        function resetGrid() {
-            grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
-            ants = [{ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }];
-            drawGrid();
-        }
+        // Reset starting positions
+        startX = 0;
+        startY = 0;
+    });
 
-        function changeSpeed() {
-            delay = parseInt(document.getElementById('speed').value);
-            if (isSimulationRunning) {
-                pauseSimulation();
-                startSimulation();
-            }
-        }
-
-        function changeGridSize() {
-            gridSize = parseInt(document.getElementById('gridSize').value);
-            cellSize = canvas.width / gridSize;
-            resetGrid();
-        }
-
-        function toggleInfo() {
-            const infoModal = document.getElementById('infoModal');
-            infoModal.style.display = infoModal.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function toggleInsertAnt() {
-            isAllowInserts = !isAllowInserts;
-        }
-
-        function clearAnts() {
-            ants = [{ x: Math.floor(gridSize / 2), y: Math.floor(gridSize / 2), dir: 0 }];
-            drawGrid();
-        }
-
-        canvas.addEventListener('click', (e) => {
-            if (isAllowInserts) {
-                const x = Math.floor(e.offsetX / cellSize);
-                const y = Math.floor(e.offsetY / cellSize);
-                ants.push({ x, y, dir: 0 });
-            }
-        });
-
-        drawGrid();
+    // Show Games section by default
+    showSection('Games');
     </script>
+
 </body>
 </html>
