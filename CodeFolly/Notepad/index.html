@@ -37,6 +37,7 @@
             background-color: #333;
             padding: 8px;
             border-bottom: 2px solid #444;
+            align-items: center;
         }
 
         .tab {
@@ -49,7 +50,7 @@
             margin-right: 5px;
             transition: background-color 0.3s ease;
             font-size: 16px;
-            height: 40px; /* Set a fixed height for all tabs */
+            height: 40px;
         }
 
         .tab:hover {
@@ -122,7 +123,8 @@
             cursor: pointer;
             font-size: 16px;
             align-self: center;
-            margin-top: 20px;
+            margin-left: auto; /* Align the "+" button to the far right */
+            height: 40px; /* Same height as the other tabs */
         }
 
         #newNotepad:hover {
