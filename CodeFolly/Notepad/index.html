@@ -21,11 +21,11 @@
         .notepad-container {
             display: flex;
             flex-direction: column;
-            width: 90%;
-            max-width: 800px;
+            width: 80%;
+            max-width: 900px;
             background-color: #222;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
             margin-top: 20px;
             overflow: hidden;
         }
@@ -34,11 +34,12 @@
             display: flex;
             justify-content: flex-start;
             background-color: #333;
-            padding: 10px;
+            padding: 8px;
+            border-bottom: 2px solid #444;
         }
 
         .tab {
-            padding: 10px;
+            padding: 10px 15px;
             cursor: pointer;
             background-color: #444;
             border: none;
@@ -46,6 +47,7 @@
             border-radius: 5px 5px 0 0;
             margin-right: 5px;
             transition: background-color 0.3s ease;
+            font-size: 16px;
         }
 
         .tab:hover {
@@ -54,6 +56,7 @@
 
         .tab.active {
             background-color: #555;
+            font-weight: bold;
         }
 
         .notepad-content {
@@ -91,7 +94,7 @@
             background-color: #444;
             color: #f0f0f0;
             border: none;
-            padding: 10px;
+            padding: 10px 15px;
             margin-left: 10px;
             border-radius: 5px;
             cursor: pointer;
@@ -104,7 +107,7 @@
         }
 
         .toolbar button:active {
-            background-color: #999;
+            background-color: #888;
         }
 
         #newNotepad {
@@ -116,11 +119,13 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            align-self: center;
         }
 
         #newNotepad:hover {
             background-color: #666;
         }
+
     </style>
 </head>
 <body>
@@ -227,6 +232,7 @@
 
         // Add the first tab and notepad on load
         window.onload = createNotepad;
+
     </script>
 </body>
 </html>
