@@ -10,23 +10,24 @@
             background-color: #181818;
             color: #f0f0f0;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             height: 100vh;
             flex-direction: column;
+            box-sizing: border-box;
         }
 
         .notepad-container {
             display: flex;
             flex-direction: column;
-            width: 80%;
-            max-width: 900px;
+            width: 100%;
+            max-width: 95%;
+            height: calc(100vh - 80px);
             background-color: #222;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-            margin-top: 20px;
             overflow: hidden;
         }
 
@@ -63,7 +64,7 @@
             display: none;
             padding: 20px;
             background-color: #333;
-            height: 300px;
+            flex-grow: 1;
             border-top: 1px solid #444;
             border-radius: 0 0 10px 10px;
         }
@@ -82,6 +83,7 @@
             padding: 10px;
             font-size: 16px;
             resize: none;
+            overflow-y: auto;
         }
 
         .toolbar {
@@ -111,7 +113,6 @@
         }
 
         #newNotepad {
-            margin-top: 20px;
             padding: 10px 20px;
             background-color: #444;
             color: #f0f0f0;
@@ -120,6 +121,7 @@
             cursor: pointer;
             font-size: 16px;
             align-self: center;
+            margin-top: 20px;
         }
 
         #newNotepad:hover {
@@ -129,10 +131,10 @@
     </style>
 </head>
 <body>
-    <button id="newNotepad">New Notepad</button>
     <div class="notepad-container" id="notepadContainer">
-        <div class="tabs" id="tabsContainer"></div>
-        <!-- Dynamic notepads will be inserted here -->
+        <div class="tabs" id="tabsContainer">
+            <button class="tab" id="newNotepad" onclick="createNotepad()">+</button> <!-- + button for creating new notepad -->
+        </div>
     </div>
 
     <script>
@@ -145,9 +147,10 @@
             const tabId = `tab-${Date.now()}`;
             const tab = document.createElement('button');
             tab.className = 'tab';
-            tab.textContent = 'Untitled';
+            tab.textContent = 'Untitled'; // Initially set the tab name as "Untitled"
             tab.setAttribute('data-id', tabId);
             tab.addEventListener('click', switchTab);
+            tab.addEventListener('dblclick', renameTab);  // Double-click to rename
 
             // Create a new notepad content area
             const notepadContent = document.createElement('div');
@@ -174,7 +177,7 @@
             notepadContent.appendChild(textarea);
 
             // Append the tab and content to the container
-            tabsContainer.appendChild(tab);
+            tabsContainer.insertBefore(tab, tabsContainer.querySelector('#newNotepad')); // Add tab before the "+" button
             container.appendChild(notepadContent);
 
             // Switch to the new tab
@@ -227,10 +230,16 @@
             input.click();
         }
 
-        // Initialize with a default notepad
-        document.getElementById("newNotepad").addEventListener("click", createNotepad);
+        // Rename the tab
+        function renameTab(event) {
+            const tab = event.target;
+            const newName = prompt("Enter new name for this tab:", tab.textContent);
+            if (newName) {
+                tab.textContent = newName;
+            }
+        }
 
-        // Add the first tab and notepad on load
+        // Initialize with a default notepad
         window.onload = createNotepad;
 
     </script>
