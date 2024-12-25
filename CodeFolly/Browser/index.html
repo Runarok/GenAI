@@ -69,7 +69,7 @@
     <button onclick="navigate()">Go</button>
   </div>
   <div class="webview-container">
-    <iframe id="webView" src="https://www.example.com"></iframe>
+    <iframe id="webView" src="https://www.example.com" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
   </div>
 </div>
 
@@ -77,6 +77,11 @@
   function navigate() {
     const url = document.getElementById('urlInput').value;
     const iframe = document.getElementById('webView');
+    
+    // Prevent storage, ensure no cookies or localStorage
+    iframe.contentWindow.localStorage.clear();
+    iframe.contentWindow.sessionStorage.clear();
+    
     // Check if the URL starts with 'http' or 'https'
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
       iframe.src = 'https://' + url;
