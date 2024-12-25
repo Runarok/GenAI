@@ -126,13 +126,15 @@
 <body>
     <button id="newNotepad">New Notepad</button>
     <div class="notepad-container" id="notepadContainer">
-        <!-- Dynamic tabs and notepads will be inserted here -->
+        <div class="tabs" id="tabsContainer"></div>
+        <!-- Dynamic notepads will be inserted here -->
     </div>
 
     <script>
         // Create a new Notepad with tabs and textarea
         function createNotepad() {
             const container = document.getElementById("notepadContainer");
+            const tabsContainer = document.getElementById("tabsContainer");
 
             // Create a new tab for the notepad
             const tabId = `tab-${Date.now()}`;
@@ -167,7 +169,7 @@
             notepadContent.appendChild(textarea);
 
             // Append the tab and content to the container
-            container.querySelector('.tabs').appendChild(tab);
+            tabsContainer.appendChild(tab);
             container.appendChild(notepadContent);
 
             // Switch to the new tab
@@ -225,7 +227,6 @@
 
         // Add the first tab and notepad on load
         window.onload = createNotepad;
-
     </script>
 </body>
 </html>
