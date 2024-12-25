@@ -49,6 +49,7 @@
             margin-right: 5px;
             transition: background-color 0.3s ease;
             font-size: 16px;
+            height: 40px; /* Set a fixed height for all tabs */
         }
 
         .tab:hover {
@@ -128,6 +129,58 @@
             background-color: #666;
         }
 
+        /* Modal Style */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #333;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #444;
+            color: #f0f0f0;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            background-color: #444;
+            color: #f0f0f0;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .modal button:hover {
+            background-color: #666;
+        }
+
+        .modal button:active {
+            background-color: #888;
+        }
+
     </style>
 </head>
 <body>
@@ -137,7 +190,19 @@
         </div>
     </div>
 
+    <!-- Modal for Renaming Tabs -->
+    <div id="renameModal" class="modal">
+        <div class="modal-content">
+            <h2>Rename Tab</h2>
+            <input type="text" id="tabNameInput" placeholder="Enter new tab name">
+            <button onclick="saveTabName()">Save</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
     <script>
+        let currentTabToRename = null;
+
         // Create a new Notepad with tabs and textarea
         function createNotepad() {
             const container = document.getElementById("notepadContainer");
@@ -230,13 +295,26 @@
             input.click();
         }
 
-        // Rename the tab
+        // Open modal to rename the tab
         function renameTab(event) {
             const tab = event.target;
-            const newName = prompt("Enter new name for this tab:", tab.textContent);
+            currentTabToRename = tab;
+            document.getElementById("tabNameInput").value = tab.textContent; // pre-fill with current name
+            document.getElementById("renameModal").style.display = "block";
+        }
+
+        // Save the new tab name
+        function saveTabName() {
+            const newName = document.getElementById("tabNameInput").value;
             if (newName) {
-                tab.textContent = newName;
+                currentTabToRename.textContent = newName;
             }
+            closeModal();
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById("renameModal").style.display = "none";
         }
 
         // Initialize with a default notepad
