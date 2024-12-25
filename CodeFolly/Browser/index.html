@@ -25,23 +25,26 @@
       padding: 10px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
 
     .address-bar input {
-      width: 80%;
+      width: calc(100% - 90px); /* Make input take available space except for the button */
       padding: 5px;
-      margin-right: 10px;
       border: none;
       border-radius: 4px;
+      font-size: 16px;
     }
 
     .address-bar button {
-      padding: 5px 10px;
+      width: 80px;
+      padding: 5px;
       background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
     }
 
     .address-bar button:hover {
