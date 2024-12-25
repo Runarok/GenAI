@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Themed Notepad</title>
+    <title>Dark Themed Notepad with Multiple Tabs</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,20 +13,60 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
+            flex-direction: column;
         }
 
         .notepad-container {
-            width: 90%;
-            max-width: 600px;
-            height: 80vh;
-            background-color: #222;
-            border-radius: 10px;
-            padding: 20px;
             display: flex;
             flex-direction: column;
+            width: 90%;
+            max-width: 800px;
+            background-color: #222;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: flex-start;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .tab {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #444;
+            border: none;
+            color: #f0f0f0;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: #666;
+        }
+
+        .tab.active {
+            background-color: #555;
+        }
+
+        .notepad-content {
+            display: none;
+            padding: 20px;
+            background-color: #333;
+            height: 300px;
+            border-top: 1px solid #444;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .notepad-content.active {
+            display: block;
         }
 
         textarea {
@@ -67,30 +107,105 @@
             background-color: #999;
         }
 
+        #newNotepad {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #444;
+            color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #newNotepad:hover {
+            background-color: #666;
+        }
     </style>
 </head>
 <body>
-    <div class="notepad-container">
-        <div class="toolbar">
-            <button id="saveButton">Save</button>
-            <button id="loadButton">Load</button>
-        </div>
-        <textarea id="notepad" placeholder="Write something..."></textarea>
+    <button id="newNotepad">New Notepad</button>
+    <div class="notepad-container" id="notepadContainer">
+        <!-- Dynamic tabs and notepads will be inserted here -->
     </div>
 
     <script>
-        // Save the content of the notepad
-        document.getElementById("saveButton").addEventListener("click", function() {
-            const text = document.getElementById("notepad").value;
+        // Create a new Notepad with tabs and textarea
+        function createNotepad() {
+            const container = document.getElementById("notepadContainer");
+
+            // Create a new tab for the notepad
+            const tabId = `tab-${Date.now()}`;
+            const tab = document.createElement('button');
+            tab.className = 'tab';
+            tab.textContent = 'Untitled';
+            tab.setAttribute('data-id', tabId);
+            tab.addEventListener('click', switchTab);
+
+            // Create a new notepad content area
+            const notepadContent = document.createElement('div');
+            notepadContent.className = 'notepad-content';
+            notepadContent.setAttribute('data-id', tabId);
+
+            const toolbar = document.createElement('div');
+            toolbar.className = 'toolbar';
+            const saveButton = document.createElement('button');
+            saveButton.textContent = 'Save';
+            saveButton.addEventListener('click', () => saveNote(tabId));
+
+            const loadButton = document.createElement('button');
+            loadButton.textContent = 'Load';
+            loadButton.addEventListener('click', () => loadNote(tabId));
+
+            toolbar.appendChild(saveButton);
+            toolbar.appendChild(loadButton);
+
+            const textarea = document.createElement('textarea');
+            textarea.id = `notepad-${tabId}`;
+            textarea.placeholder = 'Write something...';
+            notepadContent.appendChild(toolbar);
+            notepadContent.appendChild(textarea);
+
+            // Append the tab and content to the container
+            container.querySelector('.tabs').appendChild(tab);
+            container.appendChild(notepadContent);
+
+            // Switch to the new tab
+            switchTab({ target: tab });
+        }
+
+        // Switch between tabs
+        function switchTab(event) {
+            const tab = event.target;
+            const container = document.getElementById("notepadContainer");
+
+            // Set all tabs to inactive
+            container.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+            // Set all notepads to inactive
+            container.querySelectorAll('.notepad-content').forEach(c => c.classList.remove('active'));
+
+            // Set the clicked tab to active
+            tab.classList.add('active');
+
+            // Show the associated notepad
+            const tabId = tab.getAttribute('data-id');
+            const notepad = container.querySelector(`.notepad-content[data-id="${tabId}"]`);
+            notepad.classList.add('active');
+        }
+
+        // Save the content of a notepad
+        function saveNote(tabId) {
+            const text = document.getElementById(`notepad-${tabId}`).value;
             const blob = new Blob([text], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'note.txt';
+            link.download = `${tabId}.txt`;
             link.click();
-        });
+        }
 
-        // Load the content into the notepad
-        document.getElementById("loadButton").addEventListener("click", function() {
+        // Load a text file into a notepad
+        function loadNote(tabId) {
             const input = document.createElement('input');
             input.type = 'file';
             input.accept = '.txt';
@@ -98,12 +213,19 @@
                 const file = event.target.files[0];
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById("notepad").value = e.target.result;
+                    document.getElementById(`notepad-${tabId}`).value = e.target.result;
                 };
                 reader.readAsText(file);
             });
             input.click();
-        });
+        }
+
+        // Initialize with a default notepad
+        document.getElementById("newNotepad").addEventListener("click", createNotepad);
+
+        // Add the first tab and notepad on load
+        window.onload = createNotepad;
+
     </script>
 </body>
 </html>
