@@ -25,20 +25,19 @@
       padding: 10px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
     }
 
     .address-bar input {
-      width: calc(100% - 90px); /* Make input take available space except for the button */
+      flex-grow: 1; /* Takes up remaining space */
       padding: 5px;
       border: none;
       border-radius: 4px;
       font-size: 16px;
+      margin-right: 10px; /* Add gap between input and button */
     }
 
     .address-bar button {
-      width: 80px;
-      padding: 5px;
+      padding: 5px 10px;
       background-color: #4CAF50;
       color: white;
       border: none;
