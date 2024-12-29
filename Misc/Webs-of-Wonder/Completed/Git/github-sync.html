@@ -26,10 +26,15 @@
             width: 80%;
             max-width: 600px;
         }
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
         input {
-            width: 100%;
+            width: 80%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 0 10px 0 0;
             border: 1px solid #444;
             border-radius: 4px;
             background-color: #222;
@@ -40,14 +45,31 @@
             outline: none;
             border-color: #4CAF50;
         }
+        button {
+            padding: 10px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
 
     <h1>GitHub & GitHub Pages Sync</h1>
     <div class="container">
-        <input id="github-link" type="text" placeholder="Enter GitHub link (e.g., https://github.com/username/repo)" oninput="updateLinks('github')">
-        <input id="github-pages-link" type="text" placeholder="Enter GitHub Pages link (e.g., https://username.github.io/repo)" oninput="updateLinks('pages')">
+        <div class="input-wrapper">
+            <input id="github-link" type="text" placeholder="Enter GitHub link (e.g., https://github.com/username/repo)" oninput="updateLinks('github')">
+            <button id="github-link-btn" onclick="openInTab('github')" oncontextmenu="openInNewTab('github', event)">Open</button>
+        </div>
+        <div class="input-wrapper">
+            <input id="github-pages-link" type="text" placeholder="Enter GitHub Pages link (e.g., https://username.github.io/repo)" oninput="updateLinks('pages')">
+            <button id="pages-link-btn" onclick="openInTab('pages')" oncontextmenu="openInNewTab('pages', event)">Open</button>
+        </div>
     </div>
 
     <script>
@@ -67,6 +89,37 @@
                     let githubLink = pagesLink.replace('github.io', 'github.com') + '/blob';
                     githubLinkInput.value = githubLink;
                 }
+            }
+        }
+
+        function openInTab(linkType) {
+            const githubLinkInput = document.getElementById('github-link');
+            const githubPagesLinkInput = document.getElementById('github-pages-link');
+
+            let url;
+            if (linkType === 'github') {
+                url = githubLinkInput.value;
+            } else if (linkType === 'pages') {
+                url = githubPagesLinkInput.value;
+            }
+            if (url) {
+                window.location.href = url;
+            }
+        }
+
+        function openInNewTab(linkType, event) {
+            event.preventDefault();
+            const githubLinkInput = document.getElementById('github-link');
+            const githubPagesLinkInput = document.getElementById('github-pages-link');
+
+            let url;
+            if (linkType === 'github') {
+                url = githubLinkInput.value;
+            } else if (linkType === 'pages') {
+                url = githubPagesLinkInput.value;
+            }
+            if (url) {
+                window.open(url, '_blank');
             }
         }
     </script>
