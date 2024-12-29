@@ -79,14 +79,16 @@
 
             if (changedField === 'github') {
                 let githubLink = githubLinkInput.value;
+                // Convert GitHub URL to GitHub Pages URL
                 if (githubLink.startsWith('https://github.com/')) {
                     let githubPagesLink = githubLink.replace('github.com', 'github.io').replace('/blob', '');
                     githubPagesLinkInput.value = githubPagesLink;
                 }
             } else if (changedField === 'pages') {
                 let pagesLink = githubPagesLinkInput.value;
+                // Convert GitHub Pages URL to GitHub URL
                 if (pagesLink.startsWith('https://') && pagesLink.includes('github.io')) {
-                    let githubLink = pagesLink.replace('github.io', 'github.com') + '/blob';
+                    let githubLink = pagesLink.replace('github.io', 'github.com') + '/blob/main';
                     githubLinkInput.value = githubLink;
                 }
             }
