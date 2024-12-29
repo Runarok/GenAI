@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub and GitHub Pages Link Sync</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #f1f1f1;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #222;
+            color: #fff;
+            font-size: 14px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>GitHub & GitHub Pages Sync</h1>
+    <div class="container">
+        <input id="github-link" type="text" placeholder="Enter GitHub link (e.g., https://github.com/username/repo)" oninput="updateLinks('github')">
+        <input id="github-pages-link" type="text" placeholder="Enter GitHub Pages link (e.g., https://username.github.io/repo)" oninput="updateLinks('pages')">
+    </div>
+
+    <script>
+        function updateLinks(changedField) {
+            const githubLinkInput = document.getElementById('github-link');
+            const githubPagesLinkInput = document.getElementById('github-pages-link');
+
+            if (changedField === 'github') {
+                let githubLink = githubLinkInput.value;
+                if (githubLink.startsWith('https://github.com/')) {
+                    let githubPagesLink = githubLink.replace('github.com', 'github.io').replace('/blob', '');
+                    githubPagesLinkInput.value = githubPagesLink;
+                }
+            } else if (changedField === 'pages') {
+                let pagesLink = githubPagesLinkInput.value;
+                if (pagesLink.startsWith('https://') && pagesLink.includes('github.io')) {
+                    let githubLink = pagesLink.replace('github.io', 'github.com') + '/blob';
+                    githubLinkInput.value = githubLink;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
