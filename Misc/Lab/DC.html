@@ -572,6 +572,8 @@ disp(C);
 
 <span class="comment">% Step 11: Decode the encoded message</span>
 D = decode(C, n, k, 'linear', G);  <span class="comment">% Decoding using the generator matrix G</span>
+disp('Decoded Output:');
+disp(D);
     
 <span class="comment">% Step 6: Generate the syndrome table for error correction</span>
 dtable = syndtable(H);
@@ -598,7 +600,6 @@ else
     disp('The corrected word is:');
     CC = rem(R + E, 2);  <span class="comment">% Correct the received codeword by adding the error vector</span>
     disp(CC);
-
     <span class="comment">% Extract the original message from the corrected codeword</span>
     msg = CC(1:k);
 end
