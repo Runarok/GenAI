@@ -63,6 +63,10 @@
     <h1>GitHub & GitHub Pages Sync</h1>
     <div class="container">
         <div class="input-wrapper">
+            <input id="auto-link" type="text" placeholder="Enter GitHub or GitHub Pages link" oninput="autoDetectLinkType()">
+            <button id="auto-link-btn" onclick="openInTab('auto')" oncontextmenu="openInNewTab('auto', event)">Open</button>
+        </div>
+        <div class="input-wrapper">
             <input id="github-link" type="text" placeholder="Enter GitHub link (e.g., https://github.com/username/repo)" oninput="updateLinks('github')">
             <button id="github-link-btn" onclick="openInTab('github')" oncontextmenu="openInNewTab('github', event)">Open</button>
         </div>
@@ -94,6 +98,26 @@
             }
         }
 
+        function autoDetectLinkType() {
+            const autoLinkInput = document.getElementById('auto-link');
+            const githubLinkInput = document.getElementById('github-link');
+            const githubPagesLinkInput = document.getElementById('github-pages-link');
+
+            let inputLink = autoLinkInput.value;
+
+            if (inputLink.startsWith('https://github.com/')) {
+                // It's a GitHub link
+                githubLinkInput.value = inputLink;
+                let githubPagesLink = inputLink.replace('github.com', 'github.io').replace('/blob', '');
+                githubPagesLinkInput.value = githubPagesLink;
+            } else if (inputLink.startsWith('https://') && inputLink.includes('github.io')) {
+                // It's a GitHub Pages link
+                githubPagesLinkInput.value = inputLink;
+                let githubLink = inputLink.replace('github.io', 'github.com') + '/blob/main';
+                githubLinkInput.value = githubLink;
+            }
+        }
+
         function openInTab(linkType) {
             const githubLinkInput = document.getElementById('github-link');
             const githubPagesLinkInput = document.getElementById('github-pages-link');
@@ -103,6 +127,8 @@
                 url = githubLinkInput.value;
             } else if (linkType === 'pages') {
                 url = githubPagesLinkInput.value;
+            } else if (linkType === 'auto') {
+                url = document.getElementById('auto-link').value;
             }
             if (url) {
                 window.location.href = url;
@@ -119,6 +145,8 @@
                 url = githubLinkInput.value;
             } else if (linkType === 'pages') {
                 url = githubPagesLinkInput.value;
+            } else if (linkType === 'auto') {
+                url = document.getElementById('auto-link').value;
             }
             if (url) {
                 window.open(url, '_blank');
