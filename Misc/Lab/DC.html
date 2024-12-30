@@ -521,13 +521,9 @@ hold off;
 
 <span class="comment">% Take user input for parameters</span>
 k = input('Number of shift registers: ');  <span class="comment">% Number of shift registers (constraint length)</span>
-g1 = input('Enter the value to generator1: ', 's');  <span class="comment">% Generator polynomial 1 (binary input)</span>
-g2 = input('Enter the value to generator2: ', 's');  <span class="comment">% Generator polynomial 2 (binary input)</span>
+g1=input('Enter the value to generator1:');  <span class="comment">% Generator polynomial 1 (Decimal input)</span>
+g2=input('Enter the value to generator2:');  <span class="comment">% Generator polynomial 2 (Decimal input)</span>
 m = input('Enter message bits: ');  <span class="comment">% Input message bits (binary)</span>
-
-<span class="comment">% Convert generator polynomials from string to numeric</span>
-g1 = bin2dec(g1);  <span class="comment">% Convert binary string to decimal for g1</span>
-g2 = bin2dec(g2);  <span class="comment">% Convert binary string to decimal for g2</span>
 
 <span class="comment">% Create a trellis structure for the convolutional encoder</span>
 trel = poly2trellis(k, [g1 g2]);
