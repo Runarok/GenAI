@@ -557,6 +557,11 @@ disp('Generator matrix:');
 G = [eye(k) p];  <span class="comment">% G = [I_k | P], where I_k is the identity matrix of size k</span>
 disp(G);
 
+<span class="comment">% Step 5: Construct the parity check matrix H</span>
+H = [p' eye(n - k)];  <span class="comment">% H = [P' | I_(n-k)]</span>
+disp('H matrix:');
+disp(H);
+    
 <span class="comment">% Step 3: Input the message word</span>
 m = input('Enter the message word: ');
 
@@ -565,11 +570,9 @@ disp('Codeword:');
 C = encode(m, n, k, 'linear', G);  <span class="comment">% Encoding using the generator matrix G</span>
 disp(C);
 
-<span class="comment">% Step 5: Construct the parity check matrix H</span>
-H = [p' eye(n - k)];  <span class="comment">% H = [P' | I_(n-k)]</span>
-disp('H matrix:');
-disp(H);
-
+<span class="comment">% Step 11: Decode the encoded message</span>
+D = decode(C, n, k, 'linear', G);  <span class="comment">% Decoding using the generator matrix G</span>
+    
 <span class="comment">% Step 6: Generate the syndrome table for error correction</span>
 dtable = syndtable(H);
 
@@ -600,8 +603,7 @@ else
     msg = CC(1:k);
 end
 
-<span class="comment">% Step 11: Decode the encoded message</span>
-D = decode(C, n, k, 'linear', G);  <span class="comment">% Decoding using the generator matrix G</span>
+
 </pre>
 
 <pre id="huffman_code" style="display:none;">
