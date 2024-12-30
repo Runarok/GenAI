@@ -752,20 +752,15 @@ disp(decode);
         </div>
     </div>
 
-        // Set the initial font size
-        let fontSize = 16;
-
-        // Set the initial index for active button
-        let currentButtonIndex = 0;
-        const buttons = document.querySelectorAll('.nav-bar button');
-        const codeBlocks = document.querySelectorAll('pre');
-
+    <script>
         // Function to display the selected code
         function showCode(codeType) {
             // Hide all code blocks
-            codeBlocks.forEach(block => block.style.display = 'none');
+            const allCodeBlocks = document.querySelectorAll('pre');
+            allCodeBlocks.forEach(block => block.style.display = 'none');
             
             // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-bar button');
             buttons.forEach(button => button.classList.remove('active'));
 
             // Show the selected code block
@@ -775,81 +770,6 @@ disp(decode);
             const activeButton = document.querySelector(`button[onclick="showCode('${codeType}')"]`);
             activeButton.classList.add('active');
         }
-        
-
-        // Listen for W/w and D/d keypresses
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'W' || event.key === 'w') {
-                showNextCode(); // Go to next code block
-            } else if (event.key === 'D' || event.key === 'd') {
-                showPreviousCode(); // Go to previous code block
-            }
-        });
-
-        // Handle swipe gestures (for mobile)
-        let touchstartX = 0;
-        let touchendX = 0;
-
-        function checkSwipeGesture() {
-            if (touchendX < touchstartX) {
-                showNextCode(); // Swipe left, go to next code block
-            }
-            if (touchendX > touchstartX) {
-                showPreviousCode(); // Swipe right, go to previous code block
-            }
-        }
-
-        document.addEventListener('touchstart', function(event) {
-            touchstartX = event.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', function(event) {
-            touchendX = event.changedTouches[0].screenX;
-            checkSwipeGesture();
-        });
-
-        // Show next and previous code blocks
-        function showNextCode() {
-            currentButtonIndex = (currentButtonIndex + 1) % buttons.length;
-            buttons[currentButtonIndex].click();  // Simulate a click to display the next code block
-        }
-
-        function showPreviousCode() {
-            currentButtonIndex = (currentButtonIndex - 1 + buttons.length) % buttons.length;
-            buttons[currentButtonIndex].click();  // Simulate a click to display the previous code block
-        }
-
-        // Zoom with mouse wheel (desktop)
-        document.addEventListener('wheel', function(event) {
-            if (event.deltaY < 0) {
-                adjustFontSize(2); // Zoom in
-            } else if (event.deltaY > 0) {
-                adjustFontSize(-2); // Zoom out
-            }
-        });
-
-        // Zoom with pinch gesture (mobile)
-        let initialDistance = null;
-
-        document.addEventListener('touchmove', function(event) {
-            if (event.touches.length === 2) {
-                let currentDistance = Math.sqrt(Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) + Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2));
-                if (initialDistance !== null) {
-                    let delta = currentDistance - initialDistance;
-                    if (delta > 10) {
-                        adjustFontSize(2); // Zoom in
-                    } else if (delta < -10) {
-                        adjustFontSize(-2); // Zoom out
-                    }
-                }
-                initialDistance = currentDistance;
-            }
-        });
-
-        document.addEventListener('touchend', function() {
-            initialDistance = null;
-        });
-
     </script>
 
 </body>
