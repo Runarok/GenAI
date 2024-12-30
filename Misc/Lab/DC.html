@@ -754,25 +754,40 @@ disp(decode);
         </div>
     </div>
 
-    <script>
-        // Function to display the selected code
-        function showCode(codeType) {
-            // Hide all code blocks
-            const allCodeBlocks = document.querySelectorAll('pre');
-            allCodeBlocks.forEach(block => block.style.display = 'none');
-            
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('.nav-bar button');
-            buttons.forEach(button => button.classList.remove('active'));
+<script>
+    // Function to display the selected code and update the URL
+    function showCode(codeType) {
+        // Hide all code blocks
+        const allCodeBlocks = document.querySelectorAll('pre');
+        allCodeBlocks.forEach(block => block.style.display = 'none');
+        
+        // Remove active class from all buttons
+        const buttons = document.querySelectorAll('.nav-bar button');
+        buttons.forEach(button => button.classList.remove('active'));
 
-            // Show the selected code block
-            document.getElementById(codeType).style.display = 'block';
+        // Show the selected code block
+        document.getElementById(codeType).style.display = 'block';
 
-            // Update active button
-            const activeButton = document.querySelector(`button[onclick="showCode('${codeType}')"]`);
-            activeButton.classList.add('active');
-        }
-    </script>
+        // Update active button
+        const activeButton = document.querySelector(`button[onclick="showCode('${codeType}')"]`);
+        activeButton.classList.add('active');
+
+        // Update the URL with the selected code type
+        const newUrl = `${window.location.origin}${window.location.pathname}?code=${codeType}`;
+        history.replaceState(null, '', newUrl); // Replace the current state with the new URL
+    }
+
+    // Function to load the code block from the query parameter
+    function loadCodeFromQuery() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const codeType = urlParams.get('code') || 'qpsk'; // Default to 'qpsk' if no query parameter exists
+        showCode(codeType);
+    }
+
+    // Call the function on page load
+    window.onload = loadCodeFromQuery;
+</script>
+
 
 </body>
 </html>
