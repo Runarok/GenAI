@@ -204,25 +204,33 @@
 
 
 <script>
-// Function to show a specific section and update URL
+// Function to show a specific section and update the URL
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => section.style.display = 'none');
-    document.getElementById(sectionId).style.display = 'block';
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.style.display = 'block';
 
-    // Update URL without reloading the page
-    const url = new URL(window.location);
-    url.searchParams.set('section', sectionId);
-    window.history.pushState({}, '', url);
+        // Update URL without reloading the page
+        const url = new URL(window.location);
+        url.searchParams.set('section', sectionId);
+        window.history.pushState({}, '', url);
+    }
 }
 
 // Restore the section from URL parameters on page load
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const section = urlParams.get('section') || 'Games'; // Default to 'Games'
-    showSection(section);
-};
+    const section = urlParams.get('section'); // Read from URL parameters
 
+    // Check if section exists before defaulting
+    if (section && document.getElementById(section)) {
+        showSection(section);
+    } else {
+        showSection('Games'); // Default to 'Games' if parameter is missing or invalid
+    }
+};
     // List of sections in order
     const sectionIds = ['Games', 'CodeFolly' , 'miscellaneous'];
 
