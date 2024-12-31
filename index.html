@@ -207,10 +207,10 @@
 // Function to show a specific section and update the URL
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
-    sections.forEach(section => section.style.display = 'none');
+    sections.forEach(section => section.style.display = 'none'); // Hide all sections
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
-        targetSection.style.display = 'block';
+        targetSection.style.display = 'block'; // Show the specified section
 
         // Update URL without reloading the page
         const url = new URL(window.location);
@@ -222,13 +222,13 @@ function showSection(sectionId) {
 // Restore the section from URL parameters on page load
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const section = urlParams.get('section'); // Read from URL parameters
+    const section = urlParams.get('section'); // Get 'section' parameter from URL
 
-    // Check if section exists before defaulting
+    // If a valid section is found, load it. Otherwise, load the default section.
     if (section && document.getElementById(section)) {
         showSection(section);
     } else {
-        showSection('Games'); // Default to 'Games' if parameter is missing or invalid
+        showSection('Games'); // Default to 'Games' if no valid parameter is found
     }
 };
     // List of sections in order
