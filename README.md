@@ -18,18 +18,22 @@ Here are some of the projects I’ve spent the most time on, and I’m particula
 
 ### 1. **Unbeatable Tic-Tac-Toe**  
 [Play the Game](https://runarok.github.io/GenAI/Games/TicTacToe/index.html)  
+
 A Tic-Tac-Toe game with unbeatable AI! It uses the minimax algorithm to ensure that the computer never loses. I enjoyed fine-tuning the AI to make it as challenging as possible.
 
 ### 2. **Progress Knight**  
-[Play the Game](https://runarok.github.io/GenAI/Games/Progress-knight/index.html)  
+[Play the Game](https://runarok.github.io/GenAI/Games/Progress-knight/index.html) 
+
 This game allows you to progress through various levels. **Note**: This project is a small mod and was not AI-generated or created by me, but I had a lot of fun tweaking it and adding my personal touches.
 
 ### 3. **Simon Says**  
-[Play the Game](https://runarok.github.io/GenAI/Games/Simon-says/index.html)  
+[Play the Game](https://runarok.github.io/GenAI/Games/Simon-says/index.html) 
+
 A classic memory game where you follow a sequence of colors and sounds. It was a fun challenge to implement the logic and visual effects for the game.
 
 ### 4. **Golden Depths**  
-[Play the Game](https://runarok.github.io/GenAI/Games/Golden-Depths/index.html)  
+[Play the Game](https://runarok.github.io/GenAI/Games/Golden-Depths/index.html) 
+
 A maze adventure game set in a treasure-filled dungeon! I worked on refining the AI-generated level layout and made adjustments to the game mechanics for a smoother experience.
 
 ---
