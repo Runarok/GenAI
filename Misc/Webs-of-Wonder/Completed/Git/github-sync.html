@@ -96,10 +96,11 @@
 
             if (inputUrl) {
                 const urlParts = inputUrl.split('/');
-                const usernameRepo = urlParts[2].split('.');
-                const username = usernameRepo[0];
-                const repoName = usernameRepo[1];
-                const restPath = urlParts.slice(3).join('/');
+                
+                // Extract username and repo from the GitHub Pages URL (e.g., "https://runarok.github.io/GenAI/...")
+                const username = urlParts[2].split('.')[0];  // Extract username from "runarok.github.io"
+                const repoName = urlParts[3];  // Extract repo name after username (e.g., "GenAI")
+                const restPath = urlParts.slice(4).join('/');  // The remaining path
 
                 // Determine if it's a file or folder based on the last part
                 const isFile = restPath.includes('.');
