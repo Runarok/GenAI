@@ -210,91 +210,89 @@ function showSection(sectionId) {
     sections.forEach(section => section.style.display = 'none');
     document.getElementById(sectionId).style.display = 'block';
 
-    // Update URL without reloading the page
-    const url = new URL(window.location);
-    url.searchParams.set('section', sectionId);
-    window.history.pushState({}, '', url);
+    // Update URL with the selected section
+    const newUrl = `${window.location.origin}${window.location.pathname}?section=${sectionId}`;
+    history.replaceState(null, '', newUrl); // Replace the current state with the new URL
 }
 
-// Restore the section from URL parameters on page load
-window.onload = function () {
+// Function to load the section from the query parameter
+function loadSectionFromQuery() {
     const urlParams = new URLSearchParams(window.location.search);
-    const section = urlParams.get('section') || 'Games'; // Default to 'Games'
-    showSection(section);
+    const sectionId = urlParams.get('section') || 'Games'; // Default to 'Games' if no query parameter exists
+    showSection(sectionId); // Show the section based on the query
+}
+
+// Call the function on page load to show the appropriate section
+window.onload = function() {
+    loadSectionFromQuery(); // Load section from URL
 };
 
-    // List of sections in order
-    const sectionIds = ['Games', 'CodeFolly' , 'miscellaneous'];
+// List of sections in order (just for navigation)
+const sectionIds = ['Games', 'CodeFolly', 'miscellaneous'];
 
-    // Variable to track the current section
-    let currentSectionIndex = 0;
+// Variable to track the current section (not strictly necessary with the query, but useful for navigation)
+let currentSectionIndex = 0;
 
-    // Show the first section (Games) by default
+// Function to go to the next section
+function goToNextSection() {
+    currentSectionIndex = (currentSectionIndex + 1) % sectionIds.length; // Loop to the first section after the last
     showSection(sectionIds[currentSectionIndex]);
+}
 
-    // Function to go to the next section
-    function goToNextSection() {
-        currentSectionIndex = (currentSectionIndex + 1) % sectionIds.length; // Loop to the first section after the last
-        showSection(sectionIds[currentSectionIndex]);
+// Function to go to the previous section
+function goToPreviousSection() {
+    currentSectionIndex = (currentSectionIndex - 1 + sectionIds.length) % sectionIds.length; // Loop to the last section before the first
+    showSection(sectionIds[currentSectionIndex]);
+}
+
+// Event listener for keydown events to listen for arrow keys and 'A/a', 'D/d'
+document.addEventListener('keydown', function(event) {
+    // Right arrow key (→) or 'D'/'d' to go to next section
+    if (event.key === 'd' || event.key === 'D' || event.key === 'ArrowRight') {
+        goToNextSection();
+    } 
+    // Left arrow key (←) or 'A'/'a' to go to previous section
+    else if (event.key === 'a' || event.key === 'A' || event.key === 'ArrowLeft') {
+        goToPreviousSection();
+    }
+});
+
+// Variables to track touch starting points for swipe gestures
+let startX = 0;
+let startY = 0;
+
+// Start touch event
+document.addEventListener('touchstart', function(event) {
+    startX = event.touches[0].clientX;
+    startY = event.touches[0].clientY;
+});
+
+// End touch event
+document.addEventListener('touchend', function(event) {
+    if (!startX || !startY) {
+        return;
     }
 
-    // Function to go to the previous section
-    function goToPreviousSection() {
-        currentSectionIndex = (currentSectionIndex - 1 + sectionIds.length) % sectionIds.length; // Loop to the last section before the first
-        showSection(sectionIds[currentSectionIndex]);
-    }
+    let endX = event.changedTouches[0].clientX;
+    let endY = event.changedTouches[0].clientY;
 
-    // Event listener for keydown events to listen for arrow keys and 'A/a', 'D/d'
-    document.addEventListener('keydown', function(event) {
-        // Right arrow key (→) or 'D'/'d' to go to next section
-        if (event.key === 'd' || event.key === 'D' || event.key === 'ArrowRight') {
-            goToNextSection();
-        } 
-        // Left arrow key (←) or 'A'/'a' to go to previous section
-        else if (event.key === 'a' || event.key === 'A' || event.key === 'ArrowLeft') {
+    let diffX = endX - startX;
+    let diffY = endY - startY;
+
+    // Horizontal swipe detection
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) { // 50px threshold for swipe
+        if (diffX > 0) {
             goToPreviousSection();
+        } else {
+            goToNextSection();
         }
-    });
+    }
 
-    // Variables to track touch starting points
-    let startX = 0;
-    let startY = 0;
-
-    // Start touch event
-    document.addEventListener('touchstart', function(event) {
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
-    });
-
-    // End touch event
-    document.addEventListener('touchend', function(event) {
-        if (!startX || !startY) {
-            return;
-        }
-
-        let endX = event.changedTouches[0].clientX;
-        let endY = event.changedTouches[0].clientY;
-
-        let diffX = endX - startX;
-        let diffY = endY - startY;
-
-        // Horizontal swipe detection
-        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) { // 50px threshold for swipe
-            if (diffX > 0) {
-                goToPreviousSection();
-            } else {
-                goToNextSection();
-            }
-        }
-
-        // Reset starting positions
-        startX = 0;
-        startY = 0;
-    });
-
-    // Show Games section by default
-    showSection('Games');
-    </script>
+    // Reset starting positions
+    startX = 0;
+    startY = 0;
+});
+</script>
 
 </body>
 </html>
