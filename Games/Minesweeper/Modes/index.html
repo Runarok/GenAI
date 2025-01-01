@@ -125,13 +125,16 @@
             const rows = boardSize;
             const cols = boardSize;
             const totalCells = rows * cols;
-            const cellSize = Math.floor(500 / rows);  // Set cell size relative to the board size
 
-            // Set grid styles dynamically
+            // Dynamically calculate the cell size based on available space
+            const maxCellSize = 40;  // Maximum size for each cell
+            const cellSize = Math.min(Math.floor(500 / rows), maxCellSize); // Prevent cells from becoming too small
+
+            // Adjust the grid layout based on the new cell size
             board.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
             board.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
 
-            // Generate the cells
+            // Generate cells for the board
             for (let i = 0; i < totalCells; i++) {
                 const cell = document.createElement('div');
                 cell.classList.add('cell');
