@@ -1,73 +1,78 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minesweeper</title>
+    <title>Beginner's Bliss</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #0d1b2a, #1b2631);
-            background-size: 400% 400%;
-            animation: gradientFlow 10s ease infinite;
             color: #f0f0f0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 20px;
             min-height: 100vh;
-        }
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         h1 {
             margin-bottom: 20px;
             color: #00bcd4;
-            text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4, 0 0 30px rgba(0, 188, 212, 0.7);
-            font-size: 48px;
-            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
-        .dropdown {
-            position: relative;
-            margin: 20px 0;
-            width: 300px;
-        }
-        .dropdown select {
-            width: 100%;
+        .board-container {
+            border: 3px solid #00bcd4;
+            border-radius: 8px;
             padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 40px);
+            grid-template-rows: repeat(8, 40px);
+            gap: 2px;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
             background-color: #2e2e2e;
-            color: #f0f0f0;
-            border: 1px solid #00bcd4;
-            border-radius: 5px;
+            border: 1px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #ffffff;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
-        .dropdown select:hover {
+        .cell:hover {
             background-color: #3e3e3e;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
-        .tooltip {
-            position: absolute;
-            background-color: rgba(0, 188, 212, 0.9);
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            z-index: 1;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 5px;
-            opacity: 0;
-            transition: opacity 0.5s linear;
+        .cell.revealed {
+            background-color: #4e4e4e;
+            cursor: default;
         }
-        .dropdown:hover .tooltip {
-            opacity: 1;
+        .cell.mine {
+            background-color: #ff4c4c;
         }
-        .start-button {
+        .cell.marked {
+            background-color: #00796b;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #minesLeft {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #00bcd4;
+        }
+        #gameInfo {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #00bcd4;
+        }
+        button {
             padding: 10px 20px;
             border: none;
             background-color: #00bcd4;
@@ -75,55 +80,332 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.2s, transform 0.2s;
-            margin-top: 20px;
-            font-size: 18px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 10px;
         }
-        .start-button:hover {
+        button:hover {
             background-color: #0097a7;
             transform: scale(1.05);
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #00bcd4;
+            font-size: 24px;
+            transition: color 0.2s;
+        }
+        .back-button:hover {
+            background-color: #00bcd4;
+            color: #0097a7;
+        }
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(0, 188, 212, 0.8);
+            color: #ffffff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            transition: visibility 0s, opacity 0.5s linear;
+            opacity: 0;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <h1>Minesweeper</h1>
-    <div class="dropdown">
-        <select id="modeSelect">
-            <option value="">Select Mode</option>
-            <option value="1" data-size="8x8" data-mines="10" data-percentage="15.625%">Beginner's Bliss</option>
-            <option value="2" data-size="10x10" data-mines="15" data-percentage="15%">Novice's Nest</option>
-            <option value="3" data-size="12x12" data-mines="20" data-percentage="13.89%">Intermediate Challenge</option>
-            <option value="4" data-size="16x16" data-mines="40" data-percentage="15.625%">Strategist's Playground</option>
-            <option value="5" data-size="20x20" data-mines="60" data-percentage="15%">Rookie's Realm</option>
-            <option value="6" data-size="24x24" data-mines="100" data-percentage="17.36%">Expert Expedition</option>
-            <option value="7" data-size="30x30" data-mines="150" data-percentage="16.67%">Mastermind's Maze</option>
-            <option value="8" data-size="36x36" data-mines="250" data-percentage="19.44%">Challenger's Crucible</option>
-            <option value="9" data-size="40x40" data-mines="300" data-percentage="18.75%">Ultimate Battleground</option>
-            <option value="10" data-size="50x50" data-mines="400" data-percentage="16%">Titan's Trial</option>
-        </select>
-        <div class="tooltip">Hover over the options for details</div>
+<button class="back-button" onclick="window.history.back()">←</button>
+
+    <h1>Beginner's Bliss</h1>
+    <div id="gameInfo">Size: 8x8 | Mines: 10 | Mine Percentage: 15.625%</div>
+    <div id="minesLeft">Mines Left: <span id="minesCount">10</span></div>
+    <div class="board-container">
+        <div class="board" id="board"></div>
     </div>
-    <button class="start-button" onclick="startGame()">Start Game</button>
+    <button id="resetBtn">Reset Game</button>
+    <div id="toast" class="toast">Congratulations! You win!</div>
 
     <script>
-        function startGame() {
-            const select = document.getElementById('modeSelect');
-            const selectedValue = select.value;
-            
-            // Check if a valid mode is selected
-            if (selectedValue) {
-                // Get data attributes (size, mines, and percentage) of the selected option
-                const selectedOption = select.options[select.selectedIndex];
-                const size = selectedOption.getAttribute('data-size');
-                const mines = selectedOption.getAttribute('data-mines');
-                const minePercentage = selectedOption.getAttribute('data-percentage');
+        const boardSize = 8; // Board size of 8x8
+        const numberOfMines = 10; // Total number of mines
+        let board = [];
+        let revealedCount = 0;
+        let minesLeft = numberOfMines;
+        let firstClick = true;
 
-                // Construct the URL with query parameters
-                window.location.href = `Modes/?mode=${selectedValue}&size=${size}&mines=${mines}&minePercentage=${minePercentage}`;
-            } else {
-                window.location.href = 'Details/Default.html'; // Redirect to Default.html if no mode selected
+         function createBoard() {
+            // Initializes the board with cells
+            board = Array.from({ length: boardSize }, () => 
+                Array.from({ length: boardSize }, () => ({ 
+                    state: false, revealed: false, mine: false, marked: false, value: 0 
+                }))
+            );
+            renderBoard(); // Render the board after creation
+        }
+
+        function placeMines(excludeX, excludeY) {
+            // Places mines on the board, avoiding the first click position
+            let minesPlaced = 0;
+            while (minesPlaced < numberOfMines) {
+                const x = Math.floor(Math.random() * boardSize);
+                const y = Math.floor(Math.random() * boardSize);
+                // Ensure no mines are placed in the surrounding cells of the first click
+                if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && 
+                    !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
+                    board[x][y].mine = true; // Place a mine
+                    minesPlaced++; // Increment mines placed
+                }
             }
         }
+
+        function areAdjacentCellsMined(x, y, excludeX, excludeY) {
+            // Checks if adjacent cells have mines
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the current cell
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds and has a mine
+                    if (newX === excludeX && newY === excludeY) continue; // Skip the first click position
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].mine) {
+                        return true; // Found an adjacent mine
+                    }
+                }
+            }
+            return false; // No adjacent mines found
+        }
+
+        function calculateValues() {
+            // Calculates the number of adjacent mines for each cell
+            for (let x = 0; x < boardSize; x++) {
+                for (let y = 0; y < boardSize; y++) {
+                    if (board[x][y].mine) {
+                        board[x][y].value = -1; // Indicate a mine
+                        continue; // Skip further calculations for mines
+                    }
+                    board[x][y].value = countAdjacentMines(x, y); // Count adjacent mines
+                }
+            }
+        }
+
+        function countAdjacentMines(x, y) {
+            // Counts the number of mines adjacent to a given cell
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the current cell
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds and has a mine
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].mine) {
+                        count++; // Increment mine count
+                    }
+                }
+            }
+            return count; // Return the count of adjacent mines
+        }
+
+        function renderBoard() {
+            // Renders the board to the DOM
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = ''; // Clear the board
+            board.forEach((row, x) => {
+                row.forEach((cell, y) => {
+                    const cellElement = document.createElement('div');
+                    cellElement.className = 'cell'; // Add cell class
+                    cellElement.dataset.x = x; // Set x coordinate
+                    cellElement.dataset.y = y; // Set y coordinate
+
+                    // Add click event listener to each cell
+                    cellElement.addEventListener('click', () => handleCellClick(x, y));
+
+                    // Update cell display based on its state
+                    if (cell.revealed) {
+                        cellElement.classList.add('revealed');
+                        if (cell.mine) {
+                            cellElement.classList.add('mine');
+                            cellElement.innerText = '💣'; // Mine icon
+                        } else {
+                            cellElement.innerText = cell.value > 0 ? cell.value : ''; // Show value or empty
+                        }
+                    }
+                    if (cell.marked) {
+                        cellElement.classList.add('marked');
+                        cellElement.innerText = '🚩'; // Flag icon
+                    }
+
+                    boardElement.appendChild(cellElement); // Append cell to the board
+                });
+            });
+        }
+
+        function handleCellClick(x, y) {
+            // Handles the click event on a cell
+            if (firstClick) {
+                placeMines(x, y); // Place mines on first click
+                calculateValues(); // Calculate values after mines are placed
+                firstClick = false; // Set first click flag to false
+            }
+
+            const cell = board[x][y];
+            if (cell.marked) {
+                // Unmark cell on left-click
+                cell.marked = false; // Toggle marked state
+                minesLeft++; // Increment mines left
+                document.getElementById('minesCount').innerText = minesLeft; // Update mines display
+                renderBoard(); // Re-render the board
+                return;
+            }
+
+            if (cell.revealed) {
+                // Check if the clicked cell is a number
+                if (cell.value > 0) {
+                    const markedCount = countMarkedNeighbors(x, y);
+                    if (markedCount === cell.value) {
+                        revealSurroundingCells(x, y); // Reveal surrounding cells if marked count matches value
+                    }
+                }
+                return;
+            }
+
+            cell.revealed = true; // Reveal the clicked cell
+            revealedCount++; // Increment revealed count
+
+            if (cell.mine) {
+                showToast('Game Over! You hit a mine!'); // Show toast on hitting a mine
+                revealAllMines(); // Reveal all mines
+                renderBoard(); // Re-render the board
+                setTimeout(() => {
+                    resetGame(); // Reset the game after a short delay
+                }, 500); // Delay in milliseconds (500 ms = 0.5 seconds)
+                return;
+            }
+
+            if (cell.value === 0) {
+                revealAdjacentCells(x, y); // Reveal adjacent cells if value is zero
+            }
+
+            renderBoard(); // Re-render the board after clicking
+            checkWinCondition(); // Check if the player has won
+        }
+
+        function countMarkedNeighbors(x, y) {
+            // Counts the number of marked neighbors around a cell
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the current cell
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds and is marked
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].marked) {
+                        count++; // Increment marked count
+                    }
+                }
+            }
+            return count; // Return the count of marked neighbors
+        }
+
+        function revealSurroundingCells(x, y) {
+            // Reveals surrounding cells when a cell with a number is clicked
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    const newX = x + i;
+                    const newY = y + j;
+                    // Check if the cell is within bounds
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
+                        const neighbor = board[newX][newY];
+                        if (!neighbor.revealed && !neighbor.marked) {
+                            neighbor.revealed = true; // Reveal neighbor
+                            revealedCount++; // Increment revealed count
+                            if (neighbor.value === 0) {
+                                revealAdjacentCells(newX, newY); // Recursively reveal if value is zero
+                            }
+                        }
+                    }
+                }
+            }
+            renderBoard(); // Re-render the board after revealing surrounding cells
+        }
+
+        function revealAdjacentCells(x, y) {
+            // Reveals all adjacent cells if a cell with value 0 is clicked
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    const newX = x + i;
+                    const newY = y + j;
+                    if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
+                        const neighbor = board[newX][newY];
+                        if (!neighbor.revealed && !neighbor.marked) {
+                            neighbor.revealed = true; // Reveal neighbor
+                            revealedCount++; // Increment revealed count
+                            if (neighbor.value === 0) {
+                                revealAdjacentCells(newX, newY); // Recursively reveal if value is zero
+                            }
+                        }
+                    }
+                }
+            }
+            renderBoard(); // Re-render the board
+        }
+
+        function showToast(message) {
+            // Displays a toast message
+            const toast = document.getElementById('toast');
+            toast.innerText = message; // Set toast message
+            toast.classList.add('show'); // Show the toast
+            setTimeout(() => {
+                toast.classList.remove('show'); // Hide the toast after 3 seconds
+            }, 3000); // Timeout in milliseconds (3000 ms = 3 seconds)
+        }
+
+        function checkWinCondition() {
+            // Checks if the player has revealed all cells except mines
+            if (revealedCount === (boardSize * boardSize) - numberOfMines) {
+                showToast('Congratulations! You win!'); // Show congratulations message
+                setTimeout(() => {
+                    resetGame(); // Reset the game after a short delay
+                }, 500); // Delay in milliseconds (500 ms = 0.5 seconds)
+            }
+        }
+
+        function revealAllMines() {
+            // Reveals all mines when the game ends
+            for (let x = 0; x < boardSize; x++) {
+                for (let y = 0; y < boardSize; y++) {
+                    const cell = board[x][y];
+                    if (cell.mine) {
+                        cell.revealed = true; // Reveal mine cell
+                    }
+                }
+            }
+            renderBoard(); // Re-render the board to show mines
+        }
+
+        function resetGame() {
+            // Resets the game for a fresh start
+            board = [];
+            revealedCount = 0;
+            minesLeft = numberOfMines;
+            firstClick = true;
+            document.getElementById('minesCount').innerText = minesLeft; // Reset mines count display
+            createBoard(); // Re-create the board
+        }
+
+        document.getElementById('resetBtn').addEventListener('click', resetGame); // Reset game on button click
+        createBoard(); // Initialize the board when the page loads
     </script>
 </body>
 </html>
