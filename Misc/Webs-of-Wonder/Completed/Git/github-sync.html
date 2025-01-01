@@ -34,7 +34,6 @@
             background-color: #1f1f1f;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: height 0.3s ease;
-            overflow: hidden;  /* Prevent overflow of content */
         }
         input {
             width: 100%;
@@ -180,16 +179,10 @@
                 // Show the output fields and buttons with animation
                 githubLinkDiv.classList.add('visible');
                 githubPagesLinkDiv.classList.add('visible');
-
-                // Adjust the container height dynamically based on visible output fields
-                container.style.height = `${githubLinkDiv.offsetHeight + githubPagesLinkDiv.offsetHeight + 80}px`;
             } else {
                 // Hide the output fields and buttons when input is empty
                 githubLinkDiv.classList.remove('visible');
                 githubPagesLinkDiv.classList.remove('visible');
-
-                // Reset container height to only include input height
-                container.style.height = 'auto';
             }
         });
 
