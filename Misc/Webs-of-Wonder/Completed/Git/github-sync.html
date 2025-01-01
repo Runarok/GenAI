@@ -70,7 +70,7 @@
     <div class="container">
         <input type="text" id="inputUrl" placeholder="Enter GitHub Pages URL (e.g., https://runarok.github.io/...)">
         <div>
-            <div class="output" id="githubLink">
+            <div class="output" id="githubLink" style="display: none;">
                 <span id="githubText"></span>
                 <div class="buttons">
                     <button class="button" onclick="copyToClipboard('githubText')">Copy</button>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="output" id="githubPagesLink">
+            <div class="output" id="githubPagesLink" style="display: none;">
                 <span id="githubPagesText"></span>
                 <div class="buttons">
                     <button class="button" onclick="copyToClipboard('githubPagesText')">Copy</button>
@@ -93,6 +93,8 @@
             const inputUrl = this.value.trim();
             const githubText = document.getElementById('githubText');
             const githubPagesText = document.getElementById('githubPagesText');
+            const githubLinkDiv = document.getElementById('githubLink');
+            const githubPagesLinkDiv = document.getElementById('githubPagesLink');
 
             if (inputUrl) {
                 const urlParts = inputUrl.split('/');
@@ -114,9 +116,14 @@
                 // For GitHub Pages link
                 const githubPagesLink = `https://${username}.github.io/${repoName}/${restPath}`;
                 githubPagesText.textContent = githubPagesLink;
+
+                // Show the output fields and buttons
+                githubLinkDiv.style.display = 'flex';
+                githubPagesLinkDiv.style.display = 'flex';
             } else {
-                githubText.textContent = '';
-                githubPagesText.textContent = '';
+                // Hide the output fields and buttons when input is empty
+                githubLinkDiv.style.display = 'none';
+                githubPagesLinkDiv.style.display = 'none';
             }
         });
 
