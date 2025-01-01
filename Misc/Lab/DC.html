@@ -755,95 +755,39 @@ disp(decode);
     </div>
 
 <script>
-// Function to show a specific section and update URL
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => section.style.display = 'none');
-    document.getElementById(sectionId).style.display = 'block';
+    // Function to display the selected code and update the URL
+    function showCode(codeType) {
+        // Hide all code blocks
+        const allCodeBlocks = document.querySelectorAll('pre');
+        allCodeBlocks.forEach(block => block.style.display = 'none');
+        
+        // Remove active class from all buttons
+        const buttons = document.querySelectorAll('.nav-bar button');
+        buttons.forEach(button => button.classList.remove('active'));
 
-    // Update URL with the selected section
-    const newUrl = `${window.location.origin}${window.location.pathname}?section=${sectionId}`;
-    history.replaceState(null, '', newUrl); // Replace the current state with the new URL
-}
+        // Show the selected code block
+        document.getElementById(codeType).style.display = 'block';
 
-// Function to load the section from the query parameter
-function loadSectionFromQuery() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sectionId = urlParams.get('section') || 'Games'; // Default to 'Games' if no query parameter exists
-    showSection(sectionId); // Show the section based on the query
-}
+        // Update active button
+        const activeButton = document.querySelector(`button[onclick="showCode('${codeType}')"]`);
+        activeButton.classList.add('active');
 
-// Call the function on page load to show the appropriate section
-window.onload = function() {
-    loadSectionFromQuery(); // Load section from URL
-};
-
-// List of sections in order (just for navigation)
-const sectionIds = ['Games', 'CodeFolly', 'miscellaneous'];
-
-// Variable to track the current section (not strictly necessary with the query, but useful for navigation)
-let currentSectionIndex = 0;
-
-// Function to go to the next section
-function goToNextSection() {
-    currentSectionIndex = (currentSectionIndex + 1) % sectionIds.length; // Loop to the first section after the last
-    showSection(sectionIds[currentSectionIndex]);
-}
-
-// Function to go to the previous section
-function goToPreviousSection() {
-    currentSectionIndex = (currentSectionIndex - 1 + sectionIds.length) % sectionIds.length; // Loop to the last section before the first
-    showSection(sectionIds[currentSectionIndex]);
-}
-
-// Event listener for keydown events to listen for arrow keys and 'A/a', 'D/d'
-document.addEventListener('keydown', function(event) {
-    // Right arrow key (→) or 'D'/'d' to go to next section
-    if (event.key === 'd' || event.key === 'D' || event.key === 'ArrowRight') {
-        goToNextSection();
-    } 
-    // Left arrow key (←) or 'A'/'a' to go to previous section
-    else if (event.key === 'a' || event.key === 'A' || event.key === 'ArrowLeft') {
-        goToPreviousSection();
-    }
-});
-
-// Variables to track touch starting points for swipe gestures
-let startX = 0;
-let startY = 0;
-
-// Start touch event
-document.addEventListener('touchstart', function(event) {
-    startX = event.touches[0].clientX;
-    startY = event.touches[0].clientY;
-});
-
-// End touch event
-document.addEventListener('touchend', function(event) {
-    if (!startX || !startY) {
-        return;
+        // Update the URL with the selected code type
+        const newUrl = `${window.location.origin}${window.location.pathname}?code=${codeType}`;
+        history.replaceState(null, '', newUrl); // Replace the current state with the new URL
     }
 
-    let endX = event.changedTouches[0].clientX;
-    let endY = event.changedTouches[0].clientY;
-
-    let diffX = endX - startX;
-    let diffY = endY - startY;
-
-    // Horizontal swipe detection
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) { // 50px threshold for swipe
-        if (diffX > 0) {
-            goToPreviousSection();
-        } else {
-            goToNextSection();
-        }
+    // Function to load the code block from the query parameter
+    function loadCodeFromQuery() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const codeType = urlParams.get('code') || 'qpsk'; // Default to 'qpsk' if no query parameter exists
+        showCode(codeType);
     }
 
-    // Reset starting positions
-    startX = 0;
-    startY = 0;
-});
+    // Call the function on page load
+    window.onload = loadCodeFromQuery;
 </script>
+
 
 </body>
 </html>
