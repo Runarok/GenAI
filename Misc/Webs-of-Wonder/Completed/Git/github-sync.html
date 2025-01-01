@@ -89,57 +89,71 @@
     </div>
 
     <script>
-        document.getElementById('inputUrl').addEventListener('input', function() {
-            const inputUrl = this.value.trim();
-            const githubText = document.getElementById('githubText');
-            const githubPagesText = document.getElementById('githubPagesText');
-            const githubLinkDiv = document.getElementById('githubLink');
-            const githubPagesLinkDiv = document.getElementById('githubPagesLink');
+document.getElementById('inputUrl').addEventListener('input', function() {
+    const inputUrl = this.value.trim();
+    const githubText = document.getElementById('githubText');
+    const githubPagesText = document.getElementById('githubPagesText');
+    const githubLinkDiv = document.getElementById('githubLink');
+    const githubPagesLinkDiv = document.getElementById('githubPagesLink');
 
-            if (inputUrl) {
-                const urlParts = inputUrl.split('/');
-                
-                // Extract username and repo from the GitHub Pages URL (e.g., "https://runarok.github.io/GenAI/...")
-                const username = urlParts[2].split('.')[0];  // Extract username from "runarok.github.io"
-                const repoName = urlParts[3];  // Extract repo name after username (e.g., "GenAI")
-                const restPath = urlParts.slice(4).join('/');  // The remaining path
+    if (inputUrl) {
+        // Check if it's a GitHub Pages URL or GitHub repository URL
+        let username, repoName, restPath, githubLink, githubPagesLink;
 
-                // Determine if it's a file or folder based on the last part
-                const isFile = restPath.includes('.');
-
-                // For GitHub link
-                const githubLink = isFile 
-                    ? `https://github.com/${username}/${repoName}/blob/main/${restPath}` 
-                    : `https://github.com/${username}/${repoName}/tree/main/${restPath}`;
-                githubText.textContent = githubLink;
-
-                // For GitHub Pages link
-                const githubPagesLink = `https://${username}.github.io/${repoName}/${restPath}`;
-                githubPagesText.textContent = githubPagesLink;
-
-                // Show the output fields and buttons
-                githubLinkDiv.style.display = 'flex';
-                githubPagesLinkDiv.style.display = 'flex';
-            } else {
-                // Hide the output fields and buttons when input is empty
-                githubLinkDiv.style.display = 'none';
-                githubPagesLinkDiv.style.display = 'none';
-            }
-        });
-
-        function copyToClipboard(elementId) {
-            const text = document.getElementById(elementId).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Copied to clipboard!');
-            }).catch(() => {
-                alert('Failed to copy!');
-            });
+        if (inputUrl.includes('github.io')) {
+            // GitHub Pages URL format: https://{username}.github.io/{repoName}/...
+            const urlParts = inputUrl.split('/');
+            username = urlParts[2].split('.')[0];  // Extract username from {username}.github.io
+            repoName = urlParts[3];  // Extract repo name
+            restPath = urlParts.slice(4).join('/');  // The remaining path
+            // For GitHub Pages, we don't need to change the path
+            githubPagesLink = `https://${username}.github.io/${repoName}/${restPath}`;
+            // Construct the corresponding GitHub repository link
+            const isFile = restPath.includes('.');
+            githubLink = isFile 
+                ? `https://github.com/${username}/${repoName}/blob/main/${restPath}` 
+                : `https://github.com/${username}/${repoName}/tree/main/${restPath}`;
+        } else if (inputUrl.includes('github.com')) {
+            // GitHub Repository URL format: https://github.com/{username}/{repoName}/...
+            const urlParts = inputUrl.split('/');
+            username = urlParts[3];  // Extract username
+            repoName = urlParts[4];  // Extract repo name
+            restPath = urlParts.slice(5).join('/');  // The remaining path
+            // For GitHub, the repository link is already in the correct format
+            githubLink = `https://github.com/${username}/${repoName}/blob/main/${restPath}`;
+            // Construct the corresponding GitHub Pages link
+            githubPagesLink = `https://${username}.github.io/${repoName}/${restPath}`;
         }
 
-        function openLink(elementId) {
-            const text = document.getElementById(elementId).textContent;
-            window.open(text, '_blank');
-        }
+        // Update the displayed links
+        githubText.textContent = githubLink;
+        githubPagesText.textContent = githubPagesLink;
+
+        // Show the output fields and buttons
+        githubLinkDiv.style.display = 'flex';
+        githubPagesLinkDiv.style.display = 'flex';
+    } else {
+        // Hide the output fields and buttons when input is empty
+        githubLinkDiv.style.display = 'none';
+        githubPagesLinkDiv.style.display = 'none';
+    }
+});
+
+function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+    }).catch(() => {
+        alert('Failed to copy!');
+    });
+}
+
+function openLink(elementId) {
+    const text = document.getElementById(elementId).textContent;
+    window.open(text, '_blank');
+}
+
+
     </script>
 
 </body>
