@@ -28,13 +28,13 @@
             flex-direction: column;
             align-items: center;
             max-width: 700px;
-            width: auto;  /* Make the width adaptive */
+            width: 100%;  /* Ensure container width is responsive */
             padding: 20px;
             border-radius: 10px;
             background-color: #1f1f1f;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: height 0.3s ease;
-            min-width: 350px; /* Ensure it doesn't become too small on very narrow screens */
+            min-width: 350px;
         }
         input {
             width: 100%;
@@ -52,7 +52,7 @@
             border-color: #1e90ff;
         }
         .output {
-            width: 100%;
+            width: 100%;  /* Ensure output elements take full width */
             padding: 20px;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -60,14 +60,16 @@
             background-color: #333;
             color: #e0e0e0;
             font-size: 1.1rem;
-            word-wrap: break-word;
+            word-wrap: break-word; /* Allows long words to break and wrap */
+            word-break: break-word; /* Prevents overflow on long URLs */
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.3s ease, transform 0.3s ease;
-            display: none; /* Initially hide the outputs */
+            display: none;  /* Initially hide the outputs */
+            max-width: 100%;
         }
         .output.visible {
             opacity: 1;
@@ -77,6 +79,7 @@
         .buttons {
             display: flex;
             gap: 15px;
+            margin-top: 10px;
         }
         .button {
             padding: 10px 20px;
