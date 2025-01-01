@@ -204,33 +204,25 @@
 
 
 <script>
-// Function to show a specific section and update the URL
+// Function to show a specific section and update URL
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
-    sections.forEach(section => section.style.display = 'none'); // Hide all sections
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.style.display = 'block'; // Show the specified section
+    sections.forEach(section => section.style.display = 'none');
+    document.getElementById(sectionId).style.display = 'block';
 
-        // Update URL without reloading the page
-        const url = new URL(window.location);
-        url.searchParams.set('section', sectionId);
-        window.history.pushState({}, '', url);
-    }
+    // Update URL without reloading the page
+    const url = new URL(window.location);
+    url.searchParams.set('section', sectionId);
+    window.history.pushState({}, '', url);
 }
 
 // Restore the section from URL parameters on page load
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const section = urlParams.get('section'); // Get 'section' parameter from URL
-
-    // If a valid section is found, load it. Otherwise, load the default section.
-    if (section && document.getElementById(section)) {
-        showSection(section);
-    } else {
-        showSection('Games'); // Default to 'Games' if no valid parameter is found
-    }
+    const section = urlParams.get('section') || 'Games'; // Default to 'Games'
+    showSection(section);
 };
+
     // List of sections in order
     const sectionIds = ['Games', 'CodeFolly' , 'miscellaneous'];
 
