@@ -770,20 +770,19 @@ function showSection(sectionId) {
 function loadSectionFromQuery() {
     const urlParams = new URLSearchParams(window.location.search);
     const sectionId = urlParams.get('section') || 'Games'; // Default to 'Games' if no query parameter exists
-    showSection(sectionId);
+    showSection(sectionId); // Show the section based on the query
 }
 
 // Call the function on page load to show the appropriate section
-window.onload = loadSectionFromQuery;
+window.onload = function() {
+    loadSectionFromQuery(); // Load section from URL
+};
 
-// List of sections in order
+// List of sections in order (just for navigation)
 const sectionIds = ['Games', 'CodeFolly', 'miscellaneous'];
 
-// Variable to track the current section
+// Variable to track the current section (not strictly necessary with the query, but useful for navigation)
 let currentSectionIndex = 0;
-
-// Show the first section (Games) by default
-showSection(sectionIds[currentSectionIndex]);
 
 // Function to go to the next section
 function goToNextSection() {
@@ -809,7 +808,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Variables to track touch starting points
+// Variables to track touch starting points for swipe gestures
 let startX = 0;
 let startY = 0;
 
@@ -845,8 +844,6 @@ document.addEventListener('touchend', function(event) {
     startY = 0;
 });
 </script>
-
-
 
 </body>
 </html>
