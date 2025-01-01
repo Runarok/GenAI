@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,6 +28,8 @@
         }
         .board {
             display: grid;
+            grid-template-columns: repeat(8, 40px);
+            grid-template-rows: repeat(8, 40px);
             gap: 2px;
         }
         .cell {
@@ -126,9 +129,9 @@
 <body>
 <button class="back-button" onclick="window.history.back()">←</button>
 
-    <h1 id="gameTitle">Beginner's Bliss</h1>
-    <div id="gameInfo">Size: <span id="boardSizeText"></span> | Mines: <span id="minesText"></span></div>
-    <div id="minesLeft">Mines Left: <span id="minesCount"></span></div>
+    <h1>Beginner's Bliss</h1>
+    <div id="gameInfo">Size: 8x8 | Mines: 10 | Mine Percentage: 15.625%</div>
+    <div id="minesLeft">Mines Left: <span id="minesCount">10</span></div>
     <div class="board-container">
         <div class="board" id="board"></div>
     </div>
@@ -136,21 +139,8 @@
     <div id="toast" class="toast">Congratulations! You win!</div>
 
     <script>
-        // Function to dynamically update the game title and settings based on parameters
-        const gameSettings = {
-            name: "Minesweeper Game",  // Change this to whatever name you want
-            size: 8,                   // Adjust the size of the board
-            mines: 10                  // Adjust the number of mines
-        };
-
-        document.getElementById('gameTitle').innerText = gameSettings.name;
-        document.getElementById('boardSizeText').innerText = `${gameSettings.size}x${gameSettings.size}`;
-        document.getElementById('minesText').innerText = gameSettings.mines;
-        document.getElementById('minesCount').innerText = gameSettings.mines;
-
-        const boardSize = gameSettings.size;
-        const numberOfMines = gameSettings.mines;
-
+        const boardSize = 8;
+        const numberOfMines = 10;
         let board = [];
         let revealedCount = 0;
         let minesLeft = numberOfMines;
@@ -170,7 +160,8 @@
             while (minesPlaced < numberOfMines) {
                 const x = Math.floor(Math.random() * boardSize);
                 const y = Math.floor(Math.random() * boardSize);
-                if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
+                if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && 
+                    !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
                     board[x][y].mine = true;
                     minesPlaced++;
                 }
@@ -228,7 +219,6 @@
                     cellElement.className = 'cell';
                     cellElement.dataset.x = x;
                     cellElement.dataset.y = y;
-
                     cellElement.addEventListener('click', () => handleCellClick(x, y));
 
                     if (cell.revealed) {
@@ -244,7 +234,6 @@
                         cellElement.classList.add('marked');
                         cellElement.innerText = '🚩';
                     }
-
                     boardElement.appendChild(cellElement);
                 });
             });
@@ -330,6 +319,7 @@
                 }
             }
             renderBoard();
+            checkWinCondition();
         }
 
         function revealAdjacentCells(x, y) {
@@ -339,7 +329,7 @@
                     const newY = y + j;
                     if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
                         const neighbor = board[newX][newY];
-                        if (!neighbor.revealed && !neighbor.marked) {
+                        if (!neighbor.revealed) {
                             neighbor.revealed = true;
                             revealedCount++;
                             if (neighbor.value === 0) {
@@ -352,6 +342,23 @@
             renderBoard();
         }
 
+        function revealAllMines() {
+            board.forEach(row => {
+                row.forEach(cell => {
+                    if (cell.mine) {
+                        cell.revealed = true;
+                    }
+                });
+            });
+            renderBoard();
+        }
+
+        function checkWinCondition() {
+            if (revealedCount === boardSize * boardSize - numberOfMines) {
+                showToast('Congratulations! You win!');
+            }
+        }
+
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.innerText = message;
@@ -361,37 +368,40 @@
             }, 3000);
         }
 
-        function checkWinCondition() {
-            if (revealedCount === (boardSize * boardSize) - numberOfMines) {
-                showToast('Congratulations! You win!');
-                setTimeout(() => {
-                    resetGame();
-                }, 500);
-            }
-        }
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            resetGame();
+        });
 
-        function revealAllMines() {
-            for (let x = 0; x < boardSize; x++) {
-                for (let y = 0; y < boardSize; y++) {
-                    const cell = board[x][y];
-                    if (cell.mine) {
-                        cell.revealed = true;
-                    }
-                }
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            const x = e.target.dataset.x;
+            const y = e.target.dataset.y;
+            if (x !== undefined && y !== undefined) {
+                handleRightClick(parseInt(x), parseInt(y));
             }
+        });
+
+        function handleRightClick(x, y) {
+            const cell = board[x][y];
+            if (cell.revealed) return;
+            if (cell.marked) {
+                cell.marked = false;
+                minesLeft++;
+            } else {
+                cell.marked = true;
+                minesLeft--;
+            }
+            document.getElementById('minesCount').innerText = minesLeft;
             renderBoard();
         }
 
         function resetGame() {
-            board = [];
+            firstClick = true;
             revealedCount = 0;
             minesLeft = numberOfMines;
-            firstClick = true;
             document.getElementById('minesCount').innerText = minesLeft;
             createBoard();
         }
-
-        document.getElementById('resetBtn').addEventListener('click', resetGame);
 
         createBoard();
     </script>
