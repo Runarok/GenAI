@@ -41,6 +41,7 @@ let revealedCells = [];
 let flaggedCells = [];
 let gameOver = false;
 let firstClick = true; // Flag to track the first click
+let firstClickIndex = null; // To track the index of the first clicked cell
 
 // Function to generate the game board
 function generateBoard() {
@@ -68,17 +69,14 @@ function generateBoard() {
         cell.addEventListener('contextmenu', handleCellFlag);
         board.appendChild(cell);
     }
-
-    placeMines(); // Place mines after the board is generated
-    calculateNumbers();
 }
 
 // Function to place mines randomly on the board
-function placeMines(firstClickIndex) {
+function placeMines() {
     while (minesArray.length < mines) {
         const randomIndex = Math.floor(Math.random() * (size * size));
         // Ensure the random mine is not placed in the first clicked cell
-        if (!minesArray.includes(randomIndex) && randomIndex !== firstClickIndex) {
+        if (randomIndex !== firstClickIndex && !minesArray.includes(randomIndex)) {
             minesArray.push(randomIndex);
         }
     }
@@ -131,10 +129,11 @@ function handleCellClick(event) {
     const cell = event.target;
     const index = parseInt(cell.getAttribute('data-index'));
 
-    // Prevent the first click from being a mine
+    // If it's the first click, make sure it's not a mine
     if (firstClick) {
         firstClick = false;  // Mark the first click as done
-        placeMines(index);   // Place mines after the first click
+        firstClickIndex = index; // Store the first click's index
+        placeMines();   // Place mines after the first click
     }
 
     if (flaggedCells.includes(index)) return;
@@ -222,12 +221,5 @@ function revealSurroundingCells(index) {
 document.getElementById('back-btn').addEventListener('click', () => {
     window.location.href = "https://runarok.github.io/GenAI/Games/Minesweeper/";
 });
-
-// Refresh board when the game is over
-if (gameOver) {
-    setTimeout(() => {
-        window.location.reload();
-    }, 3000); // 3-second delay before refreshing the board after game over
-}
 
 generateBoard();
