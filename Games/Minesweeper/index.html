@@ -90,16 +90,16 @@
     <div class="dropdown">
         <select id="modeSelect">
             <option value="">Select Mode</option>
-            <option value="1" title="Size: 8x8 | Mines: 10 | Mine Percentage: 15.625%">Beginner's Bliss</option>
-            <option value="2" title="Size: 10x10 | Mines: 15 | Mine Percentage: 15%">Novice's Nest</option>
-            <option value="3" title="Size: 12x12 | Mines: 20 | Mine Percentage: 13.89%">Intermediate Challenge</option>
-            <option value="4" title="Size: 16x16 | Mines: 40 | Mine Percentage: 15.625%">Strategist's Playground</option>
-            <option value="5" title="Size: 20x20 | Mines: 60 | Mine Percentage: 15%">Rookie's Realm</option>
-            <option value="6" title="Size: 24x24 | Mines: 100 | Mine Percentage: 17.36%">Expert Expedition</option>
-            <option value="7" title="Size: 30x30 | Mines: 150 | Mine Percentage: 16.67%">Mastermind's Maze</option>
-            <option value="8" title="Size: 36x36 | Mines: 250 | Mine Percentage: 19.44%">Challenger's Crucible</option>
-            <option value="9" title="Size: 40x40 | Mines: 300 | Mine Percentage: 18.75%">Ultimate Battleground</option>
-            <option value="10" title="Size: 50x50 | Mines: 400 | Mine Percentage: 16%">Titan's Trial</option>
+            <option value="1" data-size="8x8" data-mines="10" data-percentage="15.625%">Beginner's Bliss</option>
+            <option value="2" data-size="10x10" data-mines="15" data-percentage="15%">Novice's Nest</option>
+            <option value="3" data-size="12x12" data-mines="20" data-percentage="13.89%">Intermediate Challenge</option>
+            <option value="4" data-size="16x16" data-mines="40" data-percentage="15.625%">Strategist's Playground</option>
+            <option value="5" data-size="20x20" data-mines="60" data-percentage="15%">Rookie's Realm</option>
+            <option value="6" data-size="24x24" data-mines="100" data-percentage="17.36%">Expert Expedition</option>
+            <option value="7" data-size="30x30" data-mines="150" data-percentage="16.67%">Mastermind's Maze</option>
+            <option value="8" data-size="36x36" data-mines="250" data-percentage="19.44%">Challenger's Crucible</option>
+            <option value="9" data-size="40x40" data-mines="300" data-percentage="18.75%">Ultimate Battleground</option>
+            <option value="10" data-size="50x50" data-mines="400" data-percentage="16%">Titan's Trial</option>
         </select>
         <div class="tooltip">Hover over the options for details</div>
     </div>
@@ -109,8 +109,17 @@
         function startGame() {
             const select = document.getElementById('modeSelect');
             const selectedValue = select.value;
+            
+            // Check if a valid mode is selected
             if (selectedValue) {
-                window.location.href = `Modes/?mode=${selectedValue}`;
+                // Get data attributes (size, mines, and percentage) of the selected option
+                const selectedOption = select.options[select.selectedIndex];
+                const size = selectedOption.getAttribute('data-size');
+                const mines = selectedOption.getAttribute('data-mines');
+                const minePercentage = selectedOption.getAttribute('data-percentage');
+
+                // Construct the URL with query parameters
+                window.location.href = `Modes/?mode=${selectedValue}&size=${size}&mines=${mines}&minePercentage=${minePercentage}`;
             } else {
                 window.location.href = 'Details/Default.html'; // Redirect to Default.html if no mode selected
             }
