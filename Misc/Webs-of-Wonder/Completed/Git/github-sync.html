@@ -101,11 +101,16 @@
                 const repoName = usernameRepo[1];
                 const restPath = urlParts.slice(3).join('/');
 
-                // For GitHub
-                const githubLink = `https://github.com/${username}/${repoName}/tree/main/${restPath}`;
+                // Determine if it's a file or folder based on the last part
+                const isFile = restPath.includes('.');
+
+                // For GitHub link
+                const githubLink = isFile 
+                    ? `https://github.com/${username}/${repoName}/blob/main/${restPath}` 
+                    : `https://github.com/${username}/${repoName}/tree/main/${restPath}`;
                 githubText.textContent = githubLink;
 
-                // For GitHub Pages
+                // For GitHub Pages link
                 const githubPagesLink = `https://${username}.github.io/${repoName}/${restPath}`;
                 githubPagesText.textContent = githubPagesLink;
             } else {
