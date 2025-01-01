@@ -119,6 +119,7 @@
 <div class="controls">
     <button onclick="showSection('Games')">Games</button>
     <button onclick="showSection('CodeFolly')">CodeFolly</button>
+    <button onclick="showSection('CodeForge')">CodeForge</button>
     <button onclick="showSection('miscellaneous')">Miscellaneous</button>
 </div>
 
@@ -186,6 +187,48 @@
     
 </div>
 
+<div id="CodeForge" class="section">
+    <div class="section-title">Webs-of-Wonders</div>
+    <div class="link-container">
+        <a href="CodeForge/Useful Tools/Choose.html">Select</a>
+        <a href="CodeForge/Useful Tools/Favicon-Fetcher.html">Favicon-Fetcher</a>
+        <a href="CodeForge/Useful Tools/QR Generator.html">QR Generator</a>
+        <a href="CodeForge/Useful Tools/QR Reader.html">QR Reader</a>
+        <a href="CodeForge/Useful Tools/Word of the day.html">Random Meanings</a>
+        <a href="CodeForge/Useful Tools/Quotes.html">Random Quotes</a>
+        <a href="CodeForge/Useful Tools/Fancy.html">Fancy words</a>
+        <a href="CodeForge/Useful Tools/API Checker.html">API Checker</a>
+    </div>
+
+    <div class="section-title">Github tools</div>
+    <div class="link-container">
+        <a href="CodeForge/Git/drag-drop-viewer.html">DragDrop Viewer</a>
+        <a href="CodeForge/Git/Git repo.html">GitHub repos</a>
+        <a href="CodeForge/Git/github-sync.html">github-sync</a>
+    </div>
+    
+    <div class="section-title">Educational Tools</div>
+    <div class="link-container">
+        <a href="CodeForge/Educational Tools/TwiddleFactors.html">TwiddleFactor Calc</a>
+        <a href="CodeForge/Educational Tools/dft.html">DFT Calc</a>            
+    </div>
+
+    <div class="section-title">General Projects : Games-Like</div>
+    <div class="link-container">
+        <a href="CodeForge/General/Bomb.html">Bomb</a>
+        <a href="CodeForge/General/RPS.html">RPS</a>
+    </div>    
+
+    <div class="section-title">Miscellaneous</div>
+    <div class="link-container">
+        <a href="CodeForge/Misc/Html Executor.html">Html v1</a>
+        <a href="CodeForge/Misc/Walls.html">Matrix Rain Generator</a>
+        <a href="CodeForge/Misc/Links.html">Links</a>
+        <a href="CodeForge/Misc/Links v2.html">Links v2</a>
+    </div>
+</div>
+    
+    
 <!-- Section for Miscellaneous -->
 <div id="miscellaneous" class="section">
     <div class="section-title">Academic</div>
@@ -228,7 +271,7 @@ window.onload = function() {
 };
 
 // List of sections in order (just for navigation)
-const sectionIds = ['Games', 'CodeFolly', 'miscellaneous'];
+const sectionIds = ['Games', 'CodeFolly', 'miscellaneous','CodeFolly'];
 
 // Variable to track the current section (not strictly necessary with the query, but useful for navigation)
 let currentSectionIndex = 0;
