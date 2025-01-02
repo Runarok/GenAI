@@ -1,271 +1,246 @@
-const boardSize = 30; // Updated board size to 30
-const numberOfMines = 150; // Updated total number of mines
-let board = [];
-let revealedCount = 0;
-let minesLeft = numberOfMines;
-let firstClick = true;
-
-function createBoard() {
-    // Initializes the board with cells
-    board = Array.from({ length: boardSize }, () => 
-        Array.from({ length: boardSize }, () => ({ 
-            state: false, revealed: false, mine: false, marked: false, value: 0 
-        }))
-    );
-    renderBoard(); // Render the board after creation
+// Detect if the user is on a mobile device
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
 }
 
-function placeMines(excludeX, excludeY) {
-    // Places mines on the board, avoiding the first click position
-    let minesPlaced = 0;
-    while (minesPlaced < numberOfMines) {
-        const x = Math.floor(Math.random() * boardSize);
-        const y = Math.floor(Math.random() * boardSize);
-        if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && 
-            !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
-            board[x][y].mine = true;
-            minesPlaced++;
+if (isMobileDevice()) {
+  // Show the mobile message and disable interaction
+  document.getElementById("mobileMessage").style.display = "block";
+  document.getElementById("gridCanvas").style.display = "none";
+  document.getElementById("controls").style.display = "none";
+} else {
+  // Canvas and simulation logic for PC users
+  const canvas = document.getElementById("gridCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let scale = 20; // Cell size (initial)
+  let minScale = 10; // Minimum scale (max zoom-out)
+  let maxScale = 100; // Maximum scale (max zoom-in)
+  let offsetX = 0; // X-offset for panning
+  let offsetY = 0; // Y-offset for panning
+  let zoomFactor = 1.1; // Zoom speed
+
+  let cells = {}; // Stores the grid's "alive" cells
+  let isPanning = false;
+  let startX, startY;
+
+  // Simulation State
+  let running = false;
+  let simulationInterval;
+
+  // Resize canvas dynamically
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drawGrid();
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  // Get cell key from coordinates
+  function getCellKey(x, y) {
+    return `${x},${y}`;
+  }
+
+  // Draw the grid
+  function drawGrid() {
+    ctx.fillStyle = "#121212"; // Background
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Align the grid offsets to prevent misalignment
+    const alignedOffsetX = offsetX % scale;
+    const alignedOffsetY = offsetY % scale;
+
+    // Draw gridlines
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 1;
+    for (let x = alignedOffsetX; x <= canvas.width; x += scale) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = alignedOffsetY; y <= canvas.height; y += scale) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    // Draw cells
+    ctx.fillStyle = "#4CAF50"; // Green for alive cells
+    for (let key in cells) {
+      const [x, y] = key.split(",").map(Number);
+      const screenX = x * scale + offsetX;
+      const screenY = y * scale + offsetY;
+
+      // Only draw cells that are visible on the screen
+      if (
+        screenX >= 0 &&
+        screenX < canvas.width &&
+        screenY >= 0 &&
+        screenY < canvas.height
+      ) {
+        ctx.fillRect(screenX, screenY, scale, scale);
+      }
+    }
+  }
+
+  // Convert screen to grid coordinates
+  function screenToGrid(x, y) {
+    return [
+      Math.floor((x - offsetX) / scale),
+      Math.floor((y - offsetY) / scale),
+    ];
+  }
+
+  // Toggle cell state
+  canvas.addEventListener("click", (event) => {
+    const [x, y] = screenToGrid(event.clientX, event.clientY);
+    const key = getCellKey(x, y);
+    if (cells[key]) {
+      delete cells[key];
+    } else {
+      cells[key] = true;
+    }
+    drawGrid();
+    saveGridState();
+  });
+
+  // Zoom in and out
+  canvas.addEventListener("wheel", (event) => {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+
+    const [gridX, gridY] = screenToGrid(mouseX, mouseY);
+
+    // Calculate new scale while respecting minScale and maxScale
+    if (event.deltaY < 0) {
+      // Zoom in
+      scale = Math.min(maxScale, scale * zoomFactor);
+    } else {
+      // Zoom out
+      scale = Math.max(minScale, scale / zoomFactor);
+    }
+
+    // Adjust offsets to keep the zoom centered around the mouse pointer
+    const [newGridX, newGridY] = screenToGrid(mouseX, mouseY);
+    offsetX += (newGridX - gridX) * scale;
+    offsetY += (newGridY - gridY) * scale;
+
+    drawGrid();
+  });
+
+  // Panning
+  canvas.addEventListener("mousedown", (event) => {
+    if (event.button === 1 || event.button === 2) {
+      isPanning = true;
+      startX = event.clientX;
+      startY = event.clientY;
+      canvas.style.cursor = "grabbing";
+    }
+  });
+  canvas.addEventListener("mousemove", (event) => {
+    if (isPanning) {
+      offsetX += event.clientX - startX;
+      offsetY += event.clientY - startY;
+      startX = event.clientX;
+      startY = event.clientY;
+      drawGrid();
+    }
+  });
+  canvas.addEventListener("mouseup", () => {
+    isPanning = false;
+    canvas.style.cursor = "pointer";
+  });
+  canvas.addEventListener("contextmenu", (event) => event.preventDefault());
+
+  // Simulation logic
+  function stepSimulation() {
+    const newCells = {};
+    const neighbors = {};
+
+    for (let key in cells) {
+      const [x, y] = key.split(",").map(Number);
+
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          const nx = x + dx;
+          const ny = y + dy;
+          const neighborKey = getCellKey(nx, ny);
+          if (dx === 0 && dy === 0) continue;
+
+          neighbors[neighborKey] = (neighbors[neighborKey] || 0) + 1;
         }
+      }
     }
+
+    for (let key in neighbors) {
+      const count = neighbors[key];
+      if (count === 3 || (count === 2 && cells[key])) {
+        newCells[key] = true;
+      }
+    }
+
+    cells = newCells;
+    drawGrid();
+    saveGridState();
+  }
+
+  document.getElementById("start").addEventListener("click", () => {
+    if (!running) {
+      running = true;
+      simulationInterval = setInterval(stepSimulation, 100);
+    }
+  });
+
+  document.getElementById("pause").addEventListener("click", () => {
+    running = false;
+    clearInterval(simulationInterval);
+  });
+
+  document.getElementById("step").addEventListener("click", stepSimulation);
+
+  document.getElementById("reset").addEventListener("click", () => {
+    cells = {};
+    drawGrid();
+    saveGridState();
+  });
+
+  // Keyboard Shortcuts for Play/Pause, Reset, Step
+  window.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+      if (!running) {
+        running = true;
+        simulationInterval = setInterval(stepSimulation, 100);
+      } else {
+        running = false;
+        clearInterval(simulationInterval);
+      }
+    } else if (event.code === "KeyR") {
+      cells = {};
+      drawGrid();
+      saveGridState();
+    } else if (event.code === "KeyS") {
+      stepSimulation();
+    }
+  });
+
+  // LocalStorage
+  function saveGridState() {
+    localStorage.setItem("gridState", JSON.stringify(cells));
+  }
+
+  function loadGridState() {
+    const savedState = localStorage.getItem("gridState");
+    if (savedState) {
+      cells = JSON.parse(savedState);
+      drawGrid();
+    }
+  }
+
+  // Load the saved grid state on page load
+  loadGridState();
+
+  drawGrid();
 }
-
-function areAdjacentCellsMined(x, y, excludeX, excludeY) {
-    // Checks if adjacent cells have mines
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            if (i === 0 && j === 0) continue;
-            const newX = x + i;
-            const newY = y + j;
-            if (newX === excludeX && newY === excludeY) continue;
-            if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].mine) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-function calculateValues() {
-    // Calculates the number of adjacent mines for each cell
-    for (let x = 0; x < boardSize; x++) {
-        for (let y = 0; y < boardSize; y++) {
-            if (board[x][y].mine) {
-                board[x][y].value = -1;
-                continue;
-            }
-            board[x][y].value = countAdjacentMines(x, y);
-        }
-    }
-}
-
-function countAdjacentMines(x, y) {
-    // Counts the number of mines adjacent to a given cell
-    let count = 0;
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            if (i === 0 && j === 0) continue;
-            const newX = x + i;
-            const newY = y + j;
-            if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].mine) {
-                count++;
-            }
-        }
-    }
-    return count;
-}
-
-function renderBoard() {
-    // Renders the board to the DOM
-    const boardElement = document.getElementById('board');
-    boardElement.innerHTML = '';
-    board.forEach((row, x) => {
-        row.forEach((cell, y) => {
-            const cellElement = document.createElement('div');
-            cellElement.className = 'cell';
-            cellElement.dataset.x = x;
-            cellElement.dataset.y = y;
-
-            cellElement.addEventListener('click', () => handleCellClick(x, y));
-
-            if (cell.revealed) {
-                cellElement.classList.add('revealed');
-                if (cell.mine) {
-                    cellElement.classList.add('mine');
-                    cellElement.innerText = '💣';
-                } else {
-                    cellElement.innerText = cell.value > 0 ? cell.value : '';
-                }
-            }
-            if (cell.marked) {
-                cellElement.classList.add('marked');
-                cellElement.innerText = '🚩';
-            }
-
-            boardElement.appendChild(cellElement);
-        });
-    });
-}
-
-function handleCellClick(x, y) {
-    // Handles the click event on a cell
-    if (firstClick) {
-        placeMines(x, y);
-        calculateValues();
-        firstClick = false;
-    }
-
-    const cell = board[x][y];
-    if (cell.marked) {
-        cell.marked = false;
-        minesLeft++;
-        document.getElementById('minesCount').innerText = minesLeft;
-        renderBoard();
-        return;
-    }
-
-    if (cell.revealed) {
-        if (cell.value > 0) {
-            const markedCount = countMarkedNeighbors(x, y);
-            if (markedCount === cell.value) {
-                revealSurroundingCells(x, y);
-            }
-        }
-        return;
-    }
-
-    cell.revealed = true;
-    revealedCount++;
-
-    if (cell.mine) {
-        showToast('Game Over! You hit a mine!');
-        revealAllMines();
-        renderBoard();
-        setTimeout(() => {
-            resetGame();
-        }, 500);
-        return;
-    }
-
-    if (cell.value === 0) {
-        revealAdjacentCells(x, y);
-    }
-
-    renderBoard();
-    checkWinCondition();
-}
-
-function countMarkedNeighbors(x, y) {
-    // Counts the number of marked neighbors around a cell
-    let count = 0;
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            if (i === 0 && j === 0) continue;
-            const newX = x + i;
-            const newY = y + j;
-            if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[newX][newY].marked) {
-                count++;
-            }
-        }
-    }
-    return count;
-}
-
-function revealSurroundingCells(x, y) {
-    // Reveals surrounding cells when a cell with a number is clicked
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            const newX = x + i;
-            const newY = y + j;
-            if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
-                const neighbor = board[newX][newY];
-                if (!neighbor.revealed && !neighbor.marked) {
-                    neighbor.revealed = true;
-                    revealedCount++;
-                    if (neighbor.value === 0) {
-                        revealAdjacentCells(newX, newY);
-                    }
-                }
-            }
-        }
-    }
-    renderBoard();
-    checkWinCondition();
-}
-
-function revealAdjacentCells(x, y) {
-    // Reveals adjacent cells if value is zero
-    for (let i = -1; i <= 1; i++) {
-        for (let j = -1; j <= 1; j++) {
-            const newX = x + i;
-            const newY = y + j;
-            if (newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize) {
-                const neighbor = board[newX][newY];
-                if (!neighbor.revealed) {
-                    neighbor.revealed = true;
-                    revealedCount++;
-                    if (neighbor.value === 0) {
-                        revealAdjacentCells(newX, newY);
-                    }
-                }
-            }
-        }
-    }
-    renderBoard();
-}
-
-function revealAllMines() {
-    // Reveals all mines on the board
-    board.forEach(row => {
-        row.forEach(cell => {
-            if (cell.mine) {
-                cell.revealed = true;
-            }
-        });
-    });
-    renderBoard();
-}
-
-function checkWinCondition() {
-    // Checks if the player has won
-    if (revealedCount === boardSize * boardSize - numberOfMines) {
-        showToast('Congratulations! You win!');
-    }
-}
-
-function showToast(message) {
-    // Displays a toast message
-    const toast = document.getElementById('toast');
-    toast.innerText = message;
-    toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-    resetGame();
-});
-
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-    const x = e.target.dataset.x;
-    const y = e.target.dataset.y;
-    if (x !== undefined && y !== undefined) {
-        const cell = board[parseInt(x)][parseInt(y)];
-        if (!cell.revealed) {
-            cell.marked = !cell.marked;
-            minesLeft += cell.marked ? -1 : 1;
-            document.getElementById('minesCount').innerText = minesLeft;
-            renderBoard();
-        }
-    }
-});
-
-function resetGame() {
-    firstClick = true;
-    revealedCount = 0;
-    minesLeft = numberOfMines;
-    createBoard();
-}
-
-createBoard();
