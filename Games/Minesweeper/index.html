@@ -1,146 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0d1b2a, #1b2631);
-            background-size: 400% 400%;
-            animation: gradientFlow 10s ease infinite;
-            color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            background-color: #2e2e2e;
+            color: #f1f1f1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
         }
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+
         h1 {
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            color: #00bcd4;
-            text-shadow: 0 0 10px #00bcd4, 0 0 20px #00bcd4, 0 0 30px rgba(0, 188, 212, 0.7);
-            font-size: 48px;
-            text-align: center;
         }
-        .dropdown {
-            position: relative;
-            margin: 20px 0;
-            width: 300px;
+
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(8, 40px);
+            grid-template-rows: repeat(8, 40px);
+            gap: 2px;
         }
-        .dropdown select {
-            width: 100%;
-            padding: 10px;
-            background-color: #2e2e2e;
-            color: #f0f0f0;
-            border: 1px solid #00bcd4;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.2s;
-        }
-        .dropdown select:hover {
-            background-color: #3e3e3e;
-        }
-        .tooltip {
-            position: absolute;
-            background-color: rgba(0, 188, 212, 0.9);
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            z-index: 1;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 5px;
-            opacity: 0;
-            transition: opacity 0.5s linear;
-        }
-        .dropdown:hover .tooltip {
-            opacity: 1;
-        }
-        .start-button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #00bcd4;
-            color: #ffffff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.2s;
-            margin-top: 20px;
+
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            background-color: #3a3a3a;
+            border: 1px solid #444;
+            cursor: pointer;
+            color: #ccc;
+            transition: background-color 0.3s;
         }
-        .start-button:hover {
-            background-color: #0097a7;
-            transform: scale(1.05);
+
+        .cell:hover {
+            background-color: #555;
+        }
+
+        .revealed {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .mine {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        .mine.revealed {
+            background-color: #c9302c;
+        }
+
+        .cell[data-count="1"] {
+            color: #1e90ff;
+        }
+
+        .cell[data-count="2"] {
+            color: #32cd32;
+        }
+
+        .cell[data-count="3"] {
+            color: #ff6347;
+        }
+
+        .cell[data-count="4"] {
+            color: #4b0082;
+        }
+
+        .cell[data-count="5"] {
+            color: #8b0000;
+        }
+
+        .cell[data-count="6"] {
+            color: #20b2aa;
+        }
+
+        .cell[data-count="7"] {
+            color: #000;
+        }
+
+        .cell[data-count="8"] {
+            color: #808080;
         }
     </style>
 </head>
+
 <body>
     <h1>Minesweeper</h1>
-    <div class="dropdown">
-        <select id="modeSelect">
-            <option value="">Select Mode</option>
-            <option value="Modes/Mode1/" title="Size: 8x8 | Mines: 10 | Mine Percentage: 15.625%">Beginner's Bliss</option>
-            <option value="Modes/Mode2/" title="Size: 10x10 | Mines: 15 | Mine Percentage: 15%">Novice's Nest</option>
-            <option value="Modes/Mode3/" title="Size: 12x12 | Mines: 20 | Mine Percentage: 13.89%">Intermediate Challenge</option>
-            <option value="Modes/Mode4/" title="Size: 16x16 | Mines: 40 | Mine Percentage: 15.625%">Strategist's Playground</option>
-            <option value="Modes/Mode5/" title="Size: 20x20 | Mines: 60 | Mine Percentage: 15%">Rookie's Realm</option>
-            <option value="Modes/Mode6/" title="Size: 24x24 | Mines: 100 | Mine Percentage: 17.36%">Expert Expedition</option>
-            <option value="Modes/Mode7/" title="Size: 30x30 | Mines: 150 | Mine Percentage: 16.67%">Mastermind's Maze</option>
-            <option value="Modes/Mode8/" title="Size: 36x36 | Mines: 250 | Mine Percentage: 19.44%">Challenger's Crucible</option>
-            <option id="randomMode" value="randomMode" title="Size: 50x50 | Mines: 400 | Mine Percentage: 16%">Random Mode</option>
-        </select>
-        <div class="tooltip">Hover over the options for details</div>
-    </div>
-    <button class="start-button" onclick="startGame()">Start Game</button>
+    <div id="gameBoard"></div>
 
     <script>
-        // Randomize the value of the 'Random Mode' option on page load
-        window.onload = function() {
-            const randomModeOption = document.getElementById("randomMode");
-            const randomModeIndex = Math.floor(Math.random() * 10) + 1; // Random index between 1 and 10
-            const randomMode = `Modes/Mode${randomModeIndex}/`;
-            randomModeOption.value = randomMode;
-            randomModeOption.title = `Size: ${randomModeIndex * 10}x${randomModeIndex * 10} | Mines: ${randomModeIndex * 40} | Mine Percentage: ${(randomModeIndex * 40 / (randomModeIndex * 10 * randomModeIndex * 10)) * 100}%`;
-        }
+        const numRows = 8;
+        const numCols = 8;
+        const numMines = 10;
 
-        // Start Game Function
-        function startGame() {
-            const select = document.getElementById('modeSelect');
-            const selectedValue = select.value;
+        const gameBoard = document.getElementById("gameBoard");
+        let board = [];
 
-            // If Random Mode is selected, pick a random mode
-            if (selectedValue === "randomMode") {
-                const allOptions = [
-                    "Modes/Mode1/",
-                    "Modes/Mode2/",
-                    "Modes/Mode3/",
-                    "Modes/Mode4/",
-                    "Modes/Mode5/",
-                    "Modes/Mode6/",
-                    "Modes/Mode7/",
-                    "Modes/Mode8/",
-                    "Modes/Mode9/",
-                    "Modes/Mode10/"
-                ];
-                const randomMode = allOptions[Math.floor(Math.random() * allOptions.length)];
-                window.location.href = randomMode;
-            } else if (selectedValue) {
-                window.location.href = selectedValue;
-            } else {
-                window.location.href = 'Details/Default.html'; // Redirect to Default.html if no mode selected
+        function initializeBoard() {
+            for (let i = 0; i < numRows; i++) {
+                board[i] = [];
+                for (let j = 0; j < numCols; j++) {
+                    board[i][j] = {
+                        isMine: false,
+                        revealed: false,
+                        count: 0,
+                    };
+                }
+            }
+
+            // Place mines randomly
+            let minesPlaced = 0;
+            while (minesPlaced < numMines) {
+                const row = Math.floor(Math.random() * numRows);
+                const col = Math.floor(Math.random() * numCols);
+                if (!board[row][col].isMine) {
+                    board[row][col].isMine = true;
+                    minesPlaced++;
+                }
+            }
+
+            // Calculate counts
+            for (let i = 0; i < numRows; i++) {
+                for (let j = 0; j < numCols; j++) {
+                    if (!board[i][j].isMine) {
+                        let count = 0;
+                        for (let dx = -1; dx <= 1; dx++) {
+                            for (let dy = -1; dy <= 1; dy++) {
+                                const ni = i + dx;
+                                const nj = j + dy;
+                                if (ni >= 0 && ni < numRows && nj >= 0 && nj < numCols && board[ni][nj].isMine) {
+                                    count++;
+                                }
+                            }
+                        }
+                        board[i][j].count = count;
+                    }
+                }
             }
         }
+
+        function revealCell(row, col) {
+            if (
+                row < 0 ||
+                row >= numRows ||
+                col < 0 ||
+                col >= numCols ||
+                board[row][col].revealed
+            ) {
+                return;
+            }
+
+            board[row][col].revealed = true;
+
+            if (board[row][col].isMine) {
+                // Handle game over
+                alert("Game Over! You stepped on a mine.");
+                return;
+            } else if (board[row][col].count === 0) {
+                // If cell has no mines nearby, reveal adjacent cells
+                for (let dx = -1; dx <= 1; dx++) {
+                    for (let dy = -1; dy <= 1; dy++) {
+                        revealCell(row + dx, col + dy);
+                    }
+                }
+            }
+
+            renderBoard();
+        }
+
+        function renderBoard() {
+            gameBoard.innerHTML = "";
+
+            for (let i = 0; i < numRows; i++) {
+                for (let j = 0; j < numCols; j++) {
+                    const cell = document.createElement("div");
+                    cell.className = "cell";
+                    if (board[i][j].revealed) {
+                        cell.classList.add("revealed");
+                        if (board[i][j].isMine) {
+                            cell.classList.add("mine");
+                            cell.textContent = "💣";
+                        } else if (board[i][j].count > 0) {
+                            cell.textContent = board[i][j].count;
+                            cell.setAttribute("data-count", board[i][j].count);
+                        }
+                    }
+                    cell.addEventListener("click", () => revealCell(i, j));
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+
+        initializeBoard();
+        renderBoard();
     </script>
 </body>
+
 </html>
