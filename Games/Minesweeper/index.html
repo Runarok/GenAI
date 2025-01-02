@@ -156,6 +156,7 @@
         let gameInterval;
         let timer = 0;
         let minesLeft = numMines;
+        let firstClick = true;
 
         const gameBoard = document.getElementById("gameBoard");
         const mineCountDisplay = document.getElementById("mineCount");
@@ -167,17 +168,12 @@
             clearInterval(gameInterval);
             timer = 0;
             minesLeft = numMines;
+            firstClick = true;
             mineCountDisplay.textContent = minesLeft;
             timerDisplay.textContent = timer;
 
             initializeBoard();
             renderBoard();
-
-            // Start the timer when the game starts
-            gameInterval = setInterval(() => {
-                timer++;
-                timerDisplay.textContent = timer;
-            }, 1000);
         }
 
         function initializeBoard() {
@@ -237,10 +233,20 @@
                 return;
             }
 
+            // Start the timer after the first click
+            if (firstClick) {
+                gameInterval = setInterval(() => {
+                    timer++;
+                    timerDisplay.textContent = timer;
+                }, 1000);
+                firstClick = false;
+            }
+
             board[row][col].revealed = true;
 
             if (board[row][col].isMine) {
                 showToast("Game Over! You stepped on a mine.");
+                setTimeout(startNewGame, 1500);  // Auto-restart after a short delay
                 clearInterval(gameInterval);
             } else if (board[row][col].count === 0) {
                 for (let dx = -1; dx <= 1; dx++) {
