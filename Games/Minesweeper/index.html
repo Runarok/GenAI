@@ -98,18 +98,44 @@
             <option value="Modes/Mode6/" title="Size: 24x24 | Mines: 100 | Mine Percentage: 17.36%">Expert Expedition</option>
             <option value="Modes/Mode7/" title="Size: 30x30 | Mines: 150 | Mine Percentage: 16.67%">Mastermind's Maze</option>
             <option value="Modes/Mode8/" title="Size: 36x36 | Mines: 250 | Mine Percentage: 19.44%">Challenger's Crucible</option>
-            <option value="Modes/Mode9/" title="Size: 40x40 | Mines: 300 | Mine Percentage: 18.75%">Ultimate Battleground</option>
-            <option value="Modes/Mode10/" title="Size: 50x50 | Mines: 400 | Mine Percentage: 16%">Titan's Trial</option>
+            <option id="randomMode" value="randomMode" title="Size: 50x50 | Mines: 400 | Mine Percentage: 16%">Random Mode</option>
         </select>
         <div class="tooltip">Hover over the options for details</div>
     </div>
     <button class="start-button" onclick="startGame()">Start Game</button>
 
     <script>
+        // Randomize the value of the 'Random Mode' option on page load
+        window.onload = function() {
+            const randomModeOption = document.getElementById("randomMode");
+            const randomModeIndex = Math.floor(Math.random() * 10) + 1; // Random index between 1 and 10
+            const randomMode = `Modes/Mode${randomModeIndex}/`;
+            randomModeOption.value = randomMode;
+            randomModeOption.title = `Size: ${randomModeIndex * 10}x${randomModeIndex * 10} | Mines: ${randomModeIndex * 40} | Mine Percentage: ${(randomModeIndex * 40 / (randomModeIndex * 10 * randomModeIndex * 10)) * 100}%`;
+        }
+
+        // Start Game Function
         function startGame() {
             const select = document.getElementById('modeSelect');
             const selectedValue = select.value;
-            if (selectedValue) {
+
+            // If Random Mode is selected, pick a random mode
+            if (selectedValue === "randomMode") {
+                const allOptions = [
+                    "Modes/Mode1/",
+                    "Modes/Mode2/",
+                    "Modes/Mode3/",
+                    "Modes/Mode4/",
+                    "Modes/Mode5/",
+                    "Modes/Mode6/",
+                    "Modes/Mode7/",
+                    "Modes/Mode8/",
+                    "Modes/Mode9/",
+                    "Modes/Mode10/"
+                ];
+                const randomMode = allOptions[Math.floor(Math.random() * allOptions.length)];
+                window.location.href = randomMode;
+            } else if (selectedValue) {
                 window.location.href = selectedValue;
             } else {
                 window.location.href = 'Details/Default.html'; // Redirect to Default.html if no mode selected
