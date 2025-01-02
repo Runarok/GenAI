@@ -144,6 +144,8 @@
         let revealedCount = 0;
         let minesLeft = numberOfMines;
         let firstClick = true;
+        let firstClickX = -1;
+        let firstClickY = -1;
 
         // Creates the game board with cells
         function createBoard() {
@@ -155,14 +157,13 @@
             renderBoard();
         }
 
-        // Places mines, avoiding the first click area
+        // Places mines after the first click, avoiding the clicked cell and its adjacent cells
         function placeMines(excludeX, excludeY) {
             let minesPlaced = 0;
             while (minesPlaced < numberOfMines) {
                 const x = Math.floor(Math.random() * boardSize);
                 const y = Math.floor(Math.random() * boardSize);
-                if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && 
-                    !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
+                if (!board[x][y].mine && (x !== excludeX || y !== excludeY) && !areAdjacentCellsMined(x, y, excludeX, excludeY)) {
                     board[x][y].mine = true;
                     minesPlaced++;
                 }
@@ -249,7 +250,9 @@
         // Handles cell click logic
         function handleCellClick(x, y) {
             if (firstClick) {
-                placeMines(x, y);
+                firstClickX = x;
+                firstClickY = y;
+                placeMines(firstClickX, firstClickY);
                 calculateValues();
                 firstClick = false;
             }
