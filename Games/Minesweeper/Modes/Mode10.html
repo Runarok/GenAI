@@ -226,7 +226,14 @@
                     cellElement.dataset.x = x;
                     cellElement.dataset.y = y;
 
+                    // Left click event to reveal cell
                     cellElement.addEventListener('click', () => handleCellClick(x, y));
+
+                    // Right click event to mark/unmark a flag
+                    cellElement.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();  // Prevent the context menu
+                        handleFlag(x, y);
+                    });
 
                     if (cell.revealed) {
                         cellElement.classList.add('revealed');
@@ -247,7 +254,7 @@
             });
         }
 
-        // Handles cell click logic
+        // Handles cell click logic (revealing cells)
         function handleCellClick(x, y) {
             if (firstClick) {
                 firstClickX = x;
@@ -259,11 +266,7 @@
 
             const cell = board[x][y];
             if (cell.marked) {
-                cell.marked = false;
-                minesLeft++;
-                document.getElementById('minesCount').innerText = minesLeft;
-                renderBoard();
-                return;
+                return; // Don't reveal flagged cells
             }
 
             if (cell.revealed) {
@@ -293,6 +296,22 @@
 
             renderBoard();
             checkWinCondition();
+        }
+
+        // Handle flag marking and unmarking
+        function handleFlag(x, y) {
+            const cell = board[x][y];
+            if (!cell.revealed) {
+                if (cell.marked) {
+                    cell.marked = false;
+                    minesLeft++;
+                } else {
+                    cell.marked = true;
+                    minesLeft--;
+                }
+                document.getElementById('minesCount').innerText = minesLeft;
+                renderBoard();
+            }
         }
 
         // Count the marked cells around a given cell
