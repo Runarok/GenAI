@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon and icon for 'Add to Home Screen' -->
     <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
-    
-    <!-- Link to manifest.json (for better compatibility with 'Add to Home Screen') -->
     <title>Papers Viewer</title>
     <style>
-        /* Default styles for dark mode */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #121212;
@@ -62,7 +58,6 @@
             transform: scale(1.05);
         }
 
-        /* Light theme styles */
         .light-theme {
             background-color: #ffffff;
             color: #121212;
@@ -113,7 +108,6 @@
             margin-bottom: 20px;
         }
 
-        /* Button Styling */
         #buttons-container {
             display: flex;
             flex-wrap: wrap;
@@ -142,7 +136,6 @@
             background-color: #0288d1;
         }
 
-        /* Adjusting responsiveness for smaller screens */
         @media screen and (max-width: 768px) {
             .container {
                 margin: 20px;
@@ -167,6 +160,22 @@
                 font-size: 1em;
             }
         }
+
+        /* Style for ordered and unordered lists */
+        ol, ul {
+            margin-left: 20px;
+            padding-left: 20px;
+        }
+
+        ol li {
+            list-style-type: decimal; /* Ensures ordered lists use numbers */
+            margin-bottom: 10px;
+        }
+
+        ul li {
+            list-style-type: disc; /* Ensures unordered lists use bullets */
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -182,7 +191,6 @@
         </div>
     </div>
 
-    <!-- Include Showdown.js for Markdown rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
     <script>
         // Function to fetch the list of markdown files in the directory
@@ -203,14 +211,13 @@
         function loadPaperContent(PaperName) {
             const fileUrl = `https://raw.githubusercontent.com/Runarok/GenAI/main/Misc/IA2/${PaperName}.md`; // Construct the raw URL
 
-            // Fetch the raw content of the selected markdown file
             fetch(fileUrl)
                 .then(response => response.text()) // Get the raw markdown data as text
                 .then(markdown => {
                     // Convert markdown to HTML
                     const converter = new showdown.Converter();
                     const htmlContent = converter.makeHtml(markdown);
-                    
+
                     // Display the content in the #markdown-content container
                     document.getElementById('markdown-content').innerHTML = htmlContent;
 
