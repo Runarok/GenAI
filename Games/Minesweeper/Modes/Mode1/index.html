@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Bliss</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="back-button" onclick="window.history.back()">←</button>
+
+    <h1>Beginner's Bliss</h1>
+    <div id="gameInfo">Size: 8x8 | Mines: 10 | Mine Percentage: 15.625%</div>
+    <div id="minesLeft">Mines Left: <span id="minesCount">10</span></div>
+    <div class="board-container">
+        <div class="board" id="board"></div>
+    </div>
+    <button id="resetBtn">Reset Game</button>
+    <div id="toast" class="toast">Congratulations! You win!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
