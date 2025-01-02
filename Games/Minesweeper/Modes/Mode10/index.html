@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind's Maze</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+
+<button class="back-button" onclick="window.history.back()">←</button>
+    <h1>Mastermind's Maze</h1>
+    <div id="gameInfo">Size: 30x30 | Mines: 150 | Mine Percentage: 16.67%</div>
+    <div id="minesLeft">Mines Left: <span id="minesCount">150</span></div>
+    <div class="board-container">
+        <div class="board" id="board"></div>
+    </div>
+    <button id="resetBtn">Reset Game</button>
+    <div id="toast" class="toast">Congratulations! You win!</div>
+
+    <script src="script.js"></script> <!-- Link to external JS file -->
+</body>
+</html>
