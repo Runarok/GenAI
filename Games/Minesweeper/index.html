@@ -93,22 +93,76 @@
         .cell[data-count="8"] {
             color: #808080;
         }
+
+        #controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #controls span {
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
     </style>
 </head>
 
 <body>
     <h1>Minesweeper</h1>
     <div id="gameBoard"></div>
+    <div id="controls">
+        <span>Time: <span id="timer">0</span>s</span>
+        <span>Mines left: <span id="mineCount">10</span></span>
+    </div>
+    <button onclick="startNewGame()">Restart Game</button>
 
     <script>
         const numRows = 8;
         const numCols = 8;
         const numMines = 10;
+        let gameInterval;
+        let timer = 0;
+        let minesLeft = numMines;
 
         const gameBoard = document.getElementById("gameBoard");
+        const mineCountDisplay = document.getElementById("mineCount");
+        const timerDisplay = document.getElementById("timer");
         let board = [];
 
+        function startNewGame() {
+            clearInterval(gameInterval);
+            timer = 0;
+            minesLeft = numMines;
+            mineCountDisplay.textContent = minesLeft;
+            timerDisplay.textContent = timer;
+
+            initializeBoard();
+            renderBoard();
+
+            // Start the timer when the game starts
+            gameInterval = setInterval(() => {
+                timer++;
+                timerDisplay.textContent = timer;
+            }, 1000);
+        }
+
         function initializeBoard() {
+            board = [];
             for (let i = 0; i < numRows; i++) {
                 board[i] = [];
                 for (let j = 0; j < numCols; j++) {
@@ -167,7 +221,7 @@
             if (board[row][col].isMine) {
                 // Handle game over
                 alert("Game Over! You stepped on a mine.");
-                return;
+                clearInterval(gameInterval);
             } else if (board[row][col].count === 0) {
                 // If cell has no mines nearby, reveal adjacent cells
                 for (let dx = -1; dx <= 1; dx++) {
@@ -177,7 +231,25 @@
                 }
             }
 
+            // Check if player wins
+            if (checkWin()) {
+                clearInterval(gameInterval);
+                alert("You Win! Time: " + timer + " seconds");
+            }
+
             renderBoard();
+        }
+
+        function checkWin() {
+            let revealedCells = 0;
+            for (let i = 0; i < numRows; i++) {
+                for (let j = 0; j < numCols; j++) {
+                    if (board[i][j].revealed && !board[i][j].isMine) {
+                        revealedCells++;
+                    }
+                }
+            }
+            return revealedCells === (numRows * numCols - numMines);
         }
 
         function renderBoard() {
@@ -203,8 +275,7 @@
             }
         }
 
-        initializeBoard();
-        renderBoard();
+        startNewGame();
     </script>
 </body>
 
