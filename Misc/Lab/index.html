@@ -225,23 +225,24 @@
             alert("Code copied to clipboard!");
         }
 
+        
         // Function to load programs based on subject
         function loadPrograms(subject) {
             const section = document.getElementById(subject);
             const programs = programData.subjects[subject];
-
+        
             // Sort the programs by question (title)
             const sortedPrograms = sortProgramsByTitle(programs);
-
+        
             // Clear previous programs
             section.innerHTML = `<div class="section-title">${subject}</div>`;
-
+        
             sortedPrograms.forEach((program, index) => {
                 const programHTML = `
                     <div class="program-container">
                         <div class="question" onclick="toggleCode('codeWrapper${subject}${index + 1}')">${capitalizeTitle(program.question)}</div>
                         <div class="code-wrapper" id="codeWrapper${subject}${index + 1}">
-                            <pre><code id="code${subject}${index + 1}">${program.code}</code></pre>
+                            <pre><code id="code${subject}${index + 1}">${program.code.trim()}</code></pre>
                             <button class="copy-btn" onclick="copyCode('code${subject}${index + 1}')">Copy Code</button>
                         </div>
                     </div>
@@ -249,6 +250,7 @@
                 section.innerHTML += programHTML; // Append the program to the section
             });
         }
+
 
         // Toggle visibility of code for a specific program
         function toggleCode(codeWrapperId) {
