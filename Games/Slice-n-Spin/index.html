@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slice-n-Spin</title>
+  <title>Slice-n-Spin with Ball</title>
   <style>
     /* Dark theme styling */
     body, html {
@@ -32,12 +32,36 @@
       font-size: 24px;
       color: #ffcc00;
     }
+
+    /* Button styling for toggling boundary */
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #008080;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .toggle-btn:hover {
+      background-color: #00b3b3;
+    }
+
+    .toggle-btn:focus {
+      outline: none;
+    }
   </style>
 </head>
 <body>
   <div id="gameContainer">
     <canvas id="gameCanvas"></canvas>
     <div id="score">Score: 0</div>
+    <button class="toggle-btn" id="toggleBoundaries">Disable Boundaries</button>
   </div>
 
   <script>
@@ -48,24 +72,84 @@
 
     let fruits = [];
     let score = 0;
-
-    // List of colors for variety in fruits
     const fruitColors = ['#ff4757', '#ffa502', '#1e90ff', '#2ed573', '#eccc68'];
-    
-    // Function to create fruit objects
+
+    // Ball class
+    function Pt(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+
+    function Ball() {
+      this.pos = new Pt(canvas.width / 2, canvas.height / 2);
+      this.mPos = new Pt(0, 0);
+      this.Xvel = 0;
+      this.Yvel = 0;
+      this.accel = new Pt(0, 0);
+      this.boundaryEnabled = true;
+    }
+
+    Ball.prototype.draw = function () {
+      context.fillStyle = "hsla(180, 100%, 50%, 1)";
+      context.shadowColor = 'hsla(180, 100%, 50%, 0.8)';
+      context.shadowBlur = 20;
+      context.shadowOffsetX = 5;
+      context.shadowOffsetY = 5;
+      context.beginPath();
+      context.arc(this.pos.x, this.pos.y, 60, 0, 2 * Math.PI);
+      context.fill();
+    };
+
+    Ball.prototype.update = function () {
+      this.accel.x = (this.mPos.x - this.pos.x) * 0.01;
+      this.accel.y = (this.mPos.y - this.pos.y) * 0.01;
+      this.Xvel += this.accel.x;
+      this.Yvel += this.accel.y;
+      this.pos.x += this.Xvel;
+      this.pos.y += this.Yvel;
+      this.Xvel *= 0.97;
+      this.Yvel *= 0.97;
+
+      if (this.boundaryEnabled) {
+        const ballRadius = 60;
+        if (this.pos.x < ballRadius) {
+          this.pos.x = ballRadius;
+          this.Xvel *= -0.5;
+        } else if (this.pos.x > canvas.width - ballRadius) {
+          this.pos.x = canvas.width - ballRadius;
+          this.Xvel *= -0.5;
+        }
+
+        if (this.pos.y < ballRadius) {
+          this.pos.y = ballRadius;
+          this.Yvel *= -0.5;
+        } else if (this.pos.y > canvas.height - ballRadius) {
+          this.pos.y = canvas.height - ballRadius;
+          this.Yvel *= -0.5;
+        }
+      }
+    };
+
+    Ball.prototype.mouseMove = function (e) {
+      this.mPos.x = e.clientX;
+      this.mPos.y = e.clientY;
+    };
+
+    const ball = new Ball();
+
+    // Fruit mechanics
     function createFruit() {
-      const size = Math.random() * 20 + 20; // Random size between 20 and 40
+      const size = Math.random() * 20 + 20;
       const fruit = {
         x: Math.random() * canvas.width,
         y: canvas.height + size,
-        speedY: -(Math.random() * 3 + 2),  // Slower upward speed
+        speedY: -(Math.random() * 3 + 2),
         radius: size,
         color: fruitColors[Math.floor(Math.random() * fruitColors.length)]
       };
       fruits.push(fruit);
     }
 
-    // Draw fruit on canvas
     function drawFruit(fruit) {
       context.beginPath();
       context.arc(fruit.x, fruit.y, fruit.radius, 0, Math.PI * 2);
@@ -74,22 +158,22 @@
       context.closePath();
     }
 
-    // Update game state
     function updateGame() {
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       fruits.forEach((fruit, index) => {
-        fruit.y += fruit.speedY; // Move the fruit up
+        fruit.y += fruit.speedY;
         drawFruit(fruit);
-        
-        // Remove fruit if off-screen
+
         if (fruit.y < -fruit.radius) {
           fruits.splice(index, 1);
         }
       });
 
-      // Add new fruit at random intervals
       if (Math.random() < 0.02) createFruit();
+
+      ball.update();
+      ball.draw();
 
       requestAnimationFrame(updateGame);
     }
@@ -105,12 +189,20 @@
         if (dist < fruit.radius) {
           score++;
           document.getElementById('score').innerText = `Score: ${score}`;
-          fruits.splice(index, 1); // Remove sliced fruit
+          fruits.splice(index, 1); 
         }
       });
+
+      ball.mouseMove(e);
     });
 
-    // Start the game
+    // Toggle ball boundary
+    document.getElementById('toggleBoundaries').addEventListener('click', function () {
+      ball.boundaryEnabled = !ball.boundaryEnabled;
+      this.textContent = ball.boundaryEnabled ? "Disable Boundaries" : "Enable Boundaries";
+    });
+
+    // Start game
     updateGame();
   </script>
 </body>
