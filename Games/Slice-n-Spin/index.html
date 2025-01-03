@@ -33,6 +33,14 @@
       color: #ffcc00;
     }
 
+    #highScore {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      color: #ffcc00;
+    }
+
     /* Button styling for toggling boundary */
     .toggle-btn {
       position: absolute;
@@ -55,14 +63,32 @@
     .toggle-btn:focus {
       outline: none;
     }
+
+    /* Toast styling for Game Over */
+    #toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 24px;
+      display: none;
+      z-index: 1000;
+    }
+
   </style>
 </head>
 <body>
   <div id="gameContainer">
     <canvas id="gameCanvas"></canvas>
     <div id="score">Score: 0</div>
+    <div id="highScore">High Score: 0</div>
     <button class="toggle-btn" id="toggleBoundaries">Disable Boundaries</button>
   </div>
+  <div id="toast">Game Over! Scored: 0</div>
 
   <script>
     const canvas = document.getElementById('gameCanvas');
@@ -72,6 +98,8 @@
 
     let fruits = [];
     let score = 0;
+    let highScore = localStorage.getItem('highScore') || 0;
+    let gameOver = false;
     const fruitColors = ['#ff4757', '#ffa502', '#1e90ff', '#2ed573', '#eccc68'];
 
     // Ball class
@@ -87,7 +115,7 @@
       this.Yvel = 0;
       this.accel = new Pt(0, 0);
       this.boundaryEnabled = true;
-      this.radius = 40;  // Reduced ball size
+      this.radius = 20;  // Reduced ball size
     }
 
     Ball.prototype.draw = function () {
@@ -140,11 +168,11 @@
 
     // Fruit mechanics
     function createFruit() {
-      const size = Math.random() * 15 + 15;  // Reduced fruit size
+      const size = Math.random() * 10 + 10;  // Reduced fruit size
       const fruit = {
         x: Math.random() * canvas.width,
-        y: canvas.height + size,
-        speedY: -(Math.random() * 3 + 2),
+        y: -size,
+        speedY: -(Math.random() * 2 + 1),
         radius: size,
         color: fruitColors[Math.floor(Math.random() * fruitColors.length)]
       };
@@ -160,10 +188,19 @@
     }
 
     function updateGame() {
+      if (gameOver) return;
+
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       fruits.forEach((fruit, index) => {
         fruit.y += fruit.speedY;
+
+        // Check if fruit reaches top (Game Over)
+        if (fruit.y < 0) {
+          gameOver = true;
+          showGameOver();
+        }
+
         drawFruit(fruit);
 
         if (fruit.y < -fruit.radius) {
@@ -171,10 +208,15 @@
         }
       });
 
-      if (Math.random() < 0.02) createFruit();
+      if (Math.random() < 0.02) createFruit(); // 1 fruit per second
 
       ball.update();
       ball.draw();
+
+      // Gradually increase fruit speed over time
+      fruits.forEach(fruit => {
+        fruit.speedY *= 1.001;
+      });
 
       requestAnimationFrame(updateGame);
     }
@@ -190,7 +232,7 @@
         if (dist < fruit.radius) {
           score++;
           document.getElementById('score').innerText = `Score: ${score}`;
-          fruits.splice(index, 1); 
+          fruits.splice(index, 1);
         }
       });
 
@@ -206,6 +248,22 @@
         }
       });
     });
+
+    // Show Game Over and store high score
+    function showGameOver() {
+      document.getElementById('toast').innerText = `Game Over! Scored: ${score}`;
+      document.getElementById('toast').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('toast').style.display = 'none';
+      }, 3000);
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+      }
+
+      document.getElementById('highScore').innerText = `High Score: ${highScore}`;
+    }
 
     // Toggle ball boundary
     document.getElementById('toggleBoundaries').addEventListener('click', function () {
