@@ -4,64 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Browser</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-    }
-
-    .browser-container {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .address-bar {
-      background-color: #333;
-      color: white;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .address-bar input {
-      flex-grow: 1; /* Takes up remaining space */
-      padding: 5px;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      margin-right: 10px; /* Add gap between input and button */
-    }
-
-    .address-bar button {
-      padding: 5px 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .address-bar button:hover {
-      background-color: #45a049;
-    }
-
-    .webview-container {
-      flex-grow: 1;
-      background-color: white;
-      border-top: 1px solid #ccc;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
 </head>
 <body>
 
@@ -75,18 +18,7 @@
   </div>
 </div>
 
-<script>
-  function navigate() {
-    const url = document.getElementById('urlInput').value;
-    const iframe = document.getElementById('webView');
-    // Check if the URL starts with 'http' or 'https'
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      iframe.src = 'https://' + url;
-    } else {
-      iframe.src = url;
-    }
-  }
-</script>
+<script src="script.js"></script> <!-- Link to the external JavaScript file -->
 
 </body>
 </html>
