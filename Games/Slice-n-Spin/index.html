@@ -79,7 +79,6 @@
       display: none;
       z-index: 1000;
     }
-
   </style>
 </head>
 <body>
@@ -221,7 +220,22 @@
         fruit.speedY *= 1.0005; // Slower speed increase
       });
 
+      // Check for collisions between ball and fruit
+      handleBallFruitCollision();
+
       requestAnimationFrame(updateGame);
+    }
+
+    // Improved collision handling: Ball slicing fruits
+    function handleBallFruitCollision() {
+      fruits.forEach((fruit, index) => {
+        const dist = Math.hypot(ball.pos.x - fruit.x, ball.pos.y - fruit.y);
+        if (dist < ball.radius + fruit.radius) {
+          score++;
+          document.getElementById('score').innerText = `Score: ${score}`;
+          fruits.splice(index, 1);  // Slice the fruit
+        }
+      });
     }
 
     // Mouse slicing event
@@ -237,21 +251,11 @@
         if (dist < fruit.radius) {
           score++;
           document.getElementById('score').innerText = `Score: ${score}`;
-          fruits.splice(index, 1);
+          fruits.splice(index, 1); // Slice the fruit
         }
       });
 
       ball.mouseMove(e);
-
-      // Ball slicing event
-      fruits.forEach((fruit, index) => {
-        const dist = Math.hypot(ball.pos.x - fruit.x, ball.pos.y - fruit.y);
-        if (dist < ball.radius + fruit.radius) {
-          score++;
-          document.getElementById('score').innerText = `Score: ${score}`;
-          fruits.splice(index, 1);
-        }
-      });
     });
 
     // Show Game Over and store high score
