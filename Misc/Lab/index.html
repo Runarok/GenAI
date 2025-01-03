@@ -160,6 +160,11 @@
     <!-- JavaScript for section handling and program data loading -->
     <script src="programData.js"></script>
     <script>
+        // Function to sort programs by their titles alphabetically
+        function sortProgramsByTitle(programs) {
+            return programs.sort((a, b) => a.question.localeCompare(b.question));
+        }
+
         // Function to show the selected section
         function showSection(sectionId) {
             // Hide all sections
@@ -202,10 +207,13 @@
             const section = document.getElementById(subject);
             const programs = programData.subjects[subject];
 
+            // Sort the programs by question (title)
+            const sortedPrograms = sortProgramsByTitle(programs);
+
             // Clear previous programs
             section.innerHTML = `<div class="section-title">${subject}</div>`;
 
-            programs.forEach((program, index) => {
+            sortedPrograms.forEach((program, index) => {
                 const programHTML = `
                     <div class="program-container">
                         <div class="question" onclick="toggleCode('codeWrapper${subject}${index + 1}')">${capitalizeTitle(program.question)}</div>
@@ -225,7 +233,7 @@
             codeWrapper.style.display = codeWrapper.style.display === 'block' ? 'none' : 'block';
         }
 
-                // Define the sections to cycle through
+        // Define the sections to cycle through
         const sectionIds = ['DSP', 'DC'];
         let currentSectionIndex = 0; // Start with DSP section
 
