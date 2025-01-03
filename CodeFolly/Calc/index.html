@@ -6,81 +6,10 @@
     <!-- Favicon and icon for 'Add to Home Screen' -->
     <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
     
-    <!-- Link to manifest.json (for better compatibility with 'Add to Home Screen') -->
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+    
     <title>Dark Themed Calculator</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        table {
-            background-color: #1e1e1e;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            border-spacing: 10px;
-        }
-        td {
-            padding: 10px;
-        }
-        input[type="text"] {
-            background-color: #333;
-            color: white;
-            font-size: 2.5em;
-            text-align: right;
-            border: none;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-        }
-        input[type="button"] {
-            background-color: #444;
-            color: white;
-            font-size: 1.8em;
-            border: none;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            width: 100%;
-        }
-        input[type="button"]:hover {
-            background-color: #555;
-        }
-        input[type="button"]:active {
-            background-color: #666;
-        }
-        input[type="button"].operator {
-            background-color: #ff8c00;
-        }
-        input[type="button"].operator:hover {
-            background-color: #e07b00;
-        }
-        input[type="button"].clear {
-            background-color: #d9534f;
-        }
-        input[type="button"].clear:hover {
-            background-color: #c9302c;
-        }
-        input[type="button"].equal {
-            background-color: #28a745;
-            grid-column: span 2;
-        }
-        input[type="button"].equal:hover {
-            background-color: #218838;
-        }
-    </style>
 </head>
 <body>
     <table id="calcu">
@@ -116,51 +45,7 @@
         </tr>
     </table>
 
-    <script>
-        let display = document.getElementById('result');
-        let currentInput = '';
-
-        function appendToDisplay(value) {
-            if (currentInput === '0' && value !== '.') {
-                currentInput = value;
-            } else {
-                currentInput += value;
-            }
-            display.value = currentInput;
-        }
-
-        function clearDisplay() {
-            currentInput = '';
-            display.value = '0';
-        }
-
-        function calculateResult() {
-            try {
-                currentInput = eval(currentInput).toString();
-                display.value = currentInput;
-            } catch (e) {
-                display.value = 'Error';
-                currentInput = '';
-            }
-        }
-
-        // Event listener for keyboard support
-        document.addEventListener('keydown', function(event) {
-            if (event.key >= '0' && event.key <= '9') {
-                appendToDisplay(event.key);
-            } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
-                appendToDisplay(event.key);
-            } else if (event.key === 'Enter') {
-                calculateResult();
-            } else if (event.key === 'Backspace') {
-                currentInput = currentInput.slice(0, -1);
-                display.value = currentInput || '0';
-            } else if (event.key === '.') {
-                appendToDisplay('.');
-            } else if (event.key === 'c' || event.key === 'C') {
-                clearDisplay();
-            }
-        });
-    </script>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
