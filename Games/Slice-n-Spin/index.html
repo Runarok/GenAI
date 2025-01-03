@@ -171,8 +171,8 @@
       const size = Math.random() * 10 + 10;  // Reduced fruit size
       const fruit = {
         x: Math.random() * canvas.width,
-        y: -size,
-        speedY: -(Math.random() * 2 + 1),
+        y: canvas.height + size,  // Fruit now starts from the bottom
+        speedY: -(Math.random() * 0.8 + 0.5),  // Slower falling speed
         radius: size,
         color: fruitColors[Math.floor(Math.random() * fruitColors.length)]
       };
@@ -215,7 +215,7 @@
 
       // Gradually increase fruit speed over time
       fruits.forEach(fruit => {
-        fruit.speedY *= 1.001;
+        fruit.speedY *= 1.0005; // Slower speed increase
       });
 
       requestAnimationFrame(updateGame);
