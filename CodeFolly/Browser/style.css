@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.browser-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.address-bar {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.address-bar input {
+  flex-grow: 1; /* Takes up remaining space */
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 10px; /* Add gap between input and button */
+}
+
+.address-bar button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.address-bar button:hover {
+  background-color: #45a049;
+}
+
+.webview-container {
+  flex-grow: 1;
+  background-color: white;
+  border-top: 1px solid #ccc;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
