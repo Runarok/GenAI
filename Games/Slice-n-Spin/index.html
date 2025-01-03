@@ -226,6 +226,8 @@
 
     // Mouse slicing event
     canvas.addEventListener('mousemove', (e) => {
+      if (gameOver) return; // Prevent slicing after game over
+
       const rect = canvas.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
@@ -266,6 +268,19 @@
       }
 
       document.getElementById('highScore').innerText = `High Score: ${highScore}`;
+
+      // Restart game after 2 seconds
+      setTimeout(restartGame, 2000);
+    }
+
+    // Restart game function
+    function restartGame() {
+      gameOver = false;
+      score = 0;
+      document.getElementById('score').innerText = `Score: ${score}`;
+      fruits = [];
+      ball.pos = new Pt(canvas.width / 2, canvas.height / 2);  // Reset ball position
+      updateGame(); // Start the game loop again
     }
 
     // Toggle ball boundary
