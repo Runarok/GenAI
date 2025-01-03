@@ -1,0 +1,139 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    color: #f0f0f0;
+    margin-top: 20px;
+}
+
+#gridCanvas {
+    background-color: #1e1e1e;
+    border: 2px solid #333;
+    cursor: pointer;
+    display: block;
+    margin: 20px 0;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+#buttonSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #444;
+    border: 1px solid #666;
+    color: white;
+    border-radius: 5px;
+    min-width: 100px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+label, input {
+    font-size: 16px;
+    color: white;
+    margin: 5px;
+}
+
+input {
+    background-color: #333;
+    border: 1px solid #666;
+    color: white;
+    padding: 5px;
+    width: 60px;
+    border-radius: 5px;
+}
+
+#infoModal {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    width: 280px;
+    color: white;
+    font-size: 14px;
+    display: none;
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#infoModal button {
+    background-color: #444;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#infoModal button:hover {
+    background-color: #555;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #gridCanvas {
+        width: 100%;
+        height: 100%;
+        max-width: 500px;
+    }
+
+    #buttonSection {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    #controls {
+        width: 100%;
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 150px;
+    }
+
+    input {
+        width: 80px;
+    }
+
+    #infoModal {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}
