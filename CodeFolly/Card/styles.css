@@ -1,0 +1,117 @@
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    transition: background-color 0.5s;
+}
+.container {
+    text-align: center;
+}
+.input-section, .card-section {
+    display: none;
+}
+.input-section input {
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid #fff;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+.input-section button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.3s;
+}
+.input-section button:hover {
+    background-color: #3700b3;
+}
+/* Toast Notification Styles */
+.toast {
+    visibility: hidden;
+    position: fixed;
+    z-index: 9999;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    line-height: 1.5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    width: auto;
+    max-width: 300px;
+}
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Birthday Card Design */
+.card {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    animation: cardAnimation 1s ease-in-out;
+    max-width: 90%;
+    margin: 0 auto;
+}
+.card h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: #ff4081;
+    animation: fadeInTitle 1s ease-in-out;
+}
+.card p {
+    font-size: 28px;
+    margin-top: 10px;
+    color: #b3b3b3;
+    animation: fadeInText 1.5s ease-in-out;
+}
+.card img {
+    width: 300px;
+    margin-top: 20px;
+    border-radius: 10px;
+    animation: bounceIn 1s ease-in-out;
+}
+
+/* Keyframe Animations */
+@keyframes cardAnimation {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInTitle {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
