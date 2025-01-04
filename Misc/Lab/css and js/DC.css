@@ -1,3 +1,4 @@
+/* General page style */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #121212; /* Very dark background */
@@ -9,25 +10,27 @@ body {
 
 /* Navigation bar */
 .nav-bar {
-    background-color: #1e1e1e; /* Dark background for navigation */
+    background-color: #1e1e1e;
     padding: 15px;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 10;
-    
-    /* Flexbox for buttons */
     display: flex;
-    flex-wrap: wrap; /* Allow buttons to wrap into the next line */
-    gap: 10px; /* Space between buttons */
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.comment {
+    color: #8BC34A; /* Green color for comments */
+    font-style: italic;
 }
 
 .nav-bar button {
-    background-color: #333; /* Dark buttons */
+    background-color: #333;
     color: #e0e0e0;
     border: none;
     padding: 12px 24px;
-    margin: 0;
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
@@ -53,22 +56,17 @@ body {
 
 /* Code block styling */
 pre {
-    background-color: #1e1e1e; /* Dark background for code */
-    color: #d4d4d4; /* Light code text color */
+    background-color: #1e1e1e;
+    color: #d4d4d4;
     padding: 20px;
     border-radius: 8px;
     overflow-x: auto;
     font-family: 'Courier New', monospace;
-    line-height: 1.8;  /* Increased line height to add space between lines */
+    line-height: 1.8;
     white-space: pre-wrap;
     word-wrap: break-word;
-    border: 1px solid #444; /* Light border */
-    margin-bottom: 10px; /* Add some gap between lines */
-}
-
-/* Make comments green */
-.comment {
-    color: #8BC34A; /* Green color for comments */
+    border: 1px solid #444;
+    margin-bottom: 10px;
 }
 
 /* Responsive design */
