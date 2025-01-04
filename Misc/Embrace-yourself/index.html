@@ -4,32 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book of Joyful Connections</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif; /* Changed to a modern sans-serif font */
             background-color: #121212; /* Dark background */
             color: #e0e0e0; /* Light text */
-            padding: 20px;
             margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
         }
         .book {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 900px;
+            width: 100%;
             background-color: #1e1e1e; /* Dark book background */
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-            padding: 30px;
-            border-radius: 12px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+            padding: 40px;
+            border-radius: 16px;
+            overflow: hidden;
         }
         .page {
             margin-bottom: 40px;
             border-bottom: 2px solid #333; /* Darker line separator */
             padding-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .page:hover {
+            transform: scale(1.02); /* Subtle hover effect */
         }
         .page-title {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
             color: #f0f0f0; /* Lighter text for titles */
             margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        .page-title:hover {
+            color: #1e90ff; /* Blue color for hover */
         }
         .page-content {
             font-size: 20px;
@@ -77,7 +92,7 @@
         const bookContainer = document.getElementById("book-container");
 
         // Loop through pagesContent to generate the content
-        pagesContent.forEach((page, index) => {
+        pagesContent.forEach((page) => {
             const pageDiv = document.createElement("div");
             pageDiv.classList.add("page");
 
