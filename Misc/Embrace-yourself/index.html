@@ -3,215 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon and icon for 'Add to Home Screen' -->
-    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
-    
-    <!-- Link to manifest.json (for better compatibility with 'Add to Home Screen') -->
-    <title>Book Interface</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
+    <title>Book of Joyful Connections</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+        .book {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .page {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5d5d5d;
+            margin-bottom: 10px;
+        }
+        .page-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            white-space: pre-wrap; /* To handle line breaks in the content */
+        }
+    </style>
 </head>
 <body>
+    <div class="book" id="book-container"></div>
 
-<div class="book"> <div class="page active" id="page1"> <p>Joyful Connections<br>‎‎‎‎‎‎ ‎ Embraced</p> </div>
-<div class="page" id="page2">
-    <h1>Page 2</h1>
-    <p>A heart awakened, filled with hope and light,<br>
-    A mind unshackled, dancing through the days.<br>
-    I seek the magic in each morning bright,<br>
-    Where passion flourishes in countless ways.</p>
-</div>
+    <script>
+        const pagesContent = [
+            { title: "Page 1", content: "Joyful Connections<br>‎‎‎‎‎‎ ‎ Embraced" },
+            { title: "Page 2", content: `A heart awakened, filled with hope and light,<br>A mind unshackled, dancing through the days.<br>I seek the magic in each morning bright,<br>Where passion flourishes in countless ways.` },
+            { title: "Page 3", content: `Perhaps I’m brave, with dreams that soar on high,<br>Embracing love, I rise above the past.<br>With open arms, I greet the endless sky,<br>My heart a vessel, steadfast and steadfast.` },
+            { title: "Page 4", content: `A heart alive with laughter, wide and free,<br>A soul uplifted, dancing through each hour.<br>I long to share this joy, to simply be,<br>A life of wonder, blooming like a flower.` },
+            { title: "Page 5", content: `Clarity shines bright, as truth lights my way,<br>I seek connection, love, and understanding.<br>With courage fierce, I greet each brand new day,<br>A spirit strong, forever expanding.` },
+            { title: "Page 6", content: `A love unspoken, waiting to be shared,<br>A heart that knows the beauty of the light.<br>I long to express, to show how much I cared,<br>To paint my dreams with colors warm and bright.` },
+            { title: "Page 7", content: `I dare to speak, my love, a joyful plea,<br>Embracing connection, the warmth of embrace.<br>A future full of hope, a vibrant sea,<br>A love that’s cherished, a beautiful grace.` },
+            { title: "Page 8", content: `With joy that flows, a heart in sweet delight,<br>A soul united, strong and ever fair.<br>To find the balance, between love and light,<br>Together we rise, with hearts that truly care.` },
+            { title: "Page 9", content: `In solitude, I find a peaceful space,<br>To contemplate the wonders life can bring.<br>In nature’s arms, I feel a warm embrace,<br>A quiet moment, where my heart can sing.` },
+            { title: "Page 10", content: `Time, a gentle guide, leads us through the day,<br>The precious moments, one by one unfold.<br>We cherish laughter, in a joyful way,<br>And celebrate the stories we’ve been told.` },
+            { title: "Page 11", content: `The weight of love, a blessing deep and grand,<br>Can lift our spirits, heal a weary heart.<br>We strive to connect, together we stand,<br>And lose ourselves in joy, never apart.` },
+            { title: "Page 12", content: `Life is a dance, a rhythm, a beat,<br>A melody that plays, in joyous flow.<br>We twirl and turn, with happy feet,<br>And embrace the moments, letting love grow.` },
+            { title: "Page 13", content: `In search of meaning, we wander with glee,<br>Through vibrant fields, where our hearts can roam.<br>We seek for purpose, a place to be,<br>A reason to laugh, and a reason for home.` },
+            { title: "Page 14", content: `The sands of time, like treasures, we hold,<br>Each grain a memory, cherished and bright.<br>We watch and wait, as life’s stories unfold,<br>Embracing each moment, in love’s pure light.` },
+            { title: "Page 15", content: `In every heartbeat, life’s rhythm is found,<br>A dance of joy, where light and love collide.<br>We sway through moments, with laughter profound,<br>Embracing every blessing, side by side.` },
+            { title: "Page 16", content: `Nature's beauty whispers in the breeze,<br>A symphony of colors, wild and bright.<br>The rustling leaves, the swaying trees,<br>Remind us of the joy in every sight.` },
+            { title: "Page 17", content: `The heart knows secrets that words cannot say,<br>Emotions dance in silence, deep and true.<br>In the quiet moments, we find our way,<br>A language of the soul, always anew.` },
+            { title: "Page 18", content: `Connection blooms in the simplest of ways,<br>A smile exchanged, a hand held tight.<br>In shared laughter and in golden days,<br>We find our anchor, our guiding light.` },
+            { title: "Page 19", content: `In the mirror of time, reflections shine bright,<br>The tales of our past, both gentle and bold.<br>With every chapter, our spirits take flight,<br>A journey of heartbeats, waiting to unfold.` },
+            { title: "Page 20", content: `As we stand on the edge of what’s yet to be,<br>Dreams like stars twinkle in the night sky.<br>With courage ignited, we dare to see,<br>The infinite possibilities as we fly.` },
+        ];
 
-<div class="page" id="page3">
-    <h1>Page 3</h1>
-    <p>Perhaps I’m brave, with dreams that soar on high,<br>
-    Embracing love, I rise above the past.<br>
-    With open arms, I greet the endless sky,<br>
-    My heart a vessel, steadfast and steadfast.</p>
-</div>
+        const bookContainer = document.getElementById("book-container");
 
-<div class="page" id="page4">
-    <h1>Page 4</h1>
-    <p>A heart alive with laughter, wide and free,<br>
-    A soul uplifted, dancing through each hour.<br>
-    I long to share this joy, to simply be,<br>
-    A life of wonder, blooming like a flower.</p>
-</div>
+        // Loop through pagesContent to generate the content
+        pagesContent.forEach((page, index) => {
+            const pageDiv = document.createElement("div");
+            pageDiv.classList.add("page");
 
-<div class="page" id="page5">
-    <h1>Page 5</h1>
-    <p>Clarity shines bright, as truth lights my way,<br>
-    I seek connection, love, and understanding.<br>
-    With courage fierce, I greet each brand new day,<br>
-    A spirit strong, forever expanding.</p>
-</div>
+            const titleDiv = document.createElement("div");
+            titleDiv.classList.add("page-title");
+            titleDiv.innerText = page.title;
 
-<div class="page" id="page6">
-    <h1>Page 6</h1>
-    <p>A love unspoken, waiting to be shared,<br>
-    A heart that knows the beauty of the light.<br>
-    I long to express, to show how much I cared,<br>
-    To paint my dreams with colors warm and bright.</p>
-</div>
+            const contentDiv = document.createElement("div");
+            contentDiv.classList.add("page-content");
+            contentDiv.innerHTML = page.content;  // Use innerHTML to handle <br> tags
 
-<div class="page" id="page7">
-    <h1>Page 7</h1>
-    <p>I dare to speak, my love, a joyful plea,<br>
-    Embracing connection, the warmth of embrace.<br>
-    A future full of hope, a vibrant sea,<br>
-    A love that’s cherished, a beautiful grace.</p>
-</div>
+            pageDiv.appendChild(titleDiv);
+            pageDiv.appendChild(contentDiv);
 
-<div class="page" id="page8">
-    <h1>Page 8</h1>
-    <p>With joy that flows, a heart in sweet delight,<br>
-    A soul united, strong and ever fair.<br>
-    To find the balance, between love and light,<br>
-    Together we rise, with hearts that truly care.</p>
-</div>
-
-<div class="page" id="page9">
-    <h1>Page 9</h1>
-    <p>In solitude, I find a peaceful space,<br>
-    To contemplate the wonders life can bring.<br>
-    In nature’s arms, I feel a warm embrace,<br>
-    A quiet moment, where my heart can sing.</p>
-</div>
-
-<div class="page" id="page10">
-    <h1>Page 10</h1>
-    <p>Time, a gentle guide, leads us through the day,<br>
-    The precious moments, one by one unfold.<br>
-    We cherish laughter, in a joyful way,<br>
-    And celebrate the stories we’ve been told.</p>
-</div>
-
-<div class="page" id="page11">
-    <h1>Page 11</h1>
-    <p>The weight of love, a blessing deep and grand,<br>
-    Can lift our spirits, heal a weary heart.<br>
-    We strive to connect, together we stand,<br>
-    And lose ourselves in joy, never apart.</p>
-</div>
-
-<div class="page" id="page12">
-    <h1>Page 12</h1>
-    <p>Life is a dance, a rhythm, a beat,<br>
-    A melody that plays, in joyous flow.<br>
-    We twirl and turn, with happy feet,<br>
-    And embrace the moments, letting love grow.</p>
-</div>
-
-<div class="page" id="page13">
-    <h1>Page 13</h1>
-    <p>In search of meaning, we wander with glee,<br>
-    Through vibrant fields, where our hearts can roam.<br>
-    We seek for purpose, a place to be,<br>
-    A reason to laugh, and a reason for home.</p>
-</div>
-
-<div class="page" id="page14">
-    <h1>Page 14</h1>
-    <p>The sands of time, like treasures, we hold,<br>
-    Each grain a memory, cherished and bright.<br>
-    We watch and wait, as life’s stories unfold,<br>
-    Embracing each moment, in love’s pure light.</p>
-</div>
-
-<div class="page" id="page15">
-    <h1>Page 15</h1>
-    <p>In every heartbeat, life’s rhythm is found,<br>
-    A dance of joy, where light and love collide.<br>
-    We sway through moments, with laughter profound,<br>
-    Embracing every blessing, side by side.</p>
-</div>
-
-<div class="page" id="page16">
-    <h1>Page 16</h1>
-    <p>Nature's beauty whispers in the breeze,<br>
-    A symphony of colors, wild and bright.<br>
-    The rustling leaves, the swaying trees,<br>
-    Remind us of the joy in every sight.</p>
-</div>
-
-<div class="page" id="page17">
-    <h1>Page 17</h1>
-    <p>The heart knows secrets that words cannot say,<br>
-    Emotions dance in silence, deep and true.<br>
-    In the quiet moments, we find our way,<br>
-    A language of the soul, always anew.</p>
-</div>
-
-<div class="page" id="page18">
-    <h1>Page 18</h1>
-    <p>Connection blooms in the simplest of ways,<br>
-    A smile exchanged, a hand held tight.<br>
-    In shared laughter and in golden days,<br>
-    We find our anchor, our guiding light.</p>
-</div>
-
-<div class="page" id="page19">
-    <h1>Page 19</h1>
-    <p>In the mirror of time, reflections shine bright,<br>
-    The tales of our past, both gentle and bold.<br>
-    With every chapter, our spirits take flight,<br>
-    A journey of heartbeats, waiting to unfold.</p>
-</div>
-
-<div class="page" id="page20">
-    <h1>Page 20</h1>
-    <p>As we stand on the edge of what’s yet to be,<br>
-    Dreams like stars twinkle in the night sky.<br>
-    With courage ignited, we dare to see,<br>
-    The infinite possibilities as we fly.</p>
-</div>
-
-    
-    <div class="navigation">
-        <button class="arrow-button" onclick="prevPage()">&#10094;</button>
-        <button class="page-selector" onclick="togglePageDropdown()">Select Page</button>
-        <button class="arrow-button" onclick="nextPage()">&#10095;</button>
-    </div>
-
-    <button class="font-selector" onclick="toggleDropdown()">&#x2022;&#x2022;&#x2022;</button>
-    <div class="font-dropdown" id="fontDropdown">
-        <select onchange="changeFont(this.value)">
-            <option value="">Select Font</option>
-            <option value="'Medieval Times', serif">Medieval Times</option>
-            <option value="'Noricon', sans-serif" selected>Noricon</option>
-            <option value="'Times New Roman', serif">Times New Roman</option>
-            <option value="'Verdana', sans-serif">Verdana</option>
-        </select>
-    </div>
-</div>
-
-<div class="page-dropdown" id="pageDropdown" style="display: none;">
-    <h2>Select a Page</h2>
-    <select id="pageSelect" onchange="goToPage(this.value)">
-        <option value="">Choose Page</option>
-        <option value="1">Page 1</option>
-        <option value="2">Page 2</option>
-        <option value="3">Page 3</option>
-        <option value="4">Page 4</option>
-        <option value="5">Page 5</option>
-        <option value="6">Page 6</option>
-        <option value="7">Page 7</option>
-        <option value="8">Page 8</option>
-        <option value="9">Page 9</option>
-        <option value="10">Page 10</option>
-        <option value="11">Page 11</option>
-        <option value="12">Page 12</option>
-        <option value="13">Page 13</option>
-        <option value="14">Page 14</option>
-        <option value="15">Page 15</option>
-        <option value="16">Page 16</option>
-        <option value="17">Page 17</option>
-        <option value="18">Page 18</option>
-        <option value="19">Page 19</option>
-        <option value="20">Page 20</option>
-    </select>
-    <button onclick="closePageDropdown()">Close</button>
-</div>
-
-<script src="script.js"></script> <!-- Link to JS file -->
+            bookContainer.appendChild(pageDiv);
+        });
+    </script>
 </body>
 </html>
