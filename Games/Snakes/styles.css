@@ -1,0 +1,80 @@
+/* Main body styles for overall look and feel */
+body {
+    font-family: 'Noricon', sans-serif;
+    background: linear-gradient(135deg, #0e1c24, #1e2a34); /* Dark gradient background */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    transition: background-color 0.5s; /* Smooth transition effect */
+}
+
+/* Container for game links */
+.link-container {
+    border: 2px solid #00bcd4; /* Teal border for emphasis */
+    border-radius: 12px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    transition: transform 0.3s, background-color 0.3s; /* Transition effects on hover */
+}
+
+/* Hover effect for the container */
+.link-container:hover {
+    background: rgba(0, 0, 0, 0.9); /* Darken on hover */
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+/* Heading styles */
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.8em; /* Larger font for the title */
+    color: #00bcd4; /* Teal color for title */
+    text-shadow: 0 0 10px rgba(0, 188, 212, 0.7); /* Glow effect for visual appeal */
+}
+
+/* Styles for the game links */
+a {
+    display: block;
+    text-decoration: none; /* Remove underline from links */
+    color: #00bcd4; /* Teal color for links */
+    font-size: 1.6em; /* Increased font size for links */
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners for links */
+    background-color: rgba(255, 255, 255, 0.1); /* Light background for links */
+    transition: color 0.3s, background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Hover effect for links */
+a:hover {
+    color: #ffffff; /* Change text color on hover */
+    background-color: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Info button styles */
+.info-button {
+    position: absolute; /* Positioned at the top right */
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #00bcd4, #1de9b6); /* Gradient background */
+    border: none; /* No border for a clean look */
+    color: white; /* White text color */
+    font-size: 2rem; /* Large font size for visibility */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    padding: 10px 15px; /* Padding for button size */
+    border-radius: 10px; /* Rounded corners */
+    transition: background 0.3s, transform 0.2s; /* Smooth transition effects */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    z-index: 1; /* Ensures button is above other elements */
+}
+
+/* Hover effect for the info button */
+.info-button:hover {
+    background: linear-gradient(45deg, #1de9b6, #00bcd4); /* Reverse gradient on hover */
+    transform: scale(1.05); /* Scale up on hover */
+}
