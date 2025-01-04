@@ -1,26 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> <!-- Character encoding -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures responsive design -->
-    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Emoji.jpeg" type="image/jpeg">
+    <meta charset="UTF-8">    
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Games/Emoji-Hunt/Emoji.jpeg" type="image/jpeg">
     <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
-    <title>Emoji Hunt: Shadow Edition</title> <!-- Page title -->
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Hunt: Shadow Edition</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #121212, #0f0f0f); /* Darker gradient background */
+            color: #fff; /* White text color */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: #00FFFF; /* Neon cyan */
+            text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF;
+            margin-bottom: 30px;
+        }
+
+        #menu {
+            z-index: 1;
+        }
+
+        #menu button {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00FFFF; /* Neon border */
+            color: #00FFFF;
+            padding: 20px 50px;
+            margin: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #menu button:hover {
+            background-color: rgba(0, 255, 255, 0.1); /* Lighter hover background */
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+        }
+
+        .emoji {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 50px;
+            pointer-events: auto;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .emoji:hover {
+            opacity: 1;
+        }
+
+        #score, #highscore, #timer {
+            position: absolute;
+            top: 10px;
+            font-size: 26px;
+            z-index: 10;
+            color: #00FFFF; /* Neon cyan text */
+        }
+
+        #score {
+            left: 10px;
+        }
+
+        #highscore {
+            left: 180px;
+        }
+
+        #timer {
+            right: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #00FFFF;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease, bottom 0.5s ease;
+            z-index: 100;
+        }
+
+        .toast.show {
+            opacity: 1;
+            bottom: 40px;
+        }
+
+        /* Darken the page and ensure no white background appears */
+        html, body {
+            background-color: #121212; /* Ensure a full dark page */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+    </style>
 </head>
 <body>
 
 <div id="menu">
-    <h1>Emoji Hunt: Shadow Edition</h1> <!-- Game title -->
-    <button onclick="startGame()">Start Game</button> <!-- Start button -->
+    <h1>Emoji Hunt: Shadow Edition</h1>
+    <button onclick="startGame()">Start Game</button>
 </div>
 
-<div id="score">Score: 0</div> <!-- Display current score -->
-<div id="highscore">High Score: 0</div> <!-- Display high score -->
-<div id="timer">Time: 60</div> <!-- Display remaining time -->
+<div id="score">Score: 0</div>
+<div id="highscore">High Score: 0</div>
+<div id="timer">Time: 60</div>
 
-<div id="toast" class="toast"></div> <!-- Toast container -->
+<div id="toast" class="toast"></div>
 
-<script src="scripts.js"></script> <!-- Link to external JS -->
+<script>
+    let score = 0;
+    let timer;
+    let gameActive = false;
+    let highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
+
+    document.getElementById('highscore').innerText = 'High Score: ' + highScore;
+
+    function startGame() {
+        score = 0;
+        gameActive = true;
+        document.getElementById('score').innerText = 'Score: ' + score;
+        document.getElementById('timer').innerText = 'Time: 60';
+        document.getElementById('menu').style.display = 'none';
+        spawnEmoji();
+        startTimer();
+    }
+
+    function spawnEmoji() {
+        if (!gameActive) return;
+
+        const emojis = [
+            '😊', '😎', '🎉', '❤️', '🚀', '🌟', '😂', '🥳', '🎈', '🌈', '🐶', '🐱', '🦄', '🌻', '🍕', '🍉', '🎶', '⚡', '🔥', '💎'
+        ];
+
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji';
+        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+        const x = Math.random() * (window.innerWidth - 50);
+        const y = Math.random() * (window.innerHeight - 50);
+        emoji.style.left = `${x}px`;
+        emoji.style.top = `${y}px`;
+
+        document.body.appendChild(emoji);
+
+        emoji.addEventListener('click', () => {
+            score++;
+            document.getElementById('score').innerText = 'Score: ' + score;
+            document.body.removeChild(emoji);
+            spawnEmoji();
+        });
+
+        setTimeout(() => {
+            if (document.body.contains(emoji)) {
+                document.body.removeChild(emoji);
+                spawnEmoji();
+            }
+        }, 3000);
+    }
+
+    function startTimer() {
+        let timeLeft = 60;
+        timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                gameActive = false;
+                showToast('Time\'s up! Your score is: ' + score);
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem('highScore', highScore);
+                    document.getElementById('highscore').innerText = 'High Score: ' + highScore;
+                }
+                document.getElementById('menu').style.display = 'block';
+            } else {
+                timeLeft--;
+                document.getElementById('timer').innerText = 'Time: ' + timeLeft;
+            }
+        }, 1000);
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+</script>
+
 </body>
 </html>
