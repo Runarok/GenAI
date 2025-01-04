@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the entire body content horizontally */
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+#drop-area {
+    border: 2px dashed #cccccc;
+    border-radius: 10px;
+    padding: 30px;
+    width: 60%;
+    background-color: #1e1e1e;
+    color: #cccccc;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Space between drop area and file content */
+    cursor: pointer;
+}
+
+#drop-area.hover {
+    background-color: #333333;
+}
+
+#file-content {
+    display: none;  /* Hide by default */
+    padding: 15px;
+    width: 60%; /* Make it the same width as the drop area */
+    border: 1px solid #444444;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1rem;
+    max-height: 400px; /* Limit the height of the box */
+    overflow-y: auto;  /* Add scroll for large content */
+    margin-bottom: 20px; /* Space below the content box */
+    text-align: left; /* Keep the content left-aligned */
+}
+
+#copy-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 60%; /* Match the width of the content box */
+    display: none; /* Initially hide the button */
+    margin: 0 auto; /* Center the button below the content */
+}
+
+#copy-btn:hover {
+    background-color: #45a049;
+}
+
+#copy-btn:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+/* Hidden file input */
+#file-input {
+    display: none;
+}
