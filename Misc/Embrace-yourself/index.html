@@ -7,34 +7,43 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text */
             padding: 20px;
+            margin: 0;
         }
         .book {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #1e1e1e; /* Dark book background */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow */
             padding: 30px;
-            border-radius: 8px;
+            border-radius: 12px;
         }
         .page {
             margin-bottom: 40px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #333; /* Darker line separator */
             padding-bottom: 20px;
         }
         .page-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            color: #5d5d5d;
-            margin-bottom: 10px;
+            color: #f0f0f0; /* Lighter text for titles */
+            margin-bottom: 15px;
         }
         .page-content {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #555;
+            font-size: 20px;
+            line-height: 1.8;
+            color: #c0c0c0; /* Light grey text */
             white-space: pre-wrap; /* To handle line breaks in the content */
+            word-wrap: break-word;
+        }
+        a {
+            color: #1e90ff; /* Blue color for links */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
