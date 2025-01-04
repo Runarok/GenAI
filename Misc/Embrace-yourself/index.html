@@ -4,64 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book of Joyful Connections</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
-            background-color: #121212; /* Dark background */
-            color: #f1f1f1; /* Light text color */
-            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
         }
         .book {
-            max-width: 900px;
-            width: 100%;
-            background-color: #1e1e1e; /* Dark book background */
-            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.4); /* Shadow for depth */
-            padding: 40px;
-            border-radius: 16px;
-            overflow-y: auto; /* Enables scrolling */
-            height: 90vh; /* Allows scrolling when content is long */
-            scrollbar-width: thin; /* For better scroll bar appearance in some browsers */
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 8px;
         }
         .page {
             margin-bottom: 40px;
-            border-bottom: 2px solid #333; /* Darker separator line */
+            border-bottom: 2px solid #eee;
             padding-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-        .page:hover {
-            transform: scale(1.02); /* Hover effect */
         }
         .page-title {
-            font-size: 30px;
+            font-size: 24px;
             font-weight: bold;
-            color: #ffcc00; /* Golden text for titles */
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-        }
-        .page-title:hover {
-            color: #1e90ff; /* Blue hover color */
+            color: #5d5d5d;
+            margin-bottom: 10px;
         }
         .page-content {
-            font-size: 20px;
-            line-height: 1.8;
-            color: #e0e0e0; /* Light grey text for better contrast */
-            white-space: pre-wrap; /* Preserve line breaks */
-            word-wrap: break-word; /* Wrap text properly */
-        }
-        a {
-            color: #1e90ff; /* Blue color for links */
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            white-space: pre-wrap; /* To handle line breaks in the content */
         }
     </style>
 </head>
@@ -70,32 +43,32 @@
 
     <script>
         const pagesContent = [
-            { title: "Page 1", content: "Joyful Connections<br>‎‎‎‎‎‎ ‎ Embraced" },
-            { title: "Page 2", content: `A heart awakened, filled with hope and light,<br>A mind unshackled, dancing through the days.<br>I seek the magic in each morning bright,<br>Where passion flourishes in countless ways.` },
-            { title: "Page 3", content: `Perhaps I’m brave, with dreams that soar on high,<br>Embracing love, I rise above the past.<br>With open arms, I greet the endless sky,<br>My heart a vessel, steadfast and steadfast.` },
-            { title: "Page 4", content: `A heart alive with laughter, wide and free,<br>A soul uplifted, dancing through each hour.<br>I long to share this joy, to simply be,<br>A life of wonder, blooming like a flower.` },
-            { title: "Page 5", content: `Clarity shines bright, as truth lights my way,<br>I seek connection, love, and understanding.<br>With courage fierce, I greet each brand new day,<br>A spirit strong, forever expanding.` },
-            { title: "Page 6", content: `A love unspoken, waiting to be shared,<br>A heart that knows the beauty of the light.<br>I long to express, to show how much I cared,<br>To paint my dreams with colors warm and bright.` },
-            { title: "Page 7", content: `I dare to speak, my love, a joyful plea,<br>Embracing connection, the warmth of embrace.<br>A future full of hope, a vibrant sea,<br>A love that’s cherished, a beautiful grace.` },
-            { title: "Page 8", content: `With joy that flows, a heart in sweet delight,<br>A soul united, strong and ever fair.<br>To find the balance, between love and light,<br>Together we rise, with hearts that truly care.` },
-            { title: "Page 9", content: `In solitude, I find a peaceful space,<br>To contemplate the wonders life can bring.<br>In nature’s arms, I feel a warm embrace,<br>A quiet moment, where my heart can sing.` },
-            { title: "Page 10", content: `Time, a gentle guide, leads us through the day,<br>The precious moments, one by one unfold.<br>We cherish laughter, in a joyful way,<br>And celebrate the stories we’ve been told.` },
-            { title: "Page 11", content: `The weight of love, a blessing deep and grand,<br>Can lift our spirits, heal a weary heart.<br>We strive to connect, together we stand,<br>And lose ourselves in joy, never apart.` },
-            { title: "Page 12", content: `Life is a dance, a rhythm, a beat,<br>A melody that plays, in joyous flow.<br>We twirl and turn, with happy feet,<br>And embrace the moments, letting love grow.` },
-            { title: "Page 13", content: `In search of meaning, we wander with glee,<br>Through vibrant fields, where our hearts can roam.<br>We seek for purpose, a place to be,<br>A reason to laugh, and a reason for home.` },
-            { title: "Page 14", content: `The sands of time, like treasures, we hold,<br>Each grain a memory, cherished and bright.<br>We watch and wait, as life’s stories unfold,<br>Embracing each moment, in love’s pure light.` },
-            { title: "Page 15", content: `In every heartbeat, life’s rhythm is found,<br>A dance of joy, where light and love collide.<br>We sway through moments, with laughter profound,<br>Embracing every blessing, side by side.` },
-            { title: "Page 16", content: `Nature's beauty whispers in the breeze,<br>A symphony of colors, wild and bright.<br>The rustling leaves, the swaying trees,<br>Remind us of the joy in every sight.` },
-            { title: "Page 17", content: `The heart knows secrets that words cannot say,<br>Emotions dance in silence, deep and true.<br>In the quiet moments, we find our way,<br>A language of the soul, always anew.` },
-            { title: "Page 18", content: `Connection blooms in the simplest of ways,<br>A smile exchanged, a hand held tight.<br>In shared laughter and in golden days,<br>We find our anchor, our guiding light.` },
-            { title: "Page 19", content: `In the mirror of time, reflections shine bright,<br>The tales of our past, both gentle and bold.<br>With every chapter, our spirits take flight,<br>A journey of heartbeats, waiting to unfold.` },
-            { title: "Page 20", content: `As we stand on the edge of what’s yet to be,<br>Dreams like stars twinkle in the night sky.<br>With courage ignited, we dare to see,<br>The infinite possibilities as we fly.` },
+            { title: "Page 1", content: "To stand in thy own light, unafraid of shadows, is the true path to nobility. Do not let doubt cloud thy vision, for thou art stronger than any whisper of uncertainty." },
+            { title: "Page 2", content: `Let not the voices of others sway thee too greatly, for thou art the architect of thy own fate. In the garden of thy soul, plant the seeds of confidence and watch them bloom, unyielding and pure.` },
+            { title: "Page 3", content: `Though the world may offer its judgments, neither accept nor reject without thought. Be steadfast in thy convictions, yet wise enough to listen to those who speak with care and kindness.` },
+            { title: "Page 4", content: `Self-doubt, like a specter, may come unbidden. Yet it is within thy power to cast it aside, for in thee dwells the strength to rise above all fears that may seek to bind thee.` },
+            { title: "Page 5", content: `In the quiet moments, take time to reflect upon thy actions. Let not pride blind thee, but neither let the scorn of others determine thy worth. Thou art the judge of thy own character.` },
+            { title: "Page 6", content: `Speak with grace, act with purpose, but above all, live with confidence. The world may speak in many voices, yet it is thy own voice that must echo true within thy heart.` },
+            { title: "Page 7", content: `Do not yield to the fleeting opinions of the crowd. They change as the wind, but thou must be as the mountain—steadfast, enduring, and unmoved by the whims of others.` },
+            { title: "Page 8", content: `Be neither too harsh upon thyself, nor too complacent. Walk the path of balance, where self-awareness meets self-respect, and confidence rises from the foundation of humility.` },
+            { title: "Page 9", content: `In times of solitude, find thy center, and let it guide thee. For in moments of peace, thou mayest find the strength to face the judgments of the world without trembling.` },
+            { title: "Page 10", content: `As the sun rises and sets, so too do the judgments of men. Do not seek to please them all, but rather seek to honor thy own heart, for in that honor lies true fulfillment.` },
+            { title: "Page 11", content: `Let the weight of others' expectations not crush thee. Instead, let them be as stones upon the path, which, though they may cause a stumble, shall never prevent thee from continuing onward.` },
+            { title: "Page 12", content: `Confidence is not born of arrogance, but of acceptance—of both thy strength and thy flaws. For in this balance, the soul finds its true freedom.` },
+            { title: "Page 13", content: `Though others may point and whisper, remember, thou art not defined by their words. Only thy actions, thy resolve, and thy heart may define thee in the eyes of the true judge: thyself.` },
+            { title: "Page 14", content: `Be not quick to anger when met with criticism. Seek first to understand the wisdom behind the words, for they may contain a lesson, even if clothed in harshness.` },
+            { title: "Page 15", content: `In all things, let patience be thy companion. For time reveals truth, and with time, thou shalt see clearly the value of each opinion, whether it be sweet or bitter.` },
+            { title: "Page 16", content: `Thy heart knows the way, even when others may seek to lead thee astray. Trust it, for it is thy most faithful guide on this journey of life.` },
+            { title: "Page 17", content: `Remember, to doubt oneself is human, but to overcome that doubt is divine. In this victory, thou shalt find a wellspring of strength, greater than any that may come from the approval of others.` },
+            { title: "Page 18", content: `Let no one’s scorn sway thee from thy path, for each has their own journey. If their words are harsh, let them fall like raindrops upon a stone, unable to change the course of the river that is thy life.` },
+            { title: "Page 19", content: `Reflect, but do not linger in the shadows of regret. Move forward with confidence, and let thy heart, ever bold, guide thee to the bright horizon that awaits.` },
+            { title: "Page 20", content: `In the grand tapestry of life, remember: thou art both the weaver and the thread. Weave with wisdom, and let thy heart be the compass by which thou steerest thy way.` },
         ];
 
         const bookContainer = document.getElementById("book-container");
 
         // Loop through pagesContent to generate the content
-        pagesContent.forEach((page) => {
+        pagesContent.forEach((page, index) => {
             const pageDiv = document.createElement("div");
             pageDiv.classList.add("page");
 
