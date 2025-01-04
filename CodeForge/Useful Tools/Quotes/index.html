@@ -24,6 +24,7 @@
             justify-content: flex-start;
             align-items: center;
             overflow-x: hidden;
+            position: relative;
         }
 
         h1 {
@@ -33,16 +34,27 @@
             color: #ecf0f1;
         }
 
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000; /* Ensure buttons appear above other content */
+        }
+
         button {
             background-color: #3498db;
             color: #fff;
             border: none;
-            padding: 15px 25px;
-            font-size: 1.2em;
-            margin: 10px;
+            padding: 10px 18px; /* Smaller padding */
+            font-size: 1em; /* Smaller font size */
+            margin: 0;
             cursor: pointer;
             border-radius: 10px;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            min-width: 150px;
         }
 
         button:hover {
@@ -104,7 +116,7 @@
 
     <h1>Quotes</h1>
 
-    <div>
+    <div class="button-container">
         <button onclick="RandomQuote()">Random Quote</button>
         <button onclick="shuffleQuotes()">Shuffle Quotes</button>
     </div>
@@ -114,6 +126,7 @@
             const quoteContainer = document.createElement('div');
             quoteContainer.className = 'quote-container';
             quoteContainer.innerHTML = `
+
                 <p class="quote">"${quoteText}"</p>
                 <p class="author">- ${authorText}</p>
             `;
