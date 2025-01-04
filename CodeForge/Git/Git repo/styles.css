@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    color: #ddd;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+.container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    max-height: 90vh; /* Limit the height of the container */
+    overflow-y: auto; /* Enable scrolling if content exceeds max height */
+    box-sizing: border-box;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 12px;
+    background-color: #444;
+    border: 1px solid #555;
+    color: #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.repo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.repo-list li {
+    background-color: #444;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.repo-list a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.repo-list a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.pagination {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.pagination button, .copy-buttons button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.pagination button:hover, .copy-buttons button:hover {
+    background-color: #5a6268;
+}
+
+.pagination button:disabled, .copy-buttons button:disabled {
+    background-color: #c6c8ca;
+    cursor: not-allowed;
+}
+
+.copy-buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-range {
+    margin-top: 10px;
+}
+
+.copy-buttons button {
+    width: 48%;
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.pagination button.square {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 20px;
+    border-radius: 0;
+    text-align: center;
+}
+
+.page-range span {
+    font-weight: normal;
+}
