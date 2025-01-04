@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Rain Generator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking to external CSS -->
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+
+    <div class="container">
+        <h1>Matrix Rain Generator</h1>
+
+        <div class="input-section">
+            <div class="input-pair">
+                <label for="textInput">Matrix Symbols:</label>
+                <input type="text" id="textInput" placeholder="Enter symbols (e.g. 01)">
+            </div>
+            <div class="input-pair">
+                <label for="symbolColor">Symbol Color:</label>
+                <input type="color" id="symbolColor" value="#00ff00">
+            </div>
+            <div class="input-pair">
+                <label for="bgColor">Background Color:</label>
+                <input type="color" id="bgColor" value="#000000">
+            </div>
+            <div class="input-pair">
+                <label for="fontStyle">Font Style:</label>
+                <select id="fontStyle">
+                    <option value="Arial">Arial</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Helvetica">Helvetica</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+            </div>
+            <div class="input-pair">
+                <label for="fontSize">Font Size:</label>
+                <input type="number" id="fontSize" value="16" min="10">
+            </div>
+            <div class="input-pair">
+                <label for="rainSpeed">Rain Speed:</label>
+                <input type="number" id="rainSpeed" value="50" min="10">
+            </div>
+            <div class="input-pair">
+                <label for="density">Drop Density:</label>
+                <input type="number" id="density" value="1" min="1" max="10" step="1">
+            </div>
+        </div>
+
+        <button onclick="downloadImage()">Download PNG Wallpaper</button>
+    </div>
+
+    <script src="scripts.js"></script> <!-- Linking to external JS -->
+</body>
+</html>
