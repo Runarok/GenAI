@@ -1,97 +1,102 @@
 body {
-    margin: 0; /* Remove default margin */
-    overflow: hidden; /* Prevents scrolling */
-    font-family: Arial, sans-serif; /* Set font */
-    animation: gradient 15s ease infinite; /* Animated gradient background */
-    background: linear-gradient(270deg, #1a1a1a, #4e4e4e, #1a1a1a); /* Gradient colors */
-    background-size: 400% 400%; /* Scales the gradient for animation */
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #121212, #0f0f0f); /* Darker gradient background */
+    color: #fff; /* White text color */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
 }
 
-h1 { /* Adjust for your header element */
-    font-size: 48px; /* Adjust size of the header */
-    color: #00FFFF; /* Neon cyan text color */
-    text-shadow: 
-        0 0 10px #00FFFF,  /* Slight glow */
-        0 0 20px #00FFFF;  /* Medium glow */
-}
-
-@keyframes gradient {
-    0% { background-position: 0% 50%; } /* Start position of gradient */
-    50% { background-position: 100% 50%; } /* Midway point */
-    100% { background-position: 0% 50%; } /* End position */
+h1 {
+    font-size: 60px;
+    color: #00FFFF; /* Neon cyan */
+    text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF;
+    margin-bottom: 30px;
 }
 
 #menu {
-    position: absolute; /* Absolute positioning */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for exact center */
-    text-align: center; /* Center text */
+    z-index: 1;
 }
 
 #menu button {
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-    border: none; /* Remove border */
-    color: #fff; /* White text */
-    padding: 15px 30px; /* Padding for button */
-    margin: 10px; /* Space between buttons */
-    cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth hover effect */
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00FFFF; /* Neon border */
+    color: #00FFFF;
+    padding: 20px 50px;
+    margin: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
 }
 
 #menu button:hover {
-    background-color: rgba(255, 255, 255, 0.5); /* Brighter background on hover */
-    transform: scale(1.05); /* Slight zoom on hover */
+    background-color: rgba(0, 255, 255, 0.1); /* Lighter hover background */
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
 }
 
 .emoji {
-    position: absolute; /* Absolute positioning */
-    opacity: 0.025; /* Initial opacity */
-    font-size: 40px; /* Font size of emojis */
-    pointer-events: auto; /* Allow interaction */
-    transition: opacity 0.3s; /* Smooth transition */
+    position: absolute;
+    opacity: 0.1;
+    font-size: 50px;
+    pointer-events: auto;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .emoji:hover {
-    opacity: 1; /* Fully visible on hover */
+    opacity: 1;
 }
 
 #score, #highscore, #timer {
-    position: absolute; /* Absolute positioning */
-    top: 10px; /* Position from top */
-    font-size: 24px; /* Font size */
-    z-index: 10; /* Ensure on top */
+    position: absolute;
+    top: 10px;
+    font-size: 26px;
+    z-index: 10;
+    color: #00FFFF; /* Neon cyan text */
 }
 
 #score {
-    left: 10px; /* Position score on the left */
+    left: 10px;
 }
 
 #highscore {
-    left: 150px; /* Space for high score */
-}    
-
-#timer {
-    right: 10px; /* Position timer on the right */
+    left: 180px;
 }
 
-/* Toast notification styling */
+#timer {
+    right: 10px;
+}
+
 .toast {
-    position: fixed; /* Fixed position on screen */
-    bottom: 20px; /* Space from bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for exact center */
-    background-color: rgba(0, 0, 0, 0.7); /* Dark background */
-    color: white; /* White text */
-    padding: 15px 30px; /* Padding inside the toast */
-    border-radius: 10px; /* Rounded corners */
-    font-size: 18px; /* Font size */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.5s ease, bottom 0.5s ease; /* Smooth fade-in effect */
-    z-index: 100; /* On top of other elements */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00FFFF;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+    z-index: 100;
 }
 
 .toast.show {
-    opacity: 1; /* Visible when class 'show' is added */
-    bottom: 40px; /* Move toast up when visible */
+    opacity: 1;
+    bottom: 40px;
+}
+
+/* Darken the page and ensure no white background appears */
+html, body {
+    background-color: #121212; /* Ensure a full dark page */
+    color: #fff;
+    font-family: 'Arial', sans-serif;
 }
