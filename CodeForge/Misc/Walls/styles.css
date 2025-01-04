@@ -1,0 +1,82 @@
+body {
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font for a techy feel */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide scrollbars */
+    background-color: #000; /* Black background for contrast */
+    color: #00ff00; /* Default text color for matrix effect */
+}
+
+.container {
+    position: relative;
+    z-index: 10; /* Ensure the container is in the foreground */
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.9); /* Dark background for container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 255, 0, 0.5); /* Green glow effect */
+}
+
+h1 {
+    color: #00ff00; /* Title color */
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #00ff00; /* Glowing effect */
+}
+
+.input-section {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-pair {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex: 1; /* Allow flex-grow */
+    max-width: 300px; /* Limit input pair width */
+}
+
+.input-pair label {
+    margin-right: 10px;
+    color: #fff; /* Label color */
+}
+
+input[type="text"], input[type="number"], input[type="color"], select {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #00ff00; /* Matrix green borders */
+    background-color: rgba(0, 0, 0, 0.6); /* Dark input background */
+    color: #00ff00; /* Input text color */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00cc00; /* Brighter green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #009900; /* Darker green on hover */
+    transform: scale(1.05); /* Slight scaling effect */
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* Make sure the canvas is behind everything */
+}
