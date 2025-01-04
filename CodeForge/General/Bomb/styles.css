@@ -1,0 +1,99 @@
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+}
+
+.container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.explosion {
+    display: none;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, yellow, transparent);
+    border-radius: 50%;
+    animation: explode 0.5s forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.difficulty {
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.power-up {
+    position: absolute;
+    color: cyan;
+    font-size: 36px;
+    animation: fall 5s linear forwards;
+    z-index: -1;
+}
+
+@keyframes fall {
+    0% { top: -50px; }
+    100% { top: 100vh; }
+}
+
+.badge {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    background: teal;
+    border-radius: 3px;
+    color: white;
+}
+
+#score {
+    margin: 20px;
+    font-size: 24px;
+}
+
+@media (max-width: 600px) {
+    input {
+        font-size: 16px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+}
