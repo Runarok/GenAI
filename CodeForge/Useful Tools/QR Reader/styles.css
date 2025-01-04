@@ -1,0 +1,86 @@
+body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    text-align: center;
+    background: rgb(30, 30, 30);
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 5px;
+}
+
+.container h1 {
+    color: #ffffff;
+}
+
+.section {
+    background-color: #2c2c2c;
+    padding: 50px 30px;
+    border: 1.5px solid #444;
+    border-radius: 0.25em;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
+}
+
+#my-qr-reader {
+    padding: 20px !important;
+    border: 1.5px solid #444 !important;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+}
+
+#my-qr-reader img[alt="Info icon"] {
+    display: none;
+}
+
+#my-qr-reader img[alt="Camera based scan"] {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+button {
+    padding: 10px 20px;
+    border: 1px solid #444;
+    outline: none;
+    border-radius: 0.25em;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    transition: 0.3s background-color;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+video {
+    width: 100% !important;
+    border: 1px solid #444 !important;
+    border-radius: 0.25em;
+}
+
+.result {
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.drag-drop-area {
+    margin-top: 20px;
+    padding: 30px;
+    border: 2px dashed #555;
+    border-radius: 0.25em;
+    color: white;
+    background-color: #444;
+}
+
+.drag-drop-area.dragover {
+    background-color: #333;
+}
