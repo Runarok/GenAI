@@ -2574,6 +2574,8 @@ Both PERT and CPM are crucial tools for project management, helping to plan, sch
 
 </details>
 
+---
+
 <details><summary>Model Question Paper Shortened</summary>
 
 a) What is Planning? Explain various steps involved in Planning.  
