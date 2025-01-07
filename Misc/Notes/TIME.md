@@ -2573,3 +2573,620 @@ Both PERT and CPM are crucial tools for project management, helping to plan, sch
 </details>  
 
 </details>
+
+<details><summary>Model Question Paper Shortened</summary>
+
+a) What is Planning? Explain various steps involved in Planning.  
+
+- **Planning is the process of deciding in advance what to do, how to do it, when to do it, and who is to do it**
+
+- **Steps Involved in Planning**
+  - **Establishing Objectives (Goals)**
+  - **Establishing Planning Premises**
+  - **Deciding the Planning Period**
+  - **Finding Alternative Courses of Action**
+  - **Evaluating Alternatives and Selecting the Best Course of Action**
+  - **Developing Derivative Plans**
+  - **Establishing and Deploying Action Plans**
+  - **Measuring and Controlling the Progress**
+
+b) Explain the roles of a manager.  
+
+- **Roles of a Manager**  
+A manager plays various roles in an organization to achieve objectives efficiently. According to management theorist Henry Mintzberg, these roles are categorized into Interpersonal, Informational, and Decisional roles. Each role involves specific tasks and responsibilities.
+
+- **Interpersonal Roles**  
+  - **Figurehead**  
+  - **Leader**  
+  - **Liaison**
+
+- **Informational Roles**  
+  - **Monitor**  
+  - **Disseminator**  
+  - **Spokesperson**
+
+- **Decisional Roles**  
+  - **Entrepreneur**  
+  - **Disturbance Handler**  
+  - **Resource Allocator**  
+  - **Negotiator**
+
+
+c) Distinguish between Management and Administration.  
+
+- **Distinction Between Management and Administration**
+
+<table>
+  <tr>
+    <th>Aspect</th>
+    <th>Management</th>
+    <th>Administration</th>
+  </tr>
+  <tr>
+    <td>Definition</td>
+    <td>Execution of plans to achieve goals</td>
+    <td>Formulation of policies and setting goals</td>
+  </tr>
+  <tr>
+    <td>Scope</td>
+    <td>Implementing policies and daily operations</td>
+    <td>Policy-making and overall direction</td>
+  </tr>
+  <tr>
+    <td>Level of Function</td>
+    <td>Operative, execution-focused</td>
+    <td>Higher-level, decision-making focused</td>
+  </tr>
+  <tr>
+    <td>Key Activities</td>
+    <td>Planning, organizing, leading, controlling</td>
+    <td>Policy formulation, resource allocation</td>
+  </tr>
+  <tr>
+    <td>Focus</td>
+    <td>Efficiency in achieving goals</td>
+    <td>Effectiveness in setting direction</td>
+  </tr>
+  <tr>
+    <td>Applicability</td>
+    <td>Business and commercial enterprises</td>
+    <td>Government, education, non-profits</td>
+  </tr>
+  <tr>
+    <td>Authority</td>
+    <td>Limited, guided by policies</td>
+    <td>Broader, defines policies</td>
+  </tr>
+  <tr>
+    <td>Nature of Work</td>
+    <td>Deals with "how" tasks are done</td>
+    <td>Deals with "what" and "why" decisions</td>
+  </tr>
+  <tr>
+    <td>Orientation</td>
+    <td>Action-oriented, execution-focused</td>
+    <td>Decision-oriented, planning-focused</td>
+  </tr>
+</table>
+
+
+OR  
+
+a) Explain various functions of Management.  
+
+- **Functions of Management**
+
+- **Planning**  
+- **Organizing**  
+- **Staffing**  
+- **Directing**  
+- **Controlling**  
+- **Coordinating**  
+- **Innovating**  
+- **Representing**
+
+
+b) Explain the types of decision making.  
+
+- **Types of Decision Making**
+
+- **Programmed and Non-Programmed Decisions**  
+  - **Programmed Decisions**: Salary payments, reorder levels for inventory.  
+  - **Non-Programmed Decisions**: Launching a new product, entering a new market.
+
+- **Major and Minor Decisions**  
+  - **Major Decisions**: Mergers and acquisitions, adopting new technology.  
+  - **Minor Decisions**: Approving leave requests, purchasing office supplies.
+
+- **Routine and Strategic Decisions**  
+  - **Routine Decisions**: Assigning tasks, scheduling shifts.  
+  - **Strategic Decisions**: Expanding into a new region.
+
+- **Individual and Group Decisions**  
+  - **Individual Decisions**: Approving small expenses.  
+  - **Group Decisions**: Deciding on a new marketing strategy.
+
+- **Simple and Complex Decisions**  
+  - **Simple Decisions**: Restocking commonly used materials.  
+  - **Complex Decisions**: Developing a five-year business plan.
+
+- **Sequential and Bear-by-the-Tail Decisions**  
+  - **Sequential Decisions**: Phased development of a project.  
+  - **Bear-by-the-Tail Decisions**: Tackling complex, difficult problems all at once.
+
+- **Heuristics and Intuitive Decisions**  
+  - **Heuristics Decisions**: Reducing marketing spend during economic downturns.  
+  - **Intuitive Decisions**: Choosing a creative idea for a marketing campaign.
+
+
+c) List and explain the managerial skills with the help of skill-mix diagram.  
+
+- **Management Levels and Skills**
+
+<table>
+  <tr>
+    <th>Management Level</th>
+    <th>Technical Skills</th>
+    <th>Human Relations Skills</th>
+    <th>Conceptual Skills</th>
+  </tr>
+  <tr>
+    <td>Top Management</td>
+    <td>Low</td>
+    <td>Moderate</td>
+    <td>High</td>
+  </tr>
+  <tr>
+    <td>Middle Management</td>
+    <td>Moderate</td>
+    <td>High</td>
+    <td>Moderate</td>
+  </tr>
+  <tr>
+    <td>Supervisory Level</td>
+    <td>High</td>
+    <td>Moderate</td>
+    <td>Low</td>
+  </tr>
+</table>
+
+- **Top Management**  
+  - **Focus**: Long-term strategy and direction.  
+  - **Responsibilities**: Set strategic goals, make high-level decisions, oversee organizational performance.
+
+- **Middle Management**  
+  - **Focus**: Bridge between top management and operations.  
+  - **Responsibilities**: Implement plans, coordinate operations, manage performance.
+
+- **Supervisory Level**  
+  - **Focus**: Day-to-day operations.  
+  - **Responsibilities**: Supervise employees, address technical issues, provide feedback, ensure policy adherence.
+
+
+---  
+
+a) What is Organization? Explain the Principles of Organization.  
+
+- **Organization**:  
+  Rational coordination of activities to achieve common goals.  
+  Involves:  
+  - Division of labor  
+  - Functional structuring  
+  - A hierarchy of responsibility and authority
+
+- **Principles of Organization**:  
+  - **Objectives****: Structure aligned with clear objectives.  
+  - **Specialization**: Tasks grouped by specialization.  
+  - **Span of Control**: Manager supervises a reasonable number of subordinates.  
+  - **Management by Exception Principle**: High-level managers focus on complex problems.  
+  - **Scalar Principle**: Clear authority line (Chain of Command).  
+  - **Unity of Command**: One superior per subordinate.  
+  - **Delegation**: Authority delegated with responsibility.  
+  - **Responsibility**: Supervisors are accountable for actions.  
+  - **Authority**: Clearly defined authority for objectives.  
+  - **Efficiency**: Achieving goals at the lowest cost.  
+  - **Simplicity**: Minimal hierarchical levels.  
+  - **Flexibility**: Adapts to changes without disruption.  
+  - **Balance**: Balance between centralization, decentralization, and control.  
+  - **Unity of Direction**: Activities with the same goal under one plan.  
+  - **Personnel Ability**: Proper selection, placement, and training of staff.  
+  - **Acceptability**: Structure should be acceptable to all.
+
+
+b) Define Recruitment. Explain the steps involved in the selection process.  
+
+- **Recruitment**:  
+  Process of attracting candidates to fill positions in the organizational structure.  
+
+- **Steps Involved in the Selection Process**:  
+  - **Application Blank**:  
+    Candidates fill out a form with qualifications, specialization, and experience.  
+  - **Initial Interview**:  
+    Clarifies application details and creates a friendly environment.  
+  - **Employment Tests**:  
+    - **Aptitude Test**: Measures learning capacity.  
+    - **Interest Test**: Identifies work preferences.  
+    - **Intelligence Test**: Evaluates mental alertness.  
+    - **Performance Test**: Assesses job-related skills.  
+    - **Personality Test**: Measures traits like confidence and originality.  
+  - **Checking References**:  
+    Verifies personal, character, and employment history.  
+  - **Physical or Medical Examination**:  
+    Ensures fitness and checks for diseases.  
+  - **Final Interview**:  
+    Discusses selection and future prospects.
+
+OR  
+
+a) With the help of a diagram explain Maslow’s need hierarchy theory with examples.  
+
+- **Maslow's Hierarchy of Needs**:  
+  - **Physiological Needs**:  
+    Basic needs for sustaining life (food, water, shelter, sleep).  
+    Example: Earning money for daily meals.  
+  - **Safety Needs**:  
+    Protection from harm, job security, health assurance.  
+    Example: Saving for emergencies or getting insurance.  
+  - **Social Needs**:  
+    Need for belonging, love, and community.  
+    Example: Joining clubs or community activities.  
+  - **Esteem Needs**:  
+    - **Self-Esteem**: Sense of accomplishment and self-worth.  
+    - **Esteem from Others**: Recognition and respect from peers.  
+    Example: Gaining professional recognition or acknowledgment.  
+  - **Self-Actualization**:  
+    Realization of personal potential and self-fulfillment.  
+    Example: Pursuing a passion for art, music, or philanthropy.
+
+
+b) Define controlling. Explain essentials of effective control system.  
+
+- **Controlling**:  
+  Process of measuring and correcting activities to ensure alignment with plans.  
+
+- **Essentials of an Effective Control System**:  
+  - **Suitable**: Tailored to departmental needs.  
+  - **Timely and Forward-Looking**: Detects deviations early for corrective actions.  
+  - **Objective and Comprehensible**: Clear standards, easy to understand.  
+  - **Flexible**: Adapts to changes in inputs and conditions.  
+  - **Economical**: Cost-effective in relation to benefits.  
+  - **Prescriptive and Operational**: Provides solutions, not just information.  
+  - **Acceptable to Members**: Realistic standards set with employee collaboration.  
+  - **Reveals Exceptions at Strategic Points**: Highlights significant deviations for immediate action.  
+  - **Motivates High Performance**: Encourages achievement of high standards.  
+  - **Balanced Focus**: Avoids neglect of other operational areas.  
+  - **Periodic Review**: Regularly evaluated to remain effective.
+
+---  
+
+a) Describe social responsibility of business towards different groups.  
+
+1. **Owners**: Run efficiently, Provide fair returns and capital growth.  
+2. **Investors & Stakeholders**: Ensure investment safety, Provide regular returns.  
+3. **Employees**: Fair wages, Safe working conditions, Growth opportunities.  
+4. **Customers**: Quality products at fair prices, Ensure safety and after-sales service.  
+5. **Suppliers**: Ethical dealings, Timely payments.  
+6. **Competitors**: Compete ethically, Avoid unfair practices.  
+7. **Government**: Pay taxes on time, Follow laws and regulations.  
+8. **Society**: Promote social welfare, Reduce pollution and create jobs.  
+9. **Environment**: Minimize pollution, Use eco-friendly practices.
+
+b) What are the essential characteristics that define a successful entrepreneur.  
+
+**Essential Characteristics of a Successful Entrepreneur**:  
+   - **Creativity**: Generate innovative ideas.  
+   - **Innovation**: Implement creative ideas for value.  
+   - **Leadership**: Inspire and guide teams.  
+   - **Team Building**: Foster collaboration and productivity.  
+   - **Achievement Motivation**: Drive to accomplish goals.  
+   - **Problem-Solving Skills**: Identify and solve problems.  
+   - **Goal Orientation**: Set SMART goals for focused progress.  
+   - **Risk-Taking and Decision-Making**: Take calculated risks with informed decisions.  
+   - **Commitment**: Perseverance towards the vision.  
+   - **Adaptability and Flexibility**: Adjust strategies to market changes.
+
+OR  
+
+a) What are some common myths about entrepreneurship.  
+
+1. **Entrepreneurs Are Born, Not Made**  
+2. **Entrepreneurs Are Academic and Social Misfits**  
+3. **Entrepreneurs Fit an Ideal Profile**  
+4. **All You Need Is Money**  
+5. **All You Need Is Luck**  
+6. **A Great Idea Guarantees Success**  
+7. **My Best Friend Will Be a Great Business Partner**  
+8. **Having No Boss Is Fun**  
+9. **Entrepreneurship Makes You Rich Quickly**  
+10. **Entrepreneurs Are Always Successful**
+
+b) Explain key stages of the Entrepreneurial Development Cycle.  
+
+1. **Stimulatory Activities**: Provide entrepreneurial education, Publicize opportunities, Identify potential entrepreneurs, Offer motivational training, Assist with product selection and project preparation, Share techno-economic information.  
+
+2. **Support Activities**: Register business units, Arrange financial support, Facilitate access to land, utilities, and machinery, Offer management consultancy services, Assist with marketing and provide relevant information.  
+
+3. **Sustaining Activities**: Support modernization and diversification, Offer additional financing, Provide diagnostic consultancy, Promote quality assurance and industry-institute collaboration.
+
+---  
+
+a) Explain the problems faced by Small Scale Industries.  
+
+1. **Internal Problems**
+   - **Planning and Implementation**: Faulty planning, Poor management, Outdated processes.  
+   - **Production Issues**: Low quality control, Poor inventory management, Limited capacity utilization.  
+   - **Financial Constraints**: Lack of working capital, Poor financial management, High cost of inputs.  
+   - **Marketing Challenges**: Weak market organization, Dependence on a single customer, Poor sales realization.  
+   - **Labor Issues**: Inefficient labor management, Poor labor relations, Lack of skilled workers.  
+
+2. **External Problems**
+   - **Infrastructure**: Inadequate access to essential services, Poor transportation networks.  
+   - **Financial and Regulatory Hurdles**: Difficulty accessing funds, Complex regulations, High taxation.  
+   - **Raw Materials**: Irregular supply, High costs.  
+   - **Technological Barriers**: Limited access to advanced technologies.  
+   - **Competitive Environment**: Intense competition, Volatile market conditions.  
+   - **Government Policies**: Lack of support, Corruption, Delays in policy implementation.  
+
+b) Explain Financial Feasibility and Technical Feasibility.  
+
+1. **Financial Feasibility**  
+   - **Cost Estimation**: Capital, operational expenses, and working capital calculation.  
+   - **Revenue Projections**: Estimating potential earnings based on market demand.  
+   - **Break-Even Analysis**: Determining when revenues equal costs.  
+   - **Funding Sources**: Identifying funding methods (loans, investors, internal funds).  
+   - **Return on Investment (ROI)**: Measuring profitability and financial returns.
+
+2. **Technical Feasibility**  
+   - **Technology Availability**: Identifying needed equipment and technology.  
+   - **Technical Expertise**: Assessing necessary skills and knowledge.  
+   - **Production Capacity**: Evaluating infrastructure's ability to meet demand.  
+   - **Process Design**: Defining workflows, layouts, and operational efficiency.  
+   - **Reliability and Scalability**: Ensuring the system adapts to future growth.
+
+
+OR  
+
+a) Explain Impact of Globalisation and WTO on SSI in India.  
+
+**Positive Impacts**  
+1. **Access to Global Markets**: Export opportunities and enhanced foreign exchange earnings.  
+2. **Technology Transfer and Innovation**: Adoption of modern technologies and collaboration with foreign firms.  
+3. **Investment and Expansion**: Attraction of foreign direct investment (FDI) and partnerships.  
+4. **Product Diversification**: Encouragement to diversify product range and target niche markets.  
+
+**Negative Impacts**  
+1. **Increased Competition**: Competition from MNCs with better resources and economies of scale.  
+2. **Erosion of Government Protection**: Reduced import tariffs, subsidies, and de-reservation of products.  
+3. **Technological Gaps**: Struggles to keep pace with global technological advancements.  
+4. **Financial Pressure**: Increased competition and reduced government support, leading to financial strain.  
+5. **Quality Standards and Regulations**: Compliance with international standards and IPR regulations adds cost.
+
+
+b) What factors contribute to creating favorable business opportunities in India?  
+
+1. **Economic Growth**: Sustained development, growing GDP, and expanding domestic demand.  
+2. **Large and Growing Population**: Vast consumer base and young, tech-savvy demographic.  
+3. **Liberalized Economic Policies**: Reduced trade barriers, simplified procedures, and initiatives like Make in India.  
+4. **Technological Advancements**: Adoption of digital technologies and growing IT infrastructure.  
+5. **Government Support**: MSME schemes, tax benefits, and ease of doing business reforms.  
+6. **Infrastructure Development**: Expanding transport, smart cities, and energy sectors.  
+7. **Financial and Banking Sector**: Increased access to financing, FinTech, and venture capital.  
+8. **Entrepreneurial Spirit and Innovation**: Rise in startups, incubators, and co-working spaces.  
+9. **Strategic Location**: Proximity to Southeast Asia, Middle East, and regional trade agreements.  
+10. **Favorable Demographics for Workforce**: Skilled, cost-effective labor force and skill development initiatives.
+
+
+---  
+
+a) Explain Government Schemes for funding Business.  
+
+1. **Startup India Scheme**: Tax exemptions, ₹10,000 crores funding, fast-tracking patent applications.  
+2. **Mudra Yojana**: Loans up to ₹10 lakhs, collateral-free for micro-enterprises.  
+3. **CGTMSE**: Collateral-free loans for MSMEs, loans up to ₹2 crores.  
+4. **Stand-Up India Scheme**: Loans ₹10 lakhs to ₹1 crore for women and SC/ST entrepreneurs.  
+5. **PMEGP**: Loans with subsidies for self-employment, up to ₹25 lakhs for manufacturing.  
+6. **SIDBI’s Fund of Funds**: Funding through Alternate Investment Funds for early-stage enterprises.  
+7. **Atal Innovation Mission (AIM)**: Support for incubators and tinkering labs to promote innovation.
+
+
+b) Explain steps in PERT. Explain advantages and Limitations of PERT.  
+
+### Steps in PERT
+1. **Identify the Project Tasks**: List all activities required to complete the project.
+2. **Determine Task Dependencies**: Identify the sequence and establish precedence relationships.
+3. **Estimate Time for Each Activity**: Use three time estimates:
+   - Optimistic Time (O)
+   - Pessimistic Time (P)
+   - Most Likely Time (M)
+   - Formula: **Expected Time (TE) = (O + 4M + P) / 6**
+4. **Construct the PERT Network**: Create a network diagram with nodes (events) and arrows (activities).
+5. **Determine the Critical Path**: Identify the longest path determining the shortest project duration.
+6. **Update and Review**: Continuously monitor and update the PERT chart.
+
+### Advantages of PERT
+- **Better Planning and Scheduling**: Visualizes timelines and dependencies.
+- **Time Management**: Estimates project duration and identifies the critical path.
+- **Flexibility**: Allows adjustments as new information becomes available.
+- **Risk Management**: Considers uncertainty in time estimates for improved risk assessment.
+
+### Limitations of PERT
+- **Complexity**: Large projects may result in overly complicated networks.
+- **Time Estimation Challenges**: Estimating accurate time can be subjective.
+- **No Cost or Resource Management**: Focuses on time but not costs or resource allocation.
+- **Dependency on Reliable Data**: Accuracy depends on the reliability of time estimates.
+
+OR  
+
+a) What are the biggest challenges entrepreneurs face when starting their own business.  
+
+<table>
+  <tr>
+    <th>Challenge</th>
+    <th>Impact</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>Financial Constraints</td>
+    <td>Difficulty securing funds</td>
+    <td>Bootstrapping, crowdfunding, venture capital</td>
+  </tr>
+  <tr>
+    <td>Business Plan</td>
+    <td>Lack of direction</td>
+    <td>Market research, set goals</td>
+  </tr>
+  <tr>
+    <td>Market Competition</td>
+    <td>Difficulty gaining market share</td>
+    <td>Unique selling proposition (USP), customer focus</td>
+  </tr>
+  <tr>
+    <td>Building Customer Base</td>
+    <td>Slow growth, low visibility</td>
+    <td>Social media, marketing strategies</td>
+  </tr>
+  <tr>
+    <td>Time Management</td>
+    <td>Inefficiency, burnout</td>
+    <td>Prioritize tasks, delegate</td>
+  </tr>
+  <tr>
+    <td>Hiring Team</td>
+    <td>Low productivity</td>
+    <td>Targeted hiring, incentivize performance</td>
+  </tr>
+  <tr>
+    <td>Legal Compliance</td>
+    <td>Penalties, delays</td>
+    <td>Legal advisors, stay updated</td>
+  </tr>
+  <tr>
+    <td>Adapting to Market Changes</td>
+    <td>Losing relevance</td>
+    <td>Invest in innovation, research</td>
+  </tr>
+  <tr>
+    <td>Managing Cash Flow</td>
+    <td>Liquidity issues</td>
+    <td>Financial forecasting, control spending</td>
+  </tr>
+  <tr>
+    <td>Work-Life Balance</td>
+    <td>Stress, reduced well-being</td>
+    <td>Set boundaries, personal health</td>
+  </tr>
+</table>
+
+b) Why do some Business Plan fail?  
+
+<table>
+  <tr>
+    <th>Reason</th>
+    <th>Impact</th>
+  </tr>
+  <tr>
+    <td>Unrealistic Goals and Projections</td>
+    <td>Misleading financial forecasts, poor decision-making</td>
+  </tr>
+  <tr>
+    <td>Lack of Market Research</td>
+    <td>Developing products with no real demand</td>
+  </tr>
+  <tr>
+    <td>Inadequate Financial Planning</td>
+    <td>Running out of capital or failing to secure financing</td>
+  </tr>
+  <tr>
+    <td>Poor Business Model</td>
+    <td>Inability to sustain profitability or scale the business</td>
+  </tr>
+  <tr>
+    <td>Weak Competitive Analysis</td>
+    <td>Difficulty capturing market share</td>
+  </tr>
+  <tr>
+    <td>Ignoring Risks and Contingencies</td>
+    <td>Unprepared for setbacks or market shifts</td>
+  </tr>
+  <tr>
+    <td>Lack of Clear Objectives and Strategy</td>
+    <td>Lack of direction and poor resource allocation</td>
+  </tr>
+  <tr>
+    <td>Overcomplicated or Poorly Written Plan</td>
+    <td>Difficulty communicating vision or securing investment</td>
+  </tr>
+  <tr>
+    <td>Failure to Update and Adapt</td>
+    <td>Losing relevance in a dynamic market</td>
+  </tr>
+  <tr>
+    <td>Lack of Execution and Commitment</td>
+    <td>Poor implementation, business failure despite planning</td>
+  </tr>
+</table>
+
+
+c) Distinguish between PERT & CPM.  
+
+<table>
+  <tr>
+    <th>Aspect</th>
+    <th>PERT (Program Evaluation and Review Technique)</th>
+    <th>CPM (Critical Path Method)</th>
+  </tr>
+  <tr>
+    <td>Type of Project</td>
+    <td>Used for research and development projects with uncertain durations.</td>
+    <td>Used for construction and repetitive projects with known durations.</td>
+  </tr>
+  <tr>
+    <td>Time Estimates</td>
+    <td>Uses three-time estimates (Optimistic, Pessimistic, and Most Likely).</td>
+    <td>Uses a single-time estimate for each activity.</td>
+  </tr>
+  <tr>
+    <td>Focus</td>
+    <td>Focuses on time management and project scheduling under uncertainty.</td>
+    <td>Focuses on time-cost trade-offs and optimization.</td>
+  </tr>
+  <tr>
+    <td>Nature of Activities</td>
+    <td>Activities are generally non-repetitive or unique.</td>
+    <td>Activities are often repetitive with established durations.</td>
+  </tr>
+  <tr>
+    <td>Critical Path</td>
+    <td>The critical path is probabilistic due to time variability.</td>
+    <td>The critical path is deterministic with fixed activity durations.</td>
+  </tr>
+  <tr>
+    <td>Emphasis</td>
+    <td>Emphasizes event milestones and timelines.</td>
+    <td>Emphasizes activities and cost control.</td>
+  </tr>
+  <tr>
+    <td>Application</td>
+    <td>Common in research, product development, and software projects.</td>
+    <td>Common in construction, engineering, and production projects.</td>
+  </tr>
+  <tr>
+    <td>Cost Estimation</td>
+    <td>Cost consideration is not a primary focus.</td>
+    <td>Includes cost analysis and resource allocation.</td>
+  </tr>
+  <tr>
+    <td>Best Use</td>
+    <td>Ideal for projects with high levels of uncertainty.</td>
+    <td>Suitable for projects with defined tasks and resources.</td>
+  </tr>
+</table>
+
+
+
+</details>
+
+
+
+
+
