@@ -1577,8 +1577,8 @@ In many regions, social audits are not mandatory, leading to a lack of commitmen
 
 **Conclusion**  
 While social audits offer numerous benefits, such as improved transparency, accountability, and resource utilization, they also come with challenges, including cost, time requirements, and resistance to change. Organizations that overcome these limitations can significantly enhance their social and environmental impact, earning the trust and loyalty of their stakeholders.
-  
----
+
+</details>  
 
 ### **Entrepreneurship**
 
@@ -1896,8 +1896,6 @@ The LPG reforms have brought both opportunities and challenges to Indian Small-S
 
 To thrive in the new economic environment, Indian SSIs need to adopt modern technologies, focus on innovation, enhance efficiency, and explore global market opportunities. The government also plays a critical role in providing continued support to small-scale industries through policy reforms, incentives, and infrastructure development.  
   
-</details>  
-
 </details>  
 
 ---
