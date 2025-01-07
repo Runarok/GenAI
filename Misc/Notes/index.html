@@ -277,6 +277,15 @@
                     };
                     buttonsContainer.appendChild(button);
                 });
+
+                // Check if a 'paper' URL parameter is provided
+                const urlParams = new URLSearchParams(window.location.search);
+                const paperName = urlParams.get('paper');
+                if (paperName && fileList.includes(paperName)) {
+                    loadPaperContent(paperName); // Automatically load content for the specified paper
+                    const activeButton = Array.from(buttonsContainer.children).find(button => button.textContent === paperName);
+                    if (activeButton) setActiveButton(activeButton); // Highlight the active button
+                }
             });
         }
 
