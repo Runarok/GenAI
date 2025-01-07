@@ -1,10 +1,10 @@
 # **Index of Topics**
 
 <details>
-<summary>Model Question Paper</summary>
+<summary>Model Question Paper</summary><br>
 
 <details>
-<summary>1)a) What is Planning. Explain various steps involved in Planning.</summary><br>
+<summary>1)a) What is Planning. Explain various steps involved in Planning.</summary>
 
 ### Planning: Definition and Explanation
 
