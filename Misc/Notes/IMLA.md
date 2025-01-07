@@ -1980,11 +1980,16 @@ In this truth table, we determine the truth value of the complex proposition `(P
 **Conclusion**
 
 The **syntax** of propositional logic defines how we construct valid formulas using propositions and logical connectives, while the **semantics** defines how the truth values of these formulas are determined. The truth table is an essential tool for evaluating the truth values of compound propositions, ensuring that conclusions are logically consistent and valid. By systematically applying truth tables to propositions, we can reason about complex statements and make sound decisions based on logical principles.
-   
----
+
   
 </details>
 
+</details>
+
+---
+
+<details>
+  <summary>Module 4</summary>
 
 # Intelligent Systems and Machine Learning Algorithms  
 **Module 4 - Question Bank**  
@@ -3444,15 +3449,7 @@ The inductive bias of the Candidate Elimination Algorithm is defined by its sear
 ---
 
 <details>
-  <summary>Module 3</summary>
-
-
-</details>
-
----
-
-<details>
-  <summary>Module 3</summary>
+  <summary>Module 5</summary>
 
 
 # Intelligent Systems and Machine Learning Algorithms  
