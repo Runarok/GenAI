@@ -1780,6 +1780,8 @@ The entrepreneurial process involves multiple stages, from opportunity identific
 
 ---
 
+## **Module 4: Small Business Enterprises**
+
 ### **Modern Small Business Enterprises**
 
 <details>  
@@ -1899,8 +1901,6 @@ To thrive in the new economic environment, Indian SSIs need to adopt modern tech
 </details>  
 
 ---
-
-## **Module 4: Small Business Enterprises**
 
 ### **Idea Generation and Feasibility Analysis**
 
