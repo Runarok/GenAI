@@ -274,6 +274,11 @@
                     button.onclick = () => {
                         loadPaperContent(file); // Load content when clicked
                         setActiveButton(button); // Set the active class to the selected button
+
+                        // Update the URL with the selected paper name
+                        const newUrl = new URL(window.location);
+                        newUrl.searchParams.set('paper', file);
+                        history.pushState(null, '', newUrl); // Update the URL without reloading the page
                     };
                     buttonsContainer.appendChild(button);
                 });
