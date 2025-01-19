@@ -11,7 +11,7 @@
 
 
 <details>
-  <summary>Syllabus</summary>
+  <summary>Syllabus</summary><br>
 
 <table border="1">
   <tr>
