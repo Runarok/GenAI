@@ -10,6 +10,218 @@
 -->
 
 <details>
+<summary>Model Question Papers</summary>
+
+## Module-1
+
+**Q.01**  
+a) How does the human brain interpret and process information?  
+b) Provide a brief overview of the evolution of Artificial Intelligence.  
+
+**OR**
+
+**Q.02**  
+a) Describe how agents use sensors and actuators to interact with their environment.  
+b) What does it mean for an agent to exhibit rational behavior?  
+
+---
+
+## Module-2
+
+**Q.03**  
+a) What are the five components used to formally define problems for problem-solving?  
+b) What is the 8-puzzle problem, and how is it structured?  
+
+**OR**
+
+**Q.04**  
+a) How does the breadth-first search algorithm work?  
+b) What is iterative deepening depth-first search, and how does it function?  
+
+---
+
+## Module-3
+
+**Q.05**  
+a) How does the accuracy of a heuristic impact the performance of a search algorithm?  
+b) What is the Wumpus World, and how is it structured?  
+
+**OR**
+
+**Q.06**  
+a) What is the syntax of propositional logic, and how is it defined?  
+b) What are the semantics of propositional logic, and how do they determine meaning?  
+
+---
+
+## Module-4
+
+**Q.07**  
+a) What are the different types of machine learning, and how do they differ?  
+b) What are the key perspectives and challenges in machine learning?  
+
+**OR**
+
+**Q.08**  
+a) How does the concept learning approach work, and what is the candidate elimination algorithm?  
+b) What is a biased hypothesis space, and why is it important in machine learning?  
+
+---
+
+## Module-5
+
+**Q.09**  
+a) Explain the process of preparing data for machine learning. Discuss the key steps involved in data preprocessing, including handling missing values.  
+b) Describe the process of choosing the right model for a machine learning task. Discuss the factors to consider when selecting a model for regression and classification problems.  
+
+**OR**
+
+**Q.10**  
+a) Define binary classification and explain its key components with suitable examples.  
+b) Explain the concept of error analysis in machine learning. How do you perform error analysis for a classification model?
+
+</details>
+
+---
+
+<details>
+<summary>Module 1</summary>
+  
+1. Define artificial intelligence (AI) and its key characteristics.  
+CO1 L1 5M  
+
+2. Discuss the goals and applications of AI in various fields.  
+CO1 L2 8M  
+
+3. Explore the significance of AI in modern society and its potential impact on industries.  
+CO1 L2 4M  
+
+4. Explain the historical development of AI, highlighting key milestones and breakthroughs.  
+CO1 L2 4M  
+
+5. Discuss the foundational concepts of AI, such as logic, problem-solving, and knowledge representation.  
+CO1 L2 6M  
+
+6. Analyze the contributions of key figures in the history of AI and their impact on the field.  
+CO1 L3 6M  
+
+7. Define intelligent agents and their role in AI systems.  
+CO1 L1 6M  
+
+8. Differentiate between simple reflex agents, model-based agents, goal-based agents, and utility-based agents.  
+CO1 L1 8M  
+
+9. Provide examples of intelligent agents in real-world applications.  
+CO1 L2 8M  
+
+10. Explain the interaction between agents and their environments in the context of AI.  
+CO1 L2 8M  
+
+11. Discuss the concept of percepts and actions in the agent-environment interaction.  
+CO1 L2 6M  
+
+12. Analyze how different types of environments can affect the performance of intelligent agents.  
+CO1 L3 6M  
+
+13. Define rationality in the context of intelligent agents.  
+CO1 L1 8M  
+
+14. Explore the relationship between rationality and decision-making in AI systems.  
+CO1 L2 6M  
+
+15. Discuss how rationality guides agents towards achieving their goals.  
+CO1 L2 6M  
+
+16. Classify environments based on their characteristics and how they impact agent behavior.  
+CO1 L2 6M  
+
+17. Discuss the challenges and considerations when designing agents for different types of environments.  
+CO1 L2 4M  
+
+18. Evaluate the suitability of different agent types for specific environments.  
+CO1 L2 6M  
+
+19. Describe the internal structure of intelligent agents, including architectures and components.  
+CO1 L2 6M  
+
+20. Discuss the role of perception, cognition, and action in the functioning of intelligent agents.  
+CO1 L2 6M  
+
+21. Compare and contrast different agent architectures.  
+CO1 L1 6M  
+
+22. Provide real-world examples of AI applications and their impact on various industries.  
+CO1 L1 6M  
+
+23. Discuss ethical considerations and potential societal implications of AI.  
+CO1 L2 6M  
+
+24. Analyze specific case studies to illustrate the challenges and successes of AI implementations.  
+CO1 L3 6M
+
+</details>
+
+---
+
+<details>
+  <summary>Module 2</summary>
+  
+1. Define problem-solving in the context of artificial intelligence.  
+CO1 L1 5M  
+
+2. Discuss the importance of problem-solving in various domains and applications.  
+CO1 L2 8M  
+
+3. Identify key characteristics of effective problem-solving agents.  
+CO1 L2 5M  
+
+4. Explain the components and architecture of a problem-solving agent.  
+CO1 L2 5M  
+
+5. Differentiate between simple reflex agents and goal-based agents in the context of problem-solving.  
+CO1 L1 6M  
+
+6. Discuss how problem-solving agents interact with their environments.  
+CO1 L3 6M  
+
+7. Provide examples of real-world problems that can be addressed using AI-based problem-solving techniques.  
+CO1 L1 6M  
+
+8. Describe the characteristics that make a problem suitable for AI-based solutions.  
+CO1 L2 8M  
+
+9. Discuss the diversity of problems that AI can tackle, ranging from simple to complex scenarios.  
+CO1 L2 8M  
+
+10. Define the concept of search strategies in problem-solving.  
+CO2 L1 8M  
+
+11. Explain the role of uninformed search strategies in finding solutions.  
+CO2 L2 6M  
+
+12. Discuss the trade-offs and limitations associated with uninformed search strategies.  
+CO2 L2 6M  
+
+13. Explain the principles of breadth-first search as a problem-solving strategy.  
+CO2 L2 8M  
+
+14. Provide a step-by-step illustration of how breadth-first search works.  
+CO2 L2 6M  
+
+15. Discuss scenarios where breadth-first search is suitable and its potential drawbacks.  
+CO2 L2 6M  
+
+16. Outline the key principles of depth-first search as an uninformed search strategy.  
+CO2 L2 6M  
+
+17. Compare and contrast depth-first search with breadth-first search.  
+CO2 L1 4M  
+
+</details>
+
+---
+
+<details>
   <summary>Module 3</summary>
 
 # Intelligent Systems and Machine Learning Algorithms  
@@ -4269,3 +4481,4 @@ print(f"Accuracy for y2: {accuracy_score(y2_test, y2_pred)}")
 
 
 ---
+
