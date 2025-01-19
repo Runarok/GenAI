@@ -13,93 +13,132 @@
 <details>
   <summary>Syllabus</summary><br>
 
-**Module-1: Introduction to AI**  
-- What is AI?  
-- Foundations and History of AI  
-- Intelligent Agents:  
-  - Agents and Environment  
-  - Concept of Rationality  
-  - The Nature of Environment  
-  - The Structure of Agents  
+  <strong>Module-1: Introduction to AI</strong><br>
+  <ul>
+    <li>What is AI?</li>
+    <li>Foundations and History of AI</li>
+    <li>Intelligent Agents:</li>
+    <ul>
+      <li>Agents and Environment</li>
+      <li>Concept of Rationality</li>
+      <li>The Nature of Environment</li>
+      <li>The Structure of Agents</li>
+    </ul>
+  </ul>
+  
+  <strong>Textbook Chapters:</strong><br>
+  <ul>
+    <li>Chapter 1: 1.1, 1.2, 1.3</li>
+    <li>Chapter 2: 2.1, 2.2, 2.3, 2.4</li>
+  </ul>
 
-**Textbook Chapters:**  
-- Chapter 1: 1.1, 1.2, 1.3  
-- Chapter 2: 2.1, 2.2, 2.3, 2.4  
+  <hr>
 
----
+  <strong>Module-2: Problem-Solving</strong><br>
+  <ul>
+    <li>Problem-Solving Agents</li>
+    <li>Example Problems</li>
+    <li>Searching for Solutions</li>
+    <li>Uninformed Search Strategies:</li>
+    <ul>
+      <li>Breadth First Search</li>
+      <li>Depth First Search</li>
+      <li>Iterative Deepening Depth First Search</li>
+    </ul>
+  </ul>
+  
+  <strong>Textbook Chapters:</strong><br>
+  <ul>
+    <li>Chapter 3: 3.1, 3.2, 3.3, 3.4</li>
+  </ul>
 
-**Module-2: Problem-Solving**  
-- Problem-Solving Agents  
-- Example Problems  
-- Searching for Solutions  
-- Uninformed Search Strategies:  
-  - Breadth First Search  
-  - Depth First Search  
-  - Iterative Deepening Depth First Search  
+  <hr>
 
-**Textbook Chapters:**  
-- Chapter 3: 3.1, 3.2, 3.3, 3.4  
+  <strong>Module-3: Informed Search Strategies</strong><br>
+  <ul>
+    <li>Heuristic Functions</li>
+    <li>Greedy Best First Search</li>
+    <li>A* Search</li>
+    <li>Logical Agents:</li>
+    <ul>
+      <li>Knowledge-Based Agents</li>
+      <li>The Wumpus World</li>
+      <li>Logic</li>
+      <li>Propositional Logic</li>
+      <li>Reasoning Patterns in Propositional Logic</li>
+    </ul>
+  </ul>
 
----
+  <strong>Textbook Chapters:</strong><br>
+  <ul>
+    <li>Chapter 3: 3.5, 3.6</li>
+    <li>Chapter 4: 4.1, 4.2</li>
+    <li>Chapter 7: 7.1, 7.2, 7.3, 7.4, 7.5</li>
+  </ul>
 
-**Module-3: Informed Search Strategies**  
-- Heuristic Functions  
-- Greedy Best First Search  
-- A* Search  
-- Logical Agents:  
-  - Knowledge-Based Agents  
-  - The Wumpus World  
-  - Logic  
-  - Propositional Logic  
-  - Reasoning Patterns in Propositional Logic  
+  <hr>
 
-**Textbook Chapters:**  
-- Chapter 3: 3.5, 3.6  
-- Chapter 4: 4.1, 4.2  
-- Chapter 7: 7.1, 7.2, 7.3, 7.4, 7.5  
+  <strong>Module-4: Introduction to Machine Learning</strong><br>
+  <ul>
+    <li>Machine Learning Landscape:</li>
+    <ul>
+      <li>What is ML?</li>
+      <li>Why ML?</li>
+      <li>Types of ML</li>
+      <li>Main Challenges of ML</li>
+    </ul>
+    <li>Concept Learning and Learning Problems:</li>
+    <ul>
+      <li>Designing Learning Systems</li>
+      <li>Perspectives and Issues</li>
+      <li>Concept Learning:</li>
+      <ul>
+        <li>Find S-Version Spaces</li>
+        <li>Candidate Elimination Algorithm</li>
+        <li>Remarks on VS</li>
+        <li>Inductive Bias</li>
+      </ul>
+    </ul>
+  </ul>
 
----
+  <strong>Textbook Chapters:</strong><br>
+  <ul>
+    <li>Textbook 3: Chapter 1</li>
+    <li>Textbook 4: Chapter 1 and 2</li>
+  </ul>
 
-**Module-4: Introduction to Machine Learning**  
-- Machine Learning Landscape:  
-  - What is ML?  
-  - Why ML?  
-  - Types of ML  
-  - Main Challenges of ML  
-- Concept Learning and Learning Problems:  
-  - Designing Learning Systems  
-  - Perspectives and Issues  
-  - Concept Learning:  
-    - Find S-Version Spaces  
-    - Candidate Elimination Algorithm  
-    - Remarks on VS  
-    - Inductive Bias  
+  <hr>
 
-**Textbook Chapters:**  
-- Textbook 3: Chapter 1  
-- Textbook 4: Chapter 1 and 2  
+  <strong>Module-5: End-to-End Machine Learning Project</strong><br>
+  <ul>
+    <li>Working with Real Data:</li>
+    <ul>
+      <li>Look at the Big Picture</li>
+      <li>Get the Data</li>
+      <li>Discover and Visualize the Data</li>
+      <li>Prepare the Data</li>
+      <li>Select and Train the Model</li>
+      <li>Fine-Tune Your Model</li>
+    </ul>
+    <li>Classification:</li>
+    <ul>
+      <li>MNIST Dataset</li>
+      <li>Training a Binary Classifier</li>
+      <li>Performance Measure</li>
+      <li>Multiclass Classification</li>
+      <li>Error Analysis</li>
+      <li>Multi-Label Classification</li>
+      <li>Multi-Output Classification</li>
+    </ul>
+  </ul>
 
----
+  <strong>Textbook Chapters:</strong><br>
+  <ul>
+    <li>Textbook 4: Chapter 2, Chapter 3</li>
+  </ul>
 
-**Module-5: End-to-End Machine Learning Project**  
-- Working with Real Data:  
-  - Look at the Big Picture  
-  - Get the Data  
-  - Discover and Visualize the Data  
-  - Prepare the Data  
-  - Select and Train the Model  
-  - Fine-Tune Your Model  
-- Classification:  
-  - MNIST Dataset  
-  - Training a Binary Classifier  
-  - Performance Measure  
-  - Multiclass Classification  
-  - Error Analysis  
-  - Multi-Label Classification  
-  - Multi-Output Classification  
+</details>
 
-**Textbook Chapters:**  
-- Textbook 4: Chapter 2, Chapter 3  
 
 ---
 
