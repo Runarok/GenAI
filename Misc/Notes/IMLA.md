@@ -137,9 +137,6 @@
     <li>Textbook 4: Chapter 2, Chapter 3</li>
   </ul>
 
-</details>
-
-
 ---
 
 **Reference Books:**  
