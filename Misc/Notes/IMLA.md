@@ -170,7 +170,7 @@
 ---
 
 <details>
-<summary>Model Question Papers</summary>
+<summary>Model Question Paper</summary>
 
 ## Module-1
 
