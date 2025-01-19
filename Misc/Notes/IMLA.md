@@ -15,12 +15,12 @@
 
 <table border="1">
   <tr>
-    <th style="width: 15%;">Module</th>
+    <th style="width: 20%;">Module</th>
     <th>Topics</th>
-    <th style="width: 15%;">Textbook Chapters</th>
+    <th style="width: 20%;">Textbook Chapters</th>
   </tr>
   <tr>
-    <td style="width: 15%;">Module-1: Introduction to AI</td>
+    <td style="width: 20%;">Module-1: Introduction to AI</td>
     <td>
       <ul>
         <li>What is AI?</li>
@@ -34,7 +34,7 @@
         </ul>
       </ul>
     </td>
-    <td style="width: 15%;">
+    <td style="width: 20%;">
       <ul>
         <li>Chapter 1: 1.1, 1.2, 1.3</li>
         <li>Chapter 2: 2.1, 2.2, 2.3, 2.4</li>
@@ -42,7 +42,7 @@
     </td>
   </tr>
   <tr>
-    <td style="width: 15%;">Module-2: Problem-Solving</td>
+    <td style="width: 20%;">Module-2: Problem-Solving</td>
     <td>
       <ul>
         <li>Problem-Solving Agents</li>
@@ -56,14 +56,14 @@
         </ul>
       </ul>
     </td>
-    <td style="width: 15%;">
+    <td style="width: 20%;">
       <ul>
         <li>Chapter 3: 3.1, 3.2, 3.3, 3.4</li>
       </ul>
     </td>
   </tr>
   <tr>
-    <td style="width: 15%;">Module-3: Informed Search Strategies</td>
+    <td style="width: 20%;">Module-3: Informed Search Strategies</td>
     <td>
       <ul>
         <li>Heuristic Functions</li>
@@ -79,7 +79,7 @@
         </ul>
       </ul>
     </td>
-    <td style="width: 15%;">
+    <td style="width: 20%;">
       <ul>
         <li>Chapter 3: 3.5, 3.6</li>
         <li>Chapter 4: 4.1, 4.2</li>
@@ -88,7 +88,7 @@
     </td>
   </tr>
   <tr>
-    <td style="width: 15%;">Module-4: Introduction to Machine Learning</td>
+    <td style="width: 20%;">Module-4: Introduction to Machine Learning</td>
     <td>
       <ul>
         <li>Machine Learning Landscape:</li>
@@ -112,7 +112,7 @@
         </ul>
       </ul>
     </td>
-    <td style="width: 15%;">
+    <td style="width: 20%;">
       <ul>
         <li>Textbook 3: Chapter 1</li>
         <li>Textbook 4: Chapter 1 and 2</li>
@@ -120,7 +120,7 @@
     </td>
   </tr>
   <tr>
-    <td style="width: 15%;">Module-5: End-to-End Machine Learning Project</td>
+    <td style="width: 20%;">Module-5: End-to-End Machine Learning Project</td>
     <td>
       <ul>
         <li>Working with Real Data:</li>
@@ -144,7 +144,7 @@
         </ul>
       </ul>
     </td>
-    <td style="width: 15%;">
+    <td style="width: 20%;">
       <ul>
         <li>Textbook 4: Chapter 2, Chapter 3</li>
       </ul>
