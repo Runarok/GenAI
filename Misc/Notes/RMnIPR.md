@@ -8,7 +8,7 @@
 <details>
   <summary>Explain the steps involved in the patent application procedure starting from filing to the grant of a patent</summary>
 
-![Image](img/PA.jpg)
+![Image](https://raw.githubusercontent.com/Runarok/GenAI/main/Misc/Notes/img/PA.jpg)
 
 ## **Steps in the Patent Application Process**
 
