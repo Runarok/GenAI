@@ -120,4 +120,93 @@ function movePlayer(directionInput) {
             direction = 'left';
             break;
         case 'right':
-            if (playerPos.x < gridSize - 
+            if (playerPos.x < gridSize - 1) playerPos.x++;
+            direction = 'right';
+            break;
+    }
+    checkGameStatus();
+    renderGrid();
+}
+
+// Shoot the arrow
+function shootArrow() {
+    if (gameOverMessage) return;
+
+    if (arrows > 0) {
+        arrows--;
+        if (isAdjacentToWumpus(playerPos.x, playerPos.y)) {
+            showToast('You killed the Wumpus! You win!');
+            gameOverMessage = 'You win!';
+            setTimeout(resetGame, 2000);
+        } else {
+            showToast('Arrow missed.');
+        }
+    } else {
+        showToast('Out of arrows!');
+    }
+}
+
+// Check if the game is over (win or loss)
+function checkGameStatus() {
+    if (isSamePosition(playerPos, wumpusPos)) {
+        showToast('You were eaten by the Wumpus! Game over!');
+        gameOverMessage = 'Game over!';
+        setTimeout(resetGame, 2000);
+    } else if (isSamePosition(playerPos, goldPos)) {
+        showToast('You found the gold! You win!');
+        gameOverMessage = 'You win!';
+        setTimeout(resetGame, 2000);
+    } else if (pits.some(pit => pit.x === playerPos.x && pit.y === playerPos.y)) {
+        showToast('You fell into a pit! Game over!');
+        gameOverMessage = 'Game over!';
+        setTimeout(resetGame, 2000);
+    }
+}
+
+// Reset the game manually
+function resetGame() {
+    gameOverMessage = '';
+    arrows = 3;
+    playerPos = { x: 0, y: 0 }; // Reset to starting position
+    initializeGame();
+}
+
+// Show toast messages
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'show';
+    setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
+}
+
+// Start the game when the page loads
+window.onload = function () {
+    initializeGame();
+};
+
+// Listen for WASD and E keys
+window.addEventListener('keydown', function (e) {
+    if (gameOverMessage) return;
+
+    switch (e.key.toLowerCase()) {
+        case 'w':
+            movePlayer('up');
+            break;
+        case 's':
+            movePlayer('down');
+            break;
+        case 'a':
+            movePlayer('left');
+            break;
+        case 'd':
+            movePlayer('right');
+            break;
+        case 'e':
+            shootArrow();
+            break;
+        case 'q':
+            resetGame();
+            break;
+            
+    }
+});
