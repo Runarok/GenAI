@@ -70,3 +70,4 @@ Thank you for visiting the **GenAI** repository! I hope you enjoy exploring the 
 
 > I considered leaving the last commits for all the projects as they were, but in the end, I wasn’t too happy with it. So, I decided to delete everything for a commit and re-uploaded it, making sure that everything has the same '-- Finalized --' as the last commit. It might not be the most conventional approach, but I personally liked it better this way.
 
+> I shall archive this repo as of Jan 31, 12:00 PM.
