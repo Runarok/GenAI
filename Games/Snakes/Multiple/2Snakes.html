@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
+    <title>Multiplayer Snake Game</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <h1>Multiplayer Snake Game</h1>
+    <div id="controls">
+        <label for="boardSize">Board Size (10-50):</label>
+        <input type="number" id="boardSize" min="10" max="50" value="20">
+        
+        <label for="snakeSpeed">Snake Speed (1-10):</label>
+        <input type="number" id="snakeSpeed" min="1" max="10" value="2">
+        
+        <label for="numApples">Number of Apples (1-50):</label>
+        <input type="number" id="numApples" min="1" max="50" value="2">
+        
+        <label for="powerUpFreq">Power up Frequency (1-100s):</label>
+        <input type="number" id="powerUpFreq" min="1" max="100" value="10">
+        
+        <button id="startBtn">Start Game</button>
+        <button id="infoBtn">Game Info</button>
+    </div>
+    
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="score">Score: 0</div>
+    <div id="game-info">
+        <h2>Game Rules</h2>
+        <p>Player 1 (Cyan): W, A, S, D | Player 2 (Teal): Arrow Keys</p>
+        <p>Eat apples to grow longer and earn points. Avoid colliding with yourself or the other player!</p>
+        <p>Power-ups appear randomly:</p>
+        <ul>
+            <li>1 - Speed Up</li>
+            <li>2 - Speed Down</li>
+            <li>3 - Score Up</li>
+        </ul>
+        <p><strong>Refresh:</strong>Click 'R' or 'r' To Reset/Refresh</p>
+        <button id="closeInfo">Close</button>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to the JavaScript file -->
+</body>
+</html>

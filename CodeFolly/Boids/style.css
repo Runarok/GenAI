@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2e2e2e;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+canvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #121212;
+    border: 1px solid #444;
+}
+.info-btn, .clear-btn, .limit-input-btn {
+    position: absolute;
+    background-color: #444;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.info-btn:hover, .clear-btn:hover, .limit-input-btn:hover {
+    background-color: #666;
+}
+.info-btn {
+    top: 20px;
+    right: 20px;
+}
+.clear-btn {
+    top: 60px;
+    left: 20px;
+}
+.limit-input-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 16px;
+}
+.limit-input-container input {
+    background-color: #444;
+    color: white;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    width: 60px;
+}
+.info-modal {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
+    display: none;
+}
+.info-modal h2 {
+    margin-top: 0;
+}
+.info-modal button {
+    background-color: #444;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}

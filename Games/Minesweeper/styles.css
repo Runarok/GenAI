@@ -1,0 +1,129 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2e2e2e;
+    color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 2px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #3a3a3a;
+    border: 1px solid #444;
+    cursor: pointer;
+    color: #ccc;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #555;
+}
+
+.revealed {
+    background-color: #555;
+    color: #fff;
+}
+
+.mine {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.mine.revealed {
+    background-color: #c9302c;
+}
+
+.cell[data-count="1"] {
+    color: #1e90ff;
+}
+
+.cell[data-count="2"] {
+    color: #32cd32;
+}
+
+.cell[data-count="3"] {
+    color: #ff6347;
+}
+
+.cell[data-count="4"] {
+    color: #4b0082;
+}
+
+.cell[data-count="5"] {
+    color: #8b0000;
+}
+
+.cell[data-count="6"] {
+    color: #20b2aa;
+}
+
+.cell[data-count="7"] {
+    color: #000;
+}
+
+.cell[data-count="8"] {
+    color: #808080;
+}
+
+#controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#controls span {
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.toast.show {
+    opacity: 1;
+}

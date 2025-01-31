@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
+    <title>Rock, Paper, Scissors Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Rock, Paper, Scissors</h1>
+    <button class="button" onclick="play('rock')">Rock</button>
+    <button class="button" onclick="play('paper')">Paper</button>
+    <button class="button" onclick="play('scissors')">Scissors</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="scoreboard" id="scoreboard">
+        <div class="score">Wins: <span id="wins">0</span></div>
+        <div class="score">Losses: <span id="losses">0</span></div>
+        <div class="score">Draws: <span id="draws">0</span></div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

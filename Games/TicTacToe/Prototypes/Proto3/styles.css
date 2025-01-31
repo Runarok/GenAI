@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: white;
+    cursor: pointer;
+    border: 2px solid #333;
+}
+
+.status {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.winner {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+}
+
+.controls {
+    margin-bottom: 20px;
+}

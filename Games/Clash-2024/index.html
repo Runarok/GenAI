@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
+    <title>Clash 2024 - Tile Merging Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Clash 2024</h1>
+    <div class="menu active" id="menu">
+        <select id="size-select">
+            <option value="3">3x3</option>
+            <option value="4" selected>4x4</option>
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+        </select>
+        <button id="play-button">Play</button>
+    </div>
+    <div class="game" id="game">
+        <div class="scores">
+            <div class="high-score">High Score: <span id="high-score">0</span></div>
+            <div class="score">Score: <span id="score">0</span></div>
+        </div>
+        <div class="board" id="board"></div>
+        <div class="reset-container">
+            <button id="reset-button">Reset Game</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

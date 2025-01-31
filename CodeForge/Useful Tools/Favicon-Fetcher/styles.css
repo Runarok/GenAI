@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+}
+h1 {
+    margin-bottom: 20px;
+}
+input {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 2px solid #444;
+    padding: 10px;
+    font-size: 16px;
+    width: 70%;
+    max-width: 400px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #555;
+}
+.favicon-container {
+    margin-top: 20px;
+}
+.favicon {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: #444;
+    margin-top: 20px;
+}
+#error {
+    color: #ff0000;
+    margin-top: 20px;
+}
+.download-btn {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.download-btn:hover {
+    background-color: #555;
+}

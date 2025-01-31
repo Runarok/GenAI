@@ -1,0 +1,21 @@
+{
+  "name": "Runarok",
+  "short_name": "Runarok",
+  "description": "Main Menu for Runarok",
+  "start_url": "/GenAI/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#00bcd4",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

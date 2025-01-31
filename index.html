@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI - Main Menu</title>
+    
+    <!-- Favicon and icon for 'Add to Home Screen' -->
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    
+    <!-- Link to manifest.json (for better compatibility with 'Add to Home Screen') -->
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noricon&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Noricon', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed to flex-start so content doesn't stretch vertically */
+            min-height: 100vh; /* Full viewport height */
+            text-align: center; /* Center text */
+            position: relative; /* For positioning the button */
+            overflow-y: auto; /* Enable scrolling only when necessary */
+            max-height: 100vh; /* Prevent the body from growing beyond the viewport */
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #00bcd4; /* Cyan color */
+            text-shadow: 0 0 10px #00bcd4;
+        }
+
+        .link-container {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping of links */
+            gap: 10px;
+            justify-content: center; /* Center links horizontally */
+        }
+
+        a {
+            color: #e0e0e0; /* Light gray for better contrast */
+            text-decoration: none;
+            padding: 10px;
+            border: 2px solid #00bcd4; /* Cyan border */
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+
+        a:hover {
+            background-color: #00bcd4; /* Background on hover */
+            color: #121212; /* Dark text on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* New styles for section toggling */
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        .controls button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #00bcd4;
+            color: #121212;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 5px;
+        }
+
+        .controls button:hover {
+            background-color: #121212;
+            color: #00bcd4;
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            width: 100%; /* Make sections responsive */
+            max-width: 600px; /* Limit max width for larger screens */
+        }
+
+        @media (max-width: 600px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            a {
+                font-size: 0.9rem;
+            }
+
+            .controls button {
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="controls">
+    <button onclick="showSection('Games')">Games</button>
+    <button onclick="showSection('CodeFolly')">CodeFolly</button>
+    <button onclick="showSection('CodeForge')">CodeForge</button>
+    <button onclick="showSection('miscellaneous')">Miscellaneous</button>
+</div>
+
+<!-- Section for Classic Games -->
+<div id="Games" class="section">
+    <div class="section-title">Classic Games</div>
+    <div class="link-container">
+        <a href="Games/TicTacToe/">Unbeatable Tic-Tac-Toe</a>
+        <a href="Games/Minesweeper/">Minesweeper</a>
+        <a href="Games/Snakes/">Snakes</a>
+        <a href="Games/Othello/">Othello</a>
+        <a href="Games/Clash-2024/">Clash 2024</a>
+    </div>
+
+    <!-- Section for Memory/Puzzle Games -->
+    <div class="section-title">Memory/Puzzle Games</div>
+    <div class="link-container">
+        <a href="Games/Simon-says/">Simon says</a>
+        <a href="Games/Slice-n-Spin/">Slice-n-Spin</a>
+        <a href="Games/Memory_Match-up/">Flip & Find</a>
+        <a href="Games/Memory-Recall/">Memory Recall</a>
+        <a href="Games/Shadow-Maze/">Shadow Maze</a>
+        <a href="Games/Labyrinth-of-Shadows/">Labyrinth of Shadows</a>
+    </div>
+
+    <!-- Section for Reflex Games -->
+    <div class="section-title">Reflex Games</div>
+    <div class="link-container">
+        <a href="Games/Yoyo-Dash/">Yoyo Dash</a>
+        <a href="Games/Quick-Click/">Quick Click</a>
+        <a href="Games/Emoji-Hunt/">Emoji Hunt</a>
+        <a href="Games/Whack-A-Tile/">Whack A Tile</a>
+    </div>
+
+    <!-- Section for Other types of Games -->
+    <div class="section-title">Other Games</div>
+    <div class="link-container">
+        <a href="Games/Progress-knight/">Progress Knight</a>
+        <a href="Games/Golden-Depths/">Golden Depths</a>
+    </div>
+</div>
+
+<!-- Section for CodeFolly -->
+<div id="CodeFolly" class="section">
+    <div class="section-title">CodeFolly Projects</div>
+    <div class="link-container">
+        <a href="CodeFolly/Rubics/">Rubics</a>
+        <a href="CodeFolly/Card/">B'day Card</a>
+        <a href="CodeFolly/NewYear/">NewYear Card</a>
+        <a href="CodeFolly/Calc/">Calc</a>
+        <a href="CodeFolly/Calc v2/">Calc v2</a>  
+        <a href="CodeFolly/Browser/">Browser</a>
+        <a href="CodeFolly/Notepad/">Notepad</a>  
+        
+    </div>
+
+    <div class="section-title">Simulations</div>
+    <div class="link-container">
+        <a href="CodeFolly/Boids/">Boids</a>
+        <a href="CodeFolly/Wireworld Simulation/">Wireworld Simulation</a>
+        <a href="CodeFolly/Game of Nim/">Game of Nim</a>
+        <a href="CodeFolly/Langton's Ant/">Langton's Ant</a>
+        <a href="CodeFolly/Conways_GOL/">Conway's Game of Life</a>
+    </div>
+    
+</div>
+
+<div id="CodeForge" class="section">
+    <div class="section-title">CodeForge Projects</div>
+    <div class="link-container">
+        <a href="CodeForge/Useful Tools/Choose/">Select</a>
+        <a href="CodeForge/Useful Tools/Favicon-Fetcher/">Favicon-Fetcher</a>
+        <a href="CodeForge/Useful Tools/QR Generator/">QR Generator</a>
+        <a href="CodeForge/Useful Tools/QR Reader/">QR Reader</a>
+        <a href="CodeForge/Useful Tools/Word of the day/">Random Meanings</a>
+        <a href="CodeForge/Useful Tools/Quotes/">Random Quotes</a>
+        <a href="CodeForge/Useful Tools/Fancy/">Fancy words</a>
+        <a href="CodeForge/Useful Tools/API Checker/">API Checker</a>
+    </div>
+
+    <div class="section-title">Github tools</div>
+    <div class="link-container">
+        <a href="CodeForge/Git/drag-drop-viewer/">DragDrop Viewer</a>
+        <a href="CodeForge/Git/Git repo/">GitHub repos</a>
+    </div>
+    
+    <div class="section-title">Educational Tools</div>
+    <div class="link-container">
+        <a href="CodeForge/Educational Tools/TwiddleFactors/">TwiddleFactor Calc</a>
+        <a href="CodeForge/Educational Tools/dft/">DFT Calc</a>            
+    </div>
+
+    <div class="section-title">General Projects : Games-Like</div>
+    <div class="link-container">
+        <a href="CodeForge/General/Bomb/">Bomb</a>
+        <a href="CodeForge/General/RPS/">RPS</a>
+    </div>    
+
+    <div class="section-title">Miscellaneous</div>
+    <div class="link-container">
+        <a href="CodeForge/Misc/Html Executor/">Html v1</a>
+        <a href="CodeForge/Misc/Walls/">Matrix Rain Generator</a>
+        <a href="CodeForge/Misc/Links.html">Links</a>
+    </div>
+</div>
+    
+    
+<!-- Section for Miscellaneous -->
+<div id="miscellaneous" class="section">
+    <div class="section-title">Academic</div>
+    <div class="link-container">
+        <a href="Misc/Notes/">Notes</a>
+        <a href="Misc/Lab/">Lab</a>
+    </div>
+
+    <div class="section-title">Miscellaneous</div>
+    <div class="link-container">
+        <a href="Misc/ZenVibes/">ZenVibes</a>
+        <a href="Misc/Embrace-yourself/">Embrace yourself</a>
+    </div>
+</div>
+
+
+<script>
+// Function to show a specific section and update URL
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.style.display = 'none');
+    document.getElementById(sectionId).style.display = 'block';
+
+    // Update URL with the selected section
+    const newUrl = `${window.location.origin}${window.location.pathname}?section=${sectionId}`;
+    history.replaceState(null, '', newUrl); // Replace the current state with the new URL
+}
+
+// Function to load the section from the query parameter
+function loadSectionFromQuery() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sectionId = urlParams.get('section') || 'Games'; // Default to 'Games' if no query parameter exists
+    showSection(sectionId); // Show the section based on the query
+}
+
+// Call the function on page load to show the appropriate section
+window.onload = function() {
+    loadSectionFromQuery(); // Load section from URL
+};
+
+// List of sections in order (just for navigation)
+const sectionIds = ['Games', 'CodeFolly', 'CodeForge', 'miscellaneous'];
+
+// Variable to track the current section (not strictly necessary with the query, but useful for navigation)
+let currentSectionIndex = 0;
+
+// Function to go to the next section
+function goToNextSection() {
+    currentSectionIndex = (currentSectionIndex + 1) % sectionIds.length; // Loop to the first section after the last
+    showSection(sectionIds[currentSectionIndex]);
+}
+
+// Function to go to the previous section
+function goToPreviousSection() {
+    currentSectionIndex = (currentSectionIndex - 1 + sectionIds.length) % sectionIds.length; // Loop to the last section before the first
+    showSection(sectionIds[currentSectionIndex]);
+}
+
+// Event listener for keydown events to listen for arrow keys and 'A/a', 'D/d'
+document.addEventListener('keydown', function(event) {
+    // Right arrow key (→) or 'D'/'d' to go to next section
+    if (event.key === 'd' || event.key === 'D' || event.key === 'ArrowRight') {
+        goToNextSection();
+    } 
+    // Left arrow key (←) or 'A'/'a' to go to previous section
+    else if (event.key === 'a' || event.key === 'A' || event.key === 'ArrowLeft') {
+        goToPreviousSection();
+    }
+});
+
+// Variables to track touch starting points for swipe gestures
+let startX = 0;
+let startY = 0;
+
+// Start touch event
+document.addEventListener('touchstart', function(event) {
+    startX = event.touches[0].clientX;
+    startY = event.touches[0].clientY;
+});
+
+// End touch event
+document.addEventListener('touchend', function(event) {
+    if (!startX || !startY) {
+        return;
+    }
+
+    let endX = event.changedTouches[0].clientX;
+    let endY = event.changedTouches[0].clientY;
+
+    let diffX = endX - startX;
+    let diffY = endY - startY;
+
+    // Horizontal swipe detection
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) { // 50px threshold for swipe
+        if (diffX > 0) {
+            goToPreviousSection();
+        } else {
+            goToNextSection();
+        }
+    }
+
+    // Reset starting positions
+    startX = 0;
+    startY = 0;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+* {
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+    box-sizing: border-box; /* Ensure box sizing is consistent */
+}
+body {
+    margin: 0; /* Remove body margin */
+    overflow: hidden; /* Prevent scrollbars */
+    font-family: 'Arial', sans-serif; /* Set font */
+    background-color: #f5f5f5; /* Set background color */
+}
+#app {
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange children vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    height: 100vh; /* Full viewport height */
+}
+.settings {
+    position: fixed; /* Fix position on the screen */
+    top: 10px; /* Position near the top */
+    right: 10px; /* Position near the right edge */
+    z-index: 100; /* Ensure it overlays other content */
+}
+.toggle-button {
+    padding: 12px 20px; /* Add padding to button */
+    font-size: 16px; /* Set font size */
+    background: #ffffff; /* Set button background color */
+    border: none; /* Remove border */
+    border-radius: 30px; /* Make button corners rounded */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a shadow */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background 0.3s ease, transform 0.2s ease; /* Smooth transitions for background and scale */
+}
+.toggle-button:hover {
+    background: #e2e2e2; /* Change background on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+}
+.toggle-button:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Add focus shadow */
+}

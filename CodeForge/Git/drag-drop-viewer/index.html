@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
+    <title>Drag and Drop File Viewer</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+
+    <h1>Drag and Drop File Viewer</h1>
+    <div id="drop-area">
+        <p>Drag and drop a text file (.txt, .md, etc.) here or click to select a file</p>
+        <!-- Hidden file input element -->
+        <input type="file" id="file-input" accept=".txt,.md" />
+    </div>
+
+    <!-- File content will appear only after a file is dropped -->
+    <div id="file-content">
+        <!-- Content will be displayed here after file is loaded -->
+    </div>
+    
+    <!-- Copy Button -->
+    <button id="copy-btn" onclick="copyToClipboard()" disabled>Copy to Clipboard</button>
+
+    <script src="script.js"></script> <!-- Link to external JavaScript -->
+</body>
+</html>

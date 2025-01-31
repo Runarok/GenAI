@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
+    <title>Othello Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Othello</h1>
+    <div id="controls">
+        <label for="mode">Game Mode:</label>
+        <select id="mode">
+            <option value="2player">Two Players</option>
+            <option value="easyAI">Easy AI</option>
+            <option value="hardAI">Hard AI</option>
+        </select>
+   
+        <label for="size">Board Size:</label>
+        <select id="size">
+            <option value="4">4x4</option>
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+            <option value="7">7x7</option>
+            <option value="8" selected>8x8</option>
+            <option value="9">9x9</option>
+            <option value="10">10x10</option>
+            <option value="11">11x11</option>
+            <option value="12">12x12</option>
+        </select>
+  
+        <button id="start">Start Game</button>
+    </div>
+    
+    <div id="board" class="visible"></div> <!-- The game board will be displayed here -->
+    <button id="reset">Reset Game</button> <!-- Button to reset the game -->
+    <div id="status"></div> <!-- Displays current game status and scores -->
+    
+    <button id="infoButton">Info</button> <!-- Button to show game rules -->
+    <div id="rules">
+        <h3>Othello Rules</h3>
+        <p>1. Players take turns placing pieces on the board.</p>
+        <p>2. A piece must outflank one or more of the opponent's pieces.</p>
+        <p>3. All outflanked pieces are flipped to the current player's color.</p>
+        <p>4. The game ends when neither player can make a move.</p>
+        <p>5. The player with the most pieces on the board wins.</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

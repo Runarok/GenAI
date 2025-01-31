@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="icon" href="https://raw.githubusercontent.com/Runarok/GenAI/main/Gen.png" type="image/png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/Runarok/GenAI/main/manifest.json">
+    <title>MATLAB Code Showcase</title>
+    <link rel="stylesheet" href="css and js/DC.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <button class="active" onclick="showCode('qpsk')">QPSK</button>
+        <button onclick="showCode('qam')">QAM</button>
+        <button onclick="showCode('rect_pulse_snr')">BaseBand</button>
+        <button onclick="showCode('gram_schmidt')">GSO</button>
+        <button onclick="showCode('crc_code')">CRC</button>
+        <button onclick="showCode('convolutional_encoder')">Convolutional</button>
+        <button onclick="showCode('huffman_code')">Huffman</button>
+        <button onclick="showCode('hamming_code')">Hamming</button>
+    </div>
+
+    <!-- Code content container -->
+    <div class="container">
+        <div id="code-content">
+            <!-- Code will be loaded dynamically -->
+        </div>
+    </div>
+
+    <script src="css and js/DC.js"></script>
+</body>
+</html>

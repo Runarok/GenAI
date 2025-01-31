@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #121212, #0f0f0f); /* Darker gradient background */
+    color: #fff; /* White text color */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 60px;
+    color: #00FFFF; /* Neon cyan */
+    text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF;
+    margin-bottom: 30px;
+}
+
+#menu {
+    z-index: 1;
+}
+
+#menu button {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00FFFF; /* Neon border */
+    color: #00FFFF;
+    padding: 20px 50px;
+    margin: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+#menu button:hover {
+    background-color: rgba(0, 255, 255, 0.1); /* Lighter hover background */
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+}
+
+.emoji {
+    position: absolute;
+    opacity: 0.5;
+    font-size: 50px;
+    pointer-events: auto;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.emoji:hover {
+    opacity: 1;
+}
+
+#score, #highscore, #timer {
+    position: absolute;
+    top: 10px;
+    font-size: 26px;
+    z-index: 10;
+    color: #00FFFF; /* Neon cyan text */
+}
+
+#score {
+    left: 10px;
+}
+
+#highscore {
+    left: 180px;
+}
+
+#timer {
+    right: 10px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00FFFF;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+    z-index: 100;
+}
+
+.toast.show {
+    opacity: 1;
+    bottom: 40px;
+}
+
+/* Darken the page and ensure no white background appears */
+html, body {
+    background-color: #121212; /* Ensure a full dark page */
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}

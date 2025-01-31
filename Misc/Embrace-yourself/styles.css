@@ -1,0 +1,65 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
+    background-color: #121212; /* Dark background */
+    color: #f1f1f1; /* Light text color */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+}
+
+.book {
+    max-width: 900px;
+    width: 100%;
+    background-color: #1e1e1e; /* Dark book background */
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.4); /* Shadow for depth */
+    padding: 40px;
+    border-radius: 16px;
+    overflow-y: auto; /* Enables scrolling */
+    height: 90vh; /* Allows scrolling when content is long */
+    scrollbar-width: thin; /* For better scroll bar appearance in some browsers */
+}
+
+.page {
+    margin-bottom: 40px;
+    border-bottom: 2px solid #333; /* Darker separator line */
+    padding-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.page:hover {
+    transform: scale(1.02); /* Hover effect */
+}
+
+.page-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ffcc00; /* Golden text for titles */
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.page-title:hover {
+    color: #1e90ff; /* Blue hover color */
+}
+
+.page-content {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #e0e0e0; /* Light grey text for better contrast */
+    white-space: pre-wrap; /* Preserve line breaks */
+    word-wrap: break-word; /* Wrap text properly */
+}
+
+a {
+    color: #1e90ff; /* Blue color for links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
