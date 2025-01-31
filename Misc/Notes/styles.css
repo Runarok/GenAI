@@ -185,7 +185,9 @@ img {
 }
 
 .footer {
-    margin-top: 40px;
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto 20px;
     padding: 20px;
     text-align: center;
     font-size: 0.9em;
@@ -193,7 +195,7 @@ img {
     background-color: #1f1f1f;
     border-top: 1px solid #444;
 }
-
+    
 .footer p {
     margin: 0;
 }
